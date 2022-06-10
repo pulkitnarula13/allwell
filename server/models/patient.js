@@ -35,6 +35,7 @@ const PatientSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
 });
 
 const Patient = mongoose.model("Patient", PatientSchema);
