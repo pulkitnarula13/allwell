@@ -3,7 +3,10 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 8080;
-require('dotenv').config()
+const patientRoutes = require('./routes/patient');
+const { baseURL } = require('./constant');
+
+require('dotenv').config();
 
 app.use(cors());
 
@@ -20,6 +23,8 @@ mongoose.connect(process.env.MONGO_URI, (error) => {
 app.get('/', (req, res) => {
     res.send('All Well API');
 })
+
+app.use(`${baseURL}/patients`,patientRoutes );
 
 app.listen(PORT, () => {
     console.log(`All well server running at port ${PORT}`);
