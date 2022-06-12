@@ -2,14 +2,13 @@ const { Patient } = require("../models/patient");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
-
-
+const upload = require("../utils/upload");
 
 /**
- * API to register patients to database
+ * @description API to register patients to database
  * @param {*} req
  * @param {*} res
- * @return {*} 
+ * @return {*}
  */
 const registerPatient = async (req, res) => {
   try {
@@ -30,14 +29,29 @@ const registerPatient = async (req, res) => {
       country: req.body.country,
     });
 
+    const uploadProfilePicture = await upload(
+      `${Date.now() + "" + req.body.profilePicture}`,
+      req.body.image,
+      "jpg",
+      "patient",
+      req.body.name
+    );
+
+    const uploadHealthDocument = await upload(
+      `${Date.now() + "" + req.body.healthDocument}`,
+      req.body.image,
+      "jpg",
+      "patient",
+      req.body.name
+    );
 
     await Patient.create({
       name: req.body.name,
       password: newPassword,
       email: req.body.email,
-      profilePicture: req.body.profilePicture,
+      profilePicture: uploadProfilePicture,
       healthNumber: req.body.healthNumber,
-      healthDocument: req.body.healthDocument,
+      healthDocument: uploadHealthDocument,
       dob: req.body.dob,
       gender: req.body.gender,
       address: savedAddress._id,
@@ -58,13 +72,11 @@ const registerPatient = async (req, res) => {
   }
 };
 
-
-
 /**
- * API to login Patients
+ * @description API to login Patients
  * @param {*} req
  * @param {*} res
- * @return {*} 
+ * @return {*}
  */
 const loginPatient = async (req, res) => {
   const email = req.body.email;
@@ -101,10 +113,8 @@ const loginPatient = async (req, res) => {
   }
 };
 
-
-
 /**
- * API to fetch all patients from database
+ * @description API to fetch all patients from database
  * @param {*} req
  * @param {*} res
  */
@@ -126,10 +136,8 @@ const getPatients = (req, res) => {
     });
 };
 
-
-
 /**
- * API to updte patients
+ * @description API to updte patients
  * @param {*} req
  * @param {*} res
  */
@@ -146,10 +154,8 @@ const updatePatient = (req, res) => {
   });
 };
 
-
-
 /**
- * API to delete patients
+ * @description API to delete patients
  * @param {*} req
  * @param {*} res
  */
@@ -158,7 +164,7 @@ const deletePatient = (req, res) => {
   Patient.findByIdAndDelete(id)
     .then((result) => {
       return res.status(200).json({
-        message: "Patient succesfully delete"
+        message: "Patient succesfully delete",
       });
     })
     .catch((error) => {
@@ -168,10 +174,8 @@ const deletePatient = (req, res) => {
     });
 };
 
-
-
 /**
- * Api to fetch patient based on given ID
+ * @description Api to fetch patient based on given ID
  * @param {*} req
  * @param {*} res
  */

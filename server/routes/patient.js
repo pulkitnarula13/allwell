@@ -10,6 +10,7 @@ const {
   getPatientById,
 } = require("../controller/patient");
 
+
 router.post("/register", registerPatient);
 
 router.post("/login", loginPatient);
