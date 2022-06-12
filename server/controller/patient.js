@@ -3,6 +3,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
 
+
+
+/**
+ * API to register patients to database
+ * @param {*} req
+ * @param {*} res
+ * @return {*} 
+ */
 const registerPatient = async (req, res) => {
   try {
     let newPassword = await bcrypt.hash(req.body.password, 10);
@@ -50,7 +58,14 @@ const registerPatient = async (req, res) => {
   }
 };
 
-// Login of Patient
+
+
+/**
+ * API to login Patients
+ * @param {*} req
+ * @param {*} res
+ * @return {*} 
+ */
 const loginPatient = async (req, res) => {
   const email = req.body.email;
   let patient = await Patient.findOne({ email: email });
@@ -86,7 +101,13 @@ const loginPatient = async (req, res) => {
   }
 };
 
-// Get all Patients
+
+
+/**
+ * API to fetch all patients from database
+ * @param {*} req
+ * @param {*} res
+ */
 const getPatients = (req, res) => {
   Patient.find()
     .populate({
@@ -105,7 +126,13 @@ const getPatients = (req, res) => {
     });
 };
 
-// Update data of Patient by id
+
+
+/**
+ * API to updte patients
+ * @param {*} req
+ * @param {*} res
+ */
 const updatePatient = (req, res) => {
   const id = req.params.id;
 
@@ -119,7 +146,13 @@ const updatePatient = (req, res) => {
   });
 };
 
-// Delete a Patient by id
+
+
+/**
+ * API to delete patients
+ * @param {*} req
+ * @param {*} res
+ */
 const deletePatient = (req, res) => {
   const id = req.params.id;
   Patient.findByIdAndDelete(id)
@@ -135,7 +168,13 @@ const deletePatient = (req, res) => {
     });
 };
 
-// Get Patient data by id
+
+
+/**
+ * Api to fetch patient based on given ID
+ * @param {*} req
+ * @param {*} res
+ */
 const getPatientById = (req, res) => {
   const id = req.params.id;
 
