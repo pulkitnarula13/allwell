@@ -68,6 +68,20 @@ const doctorSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Address",
   },
+
+  specialities: {
+    type: [{ type: String }]
+  },
+  
+  languages: {
+    type: [{ type: String }]
+  },
+
+  certifications: {
+    type: [{ type: String }]
+  }
+
+
 });
 
 exports.Doctor = mongoose.model("Doctor", doctorSchema);
