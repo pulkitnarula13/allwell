@@ -1,31 +1,49 @@
-const AWS = require('aws-sdk');
-require('dotenv').config();
-
+const AWS = require("aws-sdk");
+require("dotenv").config();
 
 const S3 = new AWS.S3({
-    accessKeyId: process.env.ID,
-    secretAccessKey: process.env.SECRET
+  accessKeyId: process.env.ID,
+  secretAccessKey: process.env.SECRET,
 });
 
-async function upload(imageName, base64Image, type)  {
-    const params = {
-        Bucket: `${process.env.BUCKET}/images`,
-        Key: imageName,
-        Body: new Buffer.from(base64Image.replace(/^data:image\/\w+;base64,/, ""), 'base64'),
-        ContentType: type
-    };
+async function upload(imageName, base64Image, type) {
+  const params = {
+    Bucket: `${process.env.BUCKET}/images`,
+    accessKeyId: process.env.S3_ID,
+    secretAccessKey: process.env.S3_SECRET,
+  };
+}
 
-    let data;
+/**
+ * @description Uploads the image to s3 server
+ * @param {*} imageName
+ * @param {*} base64Image
+ * @param {*} type
+ * @param {*} user
+ * @return {*}
+ */
+async function upload(imageName, base64Image, type, user, name) {
+  const params = {
+    Bucket: `${process.env.s3_BUCKET}/${user}/images`,
+    Key: imageName,
+    Body: new Buffer.from(
+      base64Image.replace(/^data:image\/\w+;base64,/, ""),
+      "base64"
+    ),
+    ContentType: type,
+  };
 
-    try {
-        data = await promiseUpload(params);
-    } catch (err) {
-        console.error(err);
+  let data;
 
-        return "";
-    }
+  try {
+    data = await promiseUpload(params);
+  } catch (err) {
+    console.error(err);
 
-    return data.Location;
+    return "";
+  }
+
+  return data.Location;
 }
 
 /**
@@ -34,15 +52,15 @@ async function upload(imageName, base64Image, type)  {
  * @return data/err S3 response object
  */
 function promiseUpload(params) {
-    return new Promise(function (resolve, reject) {
-        S3.upload(params, function (err, data) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(data);
-            }
-        });
+  return new Promise(function (resolve, reject) {
+    S3.upload(params, function (err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
     });
+  });
 }
 
 module.exports = upload;
