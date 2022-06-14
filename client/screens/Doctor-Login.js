@@ -1,17 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const DoctorLogin = () => {
+const doctorLogin = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>DoctorLogin</Text>
+    <View>
+      <Text>doctorSignup</Text>
     </View>
   );
 };
 
-export default DoctorLogin;
+export default doctorLogin;
