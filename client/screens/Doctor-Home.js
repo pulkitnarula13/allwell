@@ -5,6 +5,7 @@ import { Button } from 'react-native-paper';
 
 
 const Home = () => {
+    const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
     let Screenheight = Dimensions.get("window").height;
     return(
         <ScrollView>
@@ -54,7 +55,7 @@ const Home = () => {
 <Text style={{opacity:0.6,fontSize:16,lineHeight:18}}>{'\u2022'} English</Text>
 <Text style={{opacity:0.6,fontSize:16,lineHeight:18}}>{'\u2022'} French</Text>
 </View>
-<View style={{display:'flex',alignItems:'center'}}>
+<View style={{display:'flex',alignItems:'center',height:Screenheight}}>
 <Button style={{borderRadius:10,backgroundColor:"#D9D9D9",width:282,height:45,justifyContent:'center'}} mode="contained" onPress={() => console.log('Pressed')}>
     Connect
   </Button>
