@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const availableDoctorCard = () => {
+const availableDoctorCard = ({ data }) => {
   return (
     <View>
-      <Text>availableDoctorCard</Text>
+      <Text>{data.name}</Text>
     </View>
   )
 }
