@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         
     },
     imgstyle:{
-        wdith:350,
+        width:350,
         height:233,
         backgroundColor:"#D9D9D9",
         borderRadius:10,
@@ -112,8 +112,9 @@ const styles = StyleSheet.create({
         
     },
     imageview:{
-        wdith:350,
+        width:35,
         height:233,
+        alignItems:'center'
     },
     containerdata1:{
        
