@@ -16,7 +16,7 @@ import Profile from '../screens/Doctor-Profile'
 const Bottomnavigation = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'heart-outline'},
+    { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'Home'},
     { key: 'connect', title: 'Connect', focusedIcon: 'album' },
     { key: 'history', title: 'History', focusedIcon: 'clock' },
     { key: 'profile', title: 'Profile', focusedIcon: 'profile', unfocusedIcon: 'bell-outline' },
@@ -30,7 +30,7 @@ const Bottomnavigation = () => {
   });
 
   return (
-    <BottomNavigation
+    <BottomNavigation barStyle={{ backgroundColor: '#DADADA' }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
