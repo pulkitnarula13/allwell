@@ -5,12 +5,12 @@ import { Button } from 'react-native-paper';
 
 
 const Home = () => {
-    const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+    
     let Screenheight = Dimensions.get("window").height;
     return(
         <ScrollView>
 
-<View style={{ backgroundColor: "#fff",alignItems: "center",height:Screenheight}}>
+<View style={{ backgroundColor: "#fff",alignItems: "center",height:Screenheight*1.4,display:'flex',flex:1}}>
     <View style={{marginTop:50}}>
 <Text style={styles.heading}>Doctor Info</Text>
 </View>
@@ -22,18 +22,20 @@ const Home = () => {
     <View >
 <Text style={styles.heading1}>Doctor Name</Text>
 </View>
+</View>
 <View style={styles.containerdata16}>
         <Text>Location</Text>
         <Text>Wait time: 2-4hr</Text>
 </View>
-<View style={styles.containerdata17}>
+
+<View>
 <Text style={{fontWeight:"500",fontSize:15,marginTop:11,lineHeight:24}}>Introduction</Text>
 <Text style={{fontSize:16,fontWeight:"400",opacity:0.6}}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus quidem eos cumque facere neque, quaerat corrupti placeat, quas sint consectetur similique temporibus doloribus, fugit vitae. Perferendis praesentium ipsa error blanditiis.</Text>
 </View>
-<View style={styles.containerdata18}>
+<View style={{marginTop:19}}>
 <Text style={{fontWeight:"500",fontSize:15,marginTop:11,lineHeight:24}}>Specialities</Text>
 <View style={styles.twoimages}>
-<View >
+<View>
 <Image style={{width:50,height:50,marginRight:21}} source={require('../assets/icon.png')} resizeMode="contain"/>
 <Text style={styles.text1}>General Physician</Text>
 </View>
@@ -44,6 +46,9 @@ const Home = () => {
 
 
 </View>
+</View>
+
+
 <View>
 <Text style={{fontWeight:"500",fontSize:15,marginTop:11,lineHeight:24}}>Certifications</Text>
 <Text style={{opacity:0.6,fontSize:16,lineHeight:18}}>{'\u2022'} Lorem Ipsum Dolor</Text>
@@ -61,11 +66,12 @@ const Home = () => {
   </Button>
 </View>
 
-</View>
-</View>
 
 
-</View  >
+
+
+
+</View>
 
 </View>
 </ScrollView>
@@ -73,10 +79,7 @@ const Home = () => {
 )};
 
 const styles = StyleSheet.create({
-    containerdata18: {
-     marginTop:19
-     
-    },
+    
     text1:{
         width:67,height:36,fontSize:10,lineHeight:18,alignItems:'center' 
     },
@@ -109,9 +112,7 @@ const styles = StyleSheet.create({
         
 
     },
-    containerdata17:{
-        
-    },
+   
     imageview:{
         width:35,
         height:233,
@@ -124,6 +125,8 @@ const styles = StyleSheet.create({
         width:346,
         height:66,
         display:'flex',
+        
+        
         
     },
     heading1:{
