@@ -1,9 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import doctorLogin from "./screens/Doctor-Login";
-import doctorSignup from "./screens/Doctor-Signup";
+
 import { StyleSheet } from "react-native";
+import HomeScreen from "./screens/HomeScreen";
+import DoctorLogin from "./screens/DoctorLogin";
+import DoctorSignup from "./screens/DoctorSignup";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -11,10 +13,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="doctor-login"
+        initialRouteName="DoctorLogin"
       >
-        <Stack.Screen name="Doctor-Login" component={doctorLogin} />
-        <Stack.Screen name="Doctor-Signup" component={doctorSignup} />
+        <Stack.Screen name="DoctorLogin" component={DoctorLogin} />
+        <Stack.Screen name="DoctorSignup" component={DoctorSignup} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
