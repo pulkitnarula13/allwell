@@ -1,25 +1,31 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import doctorLogin from "./screens/Doctor-Login";
-import doctorSignup from "./screens/Doctor-Signup";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
 import Bottomnavigation from "./components/BottomNavigation";
+import DoctorPatientSelection from "./screens/Doctor/Doctor-Patient-Selection";
+import DoctorSignup from "./screens/Doctor/Doctor-Signup";
+import DoctorLogin from "./screens/Doctor/Doctor-Login";
+import Greeting from "./screens/Greeting";
+import "react-native-gesture-handler";
 
 const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="doctor-login"
-        >
+        <Stack.Navigator initialRouteName="Greeting">
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
-          <Stack.Screen name="Doctor-Login" component={doctorLogin} />
-          <Stack.Screen name="Doctor-Signup" component={doctorSignup} />
+          <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
+          <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
+          <Stack.Screen
+            name="Doctor-Patient-Selection"
+            component={DoctorPatientSelection}
+          />
+          <Stack.Screen name="Greeting" component={Greeting} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
