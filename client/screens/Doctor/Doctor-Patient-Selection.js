@@ -2,11 +2,21 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const DoctorPatientSelection = () => {
+const DoctorPatientSelection = ({ navigation }) => {
   return (
     <View style={style.container}>
       <View>
-        <TouchableOpacity style={{ width: 316, height: 208, borderRadius: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Patient-Signup")}
+          style={{
+            width: 316,
+            height: 208,
+            borderRadius: 20,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Image
             style={{ width: 112, height: 112, borderRadius: 4 }}
             source={require("../../assets/adaptive-icon.png")}
@@ -15,7 +25,17 @@ const DoctorPatientSelection = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity style={{ width: 316, height: 208, borderRadius: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Doctor-Signup")}
+          style={{
+            width: 316,
+            height: 208,
+            borderRadius: 20,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Image
             style={{ width: 112, height: 112, borderRadius: 4 }}
             source={require("../../assets/adaptive-icon.png")}
