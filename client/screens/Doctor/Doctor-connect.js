@@ -7,47 +7,47 @@ let Screenheight = Dimensions.get("window").height;
 const DATA = [
     {
       name: 'Kapil',
-      image: '../assets/icon.png',
+      image: '../../assets/icon.png',
     },
     {
         name: 'Prabhjyot',
-        image: '../assets/icon.png',
+        image: '../../assets/icon.png',
     },
     {
         name: 'Add Patient',
-        image: '../assets/icon.png',
+        image: '../../assets/icon.png',
     },
   ];
 
   const DATA1 = [
     {
       
-      image1: '../assets/icon.png',
+      image1: '../../assets/icon.png',
     },
     {
         
-        image1: '../assets/icon1.png',
+        image1: '../../assets/icon1.png',
     },
     {
         
-        image1: '../assets/icon2.png',
+        image1: '../../assets/icon2.png',
     },
     {
         
-        image1: '../assets/icon3.png',
+        image1: '../../assets/icon3.png',
     },
   ];
 
 
   const Item = ({ name,image }) => (
     <View style={styles.item}>
-        <Image style={styles.image1} source= {require('../assets/icon.png')} resizeMode='center' />
+        <Image style={styles.image1} source= {require('../../assets/icon.png')} resizeMode='center' />
       <Text style={styles.name1}>{name}</Text>
     </View>
   );
   const Item1 = ({ image1 }) => (
     <View style={styles.item}>
-        <Image style={styles.image2} source= {require('../assets/icon.png')} resizeMode='center' />
+        <Image style={styles.image2} source= {require('../../assets/icon.png')} resizeMode='center' />
      
     </View>
   );
