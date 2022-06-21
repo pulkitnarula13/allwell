@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {Text,StyleSheet,View,Dimensions } from 'react-native'
-
 import StepIndicator from 'react-native-step-indicator';
+import CreatingAccount1 from '../../components/CreatingAccount1';
 
  
 
@@ -51,7 +51,7 @@ return(
     />
     </View >
     <View>
-        {/* <CreatingAccount1/> */}
+        <CreatingAccount1 />
     </View>
     </View>
 )
