@@ -54,7 +54,7 @@ const GoogleSignup = () => {
   return (
     <View>
       <Button
-        title={accessToken ? "Get User Data" : "Login with Google"}
+        title={accessToken ? "Get User Data" : "Login with Google account"}
         onPress={
           accessToken
             ? getUserData
