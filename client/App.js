@@ -12,6 +12,7 @@ import Greeting from "./screens/Greeting";
 import "react-native-gesture-handler";
 import CustomNavigationBar from "./components/CustomNavigationBar";
 import PatientSignup from "./screens/Patient/Patient-Signup";
+import Medical_document from "./screens/Doctor/Medical_document";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,12 +21,13 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Greeting"
+          initialRouteName="Medical_document"
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
         >
           {/* COMMON NAVIGATIONS STARTED */}
+          <Stack.Screen name="Medical_document" component={Medical_document} />
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen

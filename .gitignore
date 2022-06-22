@@ -4,3 +4,4 @@ server/node_modules
 client/ios
 client/package-lock.json
 node_modules
+yarn.lock
