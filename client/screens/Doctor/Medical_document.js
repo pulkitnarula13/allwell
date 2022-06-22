@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import StepIndicator from "react-native-step-indicator";
 import CreatingAccount1 from "../../components/CreatingAccount1";
-import { Text, View, Dimensions } from "react-native";
+import { Text, View, Dimensions, StyleSheet } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -33,10 +33,7 @@ const Medical_document = () => {
   };
 
   return (
-    <View style={styles.outerview}>
-      <View>
-        <Text style={styles.firstHeading}>Creating Account</Text>
-      </View>
+    <View>
       <View style={styles.indicatorContainer}>
         <StepIndicator
           customStyles={customStyles}
@@ -44,7 +41,9 @@ const Medical_document = () => {
           stepCount={3}
         />
       </View>
-      <View>{/* <CreatingAccount1/> */}</View>
+      <View>
+        <CreatingAccount1 />
+      </View>
     </View>
   );
 };
