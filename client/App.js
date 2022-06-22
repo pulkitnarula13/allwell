@@ -21,7 +21,7 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Medical_document"
+          initialRouteName="Greeting"
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
