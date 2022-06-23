@@ -7,9 +7,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const { width, height } = Dimensions.get("window");
 
 const CreatingAccount1 = () => {
-  const [image1, setimage1] = useState("../assets/icon.png");
+  const [image1, setimage1] = useState(".../assets/icon.png");
+  const [clicked, setclicked] = useState(false);
 
-  const changepage = () => {};
+  const changepage = () => {
+    setclicked(true);
+  };
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -55,7 +58,7 @@ const CreatingAccount1 = () => {
             justifyContent: "center",
           }}
           mode="contained"
-          onPress={() => changepage()}
+          onPress={changepage}
         >
           Submit and Continue
         </Button>
