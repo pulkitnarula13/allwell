@@ -1,11 +1,11 @@
-const availableDoctorList = [
+export const availableDoctorList = [
     {
         id: 1,
         name: "Doctor 1",
         rating: "4.2",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: ''
+        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
     },
     {
         id: 2,
@@ -13,7 +13,8 @@ const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: ''
+        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+
     },
     {
         id: 3,
@@ -21,7 +22,8 @@ const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: ''
+        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+
     },
     {
         id: 4,
@@ -29,7 +31,8 @@ const availableDoctorList = [
         rating: "4.2",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: ''
+        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+
     },
     {
         id: 5,
@@ -37,7 +40,8 @@ const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: ''
+        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+
     },
     {
         id: 6,
@@ -45,7 +49,8 @@ const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: ''
+        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+
     },
 
 ]

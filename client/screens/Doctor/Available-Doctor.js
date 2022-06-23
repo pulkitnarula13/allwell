@@ -1,31 +1,28 @@
-import { View, Text, StyleSheet, StatusBar } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, StatusBar, SafeAreaView, FlatList } from 'react-native'
+import React from 'react';
+import AvailableDoctorCard from '../../components/AvailableDoctorCard';
 import { availableDoctorList } from '../../constants/availableDoctor';
-import availableDoctorCard from '../../components/availableDoctorCard';
+import { ScrollView } from 'react-native-gesture-handler';
+
 const AvailableDoctor = () => {
 
-
-
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
-const renderItem = ({ item }) => (
-  <Item title={item.name} />
-);
+  const Item = (data) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.title}>{data.name}</Text>
+      </View>
+    )
+  };
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.flatlist}>
       <FlatList
         data={availableDoctorList}
-        renderItem={renderItem}
+        renderItem={AvailableDoctorCard}
         keyExtractor={item => item.id}
       />
-     
+      </View>
     </SafeAreaView>
   )
 }
@@ -41,9 +38,16 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  title: {
+  name: {
     fontSize: 32,
   },
+  flatlist: {
+    flexDirection: "row !important",
+    flexWrap: "wrap !important",
+    gap: "20px",
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });
 
 
