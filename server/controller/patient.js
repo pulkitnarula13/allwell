@@ -125,7 +125,7 @@ const getPatients = (req, res) => {
     })
     .then((result) => {
       return res.status(200).json({
-        message: "Succesfully got Patients",
+        message: "Succesfully fetched Patients",
         data: result,
       });
     })

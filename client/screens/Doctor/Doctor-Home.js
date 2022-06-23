@@ -22,7 +22,7 @@ const Home = () => {
         <View style={styles.imageview}>
           <Image
             style={styles.imgstyle}
-            source={require("../assets/icon.png")}
+            source={require("../../assets/icon.png")}
             resizeMode="contain"
           />
         </View>
@@ -70,7 +70,7 @@ const Home = () => {
               <View>
                 <Image
                   style={{ width: 50, height: 50, marginRight: 21 }}
-                  source={require("../assets/icon.png")}
+                  source={require("../../assets/icon.png")}
                   resizeMode="contain"
                 />
                 <Text style={styles.text1}>General Physician</Text>
@@ -78,7 +78,7 @@ const Home = () => {
               <View>
                 <Image
                   style={{ width: 50, height: 50 }}
-                  source={require("../assets/icon.png")}
+                  source={require("../../assets/icon.png")}
                   resizeMode="contain"
                 />
                 <Text style={styles.text1}>General Practitioner</Text>
