@@ -10,21 +10,6 @@ import React from "react";
 import { Button } from "react-native-paper";
 let Screenheight = Dimensions.get("window").height;
 
-const DATA = [
-  {
-    name: "Kapil",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Prabhjyot",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Add Patient",
-    image: "../../assets/icon.png",
-  },
-];
-1;
 const DATA1 = [
   {
     image1: "../../assets/icon.png",

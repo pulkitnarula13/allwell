@@ -17,6 +17,8 @@ import Medical_document from "./screens/Doctor/Medical_document";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+ 
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
