@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "react-native-ratings": "^8.1.0"
+    "react-native-paper": "^4.12.1",
+    "react-native-ratings": "^8.1.0",
+    "react-native-vector-icons": "^9.1.0",
+    "swagger-editor": "^4.2.9"
   }
 }
