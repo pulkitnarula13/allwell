@@ -106,26 +106,23 @@
 
 import React, { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
-// import CreatingAccount1 from "../../components/CreatingAccount1";
+import CreatingAccount1 from "../../components/CreatingAccount1";
 import Stepper from "react-native-stepper-ui";
-// import CreatingAccount2 from "../../components/CreatingAccount2";
+import CreatingAccount2 from "../../components/CreatingAccount2";
 // import CreatingAccount3 from "../../components/CreatingAccount3";
 
-const MyComponent = (props) => {
-  return (
-    <View>
-      <Text>{props.title}</Text>
-    </View>
-  );
-};
+// const MyComponent = (props) => {
+//   return (
+//     <View>
+//       <Text>{props.title}</Text>
+//     </View>
+//   );
+// };
 
 const content = [
-//   <CreatingAccount1 />,
-//   <CreatingAccount2 />,
-//   <CreatingAccount3 />,
-<MyComponent title="account1"/>,
-<MyComponent title="account2"/>,
-<MyComponent title="account3"/>,
+  <CreatingAccount1 />,
+  <CreatingAccount2 />,
+
 
 ];
 
