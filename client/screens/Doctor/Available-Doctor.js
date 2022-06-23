@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, StatusBar, SafeAreaView, FlatList } from 'react
 import React from 'react';
 import AvailableDoctorCard from '../../components/AvailableDoctorCard';
 import { availableDoctorList } from '../../constants/availableDoctor';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const AvailableDoctor = () => {
 
@@ -15,12 +14,15 @@ const AvailableDoctor = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.flatlist}>
+    <SafeAreaView  style={styles.container}>
+      <View style={styles.flatlistContainer}>
       <FlatList
+      style={styles.flatlist}
         data={availableDoctorList}
         renderItem={AvailableDoctorCard}
         keyExtractor={item => item.id}
+        numColumns={2}
+        columnWrapperStyle={styles.flatListColumn}
       />
       </View>
     </SafeAreaView>
@@ -41,12 +43,8 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 32,
   },
-  flatlist: {
-    flexDirection: "row !important",
-    flexWrap: "wrap !important",
-    gap: "20px",
-    justifyContent: "center",
-    alignItems: "center"
+  flatListColumn: {
+    margin: 30
   }
 });
 
