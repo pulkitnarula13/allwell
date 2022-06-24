@@ -15,12 +15,13 @@ import CustomNavigationBar from "./components/CustomNavigationBar";
 import PatientSignup from "./screens/Patient/Patient-Signup";
 import Medical_document from "./screens/Doctor/Medical_document";
 import AvailableDoctor from "./screens/Doctor/Available-Doctor";
+import PatientLogin from "./screens/Patient-Login";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
- 
+
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="PatientLogin" component={PatientLogin} />
 
           <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
 
