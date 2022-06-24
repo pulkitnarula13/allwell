@@ -34,7 +34,7 @@ export default function PatientSignup() {
         <TouchableOpacity style={styles.arrow}>
           <Image
             style={styles.image2}
-            source={require('../assets/arrow_back.png')}
+            source={require('../../assets/arrow_back.png')}
           />
         </TouchableOpacity>
         <Text style={styles.head}>Creating account</Text>
