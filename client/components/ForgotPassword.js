@@ -18,7 +18,7 @@ const ForgotPassword = () => {
   return (
     <View>
       <View>
-        <Text style={styles.pageTitle}>Forgot Password</Text>
+        <Text style={styles.pageTitle}>Forgot your password?</Text>
       </View>
       <View>
         <Text style={styles.accountHeading1}>
