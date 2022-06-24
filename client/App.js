@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
- 
+
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
@@ -35,6 +35,7 @@ export default function App() {
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="PatientSignup" component={PatientSignup} />
 
           <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
 
