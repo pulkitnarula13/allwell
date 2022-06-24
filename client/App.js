@@ -19,6 +19,7 @@ import DoctorSignupScreenLast from "./screens/Doctor/DoctorSignupScreenLast";
 import Connect from "./screens/Doctor/Doctor-connect";
 import Schedulepatient from "./screens/Doctor/Schedule-patient";
 import ChooseSymptoms from "./screens/Patient/ChooseSymptoms";
+import Home from "./screens/Doctor/Doctor-Home"
 
 const Stack = createNativeStackNavigator();
 
@@ -29,13 +30,13 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ChooseSymptoms"
+          initialRouteName="medical_document"
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
         >
           {/* COMMON NAVIGATIONS STARTED */}
-          <Stack.Screen name="ChooseSymptoms" component={ChooseSymptoms} />
+          <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen
