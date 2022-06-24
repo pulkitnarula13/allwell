@@ -9,6 +9,7 @@ import DoctorPatientSelection from "./screens/Doctor/Doctor-Patient-Selection";
 import DoctorSignup from "./screens/Doctor/Doctor-Signup";
 import DoctorLogin from "./screens/Doctor/Doctor-Login";
 import Greeting from "./screens/Greeting";
+import ForgotPassword from "./components/ForgotPassword";
 import "react-native-gesture-handler";
 import CustomNavigationBar from "./components/CustomNavigationBar";
 import PatientSignup from "./screens/Patient/Patient-Signup";
@@ -24,7 +25,7 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Available-Doctor"
+          initialRouteName="ForgotPassword"
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
@@ -33,6 +34,8 @@ export default function App() {
           <Stack.Screen name="Medical_document" component={Medical_document} />
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+
           <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
 
           <Stack.Screen
