@@ -15,6 +15,7 @@ import CustomNavigationBar from "./components/CustomNavigationBar";
 import PatientSignup from "./screens/Patient/Patient-Signup";
 import Medical_document from "./screens/Doctor/Medical_document";
 import AvailableDoctor from "./screens/Doctor/Available-Doctor";
+import DoctorWaitingList from "./screens/Doctor/Doctor-Waiting-List";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,7 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ForgotPassword"
+          initialRouteName="Doctor-Waiting-List"
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
@@ -35,8 +36,6 @@ export default function App() {
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-
-          <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
 
           <Stack.Screen
             name="Doctor-Patient-Selection"
@@ -48,10 +47,14 @@ export default function App() {
           {/* DOCTOR NAVIGATIONS STARTED*/}
           <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
           <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
+          <Stack.Screen name="Doctor-Waiting-List" component={DoctorWaitingList} />
+
           {/* DOCTOR NAVIGATIONS ENDED*/}
 
           {/* PATIENT NAVIGATIONS STARTED */}
           <Stack.Screen name="Patient-Signup" component={PatientSignup} />
+          <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
+
           {/* PATIENT NAVIGATIONS ENDED */}
         </Stack.Navigator>
       </NavigationContainer>
