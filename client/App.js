@@ -1,5 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import { createStackNavigator, createAppContainer } from 'react-navigation';  
+
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -16,6 +18,7 @@ import Medical_document from "./screens/Doctor/Medical_document";
 import DoctorSignupScreenLast from "./screens/Doctor/DoctorSignupScreenLast";
 import Connect from "./screens/Doctor/Doctor-connect";
 import Schedulepatient from "./screens/Doctor/Schedule-patient";
+import ChooseSymptoms from "./screens/Patient/ChooseSymptoms";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,13 +29,13 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Schedule-patient"
+          initialRouteName="ChooseSymptoms"
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
         >
           {/* COMMON NAVIGATIONS STARTED */}
-          <Stack.Screen name="Schedule-patient" component={Schedulepatient} />
+          <Stack.Screen name="ChooseSymptoms" component={ChooseSymptoms} />
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen
@@ -45,6 +48,7 @@ export default function App() {
           {/* DOCTOR NAVIGATIONS STARTED*/}
           <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
           <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
+          <Stack.Screen name="DoctorSignupScreenLast" component={DoctorSignupScreenLast}/>
           {/* DOCTOR NAVIGATIONS ENDED*/}
 
           {/* PATIENT NAVIGATIONS STARTED */}

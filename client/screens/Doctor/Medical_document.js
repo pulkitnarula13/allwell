@@ -111,14 +111,16 @@ import Stepper from "react-native-stepper-ui";
 import CreatingAccount2 from "../../components/CreatingAccount2";
 import CreatingAccount3 from "../../components/CreatingAccount3";
 
-const content = [
-  <CreatingAccount1 />,
-  <CreatingAccount2 />,
-  <CreatingAccount3 />,
-];
 
-const Medical_document = () => {
+
+const Medical_document = (props) => {
   const [active, setActive] = useState(0);
+
+  const content = [
+    <CreatingAccount1 />,
+    <CreatingAccount2 />,
+    <CreatingAccount3 {...props} />,
+  ];
 
   return (
     <View style={{ marginVertical: 50, marginHorizontal: 60 }}>

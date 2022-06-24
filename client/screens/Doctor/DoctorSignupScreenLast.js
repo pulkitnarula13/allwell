@@ -22,7 +22,6 @@ const DoctorSignupScreenLast = ()=> {
           justifyContent: "center",
         }}
         mode="contained"
-        
       >
         Go To Log In
       </Button>
