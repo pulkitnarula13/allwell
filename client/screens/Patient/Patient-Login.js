@@ -22,7 +22,7 @@ export default function PatientLogin() {
             <TouchableOpacity style={styles.google2}>
                 <Image
                     style={styles.image2}
-                    source={require('../assets/arrow_back.png')}
+                    source={require('../../assets/arrow_back.png')}
                 />
             </TouchableOpacity>
             <Text style={styles.head}>Welcome Back</Text>
@@ -59,7 +59,7 @@ export default function PatientLogin() {
             <TouchableOpacity style={styles.google1}>
                 <Image
                     style={styles.image}
-                    source={require('../assets/google.png')}
+                    source={require('../../assets/google.png')}
                 />
             </TouchableOpacity>
 

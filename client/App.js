@@ -15,7 +15,7 @@ import CustomNavigationBar from "./components/CustomNavigationBar";
 import PatientSignup from "./screens/Patient/Patient-Signup";
 import Medical_document from "./screens/Doctor/Medical_document";
 import AvailableDoctor from "./screens/Doctor/Available-Doctor";
-import PatientLogin from "./screens/Patient-Login";
+import PatientLogin from "./screens/Patient/Patient-Login";
 
 const Stack = createNativeStackNavigator();
 
