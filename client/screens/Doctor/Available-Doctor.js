@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, StatusBar, SafeAreaView, FlatList } from 'react-native'
 import React from 'react';
 
-import AvailableDoctorCard from '../../components/availableDoctorCard';
+import AvailableDoctorCard from '../../components/AvailableDoctorCard';
 import { availableDoctorList } from '../../constants/availableDoctor'
 
 const AvailableDoctor = () => {
