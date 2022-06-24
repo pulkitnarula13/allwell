@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-native-ratings": "^8.1.0"
+    "react-native-ratings": "^8.1.0",
+    "react-native-status-bar-height": "^2.6.0"
   }
 }

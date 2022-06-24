@@ -4,7 +4,7 @@ import React from 'react';
 const DoctorLogin = () => {
   return (
     <View>
-      <Text>doctorSignup</Text>
+      <Text>Doctor Login</Text>
     </View>
   );
 };
