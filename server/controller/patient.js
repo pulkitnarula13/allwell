@@ -30,8 +30,8 @@ const registerPatient = async (req, res) => {
     });
 
     const uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.profilePicture}`,
-      req.body.image,
+      `${Date.now() + "" + req.body.name}`,
+      req.body.profilePicture,
       "jpg",
       "patient",
       req.body.name
