@@ -7,47 +7,47 @@ let Screenheight = Dimensions.get("window").height;
 const DATA = [
     {
       name: 'John Doe',
-      image: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+      image: '../../assets/icon.png',
     },
     {
         name: 'Alia Bhatt',
-        image: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+        image: '../../assets/icon.png',
     },
     {
         name: 'Add Patient',
-        image: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+        image: '../../assets/icon.png',
     },
   ];
 
   const DATA1 = [
     {
       
-      image1: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+      image1: '../../assets/icon.png',
     },
     {
         
-        image1: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+        image1: '../../assets/icon.png',
     },
     {
         
-        image1: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+        image1: '../../assets/icon.png',
     },
     {
         
-        image1: '/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png',
+        image1: '../../assets/icon.png',
     },
   ];
 
 
   const Item = ({ name,image }) => (
     <View style={styles.item}>
-        <Image style={styles.image1} source= {require('/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png')} resizeMode='center' />
+        <Image style={styles.image1} source= {require('../../assets/icon.png')} resizeMode='center' />
       <Text style={styles.name1}>{name}</Text>
     </View>
   );
   const Item1 = ({ image1 }) => (
     <View style={styles.item}>
-        <Image style={styles.image2} source= {require('/Users/pulkit/Documents/Langara/Sem4/Capstone Project/Project/allwell/client/assets/icon.png')} resizeMode='center' />
+        <Image style={styles.image2} source= {require('../../assets/icon.png')} resizeMode='center' />
      
     </View>
   );
