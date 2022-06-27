@@ -3,18 +3,15 @@ const mongoose = require("mongoose");
 const AddressSchema = mongoose.Schema({
   houseNumber: {
     type: String,
-    required: true,
   },
   city: {
     type: String,
-    required: true,
   },
   province: {
     type: String,
   },
   postalCode: {
     type: String,
-    required: true,
   },
   country: {
     type: String,
