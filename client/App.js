@@ -31,6 +31,7 @@ export default function App() {
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="PatientSignup" component={PatientSignup} />
 
           <Stack.Screen
             name="Doctor-Patient-Selection"
