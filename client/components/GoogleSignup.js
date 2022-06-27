@@ -3,11 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import axios from "axios";
-import {
-  IOS_CLIENT_ID,
-  WEB_CLIENT_ID,
-  EXPO_CLIENT_ID,
-} from "@env";
+import { IOS_CLIENT_ID, WEB_CLIENT_ID, EXPO_CLIENT_ID } from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 

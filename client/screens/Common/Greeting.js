@@ -1,6 +1,6 @@
 import { View, Button, StyleSheet } from "react-native";
 import React from "react";
-import GoogleSignup from "../components/GoogleSignup";
+import GoogleSignup from "../../components/GoogleSignup";
 import { Divider } from "react-native-paper";
 import { Text } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -22,11 +22,11 @@ const Greeting = ({ navigation }) => {
         <GoogleSignup />
         <Button
           title="Login"
-          onPress={() => navigation.navigate("Doctor-Login")}
+          onPress={() => navigation.navigate("Login")}
         />
         <Divider />
         <TouchableOpacity style={style.guest}>
-          Continue as Guest
+          <Text> Continue as Guest</Text>
         </TouchableOpacity>
       </View>
     </View>
