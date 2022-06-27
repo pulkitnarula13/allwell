@@ -18,7 +18,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.medicoallwell.medico",
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {

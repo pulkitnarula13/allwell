@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
-const Home = () => {
+const DoctorHome = () => {
   let Screenheight = Dimensions.get("window").height;
   return (
     <ScrollView>
@@ -203,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default DoctorHome;

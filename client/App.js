@@ -6,58 +6,62 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
+import "react-native-gesture-handler";
+//Common 
+import CustomNavigationBar from "./components/CustomNavigationBar";
 import Bottomnavigation from "./components/BottomNavigation";
+import Greeting from "./screens/Common/Greeting";
+import Login from "./screens/Common/Login";
+import ForgotPassword from "./components/ForgotPassword";
+// Doctor 
 import DoctorPatientSelection from "./screens/Doctor/Doctor-Patient-Selection";
 import DoctorSignup from "./screens/Doctor/Doctor-Signup";
-import DoctorLogin from "./screens/Doctor/Doctor-Login";
-import Greeting from "./screens/Greeting";
-import "react-native-gesture-handler";
-import CustomNavigationBar from "./components/CustomNavigationBar";
+import DoctorHome from "./screens/Doctor/Doctor-Home";
+import DoctorConnect from "./screens/Doctor/Doctor-connect";
+// Patients
 import PatientSignup from "./screens/Patient/Patient-Signup";
-import Medical_document from "./screens/Doctor/Medical_document";
-import DoctorSignupScreenLast from "./screens/Doctor/DoctorSignupScreenLast";
-import Connect from "./screens/Doctor/Doctor-connect";
-import Schedulepatient from "./screens/Doctor/Schedule-patient";
-import ChooseSymptoms from "./screens/Patient/ChooseSymptoms";
-import Home from "./screens/Doctor/Doctor-Home"
-import profile from "./screens/Patient/profile";
-import Profilesettings from "./screens/Patient/Profile-settings";
+import ConnectDoctor from "./screens/Patient/Connect-Doctor";
+import AvailableDoctor from "./screens/Patient/Available-Doctor";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
- 
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Profilesettings"
+          initialRouteName="Connect-Doctor"
+
           screenOptions={{
             header: (props) => <CustomNavigationBar {...props} />,
           }}
         >
           {/* COMMON NAVIGATIONS STARTED */}
-          <Stack.Screen name="Profilesettings" component={Profilesettings} />
-          <Stack.Screen name="profile" component={profile} />
-          <Stack.Screen name="Connect" component={Connect} />
           <Stack.Screen name="Greeting" component={Greeting} />
           <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="PatientSignup" component={PatientSignup} />
+
           <Stack.Screen
             name="Doctor-Patient-Selection"
             component={DoctorPatientSelection}
           />
+          <Stack.Screen name="Login" component={Login} />
 
           {/* COMMON NAVIGATIONS ENDED */}
 
           {/* DOCTOR NAVIGATIONS STARTED*/}
-          <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
           <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
-          <Stack.Screen name="DoctorSignupScreenLast" component={DoctorSignupScreenLast}/>
+          <Stack.Screen name="Doctor-Home" component={DoctorHome} />
+          <Stack.Screen name="Doctor-Connect" component={DoctorConnect} />
+
           {/* DOCTOR NAVIGATIONS ENDED*/}
 
           {/* PATIENT NAVIGATIONS STARTED */}
           <Stack.Screen name="Patient-Signup" component={PatientSignup} />
+          <Stack.Screen name="Connect-Doctor" component={ConnectDoctor} />
+          <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
+
           {/* PATIENT NAVIGATIONS ENDED */}
         </Stack.Navigator>
       </NavigationContainer>

@@ -9,18 +9,18 @@ const {
   deletePatient,
   getPatientById,
 } = require("../controller/patient");
-
+const validateToken = require("../middleware/auth");
 
 router.post("/register", registerPatient);
 
 router.post("/login", loginPatient);
 
-router.get("/", getPatients);
+router.get("/", validateToken, getPatients);
 
-router.put("/:id", updatePatient);
+router.put("/:id", validateToken, updatePatient);
 
-router.delete("/:id", deletePatient);
+router.delete("/:id", validateToken, deletePatient);
 
-router.get("/:id", getPatientById);
+router.get("/:id", validateToken, getPatientById);
 
 module.exports = router;
