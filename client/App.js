@@ -14,45 +14,51 @@ import CustomNavigationBar from "./components/CustomNavigationBar";
 import PatientSignup from "./screens/Patient/Patient-Signup";
 import AvailableDoctor from "./screens/Patient/Available-Doctor";
 import Login from "./screens/Common/Login";
+import { AuthProvider } from "./Context/AuthContext";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Greeting"
-          screenOptions={{
-            header: (props) => <CustomNavigationBar {...props} />,
-          }}
-        >
-          {/* COMMON NAVIGATIONS STARTED */}
-          <Stack.Screen name="Greeting" component={Greeting} />
-          <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-          <Stack.Screen name="PatientSignup" component={PatientSignup} />
+      <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Greeting"
+            screenOptions={{
+              header: (props) => <CustomNavigationBar {...props} />,
+            }}
+          >
+            {/* COMMON NAVIGATIONS STARTED */}
+            <Stack.Screen name="Greeting" component={Greeting} />
+            <Stack.Screen
+              name="BottomNavigation"
+              component={Bottomnavigation}
+            />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="PatientSignup" component={PatientSignup} />
 
-          <Stack.Screen
-            name="Doctor-Patient-Selection"
-            component={DoctorPatientSelection}
-          />
-          <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen
+              name="Doctor-Patient-Selection"
+              component={DoctorPatientSelection}
+            />
+            <Stack.Screen name="Login" component={Login} />
 
-          {/* COMMON NAVIGATIONS ENDED */}
+            {/* COMMON NAVIGATIONS ENDED */}
 
-          {/* DOCTOR NAVIGATIONS STARTED*/}
-          <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
+            {/* DOCTOR NAVIGATIONS STARTED*/}
+            <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
 
-          {/* DOCTOR NAVIGATIONS ENDED*/}
+            {/* DOCTOR NAVIGATIONS ENDED*/}
 
-          {/* PATIENT NAVIGATIONS STARTED */}
-          <Stack.Screen name="Patient-Signup" component={PatientSignup} />
-          <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
+            {/* PATIENT NAVIGATIONS STARTED */}
+            <Stack.Screen name="Patient-Signup" component={PatientSignup} />
+            <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
 
-          {/* PATIENT NAVIGATIONS ENDED */}
-        </Stack.Navigator>
-      </NavigationContainer>
+            {/* PATIENT NAVIGATIONS ENDED */}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AuthProvider>
     </PaperProvider>
   );
 }
