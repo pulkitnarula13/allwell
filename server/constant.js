@@ -1,1 +1,6 @@
-export const baseURl = '/api/v1/';
+const baseURL = `/api/v1`;
+
+
+module.exports = {
+    baseURL
+}

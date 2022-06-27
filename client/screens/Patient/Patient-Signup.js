@@ -13,7 +13,7 @@ import {
 
 
 
-export default function DoctorSignup() {
+export default function PatientSignup() {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -33,7 +33,7 @@ export default function DoctorSignup() {
         }}>
         <View style={{ alignItems: 'center' }}>
           <Image
-            source={require('../assets/doctor.jpeg')}
+            source={require('../../assets/doctor.jpeg')}
             style={{
               width: '50%',
               height: 100,

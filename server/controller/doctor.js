@@ -1,16 +1,15 @@
-const { Patient } = require("../models/patient");
+const { Doctor } = require("../models/doctor");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
-const upload = require("../utils/upload");
 
 /**
- * @description API to register patients to database
+ * @description API to register doctors to database
  * @param {*} req
  * @param {*} res
  * @return {*}
  */
-const registerPatient = async (req, res) => {
+const registerDoctor = async (req, res) => {
   try {
     let newPassword = await bcrypt.hash(req.body.password, 10);
     const token = jwt.sign(
@@ -21,6 +20,22 @@ const registerPatient = async (req, res) => {
       process.env.JWT_SECRET
     );
 
+    const uploadProfilePicture = await upload(
+      `${Date.now() + "" + req.body.profilePicture}`,
+      req.body.image,
+      "jpg",
+      "doctor",
+      req.body.name
+    );
+
+    const uploadLicenseImage = await upload(
+      `${Date.now() + "" + req.body.healthDocument}`,
+      req.body.image,
+      "jpg",
+      "patient",
+      req.body.name
+    );
+
     const savedAddress = await Address.create({
       houseNumber: req.body.houseNumber,
       city: req.body.city,
@@ -29,36 +44,29 @@ const registerPatient = async (req, res) => {
       country: req.body.country,
     });
 
-    const uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.name}`,
-      req.body.profilePicture,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    const uploadHealthDocument = await upload(
-      `${Date.now() + "" + req.body.healthDocument}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    await Patient.create({
+    const output = await Doctor.create({
       name: req.body.name,
-      password: newPassword,
-      email: req.body.email,
-      profilePicture: uploadProfilePicture,
-      healthNumber: req.body.healthNumber,
-      healthDocument: uploadHealthDocument,
       dob: req.body.dob,
+      password: newPassword,
       gender: req.body.gender,
+      email: req.body.email,
+      city: req.body.city,
+      zipCode: req.body.zipCode,
+      province: req.body.province,
+      phoneNumber: req.body.phoneNumber,
+      profilePitcture: uploadProfilePicture,
+      licenseNumber: req.body.licenseNumber,
+      doctorDescription: req.body.doctorDescription,
+      workingDays: req.body.workingDays,
+      specialities: req.body.specialities,
+      languages: req.body.languages,
+      certifications: req.body.certifications,
       address: savedAddress._id,
+      licenceImage: uploadLicenseImage,
     });
 
     return res.status(200).json({
-      message: "Patient Registered Succesfully",
+      message: "Doctor Registered Succesfully",
       data: {
         token,
         email: req.body.email,
@@ -73,18 +81,18 @@ const registerPatient = async (req, res) => {
 };
 
 /**
- * @description API to login Patients
+ * @description API to login Doctors
  * @param {*} req
  * @param {*} res
  * @return {*}
  */
-const loginPatient = async (req, res) => {
+const loginDoctor = async (req, res) => {
   const email = req.body.email;
-  let patient = await Patient.findOne({ email: email });
-  if (patient) {
+  let doctor = await Doctor.findOne({ email: email });
+  if (doctor) {
     const isValidPassword = await bcrypt.compare(
       req.body.password,
-      patient.password
+      customer.password
     );
     if (isValidPassword) {
       const token = jwt.sign(
@@ -96,36 +104,36 @@ const loginPatient = async (req, res) => {
       );
       return res.status(200).json({
         token,
-        id: patient._id,
-        name: patient.name,
-        email: patient.email,
+        id: doctor._id,
+        name: doctor.name,
+        email: doctor.email,
         message: "Succesfully Logged In",
       });
     } else {
       return res.status(401).json({
-        message: "Incorrect Password!",
+        message: "Incorrect Password",
       });
     }
   } else {
-    return res.status(500).json({
+    return res.status(400).json({
       message: "User doesn't exist, please register",
     });
   }
 };
 
 /**
- * @description API to fetch all patients from database
+ * @description API to fetch all doctors from database
  * @param {*} req
  * @param {*} res
  */
-const getPatients = (req, res) => {
-  Patient.find()
+const getDoctors = (req, res) => {
+  Doctor.find()
     .populate({
       path: "address",
     })
     .then((result) => {
       return res.status(200).json({
-        message: "Succesfully fetched Patients",
+        message: "Succesfully fetched all doctors",
         data: result,
       });
     })
@@ -137,34 +145,34 @@ const getPatients = (req, res) => {
 };
 
 /**
- * @description API to updte patients
+ * @description API to updte doctors
  * @param {*} req
  * @param {*} res
  */
-const updatePatient = (req, res) => {
+const updateDoctor = (req, res) => {
   const id = req.params.id;
 
-  Patient.findOneAndUpdate({ _id: id }, req.body, {
-    returnOriginal: false,
+  Doctor.findOneAndUpdate({ _id: id }, req.body, {
+    returnOrignal: false,
   }).then((result) => {
     res.status(200).json({
-      message: "Succesfully updated the Patient",
+      message: "Succesfully updated the Doctor",
       data: result,
     });
   });
 };
 
 /**
- * @description API to delete patients
+ * @description API to delete doctor
  * @param {*} req
  * @param {*} res
  */
-const deletePatient = (req, res) => {
+const deleteDoctor = (req, res) => {
   const id = req.params.id;
-  Patient.findByIdAndDelete(id)
+  Doctor.findByIdAndDelete(id)
     .then((result) => {
       return res.status(200).json({
-        message: "Patient succesfully delete",
+        message: "Doctor succesfully deleted",
       });
     })
     .catch((error) => {
@@ -175,17 +183,17 @@ const deletePatient = (req, res) => {
 };
 
 /**
- * @description Api to fetch patient based on given ID
+ * @description Api to fetch doctor based on given ID
  * @param {*} req
  * @param {*} res
  */
-const getPatientById = (req, res) => {
+const getDoctorById = (req, res) => {
   const id = req.params.id;
 
-  Patient.findById(id)
+  Doctor.findById(id)
     .then((result) => {
       return res.status(200).json({
-        message: `Patient found succesfully`,
+        message: `Doctor found succesfully`,
         data: result,
       });
     })
@@ -197,10 +205,10 @@ const getPatientById = (req, res) => {
 };
 
 module.exports = {
-  registerPatient,
-  loginPatient,
-  getPatients,
-  updatePatient,
-  deletePatient,
-  getPatientById,
+  getDoctors,
+  deleteDoctor,
+  updateDoctor,
+  getDoctorById,
+  registerDoctor,
+  loginDoctor,
 };

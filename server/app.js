@@ -1,26 +1,35 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const cors = require('cors');
-const mongoose = require('mongoose');
+const cors = require("cors");
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 8080;
-require('dotenv').config()
+const patientRoutes = require("./routes/patient");
+const doctorRoutes = require("./routes/doctor");
+
+const { baseURL } = require("./constant");
+
+require("dotenv").config();
 
 app.use(cors());
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb"}));
+
 
 mongoose.connect(process.env.MONGO_URI, (error) => {
-    if (error) {
-        console.log(`Error connecting the database ${error}`);
-    } else {
-        console.log(`Connected to Allwell Database`);
-    }
-})
+  if (error) {
+    console.log(`Error connecting the database ${error}`);
+  } else {
+    console.log(`Connected to Allwell Database`);
+  }
+});
 
-app.get('/', (req, res) => {
-    res.send('All Well API');
-})
+app.get("/", (req, res) => {
+  res.send("All Well API");
+});
+
+app.use(`${baseURL}/patients`, patientRoutes);
+app.use(`${baseURL}/doctors`, doctorRoutes);
 
 app.listen(PORT, () => {
-    console.log(`All well server running at port ${PORT}`);
-})
+  console.log(`All well server running at port ${PORT}`);
+});
