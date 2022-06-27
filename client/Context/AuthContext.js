@@ -46,11 +46,14 @@ export const AuthProvider = ({  children }) => {
       });
   };
 
-  const login = (email, password) => {
+  const login = ({
+    email,
+    password
+  }, navigation) => {
     setIsLoading(true);
 
     axios
-      .post(`${BASE_URL.MAIN}/login`, {
+      .post(`${BASE_URL.PATIENT}/login`, {
         email,
         password,
       })
@@ -60,6 +63,7 @@ export const AuthProvider = ({  children }) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
+        navigation.navigate("Patient-Home");
       })
       .catch((e) => {
         console.log(`login error ${e}`);

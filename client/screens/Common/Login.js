@@ -1,18 +1,22 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  TextInput,
   Button,
   TouchableOpacity,
 } from "react-native";
 
-export default function Login() {
+import { TextInput } from "react-native-paper";
+import { AuthContext } from "../../Context/AuthContext";
+
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const {isLoading, login} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -22,6 +26,7 @@ export default function Login() {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
+          value={email}
           placeholder="afs@af.com"
           placeholderTextColor="#000000"
           onChangeText={(email) => setEmail(email)}
@@ -31,6 +36,7 @@ export default function Login() {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
+          value={password}
           placeholder="******"
           placeholderTextColor="#000000"
           secureTextEntry={true}
@@ -42,9 +48,10 @@ export default function Login() {
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
+      <Button title="Login" onPress={() => login({
+        email, password
+      }, navigation)}>
+      </Button>
     </View>
   );
 }
@@ -89,4 +96,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#bbd0d8",
   },
 });
-
