@@ -2,7 +2,6 @@ import * as React from "react";
 import { BottomNavigation } from "react-native-paper";
 import Home from "../screens/Doctor/Doctor-Home";
 import Connect from "../screens/Doctor/Doctor-connect";
-import History from "../screens/Doctor/Doctor-History";
 import Profile from "../screens/Doctor/Doctor-Profile";
 
 const Bottomnavigation = () => {

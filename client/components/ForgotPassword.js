@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Dimensions } from "react-native";
-import { Button,TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width, height } = Dimensions.get("window");
 
 const ForgotPassword = () => {
-    const [email, setemail] = useState("")
-//   const [image1, setimage1] = useState(".../assets/icon.png");
-//   const [clicked, setclicked] = useState(false);
+  const [email, setemail] = useState("");
+  //   const [image1, setimage1] = useState(".../assets/icon.png");
+  //   const [clicked, setclicked] = useState(false);
 
   const changepage = () => {
     setclicked(true);
   };
-
 
   return (
     <View>
@@ -22,57 +21,49 @@ const ForgotPassword = () => {
       </View>
       <View>
         <Text style={styles.accountHeading1}>
-        We will send you the new password to this email for reset.
+          We will send you the new password to this email for reset.
         </Text>
         <TextInput
-        style={styles.inputbox}
-        mode="outlined"
-        label="email"
-        placeholder="asd@as.com"
-        value={email}
-        onChangeText={(text) => setemail(text)}
-      />
-      <Button
-        style={
-          styles.buttonnew
-        }
-        mode="contained"
-        onPress={changepage}
-      >
-        Send Password
-      </Button>
+          style={styles.inputbox}
+          mode="outlined"
+          label="email"
+          placeholder="asd@as.com"
+          value={email}
+          onChangeText={(text) => setemail(text)}
+        />
+        <Button style={styles.buttonnew} mode="contained" onPress={changepage}>
+          Send Password
+        </Button>
       </View>
-
-      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    buttonnew:{
-        backgroundColor: "#D9D9D9",
-          width: 257,
-          height: 40,
-          justifyContent: "center",
-          marginLeft:60,
-          marginRight:73
-    },
-    pageTitle:{
-        fontWeight:"600",
-        fontSize:24,
-        lineHeight:29.05,
-        marginTop:100,
-        marginLeft:60,
-        marginRight:73,
-        textAlign:"center"
-    },
-    inputbox:{
-        width:256,
-        height:40,
-        marginLeft:61,
-        marginRight:73,
-        marginBottom:36
-    },
+  buttonnew: {
+    backgroundColor: "#D9D9D9",
+    width: 257,
+    height: 40,
+    justifyContent: "center",
+    marginLeft: 60,
+    marginRight: 73,
+  },
+  pageTitle: {
+    fontWeight: "600",
+    fontSize: 24,
+    lineHeight: 29.05,
+    marginTop: 100,
+    marginLeft: 60,
+    marginRight: 73,
+    textAlign: "center",
+  },
+  inputbox: {
+    width: 256,
+    height: 40,
+    marginLeft: 61,
+    marginRight: 73,
+    marginBottom: 36,
+  },
 
   firstHeading: {
     fontSize: 24,
@@ -108,9 +99,9 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginTop: 95,
     marginBottom: 47,
-    marginLeft:49,
-    marginRight:49,
-    marginBottom:38
+    marginLeft: 49,
+    marginRight: 49,
+    marginBottom: 38,
   },
   accountImage: {
     width: 302,

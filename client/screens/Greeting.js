@@ -26,7 +26,7 @@ const Greeting = ({ navigation }) => {
         />
         <Divider />
         <TouchableOpacity style={style.guest}>
-          Continue as Guest
+          <Text> Continue as Guest</Text>
         </TouchableOpacity>
       </View>
     </View>
