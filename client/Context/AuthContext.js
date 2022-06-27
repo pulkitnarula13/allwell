@@ -1,14 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { BASE_URL_PATIENT, BASE_URL } from "@env";
+import { BASE_URL } from "../config/config";
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({  children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
+
+  console.log(children, "NaVIGATIOn");
 
   const registerPatient = ({
     name,
@@ -18,11 +20,11 @@ export const AuthProvider = ({ children }) => {
     password,
     healthNumber,
     gender,
-  }) => {
+  }, navigation) => {
     setIsLoading(true);
 
     axios
-      .post(`${BASE_URL_PATIENT}/register`, {
+      .post(`${BASE_URL.PATIENT}/register`, {
         name,
         email,
         dob,
@@ -36,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
-        console.log(userInfo);
+        navigation.navigate("Patient-Home");
       })
       .catch((e) => {
         console.log(`register error ${e}`);
@@ -48,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`${BASE_URL}/login`, {
+      .post(`${BASE_URL.MAIN}/login`, {
         email,
         password,
       })
@@ -70,7 +72,7 @@ export const AuthProvider = ({ children }) => {
 
     axios
       .post(
-        `${BASE_URL}/logout`,
+        `${BASE_URL.MAIN}/logout`,
         {},
         {
           headers: { Authorization: `Bearer ${userInfo.access_token}` },

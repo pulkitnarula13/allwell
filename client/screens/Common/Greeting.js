@@ -19,7 +19,7 @@ const Greeting = ({ navigation }) => {
           title="Signup with Email"
           onPress={() => navigation.navigate("Doctor-Patient-Selection")}
         />
-        <GoogleSignup />
+      <GoogleSignup />
         <Button
           title="Login"
           onPress={() => navigation.navigate("Login")}

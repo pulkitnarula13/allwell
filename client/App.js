@@ -22,9 +22,9 @@ import DoctorConnect from "./screens/Doctor/Doctor-connect";
 import PatientSignup from "./screens/Patient/Patient-Signup";
 import ConnectDoctor from "./screens/Patient/Connect-Doctor";
 import AvailableDoctor from "./screens/Patient/Available-Doctor";
-import Login from "./screens/Common/Login";
 import { AuthProvider } from "./Context/AuthContext";
 import AccountInformation from "./screens/Patient/AccountInformation";
+import PatientHome from "./screens/Patient/Patient-Home";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +64,7 @@ export default function App() {
             {/* PATIENT NAVIGATIONS STARTED */}
             <Stack.Screen name="Patient-Signup" component={PatientSignup} />
             <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
+            <Stack.Screen name="Patient-Home" component={PatientHome} />
 
             {/* PATIENT NAVIGATIONS ENDED */}
           </Stack.Navigator>

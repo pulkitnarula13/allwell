@@ -13,7 +13,7 @@ import { Button, TextInput, RadioButton } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import { DatePickerInput } from "react-native-paper-dates";
 
-export default function PatientSignup() {
+export default function PatientSignup({ navigation }) {
   const { isLoading, registerPatient } = useContext(AuthContext);
 
   const [name, setName] = useState("");
@@ -59,16 +59,6 @@ export default function PatientSignup() {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              value={password}
-              onChangeText={(password) => setPassword(password)}
-              underlineColorAndroid="#f000"
-              placeholder="Password"
-              placeholderTextColor="#8b9cb5"
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
               value={healthNumber}
               onChangeText={(healthNumber) => setHealthNumber(healthNumber)}
               underlineColorAndroid="#f000"
@@ -84,6 +74,16 @@ export default function PatientSignup() {
               onChange={(d) => setDOB(d)}
               inputMode="start"
               style={styles.inputStyle}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <TextInput
+              style={styles.inputStyle}
+              value={password}
+              onChangeText={(password) => setPassword(password)}
+              underlineColorAndroid="#f000"
+              placeholder="Password"
+              placeholderTextColor="#8b9cb5"
             />
           </View>
           <View style={styles.SectionStyle}>
@@ -137,7 +137,7 @@ export default function PatientSignup() {
                 password,
                 healthNumber,
                 gender,
-              })
+              }, navigation)
             }
           >
             <Text style={styles.buttonTextStyle}>Sign Up</Text>
