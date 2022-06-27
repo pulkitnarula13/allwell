@@ -3,6 +3,7 @@ import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
 import DoctorConnect from "../screens/Doctor/Doctor-connect";
 import Profile from "../screens/Doctor/Doctor-Profile";
+import AvailableDoctor from "../screens/Patient/Available-Doctor";
 
 const Bottomnavigation = () => {
   const [index, setIndex] = React.useState(0);

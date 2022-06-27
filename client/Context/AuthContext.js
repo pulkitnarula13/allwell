@@ -5,22 +5,15 @@ import { BASE_URL } from "../config/config";
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({  children }) => {
-  const [userInfo, setUserInfo] = useState({});
+export const AuthProvider = ({ children }) => {
+  const [userInfo, setUserInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
 
-  console.log(children, "NaVIGATIOn");
-
-  const registerPatient = ({
-    name,
-    email,
-    dob,
-    phoneNumber,
-    password,
-    healthNumber,
-    gender,
-  }, navigation) => {
+  const registerPatient = (
+    { name, email, dob, phoneNumber, password, healthNumber, gender },
+    navigation
+  ) => {
     setIsLoading(true);
 
     axios
@@ -38,7 +31,7 @@ export const AuthProvider = ({  children }) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
-        navigation.navigate("Patient-Home");
+        navigation.navigate("Login");
       })
       .catch((e) => {
         console.log(`register error ${e}`);
@@ -46,10 +39,7 @@ export const AuthProvider = ({  children }) => {
       });
   };
 
-  const login = ({
-    email,
-    password
-  }, navigation) => {
+  const login = ({ email, password }, navigation) => {
     setIsLoading(true);
 
     axios
@@ -59,11 +49,10 @@ export const AuthProvider = ({  children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
-        console.log(userInfo);
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
-        navigation.navigate("Patient-Home");
+        navigation.navigate("Home");
       })
       .catch((e) => {
         console.log(`login error ${e}`);
@@ -83,7 +72,6 @@ export const AuthProvider = ({  children }) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         AsyncStorage.removeItem("userInfo");
         setUserInfo({});
         setIsLoading(false);
