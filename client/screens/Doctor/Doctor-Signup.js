@@ -47,6 +47,5 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
 });
->>>>>>> develop
 
 export default DoctorSignup;
