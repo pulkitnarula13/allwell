@@ -1,7 +1,6 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useContext } from "react";
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   Image,
@@ -9,124 +8,152 @@ import {
   Keyboard,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
+} from "react-native";
+import { Button, TextInput, RadioButton } from "react-native-paper";
+import { AuthContext } from "../../Context/AuthContext";
+import { DatePickerInput } from "react-native-paper-dates";
 
+export default function PatientSignup({ navigation }) {
+  const { isLoading, registerPatient } = useContext(AuthContext);
 
-
-export default function PatientSignup() {
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [Password, setUserPassword] = useState("");
-  const [CPassword, setUserCPassword] = useState("");
-  const [Phone, setUserPhone] = useState("");
-
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [dob, setDOB] = useState(undefined);
+  const [healthNumber, setHealthNumber] = useState();
+  const [gender, setGender] = useState();
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#ebf0f3' }}>
+    <View style={{ flex: 1, backgroundColor: "#ebf0f3" }}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}>
-        <View style={{ alignItems: 'center' }}>
-          <Image
-            source={require('../../assets/doctor.jpeg')}
-            style={{
-              width: '50%',
-              height: 100,
-              resizeMode: 'contain',
-              margin: 30,
-            }}
-          />
-        </View>
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
         <KeyboardAvoidingView enabled>
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(FirstName) => setFirstName(FirstName)}
+              value={name}
+              onChangeText={(name) => setName(name)}
               underlineColorAndroid="#f000"
-              placeholder="First Name"
+              placeholder="Full Name"
               placeholderTextColor="#8b9cb5"
-
             />
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(LastName) => setLastName(LastName)}
-              underlineColorAndroid="#f000"
-              placeholder="Last Name"
-              placeholderTextColor="#8b9cb5"
-
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+              value={email}
+              onChangeText={(email) => setEmail(email)}
               underlineColorAndroid="#f000"
               placeholder="Email address"
               placeholderTextColor="#8b9cb5"
               keyboardType="email-address"
-
             />
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserPassword) =>
-                setUserPassword(UserPassword)
-              }
+              value={healthNumber}
+              onChangeText={(healthNumber) => setHealthNumber(healthNumber)}
+              underlineColorAndroid="#f000"
+              placeholder="Health Number"
+              placeholderTextColor="#8b9cb5"
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <DatePickerInput
+              locale="en"
+              label="DOB"
+              value={dob}
+              onChange={(d) => setDOB(d)}
+              inputMode="start"
+              style={styles.inputStyle}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <TextInput
+              style={styles.inputStyle}
+              value={password}
+              onChangeText={(password) => setPassword(password)}
               underlineColorAndroid="#f000"
               placeholder="Password"
               placeholderTextColor="#8b9cb5"
-
             />
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(CPassword) =>
-                setUserCPassword(CPassword)
+              value={confirmPassword}
+              onChangeText={(confirmPassword) =>
+                setConfirmPassword(confirmPassword)
               }
               underlineColorAndroid="#f000"
               placeholder="Confirm Password"
               placeholderTextColor="#8b9cb5"
-
             />
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
+              value={phone}
               style={styles.inputStyle}
-              onChangeText={(Phone) => setUserPhone(Phone)}
+              onChangeText={(phone) => setPhone(phone)}
               underlineColorAndroid="#f000"
               placeholder="mobile number"
               placeholderTextColor="#8b9cb5"
-
             />
           </View>
 
+          <View>
+            <RadioButton
+              value="Male"
+              status={gender === "Male" ? "checked" : "unchecked"}
+              onPress={() => setGender("Male")}
+              color="red"
+            />
+            <Text>Male</Text>
+            <RadioButton
+              value="Female"
+              status={gender === "Female" ? "checked" : "unchecked"}
+              onPress={() => setGender("Female")}
+              color="red"
+            />
+            <Text>Female</Text>
+          </View>
 
-          <TouchableOpacity
+          <Button
             style={styles.buttonStyle}
-            activeOpacity={0.5}
+            onPress={() =>
+              registerPatient({
+                name,
+                email,
+                dob,
+                phone,
+                password,
+                healthNumber,
+                gender,
+              }, navigation)
+            }
           >
             <Text style={styles.buttonTextStyle}>Sign Up</Text>
-            <Text style={styles.txt}>By signing up, you agree to Medico’s privacy policy</Text>
-          </TouchableOpacity>
+          </Button>
+          <Text style={styles.txt}>
+            By signing up, you agree to Medico’s privacy policy
+          </Text>
         </KeyboardAvoidingView>
       </ScrollView>
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
   SectionStyle: {
-    flexDirection: 'row',
+    flexDirection: "row",
     height: 40,
     marginTop: 20,
     marginLeft: 35,
@@ -137,12 +164,12 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#d4d8db',
+    backgroundColor: "#d4d8db",
     borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#7DE24E',
+    color: "#FFFFFF",
+    borderColor: "#7DE24E",
     height: 40,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 30,
     marginLeft: 35,
     marginRight: 35,
@@ -150,21 +177,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonTextStyle: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     paddingVertical: 10,
     fontSize: 16,
   },
   inputStyle: {
     flex: 1,
-    color: 'black',
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
-    borderRadius: 30,
-    borderColor: '#dadae8',
   },
-
   link: {
-    color: 'black',
+    color: "black",
   },
 });
