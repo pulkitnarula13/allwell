@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width, height } = Dimensions.get("window");
 
-const CreatingAccount3 = () => {
+const CreatingAccount3 = ({ navigation }) => {
   const [height, setHeight] = useState(undefined);
   const [showDropDown, setShowDropDown] = useState(false);
   const [gender, setGender] = useState("");
+  console.log("Navigation: ", navigation);
   const genderList = [
     {
       label: "Cardiology",
@@ -74,10 +76,12 @@ const CreatingAccount3 = () => {
           justifyContent: "center",
         }}
         mode="contained"
-        onPress={changepage}
+        // onPress={changepage}
+        onPress={() => navigation.navigate("DoctorSignupScreenLast")}
       >
         Sign Up
       </Button>
+
       <View style={styles.lasttextview}>
         <Text style={styles.lasttext}>
           You can always edit these on the profile page.
@@ -131,4 +135,3 @@ const styles = StyleSheet.create({
 });
 
 export default CreatingAccount3;
-

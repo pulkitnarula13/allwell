@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-native-ratings": "^8.1.0",
+    "react-navigation": "^4.4.4"
+  }
+}
