@@ -81,7 +81,6 @@ const loginPatient = async (req, res) => {
       });
     }
   } else {
-    console.log('THis one fired');
     return res.status(500).json({
       message: "User doesn't exist, please register",
     });
