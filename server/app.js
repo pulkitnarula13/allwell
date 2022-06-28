@@ -49,7 +49,7 @@ mongoose.connect(process.env.MONGO_URI, (error) => {
 });
 // Routes
 /**
- * @openapi
+ * @swagger
  * /:
  *   get:
  *     description: Welcome to swagger-jsdoc!

@@ -12,7 +12,7 @@ const {
 
 // Routes
 /**
- * @openapi
+ * @swagger
  * /register:
  *   post:
  *     description: Register a new doctor
@@ -24,7 +24,7 @@ router.post("/register", registerDoctor);
 
 // Routes
 /**
- * @openapi
+ * @swagger
  * /login:
  *   post:
  *     description: Send user to api for doctor login
@@ -36,7 +36,7 @@ router.post("/login", loginDoctor);
 
 // Routes
 /**
- * @openapi
+ * @swagger
  * /:
  *   get:
  *     description: Get all the registered doctors
@@ -48,7 +48,7 @@ router.get("/", getDoctors);
 
 // Routes
 /**
- * @openapi
+ * @swagger
  * /doctor/:id:
  *   put:
  *     description: Update information of a doctor profile
@@ -60,7 +60,7 @@ router.put("/:id", updateDoctor);
 
 // Routes
 /**
- * @openapi
+ * @swagger
  * /doctor/:id:
  *   delete:
  *     description: Delete the doctor using id from the database
@@ -72,7 +72,7 @@ router.delete("/:id", deleteDoctor);
 
 // Routes
 /**
- * @openapi
+ * @swagger
  * /doctor/:id:
  *   get:
  *     description: Get information of a doctor using id
