@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { BASE_URL } from "../config/config";
+import { Alert } from 'react-native';
 
 export const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`${BASE_URL.PATIENT}/register`, {
+      .post(`http://localhost:8080/api/v1/patients/register`, {
         name,
         email,
         dob,
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`${BASE_URL.PATIENT}/login`, {
+      .post(`http://localhost:8080/api/v1/patients/login`, {
         email,
         password,
       })
@@ -55,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         navigation.navigate("Home");
       })
       .catch((e) => {
+        Alert.alert("error", e.message);
         console.log(`login error ${e}`);
         setIsLoading(false);
       });
