@@ -1,4 +1,5 @@
 const express = require("express");
+const ROLE = require("../config/roles");
 const router = express.Router();
 
 const {
@@ -11,6 +12,7 @@ const {
 } = require("../controller/patient");
 
 const validateToken = require("../middleware/auth");
+const verifyRoles = require("../middleware/roleVerification");
 
 
 // Routes
@@ -47,7 +49,7 @@ router.post("/login", loginPatient);
  *       200:
  *         description: return positive response
  */
-router.get("/", validateToken, getPatients);
+router.get("/",validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), getPatients);
 
 // Routes
 /**
@@ -59,7 +61,7 @@ router.get("/", validateToken, getPatients);
  *       200:
  *         description: return positive response
  */
-router.put("/:id", validateToken, updatePatient);
+router.put("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, updatePatient);
 
 // Routes
 /**
@@ -71,7 +73,7 @@ router.put("/:id", validateToken, updatePatient);
  *       200:
  *         description: return positive response
  */
-router.delete("/:id", validateToken, deletePatient);
+router.delete("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, deletePatient);
 
 // Routes
 /**
@@ -83,6 +85,6 @@ router.delete("/:id", validateToken, deletePatient);
  *       200:
  *         description: return positive response
  */
-router.get("/:id", getPatientById);
+router.get("/:id",verifyRoles(ROLE.ADMIN), getPatientById);
 
 module.exports = router;
