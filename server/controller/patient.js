@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
 const upload = require("../utils/upload");
+const ROLE = require("../config/roles");
 
 /**
  * @description API to register patients to database
@@ -13,29 +14,32 @@ const upload = require("../utils/upload");
 const registerPatient = async (req, res) => {
   try {
     let newPassword = await bcrypt.hash(req.body.password, 10);
-    const token = jwt.sign(
-      {
-        name: req.body.name,
-        email: req.body.email,
-      },
-      process.env.JWT_SECRET
-    );
 
-    await Patient.create({
+    const savedPatient = await Patient.create({
       name: req.body.name,
       password: newPassword,
       email: req.body.email,
       healthNumber: req.body.healthNumber,
       dob: req.body.dob,
       gender: req.body.gender,
+      roles: [ROLE.PATIENT]
     });
+
+    const token = jwt.sign(
+      {
+        name: req.body.name,
+        email: req.body.email,
+        roles: [ROLE.PATIENT]
+      },
+      process.env.JWT_SECRET
+    );
+
 
     return res.status(200).json({
       message: "Patient Registered Succesfully",
       data: {
         token,
-        email: req.body.email,
-        name: req.body.name,
+        savedPatient
       },
     });
   } catch (error) {
@@ -53,7 +57,6 @@ const registerPatient = async (req, res) => {
  */
 const loginPatient = async (req, res) => {
   const email = req.body.email;
-  console.log(req.body);
   let patient = await Patient.findOne({ email: email });
   if (patient) {
     const isValidPassword = await bcrypt.compare(
@@ -65,6 +68,7 @@ const loginPatient = async (req, res) => {
         {
           name: req.body.name,
           email: req.body.email,
+          roles: patient.roles
         },
         process.env.JWT_SECRET
       );
