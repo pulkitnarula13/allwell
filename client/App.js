@@ -3,52 +3,31 @@ import SwaggerEditor, {plugins} from 'swagger-editor';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+// import { createStackNavigator, createAppContainer } from 'react-navigation';
+
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
-import Bottomnavigation from "./components/BottomNavigation";
-import DoctorPatientSelection from "./screens/Doctor/Doctor-Patient-Selection";
-import DoctorSignup from "./screens/Doctor/Doctor-Signup";
-import DoctorLogin from "./screens/Doctor/Doctor-Login";
-import Greeting from "./screens/Greeting";
 import "react-native-gesture-handler";
-import CustomNavigationBar from "./components/CustomNavigationBar";
-import PatientSignup from "./screens/Patient/Patient-Signup";
+//Common
 
-const Stack = createNativeStackNavigator();
+// Doctor
+
+// Patients
+
+import { AuthContext, AuthProvider } from "./Context/AuthContext";
+import AppNav from "./navigations/AppNav";
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Greeting"
-          screenOptions={{
-            header: (props) => <CustomNavigationBar {...props} />,
-          }}
-        >
-          {/* COMMON NAVIGATIONS STARTED */}
-          <Stack.Screen name="Greeting" component={Greeting} />
-          <Stack.Screen name="BottomNavigation" component={Bottomnavigation} />
-          <Stack.Screen
-            name="Doctor-Patient-Selection"
-            component={DoctorPatientSelection}
-          />
-
-          {/* COMMON NAVIGATIONS ENDED */}
-
-          {/* DOCTOR NAVIGATIONS STARTED*/}
-          <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
-          <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
-          {/* DOCTOR NAVIGATIONS ENDED*/}
-
-          {/* PATIENT NAVIGATIONS STARTED */}
-          <Stack.Screen name="Patient-Signup" component={PatientSignup} />
-          {/* PATIENT NAVIGATIONS ENDED */}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <AuthProvider>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <AppNav />
+        </NavigationContainer>
+      </PaperProvider>
+    </AuthProvider>
   );
 }
 

@@ -4,3 +4,7 @@ server/node_modules
 client/ios
 client/package-lock.json
 node_modules
+yarn.lock
+package-lock.json
+client/.expo/packager-info.json
+client/.expo/packager-info.json

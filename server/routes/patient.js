@@ -10,6 +10,9 @@ const {
   getPatientById,
 } = require("../controller/patient");
 
+const validateToken = require("../middleware/auth");
+
+
 // Routes
 /**
  * @swagger
@@ -44,7 +47,7 @@ router.post("/login", loginPatient);
  *       200:
  *         description: return positive response
  */
-router.get("/", getPatients);
+router.get("/", validateToken, getPatients);
 
 // Routes
 /**
@@ -56,7 +59,7 @@ router.get("/", getPatients);
  *       200:
  *         description: return positive response
  */
-router.put("/:id", updatePatient);
+router.put("/:id", validateToken, updatePatient);
 
 // Routes
 /**
@@ -68,7 +71,7 @@ router.put("/:id", updatePatient);
  *       200:
  *         description: return positive response
  */
-router.delete("/:id", deletePatient);
+router.delete("/:id", validateToken, deletePatient);
 
 // Routes
 /**

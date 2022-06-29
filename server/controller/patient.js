@@ -21,40 +21,13 @@ const registerPatient = async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    const savedAddress = await Address.create({
-      houseNumber: req.body.houseNumber,
-      city: req.body.city,
-      province: req.body.province,
-      postalCode: req.body.postalCode,
-      country: req.body.country,
-    });
-
-    const uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.profilePicture}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    const uploadHealthDocument = await upload(
-      `${Date.now() + "" + req.body.healthDocument}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
     await Patient.create({
       name: req.body.name,
       password: newPassword,
       email: req.body.email,
-      profilePicture: uploadProfilePicture,
       healthNumber: req.body.healthNumber,
-      healthDocument: uploadHealthDocument,
       dob: req.body.dob,
       gender: req.body.gender,
-      address: savedAddress._id,
     });
 
     return res.status(200).json({
@@ -80,6 +53,7 @@ const registerPatient = async (req, res) => {
  */
 const loginPatient = async (req, res) => {
   const email = req.body.email;
+  console.log(req.body);
   let patient = await Patient.findOne({ email: email });
   if (patient) {
     const isValidPassword = await bcrypt.compare(
@@ -143,6 +117,31 @@ const getPatients = (req, res) => {
  */
 const updatePatient = (req, res) => {
   const id = req.params.id;
+
+
+      // const savedAddress = await Address.create({
+    //   houseNumber: req.body.houseNumber,
+    //   city: req.body.city,
+    //   province: req.body.province,
+    //   postalCode: req.body.postalCode,
+    //   country: req.body.country,
+    // });
+
+    // const uploadProfilePicture = await upload(
+    //   `${Date.now() + "" + req.body.name}`,
+    //   req.body.profilePicture,
+    //   "jpg",
+    //   "patient",
+    //   req.body.name
+    // );
+
+    // const uploadHealthDocument = await upload(
+    //   `${Date.now() + "" + req.body.healthDocument}`,
+    //   req.body.image,
+    //   "jpg",
+    //   "patient",
+    //   req.body.name
+    // );
 
   Patient.findOneAndUpdate({ _id: id }, req.body, {
     returnOriginal: false,
