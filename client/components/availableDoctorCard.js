@@ -1,6 +1,6 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
-import React from 'react'
-import { Rating } from 'react-native-ratings';
+import { View, Text, Image, StyleSheet } from "react-native";
+import React from "react";
+import { Rating } from "react-native-ratings";
 
 const AvailableDoctorCard = ({ item }) => {
 
@@ -24,8 +24,8 @@ const AvailableDoctorCard = ({ item }) => {
       <Text>{item.speciality}</Text>
       <Text>Wait Time: {item.waitTime}</Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -34,13 +34,12 @@ const styles = StyleSheet.create({
   image: {
     width: 148,
     height: 162,
-    background: "red"
+    background: "red",
   },
   ratingContainer: {
     display: "flex",
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });
-
 
 export default AvailableDoctorCard;

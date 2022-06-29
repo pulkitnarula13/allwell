@@ -3,11 +3,12 @@ import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
 import { Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
 const { width, height } = Dimensions.get("window");
 
 const CreatingAccount1 = () => {
-  const [image1, setimage1] = useState(".../assets/icon.png");
+  const [image1, setimage1] = useState(
+    "/Users/kapilthaman/Documents/GitHub/allwell/client/assets/icon.png"
+  );
   const [clicked, setclicked] = useState(false);
 
   const changepage = () => {

@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
 const upload = require("../utils/upload");
+const ROLE = require("../config/roles");
 
 /**
  * @description API to register patients to database
@@ -13,56 +14,32 @@ const upload = require("../utils/upload");
 const registerPatient = async (req, res) => {
   try {
     let newPassword = await bcrypt.hash(req.body.password, 10);
+
+    const savedPatient = await Patient.create({
+      name: req.body.name,
+      password: newPassword,
+      email: req.body.email,
+      healthNumber: req.body.healthNumber,
+      dob: req.body.dob,
+      gender: req.body.gender,
+      roles: [ROLE.PATIENT]
+    });
+
     const token = jwt.sign(
       {
         name: req.body.name,
         email: req.body.email,
+        roles: [ROLE.PATIENT]
       },
       process.env.JWT_SECRET
     );
 
-    const savedAddress = await Address.create({
-      houseNumber: req.body.houseNumber,
-      city: req.body.city,
-      province: req.body.province,
-      postalCode: req.body.postalCode,
-      country: req.body.country,
-    });
-
-    const uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.profilePicture}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    const uploadHealthDocument = await upload(
-      `${Date.now() + "" + req.body.healthDocument}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    await Patient.create({
-      name: req.body.name,
-      password: newPassword,
-      email: req.body.email,
-      profilePicture: uploadProfilePicture,
-      healthNumber: req.body.healthNumber,
-      healthDocument: uploadHealthDocument,
-      dob: req.body.dob,
-      gender: req.body.gender,
-      address: savedAddress._id,
-    });
 
     return res.status(200).json({
       message: "Patient Registered Succesfully",
       data: {
         token,
-        email: req.body.email,
-        name: req.body.name,
+        savedPatient
       },
     });
   } catch (error) {
@@ -91,6 +68,7 @@ const loginPatient = async (req, res) => {
         {
           name: req.body.name,
           email: req.body.email,
+          roles: patient.roles
         },
         process.env.JWT_SECRET
       );
@@ -143,6 +121,31 @@ const getPatients = (req, res) => {
  */
 const updatePatient = (req, res) => {
   const id = req.params.id;
+
+
+      // const savedAddress = await Address.create({
+    //   houseNumber: req.body.houseNumber,
+    //   city: req.body.city,
+    //   province: req.body.province,
+    //   postalCode: req.body.postalCode,
+    //   country: req.body.country,
+    // });
+
+    // const uploadProfilePicture = await upload(
+    //   `${Date.now() + "" + req.body.name}`,
+    //   req.body.profilePicture,
+    //   "jpg",
+    //   "patient",
+    //   req.body.name
+    // );
+
+    // const uploadHealthDocument = await upload(
+    //   `${Date.now() + "" + req.body.healthDocument}`,
+    //   req.body.image,
+    //   "jpg",
+    //   "patient",
+    //   req.body.name
+    // );
 
   Patient.findOneAndUpdate({ _id: id }, req.body, {
     returnOriginal: false,

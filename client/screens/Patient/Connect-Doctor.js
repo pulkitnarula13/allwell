@@ -6,11 +6,11 @@ let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
     {
-      name: 'Kapil',
+      name: 'John Doe',
       image: '../../assets/icon.png',
     },
     {
-        name: 'Prabhjyot',
+        name: 'Alia Bhatt',
         image: '../../assets/icon.png',
     },
     {
@@ -52,7 +52,7 @@ const DATA = [
     </View>
   );
 
-const Connect = () => {
+const ConnectDoctor = () => {
     const renderItem = ({ item }) => (
         <Item name={item.name} image={item.image} />
     );
@@ -65,10 +65,10 @@ return(
     <View style={styles.outerview}>
 
     <View style={styles.headingview}>
-        <Text style={styles.headingtextview}>Connect With A Doctor</Text>
+        <Text style={styles.headingtextview}>Connect with a doctor</Text>
     </View>
     <View style={styles.subheadingview}>
-        <Text style={styles.subheadingtextview}>Choose a patient</Text>
+        <Text style={styles.subheadingtextview}>Choose a doctor</Text>
     </View>
     <View>
     <FlatList
@@ -212,4 +212,4 @@ const styles = StyleSheet.create({
 
 
 });
-export default Connect
+export default ConnectDoctor

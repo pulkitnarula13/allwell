@@ -26,7 +26,6 @@ const PatientSchema = mongoose.Schema({
   },
   healthDocument: {
     type: String,
-    required: true,
   },
   gender: {
     type: String,
@@ -34,6 +33,10 @@ const PatientSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  roles: {
+    type: [String],
+    reuqired: true,
   },
   address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
 });
