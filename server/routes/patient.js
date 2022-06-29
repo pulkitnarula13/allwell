@@ -9,18 +9,80 @@ const {
   deletePatient,
   getPatientById,
 } = require("../controller/patient");
+
 const validateToken = require("../middleware/auth");
 
+
+// Routes
+/**
+ * @swagger
+ * /register:
+ *   post:
+ *     description: Register a new patient
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
 router.post("/register", registerPatient);
 
+// Routes
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     description: Send user to api for patient login
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
 router.post("/login", loginPatient);
 
+// Routes
+/**
+ * @swagger
+ * /patient:
+ *   get:
+ *     description: Get list of the all the patients
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
 router.get("/", validateToken, getPatients);
 
+// Routes
+/**
+ * @swagger
+ * /patient/:id:
+ *   put:
+ *     description: Update information of a patient in the database
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
 router.put("/:id", validateToken, updatePatient);
 
+// Routes
+/**
+ * @swagger
+ * /patient/:id:
+ *   delete:
+ *     description: Deelete a patient profile using id
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
 router.delete("/:id", validateToken, deletePatient);
 
-router.get("/:id", validateToken, getPatientById);
+// Routes
+/**
+ * @swagger
+ * /patient/:id:
+ *   get:
+ *     description: Get information of the patient using id
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+router.get("/:id", getPatientById);
 
 module.exports = router;

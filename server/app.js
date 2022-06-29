@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+
+// swaggerDoc
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
 const PORT = process.env.PORT || 8080;
 const patientRoutes = require("./routes/patient");
 const morgan = require('morgan');
@@ -17,6 +22,27 @@ app.use(morgan('dev'));
 app.use(express.json({ limit: "50mb"}));
 
 
+// Swagger doc
+
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "Medico API",
+      description: "Medico API Information",
+      contact: {
+        name: "Medico Developers"
+      },
+      servers: ["http://localhost:8080"]
+    }
+  },
+    apis: ['./routes/*.js', 'app.js']
+    // apis: ["app.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 mongoose.connect(process.env.MONGO_URI, (error) => {
   if (error) {
     console.log(`Error connecting the database ${error}`);
@@ -24,9 +50,18 @@ mongoose.connect(process.env.MONGO_URI, (error) => {
     console.log(`Connected to Allwell Database`);
   }
 });
-
+// Routes
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
 app.get("/", (req, res) => {
-  res.send("All Well API");
+  res.status(200).send("All Well API");
 });
 
 app.use(`${baseURL}/patients`, patientRoutes);

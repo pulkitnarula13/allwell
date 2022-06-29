@@ -1,6 +1,13 @@
 {
   "dependencies": {
+<<<<<<< HEAD
+    "react-native-paper": "^4.12.1",
+    "react-native-ratings": "^8.1.0",
+    "react-native-vector-icons": "^9.1.0",
+    "swagger-editor": "^4.2.9"
+=======
     "react-native-ratings": "^8.1.0",
     "react-navigation": "^4.4.4"
+>>>>>>> b4400552f955f852368ec9b5098a335bc0b0c89b
   }
 }
