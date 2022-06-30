@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const specializationSchema = new Schema({
 
-    specializationName: {
+    name: {
         type: String,
         required: true,
         unique: true
