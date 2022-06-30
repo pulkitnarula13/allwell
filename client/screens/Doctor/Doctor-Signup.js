@@ -27,12 +27,6 @@ const DoctorSignup = () => {
     />,
   ];
 
-  useEffect(() => {
-    console.log(firstStepData, "first step data");
-    console.log(secondStepperData, "second step data");
-    console.log(thirdStepperData, "third step data");
-  }, [firstStepData, secondStepperData, thirdStepperData]);
-
   const submitData = () => {
     let mainData = {
       licenseImage: firstStepData.image.uri,
@@ -57,7 +51,7 @@ const DoctorSignup = () => {
   };
 
   return (
-    <View style={{ marginVertical: 50, marginHorizontal: 60 }}>
+    <View style={{ marginVertical: 30, marginHorizontal: 30, flexDirection: "column" }}>
       <Text style={styles.firstHeading}>Creating Account</Text>
       <Stepper
         active={active}
@@ -65,21 +59,21 @@ const DoctorSignup = () => {
         onBack={() => setActive((p) => p - 1)}
         onFinish={() => submitData()}
         onNext={() => setActive((p) => p + 1)}
-        buttonStyle={() => {
-          styles.buttonstyle;
-        }}
+        buttonStyle={styles.buttonstyle}
       />
+      <Text>Registration Process may take upto 3 hours for approval</Text>
     </View>
   );
 };
 const styles = StyleSheet.create({
   buttonstyle: {
-    marginBottom: 5,
+    margin: 20,
     borderRadius: 10,
-    backgroundColor: "#D9D9D9",
-    width: 302,
-    height: 45,
+    backgroundColor: "black !important",
+    height: 50,
     justifyContent: "center",
+    flexBasis: "auto"
+
   },
   firstHeading: {
     fontSize: 24,

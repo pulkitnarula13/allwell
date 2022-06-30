@@ -131,8 +131,7 @@ const styles = StyleSheet.create({
     borderColor: "#CBD5E0",
   },
   dropdownlistview: {
-    marginBottom: 160,
-    marginTop: 50,
+    margin: 50,
   },
   textarea: {
     height: 84,

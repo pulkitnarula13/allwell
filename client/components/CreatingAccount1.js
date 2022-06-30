@@ -60,9 +60,6 @@ const CreatingAccount1 = (props) => {
           }}
         />
       </View>
-      <View style={styles.buttonview}>
-        <Text>Register process may take upto three hours</Text>
-      </View>
     </View>
   );
 };
