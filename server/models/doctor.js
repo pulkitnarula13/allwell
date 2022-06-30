@@ -25,21 +25,21 @@ const doctorSchema = new Schema({
 
   phoneNumber: {
     type: Number,
-    unique: true,
   },
 
   profilePicture: {
     type: String,
   },
 
-  licenceNumber: {
+  licenseNumber: {
     type: String,
-    unique: true,
-    required: true,
+    unique: true
   },
 
-  licenceImage: {
+  licenseImage: {
     type: String,
+    required: true,
+    unique: true
   },
 
   description: {
@@ -70,7 +70,8 @@ const doctorSchema = new Schema({
   },
 
   specialities: {
-    type: [{ type: String }]
+    type: [{ type: mongoose.Schema.Types.ObjectId }],
+    ref: "Specialization"
   },
   
   languages: {
@@ -83,7 +84,12 @@ const doctorSchema = new Schema({
   
   experience: {
     type: Number
-  }
+  },
+
+  roles: {
+    type: [String],
+    reuqired: true,
+  },
 
 
 });

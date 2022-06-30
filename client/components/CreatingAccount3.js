@@ -15,29 +15,23 @@ const CreatingAccount3 = (props) => {
 
   useEffect(() => {
     getSpeciallityList();
-  });
+  }, []);
 
   const getSpeciallityList = async () => {
-    const data = await axios.get(
-      "http://localhost:8080/api/v1/doctor/specialities"
+    const response = await axios.get(
+      "http://localhost:8080/api/v1/doctors/specialities"
     );
-    setSpecialities(data.data);
+
+    console.log(response.data.data);
+    const manipulatedData = response.data.data.map((val) => {
+      return {
+        label: val.name,
+        value: val._id
+      }
+    })
+    setSpecialities(manipulatedData);
   };
 
-  // const genderList = [
-  //   {
-  //     label: "Cardiology",
-  //     value: "Cardiology",
-  //   },
-  //   {
-  //     label: "Family Medicine",
-  //     value: "Family Medicine",
-  //   },
-  //   {
-  //     label: "Emergency Medicine",
-  //     value: "Emergency Medicine",
-  //   },
-  // ];
 
   return (
     <View>
@@ -55,7 +49,7 @@ const CreatingAccount3 = (props) => {
             setSelectedSpeciality(data);
             props.setThirdStepperData({
               ...props.mainData,
-              speciality: data
+              specialities: data
             })
           }}
           list={specialities}

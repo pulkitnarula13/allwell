@@ -1,10 +1,10 @@
 const AWS = require('aws-sdk');
 require('dotenv').config();
 
-
 const S3 = new AWS.S3({
-    accessKeyId: process.env.S3_ID,
-    secretAccessKey: process.env.S3_SECRET
+    accessKeyId: process.env.ID,
+    secretAccessKey: process.env.SECRET,
+    region: "us-east-1"
 });
 
 
@@ -18,7 +18,7 @@ const S3 = new AWS.S3({
  */
 async function upload(imageName, base64Image, type, user, name)  {
     const params = {
-        Bucket: `${process.env.s3_BUCKET}/${user}/images`,
+        Bucket: `${process.env.BUCKET}/images/${user}/${name}`,
         Key: imageName,
         Body: new Buffer.from(base64Image.replace(/^data:image\/\w+;base64,/, ""), 'base64'),
         ContentType: type

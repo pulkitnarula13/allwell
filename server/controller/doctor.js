@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
 const { Specialization } = require("../models/specialization");
+const upload = require("../utils/upload");
+const ROLE = require("../config/roles");
 
 /**
  * @description API to register doctors to database
@@ -17,33 +19,21 @@ const registerDoctor = async (req, res) => {
       {
         name: req.body.name,
         email: req.body.email,
+        roles: [ROLE.DOCTOR]
       },
       process.env.JWT_SECRET
     );
 
-    const uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.profilePicture}`,
-      req.body.image,
+
+    console.log( req.body.licenseNumber, "incoming");
+    const uploadLicenseImage = await upload(
+      `${Date.now() + "" + req.body.licenseNumber}`,
+      req.body.licenseImage,
       "jpg",
       "doctor",
       req.body.name
     );
 
-    const uploadLicenseImage = await upload(
-      `${Date.now() + "" + req.body.healthDocument}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    const savedAddress = await Address.create({
-      houseNumber: req.body.houseNumber,
-      city: req.body.city,
-      province: req.body.province,
-      postalCode: req.body.postalCode,
-      country: req.body.country,
-    });
 
     const output = await Doctor.create({
       name: req.body.name,
@@ -55,15 +45,13 @@ const registerDoctor = async (req, res) => {
       zipCode: req.body.zipCode,
       province: req.body.province,
       phoneNumber: req.body.phoneNumber,
-      profilePitcture: uploadProfilePicture,
       licenseNumber: req.body.licenseNumber,
       doctorDescription: req.body.doctorDescription,
       workingDays: req.body.workingDays,
       specialities: req.body.specialities,
       languages: req.body.languages,
       certifications: req.body.certifications,
-      address: savedAddress._id,
-      licenceImage: uploadLicenseImage,
+      licenseImage: uploadLicenseImage,
     });
 
     return res.status(200).json({
@@ -152,6 +140,15 @@ const getDoctors = (req, res) => {
  */
 const updateDoctor = (req, res) => {
   const id = req.params.id;
+
+
+  // const savedAddress = await Address.create({
+  //   houseNumber: req.body.houseNumber,
+  //   city: req.body.city,
+  //   province: req.body.province,
+  //   postalCode: req.body.postalCode,
+  //   country: req.body.country,
+  // });
 
   Doctor.findOneAndUpdate({ _id: id }, req.body, {
     returnOrignal: false,

@@ -11,8 +11,7 @@ import { Button, TextInput } from "react-native-paper";
 import { KeyboardAvoidingView } from "react-native";
 
 const CreatingAccount2 = (props) => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
@@ -25,10 +24,10 @@ const CreatingAccount2 = (props) => {
           <TextInput
             style={styles.inputbox1}
             mode="outlined"
-            label="Firstname"
-            value={firstname}
+            label="name"
+            value={name}
             onChangeText={(text) => {
-              setFirstname(text);
+              setName(text);
               props.setSecondStepperData({
                 ...props.mainData,
                 name: text
@@ -83,7 +82,7 @@ const CreatingAccount2 = (props) => {
               setphonenumber(text)
               props.setSecondStepperData({
                 ...props.mainData,
-                phonenumber: text
+                phoneNumber: text
               })
             }}
           />
