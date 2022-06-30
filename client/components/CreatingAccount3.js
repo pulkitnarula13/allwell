@@ -1,34 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import axios from "axios";
 
-const { width, height } = Dimensions.get("window");
-
-const CreatingAccount3 = ({ navigation }) => {
+const CreatingAccount3 = (props) => {
   const [height, setHeight] = useState(undefined);
   const [showDropDown, setShowDropDown] = useState(false);
-  const [gender, setGender] = useState("");
-  console.log("Navigation: ", navigation);
-  const genderList = [
-    {
-      label: "Cardiology",
-      value: "Cardiology",
-    },
-    {
-      label: "Family Medicine",
-      value: "Family Medicine",
-    },
-    {
-      label: "Emergency Medicine",
-      value: "Emergency Medicine",
-    },
-  ];
+  const [selectedSpeciality, setSelectedSpeciality] = useState("");
+  const [specialities, setSpecialities] = useState([]);
+  const [yearOfExperience, setYearOfExperience] = useState(0);
+  const [description, setDescription] = useState("");
 
-  const changepage = () => {
-    setclicked(true);
+  useEffect(() => {
+    getSpeciallityList();
+  }, []);
+
+  const getSpeciallityList = async () => {
+    const response = await axios.get(
+      "http://localhost:8080/api/v1/doctors/specialities"
+    );
+
+    console.log(response.data.data);
+    const manipulatedData = response.data.data.map((val) => {
+      return {
+        label: val.name,
+        value: val._id
+      }
+    })
+    setSpecialities(manipulatedData);
   };
+
+
   return (
     <View>
       <View style={styles.dropdownlistview}>
@@ -39,19 +43,29 @@ const CreatingAccount3 = ({ navigation }) => {
           visible={showDropDown}
           showDropDown={() => setShowDropDown(true)}
           onDismiss={() => setShowDropDown(false)}
-          value={gender}
-          setValue={setGender}
-          list={genderList}
+          value={selectedSpeciality}
+          multiSelect
+          setValue={(data) => {
+            setSelectedSpeciality(data);
+            props.setThirdStepperData({
+              ...props.mainData,
+              specialities: data
+            })
+          }}
+          list={specialities}
         />
       </View>
       <View>
         <Text style={styles.textspeciality}>Years of work experience</Text>
         <TextInput
-          style={styles.textarea}
-          multiline
-          placeholder="Text Area"
-          onContentSizeChange={(event) => {
-            setHeight(event.nativeEvent.contentSize.height);
+          value={yearOfExperience}
+          placeholder="Years of Work Experience"
+          onChangeText={(data) => {
+            setYearOfExperience(data);
+            props.setThirdStepperData({
+              ...props.mainData,
+              experience: data
+            })
           }}
         />
       </View>
@@ -60,27 +74,20 @@ const CreatingAccount3 = ({ navigation }) => {
         <TextInput
           style={styles.textarea}
           multiline
+          value={description}
+          onChangeText={(data) => {
+            setDescription(data)
+            props.setThirdStepperData({
+              ...props.mainData,
+              description: data
+            })
+          }}
           placeholder="Describe About Yourself"
           onContentSizeChange={(event) => {
             setHeight(event.nativeEvent.contentSize.height);
           }}
         />
       </View>
-      <Button
-        style={{
-          marginBottom: 5,
-          borderRadius: 10,
-          backgroundColor: "#D9D9D9",
-          width: 302,
-          height: 45,
-          justifyContent: "center",
-        }}
-        mode="contained"
-        // onPress={changepage}
-        onPress={() => navigation.navigate("DoctorSignupScreenLast")}
-      >
-        Sign Up
-      </Button>
 
       <View style={styles.lasttextview}>
         <Text style={styles.lasttext}>
@@ -124,8 +131,7 @@ const styles = StyleSheet.create({
     borderColor: "#CBD5E0",
   },
   dropdownlistview: {
-    marginBottom: 160,
-    marginTop: 50,
+    margin: 50,
   },
   textarea: {
     height: 84,
