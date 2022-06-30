@@ -6,9 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const { width, height } = Dimensions.get("window");
 
 const CreatingAccount1 = () => {
-  const [image1, setimage1] = useState(
-    "/Users/kapilthaman/Documents/GitHub/allwell/client/assets/icon.png"
-  );
+  const [image1, setimage1] = useState(require("../assets/icon.png"));
   const [clicked, setclicked] = useState(false);
 
   const changepage = () => {
@@ -49,20 +47,6 @@ const CreatingAccount1 = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.buttonview}>
-        <Button
-          style={{
-            marginBottom: 5,
-            borderRadius: 10,
-            backgroundColor: "#D9D9D9",
-            width: 302,
-            height: 45,
-            justifyContent: "center",
-          }}
-          mode="contained"
-          onPress={changepage}
-        >
-          Submit and Continue
-        </Button>
         <Text>Register process may take upto three hours</Text>
       </View>
     </View>
