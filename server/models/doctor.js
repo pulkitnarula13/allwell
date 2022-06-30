@@ -42,7 +42,7 @@ const doctorSchema = new Schema({
     type: String,
   },
 
-  doctorDescription: {
+  description: {
     type: String,
   },
 
@@ -79,6 +79,10 @@ const doctorSchema = new Schema({
 
   certifications: {
     type: [{ type: String }]
+  },
+  
+  experience: {
+    type: Number
   }
 
 

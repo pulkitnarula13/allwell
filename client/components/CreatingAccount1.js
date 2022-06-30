@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const { width, height } = Dimensions.get("window");
 
-const CreatingAccount1 = () => {
+const CreatingAccount1 = (props) => {
   const [image1, setimage1] = useState(require("../assets/icon.png"));
-  const [clicked, setclicked] = useState(false);
-
-  const changepage = () => {
-    setclicked(true);
-  };
+  const [licenseNumber, setLicenseNumber] = useState("");
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -20,10 +16,14 @@ const CreatingAccount1 = () => {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
 
     if (!result.cancelled) {
       setimage1(result.uri);
+      props.setFirstStepperData(result);
+      props.setFirstStepperData({
+        image: result,
+        ...props.mainData,
+      })
     }
   };
 
@@ -45,6 +45,20 @@ const CreatingAccount1 = () => {
             resizeMode="contain"
           />
         </TouchableOpacity>
+      </View>
+      <View>
+        <Text style={styles.textspeciality}>License Number</Text>
+        <TextInput
+          value={licenseNumber}
+          placeholder="License Number"
+          onChangeText={(data) => {
+            setLicenseNumber(data);
+            props.setFirstStepperData({
+              ...props.mainData,
+              licenseNumber: data
+            })
+          }}
+        />
       </View>
       <View style={styles.buttonview}>
         <Text>Register process may take upto three hours</Text>
@@ -105,6 +119,12 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  textspeciality: {
+    fontSize: 14,
+    fontWeight: "600",
+    lineHeight: 20,
+    color: "#515767",
   },
 });
 
