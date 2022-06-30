@@ -1,4 +1,5 @@
 const express = require("express");
+const ROLE = require("../config/roles");
 const router = express.Router();
 
 const {
@@ -8,7 +9,11 @@ const {
   updateDoctor,
   deleteDoctor,
   getDoctorById,
+  getDoctorSpecialities,
+  createSpecialization,
 } = require("../controller/doctor");
+const validateToken = require("../middleware/auth");
+const verifyRoles = require("../middleware/roleVerification");
 
 // Routes
 /**
@@ -33,6 +38,20 @@ router.post("/register", registerDoctor);
  *         description: return positive response
  */
 router.post("/login", loginDoctor);
+
+
+
+// Routes
+/**
+ * @swagger
+ * /doctor/specialities:
+ *   get:
+ *     description: Get specialities of a doctor
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get("/specialities", getDoctorSpecialities);
 
 // Routes
 /**
@@ -81,5 +100,23 @@ router.delete("/:id", deleteDoctor);
  *         description: return positive response
  */
 router.get("/:id", getDoctorById);
+
+
+// Routes
+/**
+ * @swagger
+ * /doctor/specialities:
+ *   post:
+ *     description: Creates specialities of a doctor
+ *     responses:
+ *       201:
+ *         description: return positive response
+ */
+router.post(
+  "/specialities",
+  validateToken,
+  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR),
+  createSpecialization
+);
 
 module.exports = router;

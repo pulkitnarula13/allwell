@@ -2,6 +2,7 @@ const { Doctor } = require("../models/doctor");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
+const { Specialization } = require("../models/specialization");
 
 /**
  * @description API to register doctors to database
@@ -204,6 +205,48 @@ const getDoctorById = (req, res) => {
     });
 };
 
+
+/**
+ * @description API to fetch all specialities of doctor from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getDoctorSpecialities = (req, res) => {
+  Specialization.find()
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched all specializations",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
+/**
+ * @description API to fetch all doctors from database
+ * @param {*} req
+ * @param {*} res
+ */
+ const createSpecialization = (req, res) => {
+  
+  Specialization.create(req.body)
+    .then((result) => {
+      return res.status(201).json({
+        message: "Succesfully Created the specialization",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
 module.exports = {
   getDoctors,
   deleteDoctor,
@@ -211,4 +254,6 @@ module.exports = {
   getDoctorById,
   registerDoctor,
   loginDoctor,
+  getDoctorSpecialities,
+  createSpecialization
 };
