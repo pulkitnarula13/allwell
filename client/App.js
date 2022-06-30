@@ -15,16 +15,17 @@ import "react-native-gesture-handler";
 
 import { AuthContext, AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
+import AppStack from "./navigations/AppStack";
 
 export default function App() {
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <AppNav />
+          <AppStack />
         </NavigationContainer>
       </PaperProvider>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }
 
