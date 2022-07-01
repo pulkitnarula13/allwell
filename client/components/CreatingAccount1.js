@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const { width, height } = Dimensions.get("window");
 
 const CreatingAccount1 = (props) => {
-  const [image1, setimage1] = useState(require("../assets/icon.png"));
+  const [image1, setimage1] = useState("../assets/icon.png");
   const [licenseNumber, setLicenseNumber] = useState("");
 
   const openimagelib = async () => {
@@ -66,7 +66,7 @@ const CreatingAccount1 = (props) => {
 
 const styles = StyleSheet.create({
   firstHeading: {
-    fontSize: 24,
+    fontSize: "24px",
     fontWeight: "600",
     lineHeight: 29.05,
     textAlign: "center",

@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         gap: 20,
-        border: "1px solid gainsboro",
+        borderWidth: "1px",
+        borderColor: "gainsboro",
         margin: 20,
         padding: 10,
         borderRadius: 10
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
         width: "70%"
     },
     chipItem: {
-        fontSize: "10px !important"
+        fontSize: "10px"
     }
 });
 

@@ -8,11 +8,13 @@ import Schedulepatient from "../screens/Doctor/Schedule-patient";
 import DoctorProfile from "../screens/Doctor/Doctor-Profile";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import PatientProfile from "../screens/Patient/Patient-Profile";
+import PatientHome from "../screens/Patient/Patient-Home";
 
 const Bottomnavigation = () => {
   const { userInfo } = useContext(AuthContext);
+  
   const [render, setRender] = useState({
-    home: DoctorHome,
+    home: PatientHome,
     connect: DoctorConnect,
     history: AvailableDoctor,
     profile: PatientProfile,
@@ -25,7 +27,6 @@ const Bottomnavigation = () => {
   ]);
 
   useEffect(() => {
-    console.log(userInfo);
     if (userInfo.roles === "doctor") {
       setRoutes([
         { key: "home", title: "Home", icon: "home" },

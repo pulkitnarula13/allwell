@@ -112,9 +112,9 @@ export const AuthProvider = ({ children }) => {
       setSplashLoading(true);
 
       let userInfo = await AsyncStorage.getItem("userInfo");
-      userInfo = JSON.parse(userInfo);
-
+     
       if (userInfo) {
+        userInfo = JSON.parse(userInfo);
         setUserInfo(userInfo);
       }
 

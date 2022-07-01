@@ -29,7 +29,7 @@ const AuthStack = () => {
       />
       <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
       <Stack.Screen name="Patient-Signup" component={PatientSignup} />
-      <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
+    <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
       <Stack.Screen name="Patient-Login" component={PatientLogin} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
     </Stack.Navigator>
