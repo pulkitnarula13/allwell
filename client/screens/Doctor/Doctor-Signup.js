@@ -6,7 +6,7 @@ import CreatingAccount2 from "../../components/CreatingAccount2";
 import CreatingAccount3 from "../../components/CreatingAccount3";
 import axios from "axios";
 
-const DoctorSignup = () => {
+const DoctorSignup = ({ navigation }) => {
   const [active, setActive] = useState(0);
   const [firstStepData, setFirstStepperData] = useState();
   const [secondStepperData, setSecondStepperData] = useState();
@@ -45,6 +45,8 @@ const DoctorSignup = () => {
     
     axios.post('http://localhost:8080/api/v1/doctors/register', mainData).then((response) => {
       console.log(response);
+      navigation.navigate("Login");
+      Alert.alert("Success", response.data.message);
     }).catch((error) => {
       console.log(error);
     })
