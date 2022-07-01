@@ -40,7 +40,7 @@ const registerDoctor = async (req, res) => {
       dob: req.body.dob,
       password: newPassword,
       gender: req.body.gender,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       city: req.body.city,
       zipCode: req.body.zipCode,
       province: req.body.province,
