@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const DoctorPatientSelection = ({ navigation }) => {
+const DoctorPatientSelectionSignup = ({ navigation }) => {
   return (
     <View style={style.container}>
       <View>
@@ -58,4 +58,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default DoctorPatientSelection;
+export default DoctorPatientSelectionSignup;

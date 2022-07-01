@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import CreatingAccount1 from "../../components/CreatingAccount1";
 import Stepper from "react-native-stepper-ui";
 import CreatingAccount2 from "../../components/CreatingAccount2";
 import CreatingAccount3 from "../../components/CreatingAccount3";
 import axios from "axios";
 
-const DoctorSignup = () => {
+const DoctorSignup = ({ navigation }) => {
   const [active, setActive] = useState(0);
   const [firstStepData, setFirstStepperData] = useState();
   const [secondStepperData, setSecondStepperData] = useState();
@@ -44,7 +44,8 @@ const DoctorSignup = () => {
 
     
     axios.post('http://localhost:8080/api/v1/doctors/register', mainData).then((response) => {
-      console.log(response);
+      navigation.navigate("Doctor-Login");
+      Alert.alert("Success", response.data.message);
     }).catch((error) => {
       console.log(error);
     })
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
   buttonstyle: {
     margin: 20,
     borderRadius: 10,
-    backgroundColor: "black !important",
+    backgroundColor: "black",
     height: 50,
     justifyContent: "center",
     flexBasis: "auto"

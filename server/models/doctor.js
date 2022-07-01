@@ -10,7 +10,6 @@ const doctorSchema = new Schema({
 
   dob: {
     type: Date,
-    required: true,
   },
 
   gender: {
