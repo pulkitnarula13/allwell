@@ -4,6 +4,7 @@ import DoctorHome from "../screens/Doctor/Doctor-Home";
 import DoctorConnect from "../screens/Doctor/Doctor-connect";
 import Profile from "../screens/Doctor/Doctor-Profile";
 import AvailableDoctor from "../screens/Patient/Available-Doctor";
+import PatientHome from "../screens/Patient/Patient-Home";
 
 const Bottomnavigation = () => {
   const [index, setIndex] = React.useState(0);
@@ -15,7 +16,7 @@ const Bottomnavigation = () => {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: DoctorHome,
+    home: PatientHome,
     connect: DoctorConnect,
     // history: History,
     history: AvailableDoctor,
