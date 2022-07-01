@@ -79,7 +79,7 @@ const Item12 = ({ name, image }) => (
 );
 
 const ChooseSymptoms = () => {
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+    
   const [image1, setimage1] = useState(
     "/Users/kapilthaman/Documents/GitHub/allwell/client/assets/icon.png"
   );
