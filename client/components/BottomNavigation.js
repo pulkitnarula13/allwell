@@ -16,7 +16,7 @@ const Bottomnavigation = () => {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: PatientHome,
+    home: DoctorHome,
     connect: DoctorConnect,
     // history: History,
     history: AvailableDoctor,
