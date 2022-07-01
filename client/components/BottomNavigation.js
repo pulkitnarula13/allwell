@@ -1,33 +1,40 @@
 import * as React from "react";
 import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
-import DoctorConnect from "../screens/Doctor/Doctor-connect";
-import Profile from "../screens/Doctor/Doctor-Profile";
-import AvailableDoctor from "../screens/Patient/Available-Doctor";
+import ConnectDoctor from "../screens/Patient/Connect-Doctor";
+import Profile from "../screens/Patient/profile";
+import Schedulepatient from "../screens/Doctor/Schedule-patient";
 
-const Bottomnavigation = () => {
+const Bottomnavigation = (props) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "home", title: "DoctorHome", icon: "home" },
     { key: "connect", title: "DoctorConnect", icon: "account-plus" },
-    { key: "history", title: "History", icon: "briefcase" },
+    { key: "history", title: "Schedule", icon: "briefcase" },
     { key: "profile", title: "Profile", icon: "account" },
   ]);
 
-  const renderScene = BottomNavigation.SceneMap({
-    home: DoctorHome,
-    connect: DoctorConnect,
-    // history: History,
-    history: AvailableDoctor,
-    profile: Profile,
-  });
+  const renderScene = ({ route, jumpTo }) => {
+    switch (route.key) {
+      case 'home':
+        return <DoctorHome  jumpTo={jumpTo} />;
+      case 'connect':
+        return <ConnectDoctor {...props} jumpTo={jumpTo} />;
+        case 'history':
+          return <Schedulepatient  jumpTo={jumpTo} />;
+          case 'profile':
+          return <Profile {...props} jumpTo={jumpTo} />;
+    }
+  }
 
   return (
     <BottomNavigation
+      {...props}
       barStyle={{ backgroundColor: "#DADADA" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
+
     />
   );
 };

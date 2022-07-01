@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, ScrollView } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
 
@@ -48,6 +48,7 @@ const Schedulepatient = () => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   return (
     <View style={styles.outerview1}>
+      <ScrollView>
       <View style={styles.outerview}>
         <Text style={styles.text1}>Schedule Patient</Text>
       </View>
@@ -91,6 +92,7 @@ const Schedulepatient = () => {
           Accept
         </Button>
       </View>
+      </ScrollView>
     </View>
   );
 };

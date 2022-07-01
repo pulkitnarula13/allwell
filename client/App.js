@@ -7,15 +7,17 @@ import "react-native-gesture-handler";
 
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
+import AppStack from "./navigations/AppStack";
 
 
-export default function App() {
+
+export default function App(props) {
 
   return (
     <AuthProvider>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          <AppNav />
+          <AppNav {...props} />
         </NavigationContainer>
       </PaperProvider>
     </AuthProvider>

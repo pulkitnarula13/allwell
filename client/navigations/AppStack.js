@@ -4,10 +4,12 @@ import CustomNavigationBar from "../components/CustomNavigationBar";
 import Bottomnavigation from "../components/BottomNavigation";
 import AvailableDoctor from "../screens/Patient/Available-Doctor";
 import PatientHome from "../screens/Patient/Patient-Home";
+import ConnectDoctor from "../screens/Patient/Connect-Doctor";
+
 
 const Stack = createNativeStackNavigator();
 
-const AppStack = () => {
+const AppStack = (props) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -15,7 +17,7 @@ const AppStack = () => {
       }}
     >
       {/* COMMON NAVIGATIONS STARTED */}
-      <Stack.Screen name="Home" component={Bottomnavigation} />
+      <Stack.Screen name="Home" component={Bottomnavigation} {...props} />
       {/* COMMON NAVIGATIONS ENDED */}
 
       {/* DOCTOR NAVIGATIONS STARTED*/}
@@ -23,7 +25,8 @@ const AppStack = () => {
       {/* DOCTOR NAVIGATIONS ENDED*/}
 
       {/* PATIENT NAVIGATIONS STARTED */}
-      <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
+      <Stack.Screen name="Connect-Doctor" component={ConnectDoctor}{...props} />
+      <Stack.Screen name="Available-Doctor" component={AvailableDoctor}{...props} />
       <Stack.Screen name="Patient-Home" component={PatientHome} />
 
       {/* PATIENT NAVIGATIONS ENDED */}
