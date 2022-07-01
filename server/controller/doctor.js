@@ -81,13 +81,14 @@ const loginDoctor = async (req, res) => {
   if (doctor) {
     const isValidPassword = await bcrypt.compare(
       req.body.password,
-      customer.password
+      doctor.password
     );
     if (isValidPassword) {
       const token = jwt.sign(
         {
           name: req.body.name,
           email: req.body.email,
+          roles: [ROLE.DOCTOR]
         },
         process.env.JWT_SECRET
       );
@@ -96,6 +97,7 @@ const loginDoctor = async (req, res) => {
         id: doctor._id,
         name: doctor.name,
         email: doctor.email,
+        roles: "doctor",
         message: "Succesfully Logged In",
       });
     } else {
