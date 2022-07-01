@@ -1,10 +1,11 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CustomNavigationBar from "../components/CustomNavigationBar";
-import Bottomnavigation from "../components/BottomNavigation";
+
 import AvailableDoctor from "../screens/Patient/Available-Doctor";
-import PatientHome from "../screens/Patient/Patient-Home";
+import PatientHome from "../screens/Patient/PatientHome";
 import ConnectDoctor from "../screens/Patient/Connect-Doctor";
+
 
 
 const Stack = createNativeStackNavigator();
@@ -17,7 +18,7 @@ const AppStack = (props) => {
       }}
     >
       {/* COMMON NAVIGATIONS STARTED */}
-      <Stack.Screen name="Home" component={Bottomnavigation} {...props} />
+      <Stack.Screen name="PatientHome" component={PatientHome} {...props} />
       {/* COMMON NAVIGATIONS ENDED */}
 
       {/* DOCTOR NAVIGATIONS STARTED*/}
