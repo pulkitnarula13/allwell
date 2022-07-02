@@ -1,22 +1,21 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const doctorReviewSchema = new Schema({
+  rating: {
+    type: Number,
+    required: true,
+  },
 
-    rating: {
-        type: Number,
-        required: true    
-    },
+  feedback: {
+    type: String,
+  },
 
-    feedback: {
-        type: String,
-    },
+  authorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Patient",
+  },
+});
 
-    authorId: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "Patient"
-    }
-})
-
-exports.DoctorReview = mongoose.model('Specialization', doctorReviewSchema)
+exports.DoctorReview = mongoose.model("Review", doctorReviewSchema);
