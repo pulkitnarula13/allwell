@@ -3,6 +3,7 @@ import * as LocalAuthentication from 'expo-local-authentication'
 
 // wherever the useState is located 
 const [isBiometricSupported, setIsBiometricSupported] = React.useState(false);
+const [isAuthenticated, setIsAuthenticated] = React.useState(false)
 
 // Check if hardware supports biometrics
   useEffect(() => {
@@ -26,4 +27,16 @@ const handleBiometricAuth = async () => {
         'OK',
         () => fallBackToDefaultAuth()
       );
+}
+
+function onAuthenticate () {
+    const auth = LocalAuthentication.authenticateAsync({
+        promptMessage: 'Authenticate',
+        fallbackLabel: 'Enter Password'
+    });
+    auth.then(result => {
+        setIsAuthenticated(result.screen);
+        console.log(result);
+    }
+    );
 }

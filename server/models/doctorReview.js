@@ -19,4 +19,4 @@ const doctorReviewSchema = new Schema({
     }
 })
 
-exports.Specialization = mongoose.model('Specialization', specializationSchema)
+exports.DoctorReview = mongoose.model('Specialization', doctorReviewSchema)
