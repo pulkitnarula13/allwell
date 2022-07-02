@@ -24,8 +24,6 @@ const registerDoctor = async (req, res) => {
       process.env.JWT_SECRET
     );
 
-
-    console.log( req.body.licenseNumber, "incoming");
     const uploadLicenseImage = await upload(
       `${Date.now() + "" + req.body.licenseNumber}`,
       req.body.licenseImage,
@@ -40,7 +38,7 @@ const registerDoctor = async (req, res) => {
       dob: req.body.dob,
       password: newPassword,
       gender: req.body.gender,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       city: req.body.city,
       zipCode: req.body.zipCode,
       province: req.body.province,
@@ -81,13 +79,14 @@ const loginDoctor = async (req, res) => {
   if (doctor) {
     const isValidPassword = await bcrypt.compare(
       req.body.password,
-      customer.password
+      doctor.password
     );
     if (isValidPassword) {
       const token = jwt.sign(
         {
           name: req.body.name,
           email: req.body.email,
+          roles: [ROLE.DOCTOR]
         },
         process.env.JWT_SECRET
       );
@@ -96,6 +95,7 @@ const loginDoctor = async (req, res) => {
         id: doctor._id,
         name: doctor.name,
         email: doctor.email,
+        roles: "doctor",
         message: "Succesfully Logged In",
       });
     } else {

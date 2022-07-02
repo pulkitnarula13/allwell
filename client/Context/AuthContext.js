@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const login = ({ email, password }, navigation) => {
+  const patientLogin = ({ email, password }, navigation) => {
     setIsLoading(true);
 
     axios
@@ -54,6 +54,29 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
         navigation.navigate("Home");
+      })
+      .catch((e) => {
+        Alert.alert("error", e.message);
+        console.log(`login error ${e}`);
+        setIsLoading(false);
+      });
+  };
+
+
+  const doctorLogin = ({ email, password }, navigation) => {
+    setIsLoading(true);
+
+    axios
+      .post(`http://localhost:8080/api/v1/doctors/login`, {
+        email,
+        password,
+      })
+      .then((res) => {
+        let userInfo = res.data;
+        setUserInfo(userInfo);
+        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+        setIsLoading(false);
+        navigation.navigate("Doctor-Home");
       })
       .catch((e) => {
         Alert.alert("error", e.message);
@@ -89,9 +112,9 @@ export const AuthProvider = ({ children }) => {
       setSplashLoading(true);
 
       let userInfo = await AsyncStorage.getItem("userInfo");
-      userInfo = JSON.parse(userInfo);
-
+     
       if (userInfo) {
+        userInfo = JSON.parse(userInfo);
         setUserInfo(userInfo);
       }
 
@@ -113,7 +136,8 @@ export const AuthProvider = ({ children }) => {
         userInfo,
         splashLoading,
         registerPatient,
-        login,
+        patientLogin,
+        doctorLogin,
         logout,
       }}
     >

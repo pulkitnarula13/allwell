@@ -2,7 +2,7 @@ import { View, Text ,StyleSheet, Image} from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
-const  profile = ()=> {
+const  PatientProfile = ()=> {
   return (
     <View style={styles.allview}>
         <View style={styles.main}>
@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
     
 })
 
-export default profile
+export default PatientProfile;

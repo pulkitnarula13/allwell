@@ -12,11 +12,11 @@ import {
 import { TextInput } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 
-export default function Login({ navigation }) {
+export default function DoctorLogin({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {isLoading, login} = useContext(AuthContext);
+  const {isLoading, doctorLogin} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -48,7 +48,7 @@ export default function Login({ navigation }) {
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <Button title="Login" onPress={() => login({
+      <Button title="Login" onPress={() => doctorLogin({
         email, password
       }, navigation)}>
       </Button>
