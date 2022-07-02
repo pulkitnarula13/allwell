@@ -4,9 +4,9 @@ const router = express.Router();
 const {
   addAppointment,
   getAppointments,
+  getAppointmentById,
   updateAppointment,
-  deleteAppointment,
-  getAppointmentById
+  deleteAppointment
 } = require("../controller/doctor");
 
 
