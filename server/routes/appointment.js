@@ -13,7 +13,7 @@ const {
 // Routes
 /**
  * @swagger
- * /register:
+ * /appointment:
  *   post:
  *     description: Add a new appointment
  *     responses:
@@ -26,7 +26,7 @@ router.post("/appointment", addAppointment);
 // Routes
 /**
  * @swagger
- * /doctor/specialities:
+ * /appointments:
  *   get:
  *     description: Get all the appointments
  *     responses:
@@ -35,22 +35,24 @@ router.post("/appointment", addAppointment);
  */
  router.get("/appointments", getAppointments);
 
-// Routes
+ 
+ // Routes
 /**
  * @swagger
- * /:
+ * /appointment/:id:
  *   get:
- *     description: Get all the registered doctors
+ *     description: Get appointment using id
  *     responses:
  *       200:
  *         description: return positive response
  */
-router.get("/", getDoctors);
+router.get("/:id", getAppointmentById);
+
 
 // Routes
 /**
  * @swagger
- * /doctor/:id:
+ * /appointment/:id:
  *   put:
  *     description: Update information of an appointment
  *     responses:
@@ -70,18 +72,6 @@ router.put("/:id", updateAppointment);
  *         description: return positive response
  */
 router.delete("/:id", deleteAppointment);
-
-// Routes
-/**
- * @swagger
- * /doctor/:id:
- *   get:
- *     description: Get appointment using id
- *     responses:
- *       200:
- *         description: return positive response
- */
-router.get("/:id", getAppointmentById);
 
 
 module.exports = router;
