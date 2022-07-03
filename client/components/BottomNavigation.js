@@ -36,7 +36,7 @@ const Bottomnavigation = () => {
       ])
 
       setRender({
-        home: DoctorHome,
+        home: DoctorInbox,
         schedule: Schedulepatient,
         inbox: DoctorInbox,
         docprofile: DoctorProfile,

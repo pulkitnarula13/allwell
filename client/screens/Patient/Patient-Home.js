@@ -103,7 +103,7 @@ const PatientHome = () => {
           >
             <Text style={{
                 fontSize: 18,
-                fontWeight: 600,
+                fontWeight: "600",
                 alignItems: "left"
               }}>Choose your symptons</Text>
           </View>
