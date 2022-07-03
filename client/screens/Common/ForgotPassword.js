@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   accountHeading: {
-    fontSize: "20px",
+    fontSize: 20,
     fontWeight: "600",
     color: "gray",
     marginTop: 20,

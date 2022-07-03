@@ -19,7 +19,7 @@ const CreatingAccount3 = (props) => {
     
   const getSpeciallityList = async () => {
     const response = await axios.get(
-      "http://192.168.1.73:8080/api/v1/doctors/specialities"
+      "http://192.168.1.75:8080/api/v1/doctors/specialities"
     );
 
     console.log(response.data.data);
