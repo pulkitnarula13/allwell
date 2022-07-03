@@ -3,7 +3,7 @@ const ROLE = require("../config/roles");
 const router = express.Router();
 
 const {
-  createAppointment,
+  createAppointment, getAllAppointments, getAppointmentByPatientId, getAppointmentByDoctorId,
 } = require("../controller/appointment");
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
@@ -21,36 +21,48 @@ const verifyRoles = require("../middleware/roleVerification");
  */
 router.post("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),  createAppointment);
 
-// // Routes
-// /**
-//  * @swagger
-//  * /appointments:
-//  *   get:
-//  *     description: Get all the appointments
-//  *     responses:
-//  *       200:
-//  *         description: return positive response
-//  */
-// router.get("/appointments", getAppointments);
+// Routes
+/**
+ * @swagger
+ * /appointments:
+ *   get:
+ *     description: Get all the appointments
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+router.get("/", getAllAppointments);
 
 // // Routes
 // /**
 //  * @swagger
-//  * /appointment/:id:
+//  * /appointment/patient/:id:
 //  *   get:
-//  *     description: Get appointment using id
+//  *     description: Get appointment using patinent id
 //  *     responses:
 //  *       200:
 //  *         description: return positive response
 //  */
-// router.get("/:id", getAppointmentById);
+router.get("/patient/:id", getAppointmentByPatientId);
 
 // // Routes
 // /**
 //  * @swagger
-//  * /appointment/:id:
-//  *   put:
-//  *     description: Update information of an appointment
+//  * /appointment/patient/:id:
+//  *   get:
+//  *     description: Get appointment using patinent id
+//  *     responses:
+//  *       200:
+//  *         description: return positive response
+//  */
+router.get("/doctor/:id", getAppointmentByDoctorId);
+
+// // Routes
+// /**
+//  * @swagger
+//  * /appointment/doctor/:id:
+//  *   get:
+//  *     description: Get appointment using doctor id
 //  *     responses:
 //  *       200:
 //  *         description: return positive response

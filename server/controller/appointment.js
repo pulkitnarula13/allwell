@@ -1,97 +1,175 @@
 const { Appointment } = require("../models/appointment");
+const { Doctor } = require("../models/doctor");
+const { Patient } = require("../models/patient");
 
-  // /**
-  //  * @description API to update Appointment
-  //  * @param {*} req
-  //  * @param {*} res
-  //  */
-  // const updateAppointment = (req, res) => {
-  //   const id = req.params.id;
-  
+// /**
+//  * @description API to update Appointment
+//  * @param {*} req
+//  * @param {*} res
+//  */
+// const updateAppointment = (req, res) => {
+//   const id = req.params.id;
 
-  //   Appointment.findOneAndUpdate({ _id: id }, req.body, {
-  //     returnOrignal: false,
-  //   }).then((result) => {
-  //     res.status(200).json({
-  //       message: "Succesfully updated the Appointment",
-  //       data: result,
-  //     });
-  //   });
-  // };
-  
-  // /**
-  //  * @description API to delete Appointment
-  //  * @param {*} req
-  //  * @param {*} res
-  //  */
-  // const deleteAppointment = (req, res) => {
-  //   const id = req.params.id;
-  //   Appointment.findByIdAndDelete(id)
-  //     .then((result) => {
-  //       return res.status(200).json({
-  //         message: "Appointment succesfully deleted",
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       return res.status(500).json({
-  //         message: error.message,
-  //       });
-  //     });
-  // };
-  
-  // /**
-  //  * @description Api to fetch Appointment based on given ID
-  //  * @param {*} req
-  //  * @param {*} res
-  //  */
-  // const getAppointmentById = (req, res) => {
-  //   const id = req.params.id;
-  
-  //   Appointment.findById(id)
-  //     .then((result) => {
-  //       return res.status(200).json({
-  //         message: `Appointment found succesfully`,
-  //         data: result,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       return res.status(404).json({
-  //         message: error.message,
-  //       });
-  //     });
-  // };
-  
-  
-  // /**
-  //  * @description API to fetch all appointments from DB
-  //  * @param {*} req
-  //  * @param {*} res
-  //  */
-  //  const getAppointments = (req, res) => {
-  //   Appointment.find()
-  //     .then((result) => {
-  //       return res.status(200).json({
-  //         message: "Succesfully fetched all Appointments",
-  //         data: result,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       return res.status(500).json({
-  //         message: error.message,
-  //       });
-  //     });
-  // };
-  
-  /**
-   * @description API to fetch all appointments from database
-   * @param {*} req
-   * @param {*} res
-   */
-   const createAppointment = async (req, res) => {
-      console.log(req);
-      res.send('hello');
-  };
-  
-  module.exports = {
-    createAppointment,
-  };
+//   Appointment.findOneAndUpdate({ _id: id }, req.body, {
+//     returnOrignal: false,
+//   }).then((result) => {
+//     res.status(200).json({
+//       message: "Succesfully updated the Appointment",
+//       data: result,
+//     });
+//   });
+// };
+
+// /**
+//  * @description API to delete Appointment
+//  * @param {*} req
+//  * @param {*} res
+//  */
+// const deleteAppointment = (req, res) => {
+//   const id = req.params.id;
+//   Appointment.findByIdAndDelete(id)
+//     .then((result) => {
+//       return res.status(200).json({
+//         message: "Appointment succesfully deleted",
+//       });
+//     })
+//     .catch((error) => {
+//       return res.status(500).json({
+//         message: error.message,
+//       });
+//     });
+// };
+
+// /**
+//  * @description Api to fetch Appointment based on given ID
+//  * @param {*} req
+//  * @param {*} res
+//  */
+// const getAppointmentById = (req, res) => {
+//   const id = req.params.id;
+
+//   Appointment.findById(id)
+//     .then((result) => {
+//       return res.status(200).json({
+//         message: `Appointment found succesfully`,
+//         data: result,
+//       });
+//     })
+//     .catch((error) => {
+//       return res.status(404).json({
+//         message: error.message,
+//       });
+//     });
+// };
+
+/**
+ * @description API to fetch all appointments from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getAllAppointments = (req, res) => {
+  Appointment.find()
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched all Appointments",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
+/**
+ * @description API to fetch appointments by patient ID from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getAppointmentByPatientId = (req, res) => {
+  Appointment.find({ patient: req.params.id})
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched  Appointment for given patient",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
+
+/**
+ * @description API to fetch appointments from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getAppointmentByDoctorId = (req, res) => {
+  Appointment.find({ doctor: req.params.id})
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched  Appointment for given patient",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
+/**
+ * @description API to fetch all appointments from database
+ * @param {*} req
+ * @param {*} res
+ */
+const createAppointment = async (req, res) => {
+  try {
+    const data = req.body;
+
+    const findDoctor = await Doctor.findById(data.doctor);
+
+    if (!findDoctor) {
+      return res.status(404).json({
+        message: "Doctor not found",
+      });
+    }
+
+    const findPatient = await Patient.findById(data.patient);
+
+    if (!findPatient) {
+      return res.status(404).json({
+        message: "Patient not found",
+      });
+    }
+
+    const appointmentData = await Appointment.create({
+      date: data.date,
+      doctor: data.doctor,
+      patient: data.patient,
+      symptoms: data.symptoms,
+      qna: data.qna,
+    });
+
+    return res.status(201).json({
+      message: "Appointment Setup Succesfully",
+      data: appointmentData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports = {
+  createAppointment,
+  getAllAppointments,
+  getAppointmentByPatientId,
+  getAppointmentByDoctorId
+};
