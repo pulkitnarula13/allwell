@@ -14,6 +14,8 @@ import React, {
   useRef,
   useState,
 } from "react";
+import Animated from 'react-native-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
 import { AuthContext } from "../../Context/AuthContext";
 import { Chip } from "react-native-paper";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
@@ -33,6 +35,8 @@ const DoctorHome = ({ navigation }) => {
     type: "solid",
   });
 
+
+  
   const [waitingList, setWaitingList] = useState({
     icon: "message-text-clock",
     value: 1,
@@ -48,6 +52,7 @@ const DoctorHome = ({ navigation }) => {
   });
 
   useEffect(() => {
+    console.log(navigation)
     setPatientAppointments([
       {
         time: "12:30 - 13:30pm",
@@ -75,13 +80,26 @@ const DoctorHome = ({ navigation }) => {
       },
     ]);
   }, []);
+  const renderContent = () => (
+    <View 
+
+    style={{display:"flex",flexDirection:"column",height:"100%"}}
+    >
+
+     <View style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:50}}><Text>Active</Text></View>
+     <View style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:50}}><Text>Busy</Text></View>
+     <View style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:50}}><Text>Inactive</Text></View>
+      
+    </View>
+  );
+  const sheetRef = React.useRef(null);
 
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.nameContainer}>
           <Text>Welcome, Dr. {userInfo.name}</Text>
-          <Chip>{activeDoctorStatus}</Chip>
+          <Chip onPress={() => sheetRef.current.snapTo(250)}>Active</Chip>
         </View>
         <View>
           <FlatList
@@ -128,6 +146,12 @@ const DoctorHome = ({ navigation }) => {
           </Grid>
         </View>
       </View>
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={[1, 300, 0]}
+        borderRadius={10}
+        renderContent={renderContent}
+      />
     </ScrollView>
   );
 };
