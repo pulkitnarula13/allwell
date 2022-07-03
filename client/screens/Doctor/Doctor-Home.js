@@ -19,61 +19,59 @@ import { Chip } from "react-native-paper";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import AppointmentCard from "../../components/AppointmentCard";
 import DetailCardHome from "../../components/DetailCardHome";
-import { Col, Row, Grid } from "react-native-paper-grid";
+import * as moment from "moment";
+import axios from "axios";
 
 const DoctorHome = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
 
   const [activeDoctorStatus, setActiveDoctorStatus] = useState("Active");
   const [patientAppointments, setPatientAppointments] = useState([]);
-  const [inboxDetail, setInboxDetail] = useState({
-    icon: "message",
-    value: 4,
-    title: "Inbox",
-    type: "solid",
-  });
+  const [confirmedAppointments, setConfirmedAppointments] = useState([]);
+  const [urgentAppointments, setUrgentAppointments] = useState([]);
 
-  const [waitingList, setWaitingList] = useState({
-    icon: "message-text-clock",
-    value: 1,
-    title: "Waiting For You",
-    type: "outline",
-  });
+  const [inboxDetail, setInboxDetail] = useState([]);
 
-  const [doctorWaitingList, setDoctorWaitingList] = useState({
-    icon: "message-text-clock",
-    value: 12,
-    title: "Waiting For Doctor",
-    type: "solid",
-  });
+  const [waitingList, setWaitingList] = useState([]);
+
+  const getPatientAppointments = async () => {
+
+
+    try {
+      const data = await axios.get(
+        `http://192.168.1.73:8080/api/v1/appointments/doctor/${userInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      // const modifiedData = data.data.data.map((val) => {
+      //   val.date = moment(val.date).format("ll");
+      //   return val;
+      // });
+      setPatientAppointments(data.data.data);
+  
+      const confirmedAppointments = data.data.data.filter(
+        (data) => data.confirmed && !data.cancelled
+      );
+      setConfirmedAppointments(confirmedAppointments);
+  
+      const urgentAppointments = data.data.data.filter((data) => data.urgent && !data.completed && !data.confirmed && !data.cancelled);
+      setUrgentAppointments(urgentAppointments);
+  
+      const waitingList = data.data.data.filter((data) => !data.confirmed && !data.cancelled && !data.urgent);
+      setWaitingList(waitingList);
+  
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
 
   useEffect(() => {
-    setPatientAppointments([
-      {
-        time: "12:30 - 13:30pm",
-        name: "David",
-        symptoms: ["Headache", "Nausea"],
-        profilePicture: require("../../assets/icon.png"),
-      },
-      {
-        time: "12:30 - 13:30pm",
-        name: "Mike",
-        symptoms: ["Headache", "Nausea"],
-        profilePicture: require("../../assets/icon.png"),
-      },
-      {
-        time: "12:30 - 13:30pm",
-        name: "Allen",
-        symptoms: ["Headache", "Nausea"],
-        profilePicture: require("../../assets/icon.png"),
-      },
-      {
-        time: "12:30 - 13:30pm",
-        name: "Jas",
-        symptoms: ["Headache", "Nausea"],
-        profilePicture: require("../../assets/icon.png"),
-      },
-    ]);
+    getPatientAppointments();
   }, []);
 
   return (
@@ -86,46 +84,60 @@ const DoctorHome = ({ navigation }) => {
         <View>
           <FlatList
             horizontal={true}
-            data={patientAppointments}
+            data={confirmedAppointments}
             renderItem={AppointmentCard}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item) => item.createdAt}
           />
         </View>
         <View style={styles.inboxContainer}>
-          <Grid>
-            <Row>
-              <Col>
-                <TouchableOpacity>
-                  <DetailCardHome item={inboxDetail} />
-                </TouchableOpacity>
-              </Col>
-              <Col>
-                <TouchableOpacity onPress={() => navigation.navigate("Doctor-Waiting-List")}>
-                  <DetailCardHome item={waitingList} />
-                </TouchableOpacity>
-              </Col>
-            </Row>
 
-            <Row>
-              <Col>
+                <TouchableOpacity onPress={() => navigation.navigate('Doctor-Inbox')}>
+                  <DetailCardHome
+                    item={inboxDetail}
+                    config={{
+                      icon: "message",
+                      title: "Inbox",
+                      type: "solid",
+                    }}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                onPress={() => navigation.navigate('Doctor-Waiting-List', {
+                  waitingList
+                })}
+                >
+                  <DetailCardHome
+                    config={{
+                      icon: "message-text-clock",
+                      title: "Waiting For You",
+                      type: "outline",
+                    }}
+                    item={waitingList}
+                  />
+                </TouchableOpacity>
+
                 <View>
-                  <TouchableOpacity>
-                    <DetailCardHome item={doctorWaitingList} />
+                  <TouchableOpacity 
+                  onPress={() => navigation.navigate('Doctor-Urgent', {
+                    urgentAppointments
+                  })}
+                  >
+                    <DetailCardHome
+                      item={urgentAppointments}
+                      config={{
+                        icon: "message-text-clock",
+                        title: "Urgent",
+                        type: "solid",
+                      }}
+                    />
                   </TouchableOpacity>
                 </View>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
                 <View>
                   <TouchableOpacity style={styles.reviewButton}>
                     <Text style={styles.review}>Review</Text>
                   </TouchableOpacity>
                 </View>
-              </Col>
-            </Row>
-          </Grid>
         </View>
       </View>
     </ScrollView>
@@ -135,7 +147,7 @@ const DoctorHome = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: "20px",
+    // margin: "20px",
     gap: 12,
   },
   inboxContainer: {

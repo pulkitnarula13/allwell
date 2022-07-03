@@ -45,6 +45,10 @@ const Appointment = new Schema(
 
     cancelled: {
       type: Boolean
+    },
+
+    urgent: {
+      type: Boolean
     }
   },
   {

@@ -150,7 +150,11 @@ const getAppointmentById = (req, res) => {
  * @param {*} res
  */
  const getAppointmentByDoctorId = (req, res) => {
-  Appointment.find({ doctor: req.params.id})
+  Appointment.find({ doctor: req.params.id}).populate({
+    path: "patient"
+  }).populate({
+    path: "symptoms"
+  })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched  Appointment for given patient",
