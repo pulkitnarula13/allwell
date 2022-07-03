@@ -24,8 +24,6 @@ const registerDoctor = async (req, res) => {
       process.env.JWT_SECRET
     );
 
-
-    console.log( req.body.licenseNumber, "incoming");
     const uploadLicenseImage = await upload(
       `${Date.now() + "" + req.body.licenseNumber}`,
       req.body.licenseImage,
@@ -33,7 +31,6 @@ const registerDoctor = async (req, res) => {
       "doctor",
       req.body.name
     );
-
 
     const output = await Doctor.create({
       name: req.body.name,
