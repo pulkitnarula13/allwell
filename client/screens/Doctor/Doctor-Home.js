@@ -39,7 +39,7 @@ const DoctorHome = ({ navigation }) => {
 
     try {
       const data = await axios.get(
-        `http://192.168.1.73:8080/api/v1/appointments/doctor/${userInfo.id}`,
+        `http://192.168.1.75:8080/api/v1/appointments/doctor/${userInfo.id}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -147,7 +147,7 @@ const DoctorHome = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // margin: "20px",
+    
     gap: 12,
   },
   inboxContainer: {

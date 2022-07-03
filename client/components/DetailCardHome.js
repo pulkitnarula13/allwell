@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     display: "flex",
-    gap: "20px",
+    gap: 20,
     alignItems: "center"
   },   
   solidContainerConfig: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     height: 170,
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
     borderRadius: 8,
-    gap: "20px",
+    gap: 20,
     justifyContent: "space-evenly"
   },
   outlineContainerConfig: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 170,
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
     borderRadius: 8,
-    gap: "20px",
+    gap: 20,
     justifyContent: "space-evenly"
   },
   solidTextConfig:  {

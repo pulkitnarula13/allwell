@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: 65,
   },
   clock: {
-    minWidth: "20px",
+    minWidth: 20,
     height: 20
   },
   time: {

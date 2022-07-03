@@ -9,7 +9,7 @@ import React from 'react'
       <View style ={styles.inner}>
         <Text>Kapilsdaasdsada</Text>
       <Image
-            style={{ width: 82, height: 82,borderRadius:"50%", }}
+            style={{ width: 82, height: 82,borderRadius:50  , }}
             source={{ uri: "../assets/icon.png" }}
             resizeMode="center"
           />

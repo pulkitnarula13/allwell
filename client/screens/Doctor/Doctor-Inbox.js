@@ -15,13 +15,12 @@ import Doctorinboxdata from "../../components/Doctor-inbox-data";
 
 const DoctorInbox = () => {
   const windowWidth = Dimensions.get("window").width;
-  const windowheight = Dimensions.get("window").height;
+  
   function ExploreWitHookExamples() {
     return (
       <View
         style={{
           width: windowWidth,
-          height: { windowheight },
           backgroundColor: "blue",
         }}
       >
