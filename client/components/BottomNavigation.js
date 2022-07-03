@@ -10,7 +10,7 @@ import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import PatientHome from "../screens/Patient/Patient-Home";
 
-const Bottomnavigation = () => {
+const Bottomnavigation = ({navigation}) => {
   const { userInfo } = useContext(AuthContext);
   
   const [render, setRender] = useState({
@@ -34,26 +34,46 @@ const Bottomnavigation = () => {
         { key: "inbox", title: "Inbox", icon: "message" },
         { key: "docprofile", title: "Profile", icon: "account" },
       ])
-
-      setRender({
-        home: DoctorInbox,
-        schedule: Schedulepatient,
-        inbox: DoctorInbox,
-        docprofile: DoctorProfile,
-      })
     }
   }, [])
+
+  const renderValDoctor = ({ route, jumpTo }) => {
+    switch (route.key) {
+      case "home":
+        return <DoctorHome navigation={navigation} jumpTo={jumpTo} />;
+      case "schedule":
+        return <Schedulepatient navigation={navigation} jumpTo={jumpTo} />;
+      case "inbox":
+        return <DoctorInbox navigation={navigation} jumpTo={jumpTo} />;
+      case "docprofile":
+        return <DoctorProfile navigation={navigation} jumpTo={jumpTo} />;
+    }
+  };
+
+  const renderValPatient = ({ route, jumpTo }) => {
+    switch (route.key) {
+      case "home":
+        return <PatientHome navigation={navigation} jumpTo={jumpTo} />;
+      case "connect":
+        return <ConnectDoctor navigation={navigation} jumpTo={jumpTo} />;
+      case "history":
+        return <History navigation={navigation} jumpTo={jumpTo} />;
+      case "profile":
+        return <PatientProfile navigation={navigation} jumpTo={jumpTo} />;
+    }
+  };
+
   
   const [index, setIndex] = React.useState(0);
 
-  const renderState = BottomNavigation.SceneMap(render);
+  // const renderState = BottomNavigation.SceneMap(renderValDoctor);
 
   return (
     <BottomNavigation
       barStyle={{ backgroundColor: "#DADADA" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
-      renderScene={renderState}
+      renderScene={renderValDoctor}
     />
   );
 };

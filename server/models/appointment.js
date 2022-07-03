@@ -6,7 +6,6 @@ const Appointment = new Schema(
   {
     date: {
       type: Date,
-      required: true,
     },
 
     doctor: {
@@ -43,6 +42,14 @@ const Appointment = new Schema(
       type: [mongoose.Schema.Types.ObjectId],
       ref: "QNA",
     },
+
+    cancelled: {
+      type: Boolean
+    },
+
+    urgent: {
+      type: Boolean
+    }
   },
   {
     timestamps: true,

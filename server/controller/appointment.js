@@ -2,23 +2,64 @@ const { Appointment } = require("../models/appointment");
 const { Doctor } = require("../models/doctor");
 const { Patient } = require("../models/patient");
 
-// /**
-//  * @description API to update Appointment
-//  * @param {*} req
-//  * @param {*} res
-//  */
-// const updateAppointment = (req, res) => {
-//   const id = req.params.id;
+/**
+ * @description API to update Appointment
+ * @param {*} req
+ * @param {*} res
+ */
+const updateAppointment = (req, res) => {
+  const id = req.params.id;
 
-//   Appointment.findOneAndUpdate({ _id: id }, req.body, {
-//     returnOrignal: false,
-//   }).then((result) => {
-//     res.status(200).json({
-//       message: "Succesfully updated the Appointment",
-//       data: result,
-//     });
-//   });
-// };
+  Appointment.findOneAndUpdate({ _id: id }, req.body, {
+    returnOrignal: false,
+  }).then((result) => {
+    res.status(200).json({
+      message: "Succesfully updated the Appointment",
+      data: result,
+    });
+  });
+};
+
+/**
+ * @description API to cancel Appointment
+ * @param {*} req
+ * @param {*} res
+ */
+ const cancelAppointment = (req, res) => {
+  const id = req.params.id;
+
+  Appointment.findOneAndUpdate({ _id: id }, {
+    cancelled: true
+  }, {
+    returnOrignal: false,
+  }).then((result) => {
+    res.status(200).json({
+      message: "Appointment Cancelled",
+      data: result,
+    });
+  });
+};
+
+/**
+ * @description API to confirm Appointment
+ * @param {*} req
+ * @param {*} res
+ */
+ const confirmAppointment = (req, res) => {
+  const id = req.params.id;
+
+  Appointment.findOneAndUpdate({ _id: id }, {
+    confirmed: true,
+    date: req.body.date
+  }, {
+    returnOrignal: false,
+  }).then((result) => {
+    res.status(200).json({
+      message: "Appointment Confirmed",
+      data: result,
+    });
+  });
+};
 
 // /**
 //  * @description API to delete Appointment
@@ -40,27 +81,27 @@ const { Patient } = require("../models/patient");
 //     });
 // };
 
-// /**
-//  * @description Api to fetch Appointment based on given ID
-//  * @param {*} req
-//  * @param {*} res
-//  */
-// const getAppointmentById = (req, res) => {
-//   const id = req.params.id;
+/**
+ * @description Api to fetch Appointment based on given ID
+ * @param {*} req
+ * @param {*} res
+ */
+const getAppointmentById = (req, res) => {
+  const id = req.params.id;
 
-//   Appointment.findById(id)
-//     .then((result) => {
-//       return res.status(200).json({
-//         message: `Appointment found succesfully`,
-//         data: result,
-//       });
-//     })
-//     .catch((error) => {
-//       return res.status(404).json({
-//         message: error.message,
-//       });
-//     });
-// };
+  Appointment.findById(id)
+    .then((result) => {
+      return res.status(200).json({
+        message: `Appointment found succesfully`,
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(404).json({
+        message: error.message,
+      });
+    });
+};
 
 /**
  * @description API to fetch all appointments from DB
@@ -109,7 +150,11 @@ const { Patient } = require("../models/patient");
  * @param {*} res
  */
  const getAppointmentByDoctorId = (req, res) => {
-  Appointment.find({ doctor: req.params.id})
+  Appointment.find({ doctor: req.params.id}).populate({
+    path: "patient"
+  }).populate({
+    path: "symptoms"
+  })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched  Appointment for given patient",
@@ -171,5 +216,9 @@ module.exports = {
   createAppointment,
   getAllAppointments,
   getAppointmentByPatientId,
-  getAppointmentByDoctorId
+  getAppointmentByDoctorId,
+  updateAppointment,
+  confirmAppointment,
+  cancelAppointment,
+  getAppointmentById
 };

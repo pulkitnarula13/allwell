@@ -5,21 +5,21 @@ import { Button } from "react-native-paper";
 const AppointmentCard = ({ item }) => {
 
 
+  console.log(item, "item");
   
   return (
     <View style={styles.container}>
       <View style={styles.timeContainer}>
         <View style={styles.clock}><Button  icon="clock"></Button></View>
-        <Text style={styles.time}>{item.time}</Text>
+        <Text style={styles.time}>{item.date}</Text>
       </View>
       <View>
         <View style={styles.imageContainer}>
-        <Image style={styles.image} source={item.profilePicture} />
-        <Text style={styles.name}>{item.name}</Text>
+        <Image style={styles.image} source={item.profilePicture ? item.profilePicture : require('../assets/icon.png')} />
+        <Text style={styles.name}>{item.patient.name}</Text>
         </View>
         <View>
         </View>
-        <Text>{}</Text>
       </View>
     </View>
   );
