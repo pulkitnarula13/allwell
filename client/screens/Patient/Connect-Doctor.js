@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
 
     },
     subheadingtextview1:{
-        fontWeight:'700',
+        fontWeight:"700",
         fontSize:16,
         lineHeight:28,
         textAlign:'center',
