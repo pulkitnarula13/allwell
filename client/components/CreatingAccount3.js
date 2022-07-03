@@ -16,7 +16,7 @@ const CreatingAccount3 = (props) => {
   useEffect(() => {
     getSpeciallityList();
   }, []);
-
+    
   const getSpeciallityList = async () => {
     const response = await axios.get(
       "http://localhost:8080/api/v1/doctors/specialities"

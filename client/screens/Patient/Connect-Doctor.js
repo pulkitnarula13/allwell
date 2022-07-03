@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         height:45,
         justifyContent:'center',
         marginTop:68,
-        fontWeight:'500',
+        fontWeight:"500",
         fontSize:17,
         
 
@@ -145,13 +145,13 @@ const styles = StyleSheet.create({
         height:45,
         justifyContent:'center',
         marginTop:18,
-        fontWeight:'500',
+        fontWeight:"500",
         fontSize:17,
         
 
     },
     subheadingtextview1:{
-        fontWeight:'700',
+        fontWeight:"700",
         fontSize:16,
         lineHeight:28,
         textAlign:'center',

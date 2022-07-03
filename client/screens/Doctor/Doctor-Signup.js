@@ -40,15 +40,18 @@ const DoctorSignup = ({ navigation }) => {
         .filter((data) => data),
       experience: thirdStepperData.experience,
       description: thirdStepperData.description,
+    
     };
 
     
     axios.post('http://localhost:8080/api/v1/doctors/register', mainData).then((response) => {
-      navigation.navigate("Doctor-Login");
+      navigation.navigate("DoctorSignupScreenLast");
       Alert.alert("Success", response.data.message);
     }).catch((error) => {
       console.log(error);
     })
+    // navigation.navigate("DoctorSignupScreenLast");
+   
   };
 
   return (
@@ -58,9 +61,10 @@ const DoctorSignup = ({ navigation }) => {
         active={active}
         content={content}
         onBack={() => setActive((p) => p - 1)}
-        onFinish={() => submitData()}
+        onFinish={() => submitData(navigation)}
         onNext={() => setActive((p) => p + 1)}
         buttonStyle={styles.buttonstyle}
+        
       />
       <Text>Registration Process may take upto 3 hours for approval</Text>
     </View>

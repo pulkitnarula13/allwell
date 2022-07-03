@@ -43,7 +43,7 @@ const PatientHome = () => {
       image: "../../assets/icon.png",
     },
   ];
-  const Item = ({ name, image }) => (
+  const Item = ({ name,image }) => (
     <View style={styles.item}>
       <Image
         style={{width:72,height:72}}
@@ -142,7 +142,7 @@ const PatientHome = () => {
         />
         </View>
           <View style={{display:"flex",flexDirection:"row"}}>
-          <Text style={{fontWeight:700,fontSize:16}}>Need more Describe</Text>
+          <Text style={{fontWeight:"700",fontSize:16}}>Need more Describe</Text>
           <Button
               style={{
                 borderRadius: 10,
@@ -171,8 +171,8 @@ const PatientHome = () => {
             source={require("../../assets/icon.png")}
             resizeMode="contain"
           />
-          <Text style={{fontWeight:500,fontSize:16}}>Dr.Lora Smith</Text>
-          <Text style={{fontWeight:100,fontSize:12}}>General Phisician</Text>
+          <Text style={{fontWeight:"500",fontSize:16}}>Dr.Lora Smith</Text>
+          <Text style={{fontWeight:"100",fontSize:12}}>General Phisician</Text>
 
             </View>
             <View style={{width:187,height:187,borderWidth:2,display:"flex",justifyContent:"center",marginRight:10,alignItems:"center",borderColor:"black",borderRadius:8}}>
@@ -181,8 +181,8 @@ const PatientHome = () => {
             source={require("../../assets/icon.png")}
             resizeMode="contain"
           />
-          <Text style={{fontWeight:500,fontSize:16}}>Dr.Lora Smith</Text>
-          <Text style={{fontWeight:100,fontSize:12}}>General Phisician</Text>
+          <Text style={{fontWeight:"500",fontSize:16}}>Dr.Lora Smith</Text>
+          <Text style={{fontWeight:"100",fontSize:12}}>General Phisician</Text>
           
             </View>
             </View>
