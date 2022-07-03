@@ -3,7 +3,7 @@ const ROLE = require("../config/roles");
 const router = express.Router();
 
 const {
-  createAppointment, getAllAppointments, getAppointmentByPatientId, getAppointmentByDoctorId,
+  createAppointment, getAllAppointments, getAppointmentByPatientId, getAppointmentByDoctorId, confirmAppointment, cancelAppointment, updateAppointment, getAppointmentById,
 } = require("../controller/appointment");
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
@@ -31,7 +31,7 @@ router.post("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMI
  *       200:
  *         description: return positive response
  */
-router.get("/", getAllAppointments);
+router.get("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN), getAllAppointments);
 
 // // Routes
 // /**
@@ -43,7 +43,7 @@ router.get("/", getAllAppointments);
 //  *       200:
 //  *         description: return positive response
 //  */
-router.get("/patient/:id", getAppointmentByPatientId);
+router.get("/patient/:id",validateToken, verifyRoles(ROLE.PATIENT, ROLE.ADMIN), getAppointmentByPatientId);
 
 // // Routes
 // /**
@@ -55,30 +55,56 @@ router.get("/patient/:id", getAppointmentByPatientId);
 //  *       200:
 //  *         description: return positive response
 //  */
-router.get("/doctor/:id", getAppointmentByDoctorId);
+router.get("/doctor/:id",validateToken, verifyRoles( ROLE.DOCTOR, ROLE.ADMIN), getAppointmentByDoctorId);
 
 // // Routes
 // /**
 //  * @swagger
-//  * /appointment/doctor/:id:
+//  * /appointment/:id:
 //  *   get:
-//  *     description: Get appointment using doctor id
+//  *     description: Get appointment using id
 //  *     responses:
 //  *       200:
 //  *         description: return positive response
 //  */
-// router.put("/:id", updateAppointment);
+router.get("/:id",validateToken, verifyRoles( ROLE.DOCTOR, ROLE.ADMIN), getAppointmentById);
 
-// // Routes
-// /**
-//  * @swagger
-//  * /doctor/:id:
-//  *   delete:
-//  *     description: Delete the appointment using id from the database
-//  *     responses:
-//  *       200:
-//  *         description: return positive response
-//  */
-// router.delete("/:id", deleteAppointment);
+// Routes
+/**
+ * @swagger
+ * /:id:
+ *   put:
+ *     description: Update the appointment using id from the database
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateAppointment);
+
+// Routes
+
+
+/**
+ * @swagger
+ * /confirm/:id:
+ *   put:
+ *     description: Confirm the appointment using id from the database
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.put("/confirm/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), confirmAppointment);
+
+ // Routes
+/**
+ * @swagger
+ * /cancel/:id:
+ *   put:
+ *     description: Cancel the appointment using id from the database
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.put("/cancel/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), cancelAppointment);
 
 module.exports = router;

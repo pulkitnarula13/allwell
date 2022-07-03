@@ -2,16 +2,16 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
 
-const DetailCardHome = ({ item }) => {
-    console.log(item.type);
+const DetailCardHome = ({ config, item }) => {
+    console.log(item, "length");
   return (
-    <View style={item.type === "solid" ? styles.solidContainerConfig : styles.outlineContainerConfig}>
+    <View style={config.type === "solid" ? styles.solidContainerConfig : styles.outlineContainerConfig}>
       <View style={styles.buttonContainer}>
-        <Button icon={item.icon}></Button>
+        <Button icon={config.icon}></Button>
       </View>
       <View style={styles.textContainer}>
-        <Text style={item.type === "solid" ? styles.solidTextConfig: styles.outlineTextConfig}>{item.value}</Text>
-        <Text style={item.type === "solid" ? styles.solidTextConfig: styles.outlineTextConfig} >{item.title}</Text>
+        <Text style={config.type === "solid" ? styles.solidTextConfig: styles.outlineTextConfig}>{item.length}</Text>
+        <Text style={config.type === "solid" ? styles.solidTextConfig: styles.outlineTextConfig} >{config.title}</Text>
       </View>
     </View>
   );
