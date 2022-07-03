@@ -9,12 +9,26 @@ const {
   updatePatient,
   deletePatient,
   getPatientById,
+  createSymptom,
+  getSymptoms,
 } = require("../controller/patient");
 
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
 
 
+// Routes
+/**
+ * @swagger
+ * /patient/symptoms:
+ *   get:
+ *     description: Get symptoms
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get("/symptoms", getSymptoms);
+ 
 // Routes
 /**
  * @swagger
@@ -86,5 +100,23 @@ router.delete("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, dele
  *         description: return positive response
  */
 router.get("/:id",verifyRoles(ROLE.ADMIN), getPatientById);
+
+// Routes
+/**
+ * @swagger
+ * /patient/symptoms:
+ *   post:
+ *     description: Creates symptoms 
+ *     responses:
+ *       201:
+ *         description: return positive response
+ */
+ router.post(
+  "/symptoms",
+  validateToken,
+  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR),
+  createSymptom
+);
+
 
 module.exports = router;

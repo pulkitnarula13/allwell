@@ -2,6 +2,8 @@ const { Patient } = require("../models/patient");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
+const { Symptom } = require("../models/Symptoms");
+
 const upload = require("../utils/upload");
 const ROLE = require("../config/roles");
 
@@ -199,6 +201,51 @@ const getPatientById = (req, res) => {
     });
 };
 
+
+/**
+ * @description API to fetch all specialities of doctor from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getSymptoms = (req, res) => {
+  Symptom.find()
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched all Symptoms",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
+/**
+ * @description API to fetch all the symptoms from database
+ * @param {*} req
+ * @param {*} res
+ */
+ const createSymptom = (req, res) => {
+  
+  Symptom.create({
+    name: req.body.name,
+    description: req.body.description
+  })
+    .then((result) => {
+      return res.status(201).json({
+        message: "Succesfully Created the Symptom",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
 module.exports = {
   registerPatient,
   loginPatient,
@@ -206,4 +253,6 @@ module.exports = {
   updatePatient,
   deletePatient,
   getPatientById,
+  createSymptom,
+  getSymptoms
 };
