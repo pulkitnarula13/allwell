@@ -4,29 +4,29 @@ import { Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const PatientQuestiontwo = ({navigation}) => {
+const PatientQuestionSummary = ({navigation}) => {
 
-  const [image12, setimage12] = useState([]);
+  const DATA = [
+    {
+      name: 'Kapil',
+      image: '../../assets/icon1.png',
+    },
+    {
+        name: 'Prabhjyot',
+        image: '../../assets/icon2.png',
+    },
+    {
+        name: 'Add Patient',
+        image: '../../assets/icon3.png',
+    },
+  ];
 
-  const openimagelib = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setimage12([...image12, ...[{ image: result.uri }]]);
-    }
-  };
- 
 
 
   const Item = ({item}) =>  {
     return (
       <View style={styles.item}>
-      <Image style={styles.image2} source={item.image} resizeMode="center" />
+      <Image style={styles.image2} source={require('../../assets/icon.png')} resizeMode="center" />
     </View>
     )
   }
@@ -41,17 +41,17 @@ const PatientQuestiontwo = ({navigation}) => {
       </View>
       <Text>Add Photos/Videos</Text>
       <View style={{ display: "flex", flexDirection: "row" }}>
-        <TouchableOpacity onPress={openimagelib}>
+        
           <Image
             style={styles.image1}
             source={require("../../assets/camera.jpg")}
             resizeMode="center"
           />
-        </TouchableOpacity>
+        
         <FlatList
           style={{marginBottom:40}}
           horizontal={true}
-          data={image12}
+          data={DATA}
           renderItem={Item}
           keyExtractor={(item) => item.image}
         />
@@ -76,7 +76,7 @@ const PatientQuestiontwo = ({navigation}) => {
         <Button
           style={styles.availablebtn1}
           mode="contained"
-          onPress={() => navigation.navigate("Patient-QuestionSummary")}
+          onPress={() => navigation.navigate("Requestwait")}
         >
           Next
         </Button>
@@ -147,4 +147,4 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 });
-export default PatientQuestiontwo;
+export default PatientQuestionSummary;

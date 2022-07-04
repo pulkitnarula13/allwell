@@ -1,8 +1,10 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
+import { List } from 'react-native-paper';
+import Questions from "../../components/questions";
 
-const PatientQuestion = () => {
+const PatientQuestion = ({navigation}) => {
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
@@ -12,11 +14,9 @@ const PatientQuestion = () => {
           resizeMode="center"
         />
       </View>
-      <Text>Question</Text>
-      <Text style={styles.textheight}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.{" "}
-      </Text>
+      <View>
+        <Questions/>
+      </View>
       <View
         style={{
           justifyContent: "center",
@@ -37,7 +37,7 @@ const PatientQuestion = () => {
         <Button
           style={styles.availablebtn1}
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.navigate("Patient-Questiontwo") }
         >
           Next
         </Button>

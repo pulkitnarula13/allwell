@@ -2,8 +2,11 @@ import { View, Text ,StyleSheet, Image} from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
+
 const  PatientProfile = ()=> {
+
   return (
+
     <View style={styles.allview}>
         <View style={styles.main}>
         <View style={styles.profileheading}>
@@ -47,6 +50,7 @@ const  PatientProfile = ()=> {
       <Text style={styles.infotext12}>Viverra orci ut in quis est pretium id. Cursus purus ut fames feugiat feugiat neque sed eu ridiculus.</Text>
       </View>
     </View>
+    
   )
 }
 
