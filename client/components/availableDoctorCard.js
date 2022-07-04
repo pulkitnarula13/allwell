@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   image: {
     width: 148,
     height: 162,
-    background: "red",
+    backgroundColor: "red",
   },
   ratingContainer: {
     display: "flex",

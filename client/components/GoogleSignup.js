@@ -11,9 +11,10 @@ const GoogleSignup = () => {
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useState("");
   const [request, response, promptAsync] = Google.useAuthRequest({
-    iosClientId: IOS_CLIENT_ID,
-    webClientId: WEB_CLIENT_ID,
+    // iosClientId: IOS_CLIENT_ID,
     expoClientId: EXPO_CLIENT_ID,
+    webClientId: WEB_CLIENT_ID
+
   });
 
   useEffect(() => {
