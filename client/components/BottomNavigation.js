@@ -3,6 +3,7 @@ import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
 import { AuthContext } from "../Context/AuthContext";
 import SchedulePatient from "../screens/Doctor/Schedule-Patient";
+import DoctorAppointment from "../screens/Doctor/Doctor-Appointment";
 import InfoPatient from "../screens/Doctor/Info-Patient";
 import DoctorProfile from "../screens/Doctor/Doctor-Profile";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
@@ -39,7 +40,7 @@ const Bottomnavigation = ({navigation}) => {
       case "home":
         return <DoctorHome navigation={navigation} jumpTo={jumpTo} />;
       case "schedule":
-        return <InfoPatient navigation={navigation} jumpTo={jumpTo} />;
+        return <DoctorAppointment navigation={navigation} jumpTo={jumpTo} />;
       case "inbox":
         return <DoctorInbox navigation={navigation} jumpTo={jumpTo} />;
       case "docprofile":
