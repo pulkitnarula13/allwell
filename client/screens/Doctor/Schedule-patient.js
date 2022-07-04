@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
+import ScheduleCalendar from "../../components/ScheduleCalendar";
 
 const DATA = [
   {
@@ -74,6 +75,9 @@ const Schedulepatient = () => {
           dolore eos atque? Neque!
         </Text>
         <Text style={styles.TimeSlot}>Select a Time Slot</Text>
+      </View>
+      <View>
+        <ScheduleCalendar/>
       </View>
       <View style={styles.buttons}>
         <Button

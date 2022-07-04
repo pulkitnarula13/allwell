@@ -8,19 +8,19 @@ const PatientHome = () => {
     
     {
       name: "Cough",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon1.png",
     },
     {
       name: "Muscle Cramp",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon2.png",
     },
     {
       name: "Sore Throad",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon3.png",
     },
     {
       name: "Stomach Pain",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon4.png",
     },
    
   ];
@@ -28,19 +28,19 @@ const PatientHome = () => {
   const DATA1 = [
     {
       name: "Stomach Pain",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon5.png",
     },
     {
       name: "Congestion",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon6.png",
     },
     {
       name: "Fever1",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon7.png",
     },
     {
       name: "Fever2",
-      image: "../../assets/icon.png",
+      image: "../../assets/icon8.png",
     },
   ];
   const Item = ({ name,image }) => (

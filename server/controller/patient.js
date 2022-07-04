@@ -59,7 +59,7 @@ const registerPatient = async (req, res) => {
  */
 const loginPatient = async (req, res) => {
   const email = req.body.email;
-  let patient = await Patient.findOne({ email: email });
+  let patient = await Patient.findOne({ email: email.toLowerCase() });
   if (patient) {
     const isValidPassword = await bcrypt.compare(
       req.body.password,

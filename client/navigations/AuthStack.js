@@ -13,6 +13,7 @@ import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Select
 import DoctorLogin from "../screens/Common/Doctor-Login";
 import PatientLogin from "../screens/Common/Patient-Login";
 import DoctorSignupScreenLast from "../screens/Doctor/DoctorSignupScreenLast";
+import DoctorHome from "../screens/Doctor/Doctor-Home";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ const AuthStack = () => {
       />
       <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
       <Stack.Screen name="Patient-Signup" component={PatientSignup} />
+      <Stack.Screen name="Doctor-home" component={DoctorHome} />
     <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
       <Stack.Screen name="Patient-Login" component={PatientLogin} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />

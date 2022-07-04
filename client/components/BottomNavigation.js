@@ -9,16 +9,12 @@ import DoctorProfile from "../screens/Doctor/Doctor-Profile";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import PatientHome from "../screens/Patient/Patient-Home";
+import ConnectDoctor from "../screens/Patient/Connect-Doctor";
+import PatientHistory from "../screens/Patient/Patient-History";
 
 const Bottomnavigation = ({navigation}) => {
   const { userInfo } = useContext(AuthContext);
   
-  const [render, setRender] = useState({
-    home: PatientHome,
-    connect: DoctorConnect,
-    history: AvailableDoctor,
-    profile: PatientProfile,
-  });
   const [routes, setRoutes] = React.useState([
     { key: "home", title: "Home", icon: "home" },
     { key: "connect", title: "Connect", icon: "account-plus" },
@@ -57,7 +53,7 @@ const Bottomnavigation = ({navigation}) => {
       case "connect":
         return <ConnectDoctor navigation={navigation} jumpTo={jumpTo} />;
       case "history":
-        return <History navigation={navigation} jumpTo={jumpTo} />;
+        return <PatientHistory navigation={navigation} jumpTo={jumpTo} />;
       case "profile":
         return <PatientProfile navigation={navigation} jumpTo={jumpTo} />;
     }
@@ -73,7 +69,7 @@ const Bottomnavigation = ({navigation}) => {
       barStyle={{ backgroundColor: "#DADADA" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
-      renderScene={renderValDoctor}
+      renderScene={userInfo.roles === "doctor" ? renderValDoctor : renderValPatient}
     />
   );
 };
