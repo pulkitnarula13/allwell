@@ -20,7 +20,7 @@ const registerPatient = async (req, res) => {
     const savedPatient = await Patient.create({
       name: req.body.name,
       password: newPassword,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       healthNumber: req.body.healthNumber,
       dob: req.body.dob,
       gender: req.body.gender,
@@ -30,7 +30,7 @@ const registerPatient = async (req, res) => {
     const token = jwt.sign(
       {
         name: req.body.name,
-        email: req.body.email,
+        email: req.body.email.toLowerCase(),
         roles: [ROLE.PATIENT]
       },
       process.env.JWT_SECRET

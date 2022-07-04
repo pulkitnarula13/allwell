@@ -1,8 +1,6 @@
 import  React, { useContext, useEffect, useState } from "react";
 import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
-import DoctorConnect from "../screens/Doctor/Doctor-connect";
-import AvailableDoctor from "../screens/Patient/Available-Doctor";
 import { AuthContext } from "../Context/AuthContext";
 import Schedulepatient from "../screens/Doctor/Schedule-patient";
 import DoctorProfile from "../screens/Doctor/Doctor-Profile";
@@ -13,12 +11,6 @@ import PatientHome from "../screens/Patient/Patient-Home";
 const Bottomnavigation = ({navigation}) => {
   const { userInfo } = useContext(AuthContext);
   
-  const [render, setRender] = useState({
-    home: PatientHome,
-    connect: DoctorConnect,
-    history: AvailableDoctor,
-    profile: PatientProfile,
-  });
   const [routes, setRoutes] = React.useState([
     { key: "home", title: "Home", icon: "home" },
     { key: "connect", title: "Connect", icon: "account-plus" },
@@ -73,7 +65,7 @@ const Bottomnavigation = ({navigation}) => {
       barStyle={{ backgroundColor: "#DADADA" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
-      renderScene={renderValDoctor}
+      renderScene={userInfo.roles === "doctor" ? renderValDoctor : renderValPatient}
     />
   );
 };
