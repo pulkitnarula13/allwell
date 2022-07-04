@@ -2,7 +2,8 @@ import  React, { useContext, useEffect, useState } from "react";
 import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
 import { AuthContext } from "../Context/AuthContext";
-import Schedulepatient from "../screens/Doctor/Schedule-patient";
+import SchedulePatient from "../screens/Doctor/Schedule-Patient";
+import InfoPatient from "../screens/Doctor/Info-Patient";
 import DoctorProfile from "../screens/Doctor/Doctor-Profile";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import PatientProfile from "../screens/Patient/Patient-Profile";
@@ -36,7 +37,7 @@ const Bottomnavigation = ({navigation}) => {
       case "home":
         return <DoctorHome navigation={navigation} jumpTo={jumpTo} />;
       case "schedule":
-        return <Schedulepatient navigation={navigation} jumpTo={jumpTo} />;
+        return <InfoPatient navigation={navigation} jumpTo={jumpTo} />;
       case "inbox":
         return <DoctorInbox navigation={navigation} jumpTo={jumpTo} />;
       case "docprofile":
