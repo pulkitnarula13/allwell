@@ -7,8 +7,10 @@ import DoctorProfile from "../screens/Doctor/Doctor-Profile";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import PatientHome from "../screens/Patient/Patient-Home";
+import ConnectDoctor from "../screens/Patient/Connect-Doctor";
 import PatientHistory from "../screens/Patient/Patient-History";
-import ConnectDoctor from "../screens/Doctor/Doctor-connect";
+import ConnectPatient from "../screens/Patient/Connect-Doctor";
+
 
 const Bottomnavigation = ({navigation}) => {
   const { userInfo } = useContext(AuthContext);
@@ -49,7 +51,7 @@ const Bottomnavigation = ({navigation}) => {
       case "home":
         return <PatientHome navigation={navigation} jumpTo={jumpTo} />;
       case "connect":
-        return <ConnectDoctor navigation={navigation} jumpTo={jumpTo} />;
+        return <ConnectPatient navigation={navigation} jumpTo={jumpTo} />;
       case "history":
         return <PatientHistory navigation={navigation} jumpTo={jumpTo} />;
       case "profile":

@@ -52,7 +52,7 @@ const DATA = [
     </View>
   );
 
-const ConnectDoctor = () => {
+const ConnectPatient = ({navigation}) => {
     const renderItem = ({ item }) => (
         <Item name={item.name} image={item.image} />
     );
@@ -98,7 +98,7 @@ return(
         <Text style={styles.subheadingtextview1}>Neurologists</Text>
       </View>
       <View style={{alignItems:'center'}}>
-      <Button style={styles.availablebtn} mode="contained" onPress={() => console.log('Pressed')}>
+      <Button style={styles.availablebtn} mode="contained" onPress={() => navigation.navigate("AvailableDoctor")}>
     Available Doctor
   </Button>
 
@@ -212,4 +212,4 @@ const styles = StyleSheet.create({
 
 
 });
-export default ConnectDoctor
+export default ConnectPatient
