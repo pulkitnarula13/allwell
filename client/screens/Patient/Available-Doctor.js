@@ -11,7 +11,8 @@ import React from "react";
 import AvailableDoctorCard from "../../components/AvailableDoctorCard";
 import { availableDoctorList } from "../../constants/availableDoctor";
 
-const AvailableDoctor = () => {
+const AvailableDoctor = (props) => {
+  
   const Item = (data) => {
     return (
       <View style={styles.item}>
@@ -29,6 +30,7 @@ const AvailableDoctor = () => {
           renderItem={AvailableDoctorCard}
           keyExtractor={(item) => item.id}
           numColumns={2}
+          extraData={props.navigation}
           columnWrapperStyle={styles.flatListColumn}
         />
       </View>

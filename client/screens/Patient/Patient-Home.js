@@ -98,20 +98,20 @@ const PatientHome = () => {
           <View
             style={{
               display: "block",
-              alignItems: "left",
+              alignItems: "flex-start",
             }}
           >
             <Text style={{
-                fontSize: "18px",
+                fontSize: 18,
                 fontWeight: "bold",
-                alignItems: "left"
+                alignItems: "flex-start"
               }}>Choose your symptons</Text>
           </View>
           
           <View
             style={{
               display: "block",
-              alignItems: "left",
+              alignItems: "flex-start",
               height: 50,
               
             }}
