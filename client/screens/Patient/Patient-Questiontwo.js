@@ -1,8 +1,33 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, Image, StyleSheet, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
+import * as ImagePicker from "expo-image-picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const PatientQuestion = () => {
+const PatientQuestiontwo = (props) => {
+  const [image12, setimage12] = useState([]);
+
+  const openimagelib = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setimage12([...image12, ...[{ image: result.uri }]]);
+    }
+  };
+
+
+  const Item = ({item}) =>  {
+    return (
+      <View style={styles.item}>
+      <Image style={styles.image2} source={item.image} resizeMode="center" />
+    </View>
+    )
+  }
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
@@ -12,11 +37,23 @@ const PatientQuestion = () => {
           resizeMode="center"
         />
       </View>
-      <Text>Question</Text>
-      <Text style={styles.textheight}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.{" "}
-      </Text>
+      <Text>Add Photos/Videos</Text>
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <TouchableOpacity onPress={openimagelib}>
+          <Image
+            style={styles.image1}
+            source={require("../../assets/camera.jpg")}
+            resizeMode="center"
+          />
+        </TouchableOpacity>
+        <FlatList
+          style={{marginBottom:40}}
+          horizontal={true}
+          data={image12}
+          renderItem={Item}
+          keyExtractor={(item) => item.image}
+        />
+      </View>
       <View
         style={{
           justifyContent: "center",
@@ -46,9 +83,22 @@ const PatientQuestion = () => {
   );
 };
 const styles = StyleSheet.create({
+  item: {
+    display: "flex",
+    flexDirection: "column",
+    marginRight: 21,
+    marginTop: 24,
+  },
+  image2: {
+    width: 235,
+    height: 248,
+    borderRadius: 10,
+  },
   image1: {
     width: 235,
     height: 248,
+    marginRight:20,
+    
   },
   textheight: {
     width: 320,
@@ -95,4 +145,4 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 });
-export default PatientQuestion;
+export default PatientQuestiontwo;

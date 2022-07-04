@@ -10,6 +10,7 @@ import PatientHome from "../screens/Patient/Patient-Home";
 import ConnectDoctor from "../screens/Patient/Connect-Doctor";
 import PatientHistory from "../screens/Patient/Patient-History";
 import ConnectPatient from "../screens/Patient/Connect-Doctor";
+import PatientQuestiontwo from "../screens/Patient/Patient-Questiontwo";
 
 
 const Bottomnavigation = ({navigation}) => {
@@ -49,7 +50,7 @@ const Bottomnavigation = ({navigation}) => {
   const renderValPatient = ({ route, jumpTo }) => {
     switch (route.key) {
       case "home":
-        return <PatientHome navigation={navigation} jumpTo={jumpTo} />;
+        return <PatientQuestiontwo navigation={navigation} jumpTo={jumpTo} />;
       case "connect":
         return <ConnectPatient navigation={navigation} jumpTo={jumpTo} />;
       case "history":
