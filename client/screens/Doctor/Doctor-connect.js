@@ -52,7 +52,7 @@ const DATA = [
     </View>
   );
 
-const Connect = () => {
+const ConnectDoctor = () => {
     const renderItem = ({ item }) => (
         <Item name={item.name} image={item.image} />
     );
@@ -212,4 +212,4 @@ const styles = StyleSheet.create({
 
 
 });
-export default Connect
+export default ConnectDoctor;

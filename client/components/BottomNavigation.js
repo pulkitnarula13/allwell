@@ -8,6 +8,7 @@ import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import PatientHome from "../screens/Patient/Patient-Home";
 import PatientHistory from "../screens/Patient/Patient-History";
+import ConnectDoctor from "../screens/Doctor/Doctor-connect";
 
 const Bottomnavigation = ({navigation}) => {
   const { userInfo } = useContext(AuthContext);
