@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "react-native-paper";
 
 const DetailCardHome = ({ config, item }) => {
-    console.log(item, "length");
   return (
     <View style={config.type === "solid" ? styles.solidContainerConfig : styles.outlineContainerConfig}>
       <View style={styles.buttonContainer}>

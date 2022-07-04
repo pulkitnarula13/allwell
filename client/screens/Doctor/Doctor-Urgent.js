@@ -3,7 +3,6 @@ import React from "react";
 import WaitingCard from "../../components/WaitingCard";
 
 const DoctorUrgent = (props) => {
-    console.log(props, "props");
   return (
     <View>
       {props.route.params.urgentAppointments.map((data, index) => {

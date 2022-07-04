@@ -5,7 +5,6 @@ import { Button } from 'react-native-paper'
 
 const DoctorSignupScreenLast = ({navigation})=> {
   const pressedvalue = ()=>{
-    console.log("hello",navigation);
     navigation.navigate("Doctor-Login")
   }
   return (

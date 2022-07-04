@@ -3,10 +3,7 @@ import React from "react";
 import { Button } from "react-native-paper";
 
 const AppointmentCard = ({ item }) => {
-
-
-  console.log(item, "item");
-  
+ 
   return (
     <View style={styles.container}>
       <View style={styles.timeContainer}>

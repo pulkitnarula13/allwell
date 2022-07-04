@@ -53,6 +53,7 @@ const WaitingCard = ({ item }) => {
 const styles = StyleSheet.create({
   container: {
     gap: 20,
+    // flex: 1,
     borderWidth: "1px",
     borderColor: "gainsboro",
     marginHorizontal: 20,

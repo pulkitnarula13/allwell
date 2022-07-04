@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
 import { Title, Paragraph } from "react-native-paper";
@@ -13,76 +13,95 @@ import {
 import Searchbars from "../../components/searchbar";
 import Doctorinboxdata from "../../components/Doctor-inbox-data";
 
-const DoctorInbox = () => {
+const DoctorInbox = ({ navigation }) => {
+  useEffect(() => {
+    navigation.setOptions({
+      title: `Inbox`,
+    })
+  }, []);
   const windowWidth = Dimensions.get("window").width;
-  
-  function ExploreWitHookExamples() {
-    return (
-      <View
-        style={{
-          width: windowWidth,
-          backgroundColor: "blue",
-        }}
-      >
-        <Doctorinboxdata />
-      </View>
-    );
-  }
-  function ExploreWitHookExamples1() {
-    const goTo = useTabNavigation();
-    const index = useTabIndex();
 
-    return (
-      <View style={{ flex: 1, width: windowWidth }}>
-        <Title>Current</Title>
-      </View>
-    );
-  }
+  // function ExploreWitHookExamples() {
+  //   return (
+  //     <View
+  //       style={{
+  //         width: windowWidth,
+  //         backgroundColor: "blue",
+  //       }}
+  //     >
+  //       <Doctorinboxdata />
+  //     </View>
+  //   );
+  // }
+  // function ExploreWitHookExamples1() {
+  //   const goTo = useTabNavigation();
+  //   const index = useTabIndex();
+
+  //   return (
+  //     <View style={{ flex: 1, width: windowWidth }}>
+  //       <Title>Current</Title>
+  //     </View>
+  //   );
+  // }
 
   return (
-    <View style={styles.Header}>
-      <View style={styles.headermain}>
-        <View style={styles.align}>
-          <Text style={styles.text2}>Inbox</Text>
-          <View style={styles.btnview}>
-            <Button style={styles.btnsetting}>
-              <Feather name="bookmark" size={24} color="black" />
-            </Button>
-            <Button style={styles.btnsetting}>
-              <Feather name="shopping-bag" size={24} color="black" />
-            </Button>
+    <View style={styles.main}>
+      <View style={styles.search}>
+        <Searchbars />
+      </View>
+      <Tabs>
+        <TabScreen label="Current">
+          {/* <ExploreWitHookExamples /> */}
+          <View>
+            <Text>hello</Text>
           </View>
-        </View>
-        <View style={styles.search}>
-          <Searchbars />
-        </View>
-      </View>
-      <View>
-        <Tabs>
-          <TabScreen label="Current">
-            <ExploreWitHookExamples />
-          </TabScreen>
+        </TabScreen>
 
-          <TabScreen label="Compeleted">
-            <ExploreWitHookExamples1 />
-          </TabScreen>
-        </Tabs>
-      </View>
+        <TabScreen label="Compeleted">
+          <View>
+            <Text>how</Text>
+          </View>
+
+          {/* <ExploreWitHookExamples1 /> */}
+        </TabScreen>
+      </Tabs>
     </View>
+    // <View style={styles.Header}>
+    //   <View style={styles.headermain}>
+    //     <View style={styles.align}>
+    //       <Text style={styles.text2}>Inbox</Text>
+    //       <View style={styles.btnview}>
+    //         <Button style={styles.btnsetting}>
+    //           <Feather name="bookmark" size={24} color="black" />
+    //         </Button>
+    //         <Button style={styles.btnsetting}>
+    //           <Feather name="shopping-bag" size={24} color="black" />
+    //         </Button>
+    //       </View>
+    //     </View>
+    //   </View>
+    //   <View>
+
+    //   </View>
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
   Header: {
     display: "flex",
-    flex: "1",
-    flexDirection: "column",
+    // flex: "1",
+    // flexDirection: "column",
   },
   search: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 34,
+    marginBottom: 34,
   },
   headermain: {
     display: "flex",
