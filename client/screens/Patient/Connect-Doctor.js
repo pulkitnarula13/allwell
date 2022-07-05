@@ -5,6 +5,7 @@ import {
   Dimensions,
   Image,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
@@ -82,7 +83,7 @@ const ConnectPatient = ({ navigation }) => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.1.73:8080/api/v1/patients/symptoms")
+      .get("http://10.0.0.252:8080/api/v1/patients/symptoms")
       .then((response) => {
         setSymptoms(response.data.data, "Api output");
       });
