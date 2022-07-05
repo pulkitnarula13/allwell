@@ -1,4 +1,4 @@
-import  React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
 import { AuthContext } from "../Context/AuthContext";
@@ -12,9 +12,9 @@ import PatientHistory from "../screens/Patient/Patient-History";
 import ConnectPatient from "../screens/Patient/Connect-Doctor";
 
 
-const Bottomnavigation = ({navigation}) => {
+const Bottomnavigation = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
-  
+
   const [routes, setRoutes] = React.useState([
     { key: "home", title: "Home", icon: "home" },
     { key: "connect", title: "Connect", icon: "account-plus" },
@@ -29,9 +29,9 @@ const Bottomnavigation = ({navigation}) => {
         { key: "schedule", title: "Schedule", icon: "calendar" },
         { key: "inbox", title: "Inbox", icon: "message" },
         { key: "docprofile", title: "Profile", icon: "account" },
-      ])
+      ]);
     }
-  }, [])
+  }, []);
 
   const renderValDoctor = ({ route, jumpTo }) => {
     switch (route.key) {
@@ -59,7 +59,6 @@ const Bottomnavigation = ({navigation}) => {
     }
   };
 
-  
   const [index, setIndex] = React.useState(0);
 
   // const renderState = BottomNavigation.SceneMap(renderValDoctor);
@@ -69,7 +68,9 @@ const Bottomnavigation = ({navigation}) => {
       barStyle={{ backgroundColor: "#DADADA" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
-      renderScene={userInfo.roles === "doctor" ? renderValDoctor : renderValPatient}
+      renderScene={
+        userInfo.roles === "doctor" ? renderValDoctor : renderValPatient
+      }
     />
   );
 };
