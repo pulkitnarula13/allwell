@@ -7,6 +7,9 @@ import PatientHome from "../screens/Patient/Patient-Home";
 import DoctorWaitingList from "../screens/Doctor/Doctor-Waiting-List";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
 import DoctorUrgent from "../screens/Doctor/Doctor-Urgent";
+import PatientQuestiontwo from "../screens/Patient/Patient-Questiontwo";
+import PatientQuestionSummary from "../screens/Patient/Patient-QuestionSummary";
+import Requestwait from "../screens/Patient/Requestwait";
 
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +23,9 @@ const AppStack = () => {
     >
       {/* COMMON NAVIGATIONS STARTED */}
       <Stack.Screen name="Home" component={Bottomnavigation} />
+      <Stack.Screen name="Patient-Questiontwo" component={PatientQuestiontwo}  />
+      <Stack.Screen name="Requestwait" component={Requestwait}  />
+      <Stack.Screen name="Patient-QuestionSummary" component={PatientQuestionSummary} />
       <Stack.Screen name="AvailableDoctor" component={AvailableDoctor} />
       {/* COMMON NAVIGATIONS ENDED */}
 
