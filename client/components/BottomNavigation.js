@@ -2,18 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { BottomNavigation } from "react-native-paper";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
 import { AuthContext } from "../Context/AuthContext";
-import SchedulePatient from "../screens/Doctor/Schedule-Patient";
 import DoctorAppointment from "../screens/Doctor/Doctor-Appointment";
-import InfoPatient from "../screens/Doctor/Info-Patient";
 import DoctorProfile from "../screens/Doctor/Doctor-Profile";
 import DoctorInbox from "../screens/Doctor/Doctor-Inbox";
-import PatientProfile from "../screens/Patient/Patient-Profile";
-import PatientHome from "../screens/Patient/Patient-Home";
-import ConnectDoctor from "../screens/Patient/Connect-Doctor";
 import PatientHistory from "../screens/Patient/Patient-History";
 import ConnectPatient from "../screens/Patient/Connect-Doctor";
-import PatientQuestion from "../screens/Patient/Patient-Question";
-
+import PatientHome from "../screens/Patient/Patient-Home";
+import PatientProfile from "../screens/Patient/Patient-Profile";
 
 
 const Bottomnavigation = ({ navigation }) => {
@@ -53,7 +48,7 @@ const Bottomnavigation = ({ navigation }) => {
   const renderValPatient = ({ route, jumpTo }) => {
     switch (route.key) {
       case "home":
-        return <PatientQuestion navigation={navigation} jumpTo={jumpTo} />;
+        return <PatientHome navigation={navigation} jumpTo={jumpTo} />;
       case "connect":
         return <ConnectPatient navigation={navigation} jumpTo={jumpTo} />;
       case "history":

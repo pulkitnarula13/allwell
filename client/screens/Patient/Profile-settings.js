@@ -1,11 +1,20 @@
 import { View, Text,StyleSheet } from 'react-native'
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { Switch,Button } from 'react-native-paper';
+import { AuthContext } from '../../Context/AuthContext';
 
-const  Profilesettings = ()=> {
+const  PatientProfileSettings = ({navigation})=> {
     const [isSwitchOn, setIsSwitchOn] = useState(false);
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    const { logout } = useContext(AuthContext);
+
+    const patientLogout = () => {
+      logout();
+      navigation.navigate("Patient-Login");
+    }
+
+
   return (
     <View>
         <View style={styles.outerview}>
@@ -47,7 +56,7 @@ const  Profilesettings = ()=> {
       <Button
           style={styles.availablebtn}
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={patientLogout}
           color="#FCFCFC"
         >
           Log Out
@@ -140,4 +149,4 @@ const styles = StyleSheet.create({
         lineHeight:24
 },
 })
-export default Profilesettings
+export default PatientProfileSettings;

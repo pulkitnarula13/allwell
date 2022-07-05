@@ -2,31 +2,32 @@ import { View, Text, Image, StyleSheet, Touchable, TouchableOpacity } from "reac
 import React from "react";
 import { Rating } from "react-native-ratings";
 
-const AvailableDoctorCard = ({ item, navigation}) => {
-console.log(navigation)
+const AvailableDoctorCard = (props) => {
+  console.log(props, "navigation");
   return (
     <View style={styles.container}>
       <TouchableOpacity 
+      onPress={() => props.navigation.navigate("Doctor-Info")}
       >
       <View>
         <Image
           style=  {styles.image}
-          source={item.image}
+          source={props.item.image}
           resizeMode="center"
         />
       </View>
       </TouchableOpacity>
-      <Text>{item.name}</Text>
+      <Text>{props.item.name}</Text>
       <View style={styles.ratingContainer}>
-        <Text>{item.rating}</Text>
+        <Text>{props.item.rating}</Text>
         <Rating
           type='star'
           ratingCount={5}
           imageSize={15}
         />
       </View>
-      <Text>{item.speciality}</Text>
-      <Text>Wait Time: {item.waitTime}</Text>
+      <Text>{props.item.speciality}</Text>
+      <Text>Wait Time: {props.item.waitTime}</Text>
     </View>
   );
 };

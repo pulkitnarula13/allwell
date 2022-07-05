@@ -86,25 +86,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
-    axios
-      .post(
-        `${BASE_URL.MAIN}/logout`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${userInfo.access_token}` },
-        }
-      )
-      .then((res) => {
-        AsyncStorage.removeItem("userInfo");
-        setUserInfo({});
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.log(`logout error ${e}`);
-        setIsLoading(false);
-      });
+    // axios
+    //   .post(
+    //     `${BASE_URL.MAIN}/logout`,
+    //     {},
+    //     {
+    //       headers: { Authorization: `Bearer ${userInfo.access_token}` },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     AsyncStorage.removeItem("userInfo");
+    //     setUserInfo({});
+    //     setIsLoading(false);
+    //   })
+    //   .catch((e) => {
+    //     console.log(`logout error ${e}`);
+    //     setIsLoading(false);
+    //   });
+    AsyncStorage.removeItem("userInfo");
+    setUserInfo({});
+    setIsLoading(false);
   };
 
   const isLoggedIn = async () => {

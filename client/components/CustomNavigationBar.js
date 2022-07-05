@@ -1,8 +1,7 @@
 import { Appbar } from "react-native-paper";
 
 const CustomNavigationBar = (props) => {
-  console.log(props, "navigation");
-  
+
   return (
     <Appbar.Header>
       {props.back ? <Appbar.BackAction onPress={props.navigation.goBack} /> : null}
