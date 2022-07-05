@@ -12,7 +12,7 @@ const patientRoutes = require("./routes/patient");
 const morgan = require('morgan');
 const doctorRoutes = require("./routes/doctor");
 const appointmentRoutes = require("./routes/appointment");
-
+const qnaRoutes = require("./routes/qna");
 
 const { baseURL } = require("./constant");
 
@@ -69,6 +69,7 @@ app.get("/", (req, res) => {
 app.use(`${baseURL}/patients`, patientRoutes);
 app.use(`${baseURL}/doctors`, doctorRoutes);
 app.use(`${baseURL}/appointments`, appointmentRoutes);
+app.use(`${baseURL}/qna`, qnaRoutes);
 
 app.listen(PORT, () => {
   console.log(`All well server running at port ${PORT}`);

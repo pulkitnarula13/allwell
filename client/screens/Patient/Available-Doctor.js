@@ -27,7 +27,7 @@ const AvailableDoctor = (props) => {
         <FlatList
           style={styles.flatlist}
           data={availableDoctorList}
-          renderItem={AvailableDoctorCard}
+          renderItem={(data) => <AvailableDoctorCard {...data} navigation={props.navigation} />}
           keyExtractor={(item) => item.id}
           numColumns={2}
           extraData={props.navigation}

@@ -2,7 +2,8 @@ import { View, Text,StyleSheet,Image ,ScrollView} from 'react-native'
 import React,{useState} from 'react'
 import { TextInput,Button } from 'react-native-paper';
 
- const AddFamilyMember = ()=> {
+ const AddFamilyMember = (props)=> {
+  console.log(props);
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setemail] = useState("");
@@ -96,7 +97,8 @@ import { TextInput,Button } from 'react-native-paper';
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() => console.log("Pressed")}
+              onPress={() =>  props.navigation.navigate('Home')
+              }
             >
               Add
             </Button>

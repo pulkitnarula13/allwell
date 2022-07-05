@@ -3,8 +3,9 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
-const DoctorInfo = () => {
+const DoctorInfo = (props) => {
   let Screenheight = Dimensions.get("window").height;
+  
   return (
     <ScrollView>
       <View
@@ -139,7 +140,7 @@ const DoctorInfo = () => {
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() => console.log("Pressed")}
+              onPress={() => props.navigation.navigate("PatientQuestion1")}
             >
               Connect
             </Button>

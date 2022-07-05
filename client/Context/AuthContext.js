@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.75:8080/api/v1/patients/register`, {
+      .post(`http://192.168.1.73:8080/api/v1/patients/register`, {
         name,
         email,
         dob,
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.75:8080/api/v1/patients/login`, {
+      .post(`http://192.168.1.73:8080/api/v1/patients/login`, {
         email,
         password,
       })
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.75:8080/api/v1/doctors/login`, {
+      .post(`http://192.168.1.73:8080/api/v1/doctors/login`, {
         email,
         password,
       })
@@ -86,25 +86,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
-    axios
-      .post(
-        `${BASE_URL.MAIN}/logout`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${userInfo.access_token}` },
-        }
-      )
-      .then((res) => {
-        AsyncStorage.removeItem("userInfo");
-        setUserInfo({});
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.log(`logout error ${e}`);
-        setIsLoading(false);
-      });
+    // axios
+    //   .post(
+    //     `${BASE_URL.MAIN}/logout`,
+    //     {},
+    //     {
+    //       headers: { Authorization: `Bearer ${userInfo.access_token}` },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     AsyncStorage.removeItem("userInfo");
+    //     setUserInfo({});
+    //     setIsLoading(false);
+    //   })
+    //   .catch((e) => {
+    //     console.log(`logout error ${e}`);
+    //     setIsLoading(false);
+    //   });
+    AsyncStorage.removeItem("userInfo");
+    setUserInfo({});
+    setIsLoading(false);
   };
 
   const isLoggedIn = async () => {

@@ -3,8 +3,7 @@ import React from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 
-const  PatientProfile = ()=> {
-
+const  PatientProfile = (props)=> {
   return (
 
     <View style={styles.allview}>
@@ -13,7 +12,7 @@ const  PatientProfile = ()=> {
       <Text style={styles.profiletext}>Profile</Text>
       </View>
       <View style={styles.profileheading}>
-      <Button style={styles.btnsetting}>
+      <Button style={styles.btnsetting} onPress={() => props.navigation.navigate("Patient-Profile-Settings")}>
         <Feather name="settings" size={24} color="black" />
         </Button>
       </View>

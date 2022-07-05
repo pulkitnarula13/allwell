@@ -1,6 +1,8 @@
 const { Appointment } = require("../models/appointment");
 const { Doctor } = require("../models/doctor");
 const { Patient } = require("../models/patient");
+const { QNA } = require("../models/QnA");
+const upload = require("../utils/upload");
 
 /**
  * @description API to update Appointment
@@ -193,12 +195,28 @@ const createAppointment = async (req, res) => {
       });
     }
 
+    const modifiedData = req.body.qna.map( (val) => {
+      if (val.images.length !== 0) {
+        const newData =  val.images.map( (image) => {
+
+        const uploadImage = uploadImageTOS3(image, req.body.patient);
+        image = uploadImage;
+        return image;
+      })
+      val.images = newData;
+    }
+    return val;
+    });
+    const qna = await QNA.insertMany(modifiedData);
+
+    console.log(qna);
+
     const appointmentData = await Appointment.create({
       date: data.date,
       doctor: data.doctor,
       patient: data.patient,
       symptoms: data.symptoms,
-      qna: data.qna,
+      qna: qna,
     });
 
     return res.status(201).json({
@@ -212,6 +230,17 @@ const createAppointment = async (req, res) => {
   }
 };
 
+const uploadImageTOS3 = async (image, user) => {
+  const uploadedImage = await upload(
+    `${Date.now() + "" + user}`,
+    image,
+    "jpg",
+    "patient",
+    user
+  );
+
+  return uploadedImage;
+}
 module.exports = {
   createAppointment,
   getAllAppointments,
