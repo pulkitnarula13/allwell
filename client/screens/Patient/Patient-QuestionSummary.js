@@ -1,10 +1,35 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, Image, StyleSheet, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
-import { List } from 'react-native-paper';
-import Questions from "../../components/questions";
+import * as ImagePicker from "expo-image-picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const PatientQuestion = ({navigation}) => {
+const PatientQuestionSummary = ({navigation}) => {
+
+  const DATA = [
+    {
+      name: 'Kapil',
+      image: '../../assets/icon1.png',
+    },
+    {
+        name: 'Prabhjyot',
+        image: '../../assets/icon2.png',
+    },
+    {
+        name: 'Add Patient',
+        image: '../../assets/icon3.png',
+    },
+  ];
+
+
+
+  const Item = ({item}) =>  {
+    return (
+      <View style={styles.item}>
+      <Image style={styles.image2} source={require('../../assets/icon.png')} resizeMode="center" />
+    </View>
+    )
+  }
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
@@ -14,8 +39,22 @@ const PatientQuestion = ({navigation}) => {
           resizeMode="center"
         />
       </View>
-      <View>
-        <Questions/>
+      <Text>Add Photos/Videos</Text>
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        
+          <Image
+            style={styles.image1}
+            source={require("../../assets/camera.jpg")}
+            resizeMode="center"
+          />
+        
+        <FlatList
+          style={{marginBottom:40}}
+          horizontal={true}
+          data={DATA}
+          renderItem={Item}
+          keyExtractor={(item) => item.image}
+        />
       </View>
       <View
         style={{
@@ -37,7 +76,7 @@ const PatientQuestion = ({navigation}) => {
         <Button
           style={styles.availablebtn1}
           mode="contained"
-          onPress={() => navigation.navigate("Patient-Questiontwo") }
+          onPress={() => navigation.navigate("Requestwait")}
         >
           Next
         </Button>
@@ -46,9 +85,22 @@ const PatientQuestion = ({navigation}) => {
   );
 };
 const styles = StyleSheet.create({
+  item: {
+    display: "flex",
+    flexDirection: "column",
+    marginRight: 21,
+    marginTop: 24,
+  },
+  image2: {
+    width: 130,
+    height: 130,
+    borderRadius: 10,
+  },
   image1: {
-    width: 235,
-    height: 248,
+    width: 130,
+    height: 130,
+    marginRight:20,
+    
   },
   textheight: {
     width: 320,
@@ -95,4 +147,4 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 });
-export default PatientQuestion;
+export default PatientQuestionSummary;
