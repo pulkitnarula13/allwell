@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const DoctorPatientSelectionLogin = ({ navigation }) => {
   return (
     <View style={style.container}>
-      <View>
+      <View style={{marginTop:90,borderRadius: 20,borderColor:"#74CBD4",borderWidth:2,marginBottom:56}}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Patient-Login")}
           style={{
@@ -18,13 +18,13 @@ const DoctorPatientSelectionLogin = ({ navigation }) => {
           }}
         >
           <Image
-            style={{ width: 112, height: 112, borderRadius: 4 }}
+            style={{ width: 112, height: 112  }}
             source={require("../../assets/adaptive-icon.png")}
           />
           <Text>I'm a Patient</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{borderRadius: 20,borderColor:"#74CBD4",borderWidth:2,marginBottom:30}}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Doctor-Login")}
           style={{

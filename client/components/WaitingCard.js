@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: "70%",
   },
   chipItem: {
-    fontSize: "10px",
+    fontSize: 10,
   },
 });
 

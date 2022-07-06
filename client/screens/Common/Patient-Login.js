@@ -20,8 +20,9 @@ export default function PatientLogin({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Welcome Back</Text>
+      <Text style={styles.welcometext}>Welcome Back</Text>
       <StatusBar style="auto" />
+<View style={styles.idcontainer}>
       <Text style={styles.ids}>ID</Text>
       <View style={styles.inputView}>
         <TextInput
@@ -32,7 +33,9 @@ export default function PatientLogin({ navigation }) {
           onChangeText={(email) => setEmail(email)}
         />
       </View>
-      <Text style={styles.ids}>Password</Text>
+      </View>
+      <View style={styles.idcontainer}>
+      <Text style={styles.ids}>PASSWORD</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
@@ -43,30 +46,59 @@ export default function PatientLogin({ navigation }) {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
+      </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("forgot-password")}>
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <Button title="Login" onPress={() => patientLogin({
+      <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+      <View style={styles.btn1} >
+      <Button style={styles.btn} title="Login" color="white" onPress={() => patientLogin({
         email, password
       }, navigation)}>
       </Button>
+      </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  btn:{
+    width:257,
+    height:40,
+    backgroundColor:"#E2E8F0"
+  },
+  btn1:{
+    width:257,
+    height:40,
+    backgroundColor:"#74CBD4",
+    borderRadius:8
+    
+  },
+  welcometext:{
+    marginTop:97,
+    marginLeft:67,
+    fontWeight:"600",
+    fontSize:24,
+    lineHeight:29.05,
+    marginBottom:51
+  },
+  idcontainer:{
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center"
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
   inputView: {
-    backgroundColor: "#ebf0f3",
-    borderRadius: 30,
-    width: "70%",
+    backgroundColor: "white",
+    borderRadius: 8,
+    width: 256,
     height: 45,
     marginBottom: 20,
 
@@ -74,17 +106,28 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     height: 50,
+    width:279,
+    borderRadius:8,
+    backgroundColor:"white",
+    borderWidth:1,
+    borderColor:"#E2E8F0",
     flex: 1,
+    justifyContent:"center",
     padding: 10,
     marginLeft: 20,
   },
   ids: {
     marginBottom: 15,
     marginLeft: -200,
+    fontSize:14,
+    fontWeight:"600"
   },
   forgot_button: {
     height: 30,
-    marginBottom: 30,
+    marginBottom: 48,
+    marginLeft:65,
+    fontWeight:"700",
+    fontSize:14
   },
   loginBtn: {
     width: "80%",

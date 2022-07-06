@@ -32,7 +32,7 @@ const AuthStack = () => {
       <Stack.Screen name="Patient-Signup" component={PatientSignup} />
     <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
       <Stack.Screen name="Patient-Login" component={PatientLogin} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="forgot-password" component={ForgotPassword} />
       <Stack.Screen name="DoctorSignupScreenLast" component={DoctorSignupScreenLast} />
     </Stack.Navigator>
   );

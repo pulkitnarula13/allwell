@@ -1,10 +1,9 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
-import { List } from 'react-native-paper';
-import Questions from "../../components/questions";
+import Questions from "../../components/Questions";
 
-const PatientQuestion = ({navigation}) => {
+const PatientQuestionfive = ({navigation}) => {
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
@@ -15,7 +14,7 @@ const PatientQuestion = ({navigation}) => {
         />
       </View>
       <View>
-        <Questions/>
+        <Questions data = "Question 4:  How are you feeling?"/>
       </View>
       <View
         style={{
@@ -95,4 +94,4 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 });
-export default PatientQuestion;
+export default PatientQuestionfive;

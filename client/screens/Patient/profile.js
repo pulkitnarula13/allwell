@@ -2,9 +2,11 @@ import { View, Text ,StyleSheet, Image} from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
 const  profile = ()=> {
   return (
     <View style={styles.allview}>
+      <ScrollView>
         <View style={styles.main}>
         <View style={styles.profileheading}>
       <Text style={styles.profiletext}>Profile</Text>
@@ -46,6 +48,7 @@ const  profile = ()=> {
       <Text style={styles.infotext13}>Short Bio</Text>
       <Text style={styles.infotext12}>Viverra orci ut in quis est pretium id. Cursus purus ut fames feugiat feugiat neque sed eu ridiculus.</Text>
       </View>
+      </ScrollView>
     </View>
   )
 }

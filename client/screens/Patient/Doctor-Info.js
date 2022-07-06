@@ -140,7 +140,7 @@ const DoctorInfo = (props) => {
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() => props.navigation.navigate("PatientQuestion1")}
+              onPress={() => props.navigation.navigate("Patient-question-home")}
             >
               Connect
             </Button>

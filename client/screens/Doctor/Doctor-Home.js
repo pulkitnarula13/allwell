@@ -39,7 +39,7 @@ const DoctorHome = ({ navigation }) => {
 
     try {
       const data = await axios.get(
-        `http://192.168.1.73:8080/api/v1/appointments/doctor/${userInfo.id}`,
+        `http://10.0.0.252:8080/api/v1/appointments/doctor/${userInfo.id}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,

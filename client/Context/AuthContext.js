@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.73:8080/api/v1/patients/register`, {
+      .post(`http://10.0.0.252:8080/api/v1/patients/register`, {
         name,
         email,
         dob,
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.73:8080/api/v1/patients/login`, {
+      .post(`http://10.0.0.252:8080/api/v1/patients/login`, {
         email,
         password,
       })
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.73:8080/api/v1/doctors/login`, {
+      .post(`http://10.0.0.252:8080/api/v1/doctors/login`, {
         email,
         password,
       })

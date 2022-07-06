@@ -16,28 +16,15 @@ let Screenheight = Dimensions.get("window").height;
 const DATA = [
   {
     name: "John Doe",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon1.png",
   },
   {
     name: "Alia Bhatt",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon2.png",
   },
 ];
 
-const DATA1 = [
-  {
-    image1: "../../assets/icon.png",
-  },
-  {
-    image1: "../../assets/icon.png",
-  },
-  {
-    image1: "../../assets/icon.png",
-  },
-  {
-    image1: "../../assets/icon.png",
-  },
-];
+
 
 const ConnectPatient = ({ navigation }) => {
   const Item = ({ name, image }) => (
@@ -141,12 +128,12 @@ const ConnectPatient = ({ navigation }) => {
             Available Doctor
           </Button>
 
-          <Button
+          <Button   
             style={styles.availablebtn1}
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={() => navigation.navigate("Patient-question-home")}
           >
-            Available Doctor
+            ASAP
           </Button>
         </View>
       </View>
