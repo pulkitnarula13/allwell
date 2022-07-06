@@ -181,7 +181,7 @@ const PatientHome = ({navigation}) => {
             Choose your symptons
           </Text>
         </View>
-        <Text style={{marginRight:40,fontWeight:"700"}}>View All</Text>
+        <Text onPress={()=>{navigation.navigate("ChooseSymptoms")}} style={{marginRight:40,fontWeight:"700"}}>View All</Text>
         </View>
         <View
           style={{

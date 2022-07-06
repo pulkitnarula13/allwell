@@ -29,6 +29,7 @@ import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 import Greeting from "../screens/Common/Greeting";
 import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
 import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
+import ChooseSymptoms from "../screens/Patient/ChooseSymptoms";
 
 const Stack = createNativeStackNavigator();
 
@@ -82,6 +83,7 @@ const AppStack = () => {
       <Stack.Screen name="Patient-question-home" component={PatientQuestionHome} />
       <Stack.Screen name="Requestwait" component={Requestwait} />
       <Stack.Screen name="Patient-Home" component={PatientHome} />
+      <Stack.Screen name="ChooseSymptoms" component={ChooseSymptoms} />
       <Stack.Screen name="PatientQuestion1" component={PatientQuestion} />
       <Stack.Screen name="Doctor-Info" component={DoctorInfo} />
       <Stack.Screen name="Add-Family-Member" component={AddFamilyMember} />
