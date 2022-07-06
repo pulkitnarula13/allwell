@@ -6,7 +6,7 @@ const DoctorUrgent = (props) => {
   return (
     <View>
       {props.route.params.urgentAppointments.map((data, index) => {
-        return <WaitingCard key={index} item={data} />;
+        return <WaitingCard key={index} item={data}  {...props} />;
       })}
     </View>
   );

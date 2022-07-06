@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { BASE_URL } from "../config/config";
 import { Alert } from 'react-native';
+import { BASE_URL_DEV } from "@env";
 
 export const AuthContext = createContext();
 
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.73:8080/api/v1/patients/register`, {
+      .post(`${BASE_URL_DEV}/patients/register`, {
         name,
         email,
         dob,
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.73:8080/api/v1/patients/login`, {
+      .post(`${BASE_URL_DEV}/patients/login`, {
         email,
         password,
       })
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://192.168.1.73:8080/api/v1/doctors/login`, {
+      .post(`${BASE_URL_DEV}/doctors/login`, {
         email,
         password,
       })
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
 
     // axios
     //   .post(
-    //     `${BASE_URL.MAIN}/logout`,
+    //     `${BASE_URL_DEV.MAIN}/logout`,
     //     {},
     //     {
     //       headers: { Authorization: `Bearer ${userInfo.access_token}` },

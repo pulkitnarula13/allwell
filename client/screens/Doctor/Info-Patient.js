@@ -15,23 +15,23 @@ const DATA = [
   {
     name: "Sore Throad",
     image: "../../assets/icon.png",
-  }
+  },
 ];
 
 const PatientPhotoData = [
-    {
-      name: "Photo1",
-      image: "../../assets/icon.png",
-    },
-    {
-      name: "Photo2",
-      image: "../../assets/icon.png",
-    },
-    {
-      name: "Video1",
-      image: "../../assets/icon.png",
-    }
-  ];
+  {
+    name: "Photo1",
+    image: "../../assets/icon.png",
+  },
+  {
+    name: "Photo2",
+    image: "../../assets/icon.png",
+  },
+  {
+    name: "Video1",
+    image: "../../assets/icon.png",
+  },
+];
 
 const Item = ({ name, image }) => (
   <View style={styles.item}>
@@ -48,75 +48,75 @@ const InfoPatient = () => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   return (
     <ScrollView>
-    <View style={styles.outerview1}>
-      <View style={styles.outerview}>
-        <Text style={styles.textHeader}>Patient Info</Text>
-      </View>
-      <View style={styles.innerview}>
-        <View style={styles.imagecenter}>
+      <View style={styles.outerview1}>
+        <View style={styles.outerview}>
+          <Text style={styles.textHeader}>Patient Info</Text>
+        </View>
+        <View style={styles.innerview}>
+          <View style={styles.imagecenter}>
             <Image
-          style={styles.image2}
-          source={require("../../assets/icon.png")}
-          resizeMode="contain"
+              style={styles.image2}
+              source={require("../../assets/icon.png")}
+              resizeMode="contain"
             />
-        </View>
-        <Text style={styles.text2}>Atif Aslam</Text>
+          </View>
+          <Text style={styles.text2}>Atif Aslam</Text>
           <Text style={styles.text3}>Male, 32 years</Text>
-        <Text style={styles.textComponentsHead}>Symptoms</Text>
-        <View style={styles.flatlistView}>
-          <FlatList
-            horizontal={true}
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.name}
-          />
+          <Text style={styles.textComponentsHead}>Symptoms</Text>
+          <View style={styles.flatlistView}>
+            <FlatList
+              horizontal={true}
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.name}
+            />
+          </View>
+          <Text style={styles.textComponentsHead}>Photos/ Videos</Text>
+          <View style={styles.flatlistView}>
+            <FlatList
+              horizontal={true}
+              data={PatientPhotoData}
+              renderItem={renderItem}
+              // keyExtractor={(item) => item.name}
+            />
+          </View>
+          <Text style={styles.textComponentsHead}>Description</Text>
+          <Text style={styles.textDescriptionData}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in officia deserunt mollit anim id est laborum
+          </Text>
         </View>
-        <Text style={styles.textComponentsHead}>Photos/ Videos</Text>
-        <View style={styles.flatlistView}>
-          <FlatList
-            horizontal={true}
-            data={PatientPhotoData}
-            renderItem={renderItem}
-            // keyExtractor={(item) => item.name}
-          />
+
+        <View style={styles.buttonSingle}>
+          <Button
+            style={styles.btnRespond}
+            mode="contained"
+            onPress={() => console.log("Respond Pressed")}
+          >
+            Respond
+          </Button>
         </View>
-        <Text style={styles.textComponentsHead}>Description</Text>
-        <Text style={styles.textDescriptionData}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in  
-            officia deserunt mollit anim id est laborum
-        </Text>
-      </View>
 
-      <View style={styles.buttonSingle}>
-        <Button
-          style={styles.btnRespond}
-          mode="contained"
-          onPress={() => console.log("Respond Pressed")}
-        >
-          Respond
-        </Button>
+        <View style={styles.buttons}>
+          <Button
+            style={styles.btnReschedule}
+            mode="contained"
+            onPress={() => console.log("Reschedule Pressed")}
+          >
+            Reschedule
+          </Button>
+          <Button
+            style={styles.btnCancel}
+            mode="contained"
+            onPress={() => console.log("Cancel Pressed")}
+          >
+            Cancel
+          </Button>
+        </View>
       </View>
-
-      <View style={styles.buttons}>
-        <Button
-          style={styles.btnReschedule}
-          mode="contained"
-          onPress={() => console.log("Reschedule Pressed")}
-        >
-          Reschedule
-        </Button>
-        <Button
-          style={styles.btnCancel}
-          mode="contained"
-          onPress={() => console.log("Cancel Pressed")}
-        >
-          Cancel
-        </Button>
-      </View>
-    </View>
     </ScrollView>
   );
 };
@@ -157,21 +157,20 @@ const styles = StyleSheet.create({
     width: 310,
     height: 40,
     backgroundColor: "#DADADA",
-    marginBottom: 20
-
+    marginBottom: 20,
   },
   btnReschedule: {
     width: 140,
     height: 40,
     marginRight: 29,
-    backgroundColor: "#DADADA"
+    backgroundColor: "#DADADA",
   },
   btnCancel: {
     width: 140,
     height: 40,
     backgroundColor: "#ffffff",
     borderColor: "#000000",
-    borderWidth: 1
+    borderWidth: 1,
   },
   textDescriptionData: {
     width: 349,
@@ -219,8 +218,7 @@ const styles = StyleSheet.create({
   },
   text3: {
     marginBottom: 11,
-    textAlign: "center"
-
+    textAlign: "center",
   },
   image1: {
     width: 50,

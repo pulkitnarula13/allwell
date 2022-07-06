@@ -15,6 +15,11 @@ import DoctorInfo from "../screens/Patient/Doctor-Info";
 import AddFamilyMember from "../screens/Patient/AddFamilyMember";
 import PatientProfileSettings from "../screens/Patient/Profile-settings";
 import PatientLogin from "../screens/Common/Patient-Login";
+import DoctorProfileSettings from "../screens/Doctor/Doctor-Profile-Settings";
+import DoctorLogin from "../screens/Common/Doctor-Login";
+import DoctorHome from "../screens/Doctor/Doctor-Home";
+import SchedulePatient from "../screens/Doctor/Schedule-patient";
+import AcceptPatientSchedule from "../screens/Doctor/Accept-Patient-Schedule";
 
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +45,11 @@ const AppStack = () => {
       <Stack.Screen name="Doctor-Inbox" component={DoctorInbox} />
       <Stack.Screen name="Doctor-Waiting-List" component={DoctorWaitingList} />
       <Stack.Screen name="Doctor-Urgent" component={DoctorUrgent} />
+      <Stack.Screen name="Doctor-Profile-Settings" component={DoctorProfileSettings} />
+      <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
+      <Stack.Screen name="Doctor-Home" component={DoctorHome} />
+      <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
+      <Stack.Screen name="Accept-Patient-Schedule" component={AcceptPatientSchedule} />
 
       {/* DOCTOR NAVIGATIONS ENDED*/}
 
