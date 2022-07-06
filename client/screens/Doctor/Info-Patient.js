@@ -104,7 +104,7 @@ const InfoPatient = (props) => {
           <Button
             style={styles.btnReschedule}
             mode="contained"
-            onPress={() => console.log("Reschedule Pressed")}
+            onPress={() => props.navigation.navigate("Accept-Patient-Schedule")}
           >
             Reschedule
           </Button>

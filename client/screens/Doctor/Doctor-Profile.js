@@ -1,23 +1,40 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-const Doctorprofile = (props) => {
+import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
-  return (
+const Doctorprofile = (props) => {
+  const { userInfo } = useContext(AuthContext);
+  const [docProfileData, setDocProfileData] = useState();
+
+  useEffect(() => {
+    getDoctorProfile();
+  }, []);
+
+  const getDoctorProfile = async () => {
+    const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
+    setDocProfileData(userData.data.data);
+    console.log(userData.data.data);
+  };
+
+  return docProfileData ? (
     <View style={styles.allview}>
       <View style={styles.main}>
         <View style={styles.profileheading}>
           <Text style={styles.profiletext}>Profile</Text>
         </View>
         <View style={styles.profileheading}>
-          <TouchableOpacity onPress={() => props.navigation.navigate("Doctor-Profile-Settings")}>
-          <Button style={styles.btnsetting}>
-            <Feather name="settings" size={24} color="black" />
-          </Button>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Doctor-Profile-Settings")}
+          >
+            <Button style={styles.btnsetting}>
+              <Feather name="settings" size={24} color="black" />
+            </Button>
           </TouchableOpacity>
-
         </View>
       </View>
       <View style={styles.imagecenter}>
@@ -32,35 +49,68 @@ const Doctorprofile = (props) => {
       </View>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Email</Text>
-        <Text style={styles.infotext11}>John@medico.com</Text>
+        <Text style={styles.infotext11}>{docProfileData.email}</Text>
       </View>
       <View style={styles.info2}>
         <Text style={styles.infotext1}>Mobile Number</Text>
-        <Text style={styles.infotext11}>+1 123 456 7890</Text>
+        <Text style={styles.infotext11}>{docProfileData.phoneNumber}</Text>
       </View>
       <View style={styles.info2}>
         <Text style={styles.infotext1}>License Number</Text>
-        <Text style={styles.infotext11}>12334</Text>
+        <Text style={styles.infotext11}>{docProfileData.licenseNumber}</Text>
       </View>
       <View style={styles.info2}>
         <Text style={styles.infotext2}>Address</Text>
-        <Text style={styles.infotext11}>
-          100 W 49th Ave, Vancouver, BC V5Y 2Z6
-        </Text>
+        {docProfileData.address ? (
+          <View>
+            <Text>
+              {" "}
+              {docProfileData.address.houseNumber}{" "}
+              {docProfileData.address.province} {docProfileData.address.city}{" "}
+            </Text>
+            <Text>
+              {" "}
+              {docProfileData.address.province}{" "}
+              {docProfileData.address.postalCode}{" "}
+            </Text>
+          </View>
+        ) : (
+          <View>
+            <Text>Please update address</Text>
+          </View>
+        )}
+        <Text style={styles.infotext11}></Text>
       </View>
       <View style={styles.info2}>
         <Text style={styles.infotext1}>Date of birth</Text>
-        <Text style={styles.infotext11}>1980. 08. 18</Text>
+        <Text style={styles.infotext11}>
+          {docProfileData.dob ? (
+            <View>
+              <Text>{docProfileData.dob}</Text>
+            </View>
+          ) : (
+            <View>
+              <Text>Please update DOB</Text>
+            </View>
+          )}
+        </Text>
       </View>
       <View style={styles.info3}>
         <Text style={styles.infotext13}>Short Bio</Text>
         <Text style={styles.infotext12}>
-          Viverra orci ut in quis est pretium id. Cursus purus ut fames feugiat
-          feugiat neque sed eu ridiculus.
+          {docProfileData.description ? (
+            <View>
+              <Text>{docProfileData.description}</Text>
+            </View>
+          ) : (
+            <View>
+              <Text> : Please add some bio</Text>
+            </View>
+          )}
         </Text>
       </View>
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({

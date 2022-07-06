@@ -79,6 +79,7 @@ export const AuthProvider = ({ children }) => {
         navigation.navigate("Doctor-Home");
       })
       .catch((e) => {
+        console.log(e);
         Alert.alert("error", e.message);
         console.log(`login error ${e}`);
         setIsLoading(false);
