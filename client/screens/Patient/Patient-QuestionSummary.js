@@ -49,7 +49,7 @@ const PatientQuestionSummary = ({navigation}) => {
           keyExtractor={(item) => item.image}
         />
       </View>
-      <View
+      {/* <View
         style={{
           justifyContent: "center",
           alignItems: "center",
@@ -73,7 +73,7 @@ const PatientQuestionSummary = ({navigation}) => {
         >
           Next
         </Button>
-      </View>
+      </View> */}
     </View>
   );
 };

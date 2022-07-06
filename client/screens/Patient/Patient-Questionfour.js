@@ -16,7 +16,7 @@ const PatientQuestionfour = ({ navigation }) => {
       <View>
         <Questions data="Question 3:  How are you feeling?" />
       </View>
-      <View
+      {/* <View
         style={{
           justifyContent: "center",
           alignItems: "center",
@@ -40,7 +40,7 @@ const PatientQuestionfour = ({ navigation }) => {
         >
           Next
         </Button>
-      </View>
+      </View> */}
     </View>
   );
 };
