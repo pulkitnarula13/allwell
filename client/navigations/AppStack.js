@@ -25,6 +25,9 @@ import DoctorAppointment from "../screens/Doctor/Doctor-Appointment";
 import PatientChat from "../screens/Doctor/Patient-Chat";
 import ForgotPassword from "../screens/Common/ForgotPassword";
 import PatientQuestionHome from "../screens/Patient/PatientQuestionHome";
+import Greeting from "../screens/Common/Greeting";
+import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
+import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +47,15 @@ const AppStack = () => {
       />
       <Stack.Screen name="AvailableDoctor" component={AvailableDoctor} />
       <Stack.Screen name="forgot-password" component={ForgotPassword} />
+      <Stack.Screen name="greeting" component={Greeting} />
+      <Stack.Screen
+        name="Doctor-Patient-Selection-Signup"
+        component={DoctorPatientSelectionSignup}
+      />
+      <Stack.Screen
+        name="Doctor-Patient-Selection-Login"
+        component={DoctorPatientSelectionLogin}
+      />
       {/* COMMON NAVIGATIONS ENDED */}
 
       {/* DOCTOR NAVIGATIONS STARTED*/}
@@ -55,7 +67,7 @@ const AppStack = () => {
         component={DoctorProfileSettings}
       />
       <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
-      <Stack.Screen name="Doctor-Home" component={DoctorHome} />
+      {/* <Stack.Screen name="Doctor-Home" component={DoctorHome} /> */}
       <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
       <Stack.Screen
         name="Accept-Patient-Schedule"
