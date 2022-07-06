@@ -66,7 +66,9 @@ const Bottomnavigation = ({ navigation }) => {
 
   return (
     <BottomNavigation
-      barStyle={{ backgroundColor: "#DADADA" }}
+      inactiveColor="#5EC1CE"
+      activeColor="#5EC1CE"
+      barStyle={{ backgroundColor: "#FFFFFF" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={
