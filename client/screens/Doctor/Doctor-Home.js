@@ -1,149 +1,144 @@
-import { View, Text, Image, Dimensions, ScrollView } from "react-native";
-import React from "react";
-import { StyleSheet } from "react-native";
-import { Button } from "react-native-paper";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  Touchable,
+} from "react-native";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { AuthContext } from "../../Context/AuthContext";
+import { Chip } from "react-native-paper";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import AppointmentCard from "../../components/AppointmentCard";
+import DetailCardHome from "../../components/DetailCardHome";
+import * as moment from "moment";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
-const DoctorHome = () => {
-  let Screenheight = Dimensions.get("window").height;
+const DoctorHome = ({ navigation }) => {
+  const { userInfo } = useContext(AuthContext);
+
+  const [activeDoctorStatus, setActiveDoctorStatus] = useState("Active");
+  const [patientAppointments, setPatientAppointments] = useState([]);
+  const [confirmedAppointments, setConfirmedAppointments] = useState([]);
+  const [urgentAppointments, setUrgentAppointments] = useState([]);
+
+  const [inboxDetail, setInboxDetail] = useState([]);
+
+  const [waitingList, setWaitingList] = useState([]);
+
+  const getPatientAppointments = async () => {
+
+
+    try {
+      const data = await axios.get(
+        `${BASE_URL_DEV}/appointments/doctor/${userInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      // const modifiedData = data.data.data.map((val) => {
+      //   val.date = moment(val.date).format("ll");
+      //   return val;
+      // });
+      setPatientAppointments(data.data.data);
+  
+      const confirmedAppointments = data.data.data.filter(
+        (data) => data.confirmed && !data.cancelled
+      );
+      setConfirmedAppointments(confirmedAppointments);
+  
+      const urgentAppointments = data.data.data.filter((data) => data.urgent && !data.completed && !data.confirmed && !data.cancelled);
+      setUrgentAppointments(urgentAppointments);
+  
+      const waitingList = data.data.data.filter((data) => !data.confirmed && !data.cancelled && !data.urgent);
+      setWaitingList(waitingList);
+  
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
+  useEffect(() => {
+    getPatientAppointments();
+  }, []);
+
   return (
     <ScrollView>
-      <View
-        style={{
-          backgroundColor: "#fff",
-          alignItems: "center",
-          height: Screenheight * 1.4,
-          display: "flex",
-          flex: 1,
-        }}
-      >
-        <View style={{ marginTop: 50 }}>
-          <Text style={styles.heading}>Doctor Info</Text>
+      <View style={styles.container}>
+        <View style={styles.nameContainer}>
+          <Text>Welcome, Dr. {userInfo.name}</Text>
+          <Chip>{activeDoctorStatus}</Chip>
         </View>
-        <View style={styles.imageview}>
-          <Image
-            style={styles.imgstyle}
-            source={require("../../assets/icon.png")}
-            resizeMode="contain"
+        <View>
+          <FlatList
+            horizontal={true}
+            data={confirmedAppointments}
+            renderItem={AppointmentCard}
+            keyExtractor={(item) => item.createdAt}
           />
         </View>
-        <View style={{ width: 346, height: 100, marginTop: 12 }}>
-          <View style={styles.containerdata15}>
-            <View>
-              <Text style={styles.heading1}>Doctor Name</Text>
-            </View>
-          </View>
-          <View style={styles.containerdata16}>
-            <Text>Location</Text>
-            <Text>Wait time: 2-4hr</Text>
-          </View>
+        <View style={styles.inboxContainer}>
 
-          <View>
-            <Text
-              style={{
-                fontWeight: "500",
-                fontSize: 15,
-                marginTop: 11,
-                lineHeight: 24,
-              }}
-            >
-              Introduction
-            </Text>
-            <Text style={{ fontSize: 16, fontWeight: "400", opacity: 0.6 }}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus quidem eos cumque facere neque, quaerat corrupti
-              placeat, quas sint consectetur similique temporibus doloribus,
-              fugit vitae. Perferendis praesentium ipsa error blanditiis.
-            </Text>
-          </View>
-          <View style={{ marginTop: 19 }}>
-            <Text
-              style={{
-                fontWeight: "500",
-                fontSize: 15,
-                marginTop: 11,
-                lineHeight: 24,
-              }}
-            >
-              Specialities
-            </Text>
-            <View style={styles.twoimages}>
-              <View>
-                <Image
-                  style={{ width: 50, height: 50, marginRight: 21 }}
-                  source={require("../../assets/icon.png")}
-                  resizeMode="contain"
-                />
-                <Text style={styles.text1}>General Physician</Text>
-              </View>
-              <View>
-                <Image
-                  style={{ width: 50, height: 50 }}
-                  source={require("../../assets/icon.png")}
-                  resizeMode="contain"
-                />
-                <Text style={styles.text1}>General Practitioner</Text>
-              </View>
-            </View>
-          </View>
+                <TouchableOpacity onPress={() => navigation.navigate('Doctor-Inbox')}>
+                  <DetailCardHome
+                    item={inboxDetail}
+                    config={{
+                      icon: "message",
+                      title: "Inbox",
+                      type: "solid",
+                    }}
+                  />
+                </TouchableOpacity>
 
-          <View>
-            <Text
-              style={{
-                fontWeight: "500",
-                fontSize: 15,
-                marginTop: 11,
-                lineHeight: 24,
-              }}
-            >
-              Certifications
-            </Text>
-            <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
-              {"\u2022"} Lorem Ipsum Dolor
-            </Text>
-            <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
-              {"\u2022"} Lorem Ipsum Dolor
-            </Text>
-          </View>
+                <TouchableOpacity
+                onPress={() => navigation.navigate('Doctor-Waiting-List', {
+                  waitingList
+                })}
+                >
+                  <DetailCardHome
+                    config={{
+                      icon: "message-text-clock",
+                      title: "Waiting For You",
+                      type: "outline",
+                    }}
+                    item={waitingList}
+                  />
+                </TouchableOpacity>
 
-          <View>
-            <Text
-              style={{
-                fontWeight: "500",
-                fontSize: 15,
-                marginTop: 11,
-                lineHeight: 24,
-              }}
-            >
-              Languages
-            </Text>
-            <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
-              {"\u2022"} English
-            </Text>
-            <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
-              {"\u2022"} French
-            </Text>
-          </View>
-          <View
-            style={{
-              display: "flex",
-              alignItems: "center",
-              height: Screenheight,
-            }}
-          >
-            <Button
-              style={{
-                borderRadius: 10,
-                backgroundColor: "#D9D9D9",
-                width: 282,
-                height: 45,
-                justifyContent: "center",
-              }}
-              mode="contained"
-              onPress={() => console.log("Pressed")}
-            >
-              Connect
-            </Button>
-          </View>
+                <View>
+                  <TouchableOpacity 
+                  onPress={() => navigation.navigate('Doctor-Urgent', {
+                    urgentAppointments
+                  })}
+                  >
+                    <DetailCardHome
+                      item={urgentAppointments}
+                      config={{
+                        icon: "message-text-clock",
+                        title: "Urgent",
+                        type: "solid",
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity style={styles.reviewButton}>
+                    <Text style={styles.review}>Review</Text>
+                  </TouchableOpacity>
+                </View>
         </View>
       </View>
     </ScrollView>
@@ -151,55 +146,35 @@ const DoctorHome = () => {
 };
 
 const styles = StyleSheet.create({
-  text1: {
-    width: 67,
-    height: 36,
-    fontSize: 10,
-    lineHeight: 18,
-    alignItems: "center",
+  container: {
+    flex: 1,
+    
+    gap: 12,
   },
-  twoimages: {
+  inboxContainer: {
     display: "flex",
-    flexDirection: "row",
-    marginTop: 8,
+    gap: 16,
   },
-  containernew: {
-    position: "absolute",
-    left: "18.46%",
-    right: "18.46%",
-    top: "8.65%",
-    bottom: "89.1%",
-  },
-  heading: {
-    fontSize: 22,
-    fontWeight: "700",
-    marginBottom: 26.66,
-  },
-  imgstyle: {
-    width: 350,
-    height: 233,
-    backgroundColor: "#D9D9D9",
+  reviewButton: {
+    borderColor: "#74CBD4",
+    borderWidth: "1px",
     borderRadius: 10,
+    height: 60,
+    justifyContent: "center",
+    paddingLeft: 10,
   },
-
-  imageview: {
-    width: 35,
-    height: 233,
+  review: {
+    fontWeight: "bold",
+  },
+  contentContainer: {
+    flex: 1,
     alignItems: "center",
   },
-  containerdata1: {},
-  containerdata15: {
-    width: 346,
-    height: 66,
+  nameContainer: {
     display: "flex",
-  },
-  heading1: {
-    fontSize: 20,
-    fontWeight: "600",
-  },
-  containerdata16: {
-    width: 125,
-    height: 39,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

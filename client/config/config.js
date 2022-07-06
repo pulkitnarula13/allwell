@@ -1,5 +1,5 @@
 export const BASE_URL = {
-  MAIN: "http://localhost:8080/api/",
-  PATIENT: " http://localhost:8080/api/v1/patients",
-  DOCTOR: "http://localhost:8080/api/v1/doctor",
+  MAIN: "http://10.0.0.252:8080/api/",
+  PATIENT: " http://10.0.0.252:8080/api/v1/patients",
+  DOCTOR: "http://10.0.0.252:8080/api/v1/doctor",
 };

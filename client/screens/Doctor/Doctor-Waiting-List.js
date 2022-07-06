@@ -1,20 +1,16 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { waitingDoctorList } from '../../constants/WaitingForDoctor';
-import WaitingCard from '../../components/WaitingCard';
+import { View, Text } from "react-native";
+import React from "react";
+import WaitingCard from "../../components/WaitingCard";
 
-const DoctorWaitingList = () => {
+const DoctorWaitingList = (props) => {
 
-
-    return (
-        <View>
-            {
-                waitingDoctorList.map((data, index) => {
-                    return <WaitingCard key={index} item={data} />
-                })
-            }
-        </View>
-    )
-}
+  return (
+    <View>
+      {props.route.params.waitingList.map((data, index) => {
+        return <WaitingCard key={index} item={data} {...props} />;
+      })}
+    </View>
+  );
+};
 
 export default DoctorWaitingList;

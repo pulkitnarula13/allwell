@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Address } = require("../models/address");
 const { Specialization } = require("../models/specialization");
+const upload = require("../utils/upload");
+const ROLE = require("../config/roles");
 
 /**
  * @description API to register doctors to database
@@ -17,53 +19,37 @@ const registerDoctor = async (req, res) => {
       {
         name: req.body.name,
         email: req.body.email,
+        roles: [ROLE.DOCTOR]
       },
       process.env.JWT_SECRET
     );
 
-    const uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.profilePicture}`,
-      req.body.image,
+    const uploadLicenseImage = await upload(
+      `${Date.now() + "" + req.body.licenseNumber}`,
+      req.body.licenseImage,
       "jpg",
       "doctor",
       req.body.name
     );
 
-    const uploadLicenseImage = await upload(
-      `${Date.now() + "" + req.body.healthDocument}`,
-      req.body.image,
-      "jpg",
-      "patient",
-      req.body.name
-    );
-
-    const savedAddress = await Address.create({
-      houseNumber: req.body.houseNumber,
-      city: req.body.city,
-      province: req.body.province,
-      postalCode: req.body.postalCode,
-      country: req.body.country,
-    });
 
     const output = await Doctor.create({
       name: req.body.name,
       dob: req.body.dob,
       password: newPassword,
       gender: req.body.gender,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       city: req.body.city,
       zipCode: req.body.zipCode,
       province: req.body.province,
       phoneNumber: req.body.phoneNumber,
-      profilePitcture: uploadProfilePicture,
       licenseNumber: req.body.licenseNumber,
       doctorDescription: req.body.doctorDescription,
       workingDays: req.body.workingDays,
       specialities: req.body.specialities,
       languages: req.body.languages,
       certifications: req.body.certifications,
-      address: savedAddress._id,
-      licenceImage: uploadLicenseImage,
+      licenseImage: uploadLicenseImage,
     });
 
     return res.status(200).json({
@@ -89,17 +75,18 @@ const registerDoctor = async (req, res) => {
  */
 const loginDoctor = async (req, res) => {
   const email = req.body.email;
-  let doctor = await Doctor.findOne({ email: email });
+  let doctor = await Doctor.findOne({ email: email.toLowerCase() });
   if (doctor) {
     const isValidPassword = await bcrypt.compare(
       req.body.password,
-      customer.password
+      doctor.password
     );
     if (isValidPassword) {
       const token = jwt.sign(
         {
           name: req.body.name,
           email: req.body.email,
+          roles: [ROLE.DOCTOR]
         },
         process.env.JWT_SECRET
       );
@@ -108,6 +95,7 @@ const loginDoctor = async (req, res) => {
         id: doctor._id,
         name: doctor.name,
         email: doctor.email,
+        roles: "doctor",
         message: "Succesfully Logged In",
       });
     } else {
@@ -152,6 +140,15 @@ const getDoctors = (req, res) => {
  */
 const updateDoctor = (req, res) => {
   const id = req.params.id;
+
+
+  // const savedAddress = await Address.create({
+  //   houseNumber: req.body.houseNumber,
+  //   city: req.body.city,
+  //   province: req.body.province,
+  //   postalCode: req.body.postalCode,
+  //   country: req.body.country,
+  // });
 
   Doctor.findOneAndUpdate({ _id: id }, req.body, {
     returnOrignal: false,

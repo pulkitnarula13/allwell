@@ -10,11 +10,8 @@ import {
 import { Button, TextInput } from "react-native-paper";
 import { KeyboardAvoidingView } from "react-native";
 
-const { width, height } = Dimensions.get("window");
-
-const CreatingAccount2 = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+const CreatingAccount2 = (props) => {
+  const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
@@ -27,44 +24,67 @@ const CreatingAccount2 = () => {
           <TextInput
             style={styles.inputbox1}
             mode="outlined"
-            label="Firstname"
-            value={firstname}
-            onChangeText={(text) => setFirstname(text)}
-          />
-          <TextInput
-            style={styles.inputbox}
-            mode="outlined"
-            label="Lastname"
-            value={lastname}
-            onChangeText={(text) => setLastname(text)}
+            label="name"
+            value={name}
+            onChangeText={(text) => {
+              setName(text);
+              props.setSecondStepperData({
+                ...props.mainData,
+                name: text
+              })
+            }}
           />
           <TextInput
             style={styles.inputbox}
             mode="outlined"
             label="Email"
             value={email}
-            onChangeText={(text) => setemail(text)}
+            onChangeText={(text) => {
+              setemail(text)
+              props.setSecondStepperData({
+                ...props.mainData,
+                email: text
+              })
+            }}
           />
           <TextInput
             style={styles.inputbox}
             mode="outlined"
             label="Password"
             value={password}
-            onChangeText={(text) => setpassword(text)}
+            onChangeText={(text) => {
+              setpassword(text)
+              props.setSecondStepperData({
+                ...props.mainData,
+                password: text
+              })
+            }}
           />
           <TextInput
             style={styles.inputbox}
             mode="outlined"
             label="Confirm Password"
             value={confirmpassword}
-            onChangeText={(text) => setconfirmpassword(text)}
+            onChangeText={(text) => {
+              setconfirmpassword(text)
+              props.setSecondStepperData({
+                ...props.mainData,
+                confirmpassword: text
+              })
+            }}
           />
           <TextInput
             style={styles.inputboxlast}
             mode="outlined"
             label="Phone Number"
             value={phonenumber}
-            onChangeText={(text) => setphonenumber(text)}
+            onChangeText={(text) => {
+              setphonenumber(text)
+              props.setSecondStepperData({
+                ...props.mainData,
+                phoneNumber: text
+              })
+            }}
           />
           <View>
             <Text>By signing up, you agree to Medico’s privacy policy</Text>

@@ -4,17 +4,22 @@ import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import axios from "axios";
 import { IOS_CLIENT_ID, WEB_CLIENT_ID, EXPO_CLIENT_ID } from "@env";
+import { Platform } from 'react-native';
+
 
 WebBrowser.maybeCompleteAuthSession();
+
 
 const GoogleSignup = () => {
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useState("");
   const [request, response, promptAsync] = Google.useAuthRequest({
-    iosClientId: IOS_CLIENT_ID,
-    webClientId: WEB_CLIENT_ID,
+    // iosClientId: IOS_CLIENT_ID,
     expoClientId: EXPO_CLIENT_ID,
+    webClientId: WEB_CLIENT_ID
+
   });
+
 
   useEffect(() => {
     if (response?.type === "success") {

@@ -1,10 +1,16 @@
 import { Appbar } from "react-native-paper";
 
-const CustomNavigationBar = ({ navigation, back }) => {
+const CustomNavigationBar = (props) => {
+
   return (
     <Appbar.Header>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={back ? back.title : "Medico"} />
+      {props.back ? <Appbar.BackAction onPress={props.navigation.goBack} /> : null}
+      <Appbar.Content title={props.back ? props.back.title : (props.options.title ? props.options.title: "Medico")} />
+      <Appbar.Action icon="bookmark" onPress={() => console.log("Pressed mail")} />
+      <Appbar.Action
+        icon="calendar"
+        onPress={() => console.log("Pressed label")}
+      />
     </Appbar.Header>
   );
 };

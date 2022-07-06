@@ -1,7 +1,16 @@
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
+import { ScrollView } from "react-native-gesture-handler";
 
+import CalendarStrip from "react-native-calendar-strip";
 const DATA = [
   {
     name: "Headache",
@@ -44,141 +53,200 @@ const Item = ({ name, image }) => (
   </View>
 );
 
-const Schedulepatient = () => {
+const SchedulePatient = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+
   return (
-    <View style={styles.outerview1}>
-      <View style={styles.outerview}>
-        <Text style={styles.text1}>Schedule Patient</Text>
-      </View>
-      <View style={styles.innerview}>
-        <Text style={styles.text2}>Patient Name</Text>
-        <View style={styles.text3}>
-          <Text>Request Time: 11:11am</Text>
-          <Text>06/17/2022</Text>
+    <ScrollView>
+      <View style={styles.viewPage}>
+        <View style={styles.viewPageName}>
+          <Text style={styles.textPageName}>Schedule</Text>
         </View>
-        <Text style={styles.datandtime1}>Symptoms</Text>
-        <View style={styles.flatlistView}>
-          <FlatList
-            horizontal={true}
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.name}
-          />
+        <View style={styles.viewCalendarStrip}>
+          <CalendarStrip></CalendarStrip>
         </View>
-        <Text style={styles.description}>More Description</Text>
-        <Text style={styles.lorem1}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-          similique minus quibusdam facilis nobis ipsum nihil consequuntur
-          aperiam vel! Consequuntur officia itaque pariatur dolor qui vitae
-          dolore eos atque? Neque!
-        </Text>
-        <Text style={styles.TimeSlot}>Select a Time Slot</Text>
+        <View style={styles.viewSelection}>
+          <Text
+            style={styles.textSelection}
+            onPress={() => console.log("All Pressed")}
+          >
+            All
+          </Text>
+          <Text
+            style={styles.textSelection}
+            onPress={() => console.log("Appointment Pressed")}
+          >
+            Appointments
+          </Text>
+          <Text
+            style={styles.textSelection}
+            onPress={() => console.log("Available Pressed")}
+          >
+            Available
+          </Text>
+        </View>
+
+        <View style={styles.viewDataContainer}>
+          {/* Patient Meeting */}
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Info-Patient")}
+          >
+            <View style={styles.viewPatientMeeting}>
+              <Text style={styles.textPatientMeetingTime}>
+                11:00 AM - 12:00 PM
+              </Text>
+              <View style={styles.viewDividerLine} />
+              <View style={styles.viewPatientData}>
+                <Image
+                  style={styles.imagePatient}
+                  source={require("../../assets/icon.png")}
+                  resizeMode="contain"
+                />
+                <Text style={styles.textPatientName}>Imran Syahir</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          {/* Available Slots */}
+
+          <View style={styles.viewMeeting}>
+            <Text style={styles.textMeetingTime}>12:00 PM - 1:00 PM</Text>
+            <View style={styles.viewDividerLine} />
+            <View style={styles.viewButtons}>
+              <Text
+                style={styles.textAvailable}
+                onPress={() => console.log("Available Pressed")}
+              >
+                Available
+              </Text>
+              <Button
+                style={styles.btnBookSchedule}
+                mode="contained"
+                onPress={() => console.log("Book Schedule Pressed")}
+              >
+                <Text style={styles.textButton}>Book Schedule</Text>
+              </Button>
+            </View>
+          </View>
+        </View>
+        {/* End of whole page view */}
       </View>
-      <View style={styles.buttons}>
-        <Button
-          style={styles.availablebtn1}
-          mode="contained"
-          onPress={() => console.log("Pressed")}
-        >
-          Decline
-        </Button>
-        <Button
-          style={styles.availablebtn2}
-          mode="contained"
-          onPress={() => console.log("Pressed")}
-        >
-          Accept
-        </Button>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  outerview: {
+  viewPage: {
+    backgroundColor: "#FCFCFC",
+  },
+  viewPageName: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: "#FCFCFC",
   },
-  buttons: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  TimeSlot: {
-    fontWeight: "600",
-    fontSize: 14,
-    lineHeight: 24,
-    marginBottom: 270,
-  },
-  availablebtn1: {
-    width: 160,
-    height: 40,
-    marginRight: 29,
-    backgroundColor: "#E2E8F0",
-  },
-  availablebtn2: {
-    width: 160,
-    height: 40,
-    backgroundColor: "#E2E8F0",
-  },
-  lorem1: {
-    width: 349,
-    height: 60,
-    fontSize: 16,
-    lineHeight: 18,
-    marginBottom: 17,
-  },
-
-  description: {
-    fontWeight: "600",
-    fontSize: 14,
-    lineHeight: 24,
-    marginBottom: 11,
-  },
-  datandtime1: {
-    fontWeight: "600",
-    fontSize: 14,
-    lineHeight: 24,
-  },
-  innerview: {
-    paddingLeft: 19,
-    marginTop: 44.66,
-  },
-  outerview1: {
-    display: "flex",
-    flexDirection: "column",
-    flex: 1,
-  },
-  flatlistView: {
-    marginTop: 9,
-  },
-  text1: {
+  textPageName: {
     fontWeight: "700",
     fontSize: 24,
     lineHeight: 28,
     marginTop: 38,
   },
-  text2: {
+  viewCalendarStrip: {
+    marginTop: 20,
+    marginBottom: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
+    backgroundColor: "#D9D9D9",
+  },
+  viewSelection: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingBottom: 20,
+    borderBottomColor: "#D9D9D9",
+    borderBottomWidth: 1,
+  },
+  textSelection: {
+    fontSize: 18,
+  },
+  viewDataContainer: {
+    backgroundColor: "#fcfcfc",
+    // paddingTop: 20,
+    display: "flex",
+    flexDirection: "coloumn",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  viewDividerLine: {
+    borderBottomColor: "black",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  viewPatientMeeting: {
+    width: 300,
+    marginTop: 20,
+    backgroundColor: "#C4C4C4",
+    padding: 15,
+    color: "white",
+    borderRadius: 20,
+  },
+  textPatientMeetingTime: {
+    color: "white",
+    fontSize: 18,
+  },
+  viewPatientData: {
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: 20,
+  },
+  imagePatient: {
+    width: 60,
+    height: 60,
+  },
+  textPatientName: {
+    paddingLeft: 20,
+    paddingTop: 5,
+    fontSize: 24,
+    color: "white",
     fontWeight: "600",
-    fontSize: 22,
-    lineHeight: 22,
-    marginBottom: 4,
   },
-  text3: {
-    marginBottom: 11,
+  viewMeeting: {
+    marginTop: 20,
+    width: 300,
+    backgroundColor: "#C4C4C4",
+    padding: 15,
+    color: "black",
+    borderRadius: 20,
   },
-  image1: {
-    width: 50,
-    height: 50,
-    marginRight: 28,
+  textMeetingTime: {
+    color: "black",
+    fontSize: 18,
   },
-  name1: {
-    width: 67,
-    textAlign: "center",
-    marginBottom: 10,
+  viewButtons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+  },
+  textButton: {
+    fontSize: 14,
+    textTransform: "capitalize",
+    color: "white",
+  },
+  textAvailable: {
+    fontSize: 18,
+    fontWeight: "400",
+    paddingTop: 10,
+  },
+
+  btnBookSchedule: {
+    width: 150,
+    height: 40,
+    backgroundColor: "#74CBD4",
+    borderRadius: 30,
   },
 });
 
-export default Schedulepatient;
+export default SchedulePatient;

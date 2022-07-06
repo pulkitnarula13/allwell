@@ -8,10 +8,11 @@ import {
 } from "react-native";
 import React from "react";
 
-import AvailableDoctorCard from "../../components/AvailableDoctorCard";
+import AvailableDoctorCard from "../../components/availableDoctorCard";
 import { availableDoctorList } from "../../constants/availableDoctor";
 
-const AvailableDoctor = () => {
+const AvailableDoctor = (props) => {
+  
   const Item = (data) => {
     return (
       <View style={styles.item}>
@@ -26,9 +27,10 @@ const AvailableDoctor = () => {
         <FlatList
           style={styles.flatlist}
           data={availableDoctorList}
-          renderItem={AvailableDoctorCard}
+          renderItem={(data) => <AvailableDoctorCard {...data} navigation={props.navigation} />}
           keyExtractor={(item) => item.id}
           numColumns={2}
+          extraData={props.navigation}
           columnWrapperStyle={styles.flatListColumn}
         />
       </View>

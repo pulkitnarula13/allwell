@@ -3,7 +3,10 @@ import React from 'react'
 import { Button } from 'react-native-paper'
 
 
-const DoctorSignupScreenLast = ()=> {
+const DoctorSignupScreenLast = ({navigation})=> {
+  const pressedvalue = ()=>{
+    navigation.navigate("Doctor-Login")
+  }
   return (
     <View style={styles.outerview}>
        <Image
@@ -22,6 +25,7 @@ const DoctorSignupScreenLast = ()=> {
           justifyContent: "center",
         }}
         mode="contained"
+        onPress={()=>{pressedvalue()}}
       >
         Go To Log In
       </Button>

@@ -7,34 +7,34 @@ let Screenheight = Dimensions.get("window").height;
 const DATA = [
     {
       name: 'Kapil',
-      image: '../../assets/icon.png',
+      image: '../../assets/icon1.png',
     },
     {
         name: 'Prabhjyot',
-        image: '../../assets/icon.png',
+        image: '../../assets/icon2.png',
     },
     {
         name: 'Add Patient',
-        image: '../../assets/icon.png',
+        image: '../../assets/icon3.png',
     },
   ];
 
   const DATA1 = [
     {
       
-      image1: '../../assets/icon.png',
+      image1: '../../assets/icon4.png',
     },
     {
         
-        image1: '../../assets/icon.png',
+        image1: '../../assets/icon5.png',
     },
     {
         
-        image1: '../../assets/icon.png',
+        image1: '../../assets/icon6.png',
     },
     {
         
-        image1: '../../assets/icon.png',
+        image1: '../../assets/icon7.png',
     },
   ];
 
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     },
     headingview:{
         marginTop:50,  
-        alignItems:'center'
+        alignItems:"center"
     },
     headingtextview:{
         fontWeight:"700",

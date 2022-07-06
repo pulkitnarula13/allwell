@@ -5,56 +5,55 @@ import { Button } from "react-native-paper";
 const DATA = [
   {
     name: "Headache",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon3.png",
   },
   {
     name: "Cough",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon45.png",
   },
   {
     name: "Muscle Cramp",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon654.png",
   },
   {
     name: "Sore Throad",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon32.png",
   },
   {
     name: "Stomach Pain",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon324.png",
   },
   {
     name: "Congestion",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon543.png",
   },
   {
     name: "Fever",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon76.png",
   },
   {
     name: "Fever3",
-    image: "../../assets/icon.png",
+    image: "../../assets/icon32.png",
+  },
+  {
+    name: "Stomach Pain23",
+    image: "../../assets/icon14.png",
+  },
+  {
+    name: "Congestion45",
+    image: "../../assets/icon2364.png",
+  },
+  {
+    name: "Fever14",
+    image: "../../assets/icon1332.png",
+  },
+  {
+    name: "Fever26",
+    image: "../../assets/icon1.png",
   },
 ];
 
-const DATA1 = [
-  {
-    name: "Stomach Pain",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Congestion",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Fever1",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Fever2",
-    image: "../../assets/icon.png",
-  },
-];
+
 
 const Item = ({ name, image }) => (
   <View style={styles.item}>
@@ -67,19 +66,12 @@ const Item = ({ name, image }) => (
   </View>
 );
 
-const Item12 = ({ name, image }) => (
-  <View style={styles.item}>
-    <Image
-      style={styles.image2}
-      source={require("../../assets/icon.png")}
-      resizeMode="contain"
-    />
-    <Text style={styles.name1}>{name}</Text>
-  </View>
-);
+
 
 const ChooseSymptoms = () => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  
+    
   const [image1, setimage1] = useState(
     "/Users/kapilthaman/Documents/GitHub/allwell/client/assets/icon.png"
   );
@@ -88,30 +80,19 @@ const ChooseSymptoms = () => {
       <View style={styles.innerview}>
         <Text style={styles.text1}>Choose Your Symptoms</Text>
       </View>
-      <View style={styles.innerview1}>
-        <Image
-          style={{ width: 285, height: 193 }}
-          source={{ uri: image1 }}
-          resizeMode="contain"
-        />
-      </View>
+      
       <View>
         <FlatList
           style={styles.flatview}
-          horizontal={true}
+          horizontal={false}
           data={DATA}
           renderItem={renderItem}
+          numColumns={3}
           keyExtractor={(item) => item.name}
           showsHorizontalScrollIndicator={false}
+          
         />
-        <FlatList
-          style={styles.flatview1}
-          horizontal={true}
-          data={DATA1}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.name}
-          showsHorizontalScrollIndicator={false}
-        />
+        
         <View style={styles.buttonview}>
           <Button
             style={{
@@ -145,15 +126,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   flatview: {
-    height: 110,
-    marginRight: 36,
+    height: 488,
+    marginRight: 40,
     marginLeft: 36,
+    marginBottom:110
   },
-  flatview1: {
-    height: 110,
-    marginRight: 36,
-    marginLeft: 36,
-    marginBottom: 58,
+  item:{
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center"
+   
   },
   name1: {
     width: 67,
@@ -161,8 +143,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image2: {
-    width: 70,
-    height: 70,
+    width: 100,
+    height: 100,
     marginRight: 28,
   },
   innerview: {

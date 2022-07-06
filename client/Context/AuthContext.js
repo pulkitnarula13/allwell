@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { BASE_URL } from "../config/config";
 import { Alert } from 'react-native';
+import { BASE_URL_DEV } from "@env";
 
 export const AuthContext = createContext();
 
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     axios
-      .post(`http://localhost:8080/api/v1/patients/register`, {
+      .post(`${BASE_URL_DEV}/patients/register`, {
         name,
         email,
         dob,
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
-        navigation.navigate("Login");
+        navigation.navigate("Patient-Login");
       })
       .catch((e) => {
         console.log(`register error ${e}`);
@@ -40,11 +40,11 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const login = ({ email, password }, navigation) => {
+  const patientLogin = ({ email, password }, navigation) => {
     setIsLoading(true);
 
     axios
-      .post(`http://localhost:8080/api/v1/patients/login`, {
+      .post(`${BASE_URL_DEV}/patients/login`, {
         email,
         password,
       })
@@ -62,26 +62,53 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const logout = () => {
+
+  const doctorLogin = ({ email, password }, navigation) => {
     setIsLoading(true);
 
     axios
-      .post(
-        `${BASE_URL.MAIN}/logout`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${userInfo.access_token}` },
-        }
-      )
+      .post(`${BASE_URL_DEV}/doctors/login`, {
+        email,
+        password,
+      })
       .then((res) => {
-        AsyncStorage.removeItem("userInfo");
-        setUserInfo({});
+        let userInfo = res.data;
+        setUserInfo(userInfo);
+        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
+        navigation.navigate("Home");
       })
       .catch((e) => {
-        console.log(`logout error ${e}`);
+        console.log(e);
+        Alert.alert("error", e.message);
+        console.log(`login error ${e}`);
         setIsLoading(false);
       });
+  };
+
+  const logout = () => {
+    // setIsLoading(true);
+
+    // axios
+    //   .post(
+    //     `${BASE_URL_DEV.MAIN}/logout`,
+    //     {},
+    //     {
+    //       headers: { Authorization: `Bearer ${userInfo.access_token}` },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     AsyncStorage.removeItem("userInfo");
+    //     setUserInfo({});
+    //     setIsLoading(false);
+    //   })
+    //   .catch((e) => {
+    //     console.log(`logout error ${e}`);
+    //     setIsLoading(false);
+    //   });
+    AsyncStorage.removeItem("userInfo");
+    setUserInfo({});
+    setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
@@ -89,9 +116,9 @@ export const AuthProvider = ({ children }) => {
       setSplashLoading(true);
 
       let userInfo = await AsyncStorage.getItem("userInfo");
-      userInfo = JSON.parse(userInfo);
-
+     
       if (userInfo) {
+        userInfo = JSON.parse(userInfo);
         setUserInfo(userInfo);
       }
 
@@ -113,7 +140,8 @@ export const AuthProvider = ({ children }) => {
         userInfo,
         splashLoading,
         registerPatient,
-        login,
+        patientLogin,
+        doctorLogin,
         logout,
       }}
     >

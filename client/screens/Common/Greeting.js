@@ -17,12 +17,12 @@ const Greeting = ({ navigation }) => {
       <View style={style.button}>
         <Button
           title="Signup with Email"
-          onPress={() => navigation.navigate("Doctor-Patient-Selection")}
+          onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}
         />
       <GoogleSignup />
         <Button
           title="Login"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("Doctor-Patient-Selection-Login")}
         />
         <Divider />
         <TouchableOpacity style={style.guest}>
