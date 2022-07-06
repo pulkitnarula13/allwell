@@ -1,6 +1,7 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
+import Questions from "../../components/Questions";
 
 const PatientQuestionone = ({navigation}) => {
   return (
@@ -32,13 +33,13 @@ const PatientQuestionone = ({navigation}) => {
           Go Back
         </Button>
 
-        <Button
+        {/* <Button
           style={styles.availablebtn1}
           mode="contained"
           onPress={() => navigation.navigate("Patient-Questiontwo") }
         >
           Next
-        </Button>
+        </Button> */}
       </View>
     </View>
   );

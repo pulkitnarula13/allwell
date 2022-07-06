@@ -12,6 +12,7 @@ import {
 
 import Searchbars from "../../components/searchbar";
 import Doctorinboxdata from "../../components/Doctor-inbox-data";
+import { ScrollView } from "react-native";
 
 const DoctorInbox = ({ navigation }) => {
   useEffect(() => {
@@ -21,28 +22,19 @@ const DoctorInbox = ({ navigation }) => {
   }, []);
   const windowWidth = Dimensions.get("window").width;
 
-  // function ExploreWitHookExamples() {
-  //   return (
-  //     <View
-  //       style={{
-  //         width: windowWidth,
-  //         backgroundColor: "blue",
-  //       }}
-  //     >
-  //       <Doctorinboxdata />
-  //     </View>
-  //   );
-  // }
-  // function ExploreWitHookExamples1() {
-  //   const goTo = useTabNavigation();
-  //   const index = useTabIndex();
-
-  //   return (
-  //     <View style={{ flex: 1, width: windowWidth }}>
-  //       <Title>Current</Title>
-  //     </View>
-  //   );
-  // }
+  function ExploreWitHookExamples() {
+    return (
+      <View
+        style={{
+          width: windowWidth,
+          backgroundColor: "blue",
+        }}
+      >
+        <Doctorinboxdata />
+      </View>
+    );
+  }
+  
 
   return (
     <View style={styles.main}>
@@ -51,15 +43,20 @@ const DoctorInbox = ({ navigation }) => {
       </View>
       <Tabs>
         <TabScreen label="Current">
-          {/* <ExploreWitHookExamples /> */}
+          
           <View>
-            <Text>hello</Text>
+          <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
+          
+          <Doctorinboxdata/>
           </View>
+          </View>
+          
         </TabScreen>
-
         <TabScreen label="Compeleted">
+        <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
           <View>
-            <Text>how</Text>
+          <Doctorinboxdata/>
+          </View>
           </View>
 
           {/* <ExploreWitHookExamples1 /> */}
@@ -88,6 +85,7 @@ const DoctorInbox = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  
   main: {
     flex: 1,
   },

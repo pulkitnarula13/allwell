@@ -12,7 +12,6 @@ import PatientProfile from "../screens/Patient/Patient-Profile";
 import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 
 
-
 const Bottomnavigation = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
 
@@ -66,7 +65,9 @@ const Bottomnavigation = ({ navigation }) => {
 
   return (
     <BottomNavigation
-      barStyle={{ backgroundColor: "#DADADA" }}
+      inactiveColor="#5EC1CE"
+      activeColor="#5EC1CE"
+      barStyle={{ backgroundColor: "#FFFFFF" }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={
