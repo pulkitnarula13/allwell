@@ -1,14 +1,17 @@
 import { View, Text, Image, Dimensions, ScrollView, Alert } from "react-native";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { Button } from "react-native-paper";
 import { Feather, Ionicons } from "@expo/vector-icons";
-import {getCurrentPositionAsync,useForegroundPermissions,PermissionStatus} from 'expo-location'
-
+import {
+  getCurrentPositionAsync,
+  useForegroundPermissions,
+  PermissionStatus,
+} from "expo-location";
 
 const PatientHome = () => {
-const [latitude, setlatitude] = useState("0")
-const [longitude, setlongitude] = useState("0")
+  const [latitude, setlatitude] = useState("0");
+  const [longitude, setlongitude] = useState("0");
 
   const DATA = [
     {
@@ -48,37 +51,38 @@ const [longitude, setlongitude] = useState("0")
     },
   ];
 
-  const [locationpermissioninfo,requestpermission] =   useForegroundPermissions();
+  const [locationpermissioninfo, requestpermission] =
+    useForegroundPermissions();
 
+  async function seePermission() {
+    if (locationpermissioninfo.status === PermissionStatus.UNDETERMINED) {
+      const permissionResponse = await requestpermission();
 
-async function seePermission(){
-  if(locationpermissioninfo.status === PermissionStatus.UNDETERMINED){
-    const permissionResponse = await requestpermission();
+      return permissionResponse.granted;
+    }
+    if (locationpermissioninfo.status === PermissionStatus.DENIED) {
+      Alert.alert(
+        "Sorry, we cannot get the permission for you as it is denied by the user "
+      );
 
-    return permissionResponse.granted;
+      return false;
+    }
   }
-  if(locationpermissioninfo.status ===PermissionStatus.DENIED){
-    Alert.alert("Sorry, we cannot get the permission for you as it is denied by the user ");
 
-    return false;
-  }
-}
+  async function getlocationhandler() {
+    const haspermission = await seePermission();
+    console.log(haspermission, "has permission");
 
-  async function  getlocationhandler(){
+    if (!haspermission) {
+      return;
+    }
 
-const haspermission =await seePermission();
-
-if(!haspermission){
-  return;
-}
-
-    const location = await getCurrentPositionAsync().then((data)=>{
+    const location = await getCurrentPositionAsync().then((data) => {
       setlatitude(data.coords.latitude);
       setlongitude(data.coords.longitude);
-      console.log(data.coords.latitude,"latitude");
-      console.log(data.coords.longitude,"longitutde")
-    })
-    
+      console.log(data.coords.latitude, "latitude");
+      console.log(data.coords.longitude, "longitutde");
+    });
   }
 
   const Item = ({ name, image }) => (
@@ -94,25 +98,32 @@ if(!haspermission){
   let Screenheight = Dimensions.get("window").height;
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   return (
-  
-      <View
-        style={{
-          backgroundColor: "#fff",
-          alignItems: "center",
-          height: Screenheight * 1.4,
-          display: "flex",
-          flex: 1,
-        }}
-      >
-          <ScrollView>
-        
-        <View style={{ marginTop:17.81,display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+    <View
+      style={{
+        backgroundColor: "#fff",
+        alignItems: "center",
+        height: Screenheight * 1.4,
+        display: "flex",
+        flex: 1,
+      }}
+    >
+      <ScrollView>
+        <View
+          style={{
+            marginTop: 17.81,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
           <Text style={styles.heading}>Hello,Guest</Text>
-          <View style={{display:"flex",flexDirection:"row"}}>
-          <Button onPress={getlocationhandler}>
-            <Ionicons name="location-outline" size={24} color="black" />
-          </Button>
-          <Text style={{marginRight:50,marginTop:15}}>{latitude},{longitude}</Text>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Button onPress={getlocationhandler}>
+              <Ionicons name="location-outline" size={24} color="black" />
+            </Button>
+            <Text style={{ marginRight: 50, marginTop: 15 }}>
+              {latitude},{longitude}
+            </Text>
           </View>
         </View>
         <View style={{ marginTop: 50 }}>
@@ -275,9 +286,8 @@ if(!haspermission){
             </Text>
           </View>
         </View>
-        </ScrollView>
-      </View>
-   
+      </ScrollView>
+    </View>
   );
 };
 

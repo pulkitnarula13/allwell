@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Chip } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const WaitingCard = ({ item }) => {
-
+const WaitingCard = ({ item, navigation }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Accept-Patient-Schedule")}
+    >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
@@ -17,10 +18,6 @@ const WaitingCard = ({ item }) => {
                 : require("../assets/icon.png")
             }
           />
-
-          {
-            console.log(item.patient, "inside jsx")
-          }
 
           <Text style={styles.title}>{item.patient.name}</Text>
         </View>

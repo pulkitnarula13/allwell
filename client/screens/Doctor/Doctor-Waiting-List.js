@@ -7,7 +7,7 @@ const DoctorWaitingList = (props) => {
   return (
     <View>
       {props.route.params.waitingList.map((data, index) => {
-        return <WaitingCard key={index} item={data} />;
+        return <WaitingCard key={index} item={data} {...props} />;
       })}
     </View>
   );

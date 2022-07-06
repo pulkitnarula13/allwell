@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -13,22 +13,23 @@ const DATA = [
     image: "../../assets/icon.png",
   },
   {
+    name: "Muscle Cramp",
+    image: "../../assets/icon.png",
+  },
+  {
     name: "Sore Throad",
     image: "../../assets/icon.png",
   },
-];
-
-const PatientPhotoData = [
   {
-    name: "Photo1",
+    name: "Stomach Pain",
     image: "../../assets/icon.png",
   },
   {
-    name: "Photo2",
+    name: "Congestion",
     image: "../../assets/icon.png",
   },
   {
-    name: "Video1",
+    name: "Fever",
     image: "../../assets/icon.png",
   },
 ];
@@ -44,25 +45,22 @@ const Item = ({ name, image }) => (
   </View>
 );
 
-const InfoPatient = (props) => {
+const AcceptPatientSchedule = () => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+
   return (
     <ScrollView>
       <View style={styles.outerview1}>
         <View style={styles.outerview}>
-          <Text style={styles.textHeader}>Patient Info</Text>
+          <Text style={styles.text1}>Schedule Patient</Text>
         </View>
         <View style={styles.innerview}>
-          <View style={styles.imagecenter}>
-            <Image
-              style={styles.image2}
-              source={require("../../assets/icon.png")}
-              resizeMode="contain"
-            />
+          <Text style={styles.text2}>Patient Name</Text>
+          <View style={styles.text3}>
+            <Text>Request Time: 11:11am</Text>
+            <Text>06/17/2022</Text>
           </View>
-          <Text style={styles.text2}>Atif Aslam</Text>
-          <Text style={styles.text3}>Male, 32 years</Text>
-          <Text style={styles.textComponentsHead}>Symptoms</Text>
+          <Text style={styles.datandtime1}>Symptoms</Text>
           <View style={styles.flatlistView}>
             <FlatList
               horizontal={true}
@@ -71,49 +69,29 @@ const InfoPatient = (props) => {
               keyExtractor={(item) => item.name}
             />
           </View>
-          <Text style={styles.textComponentsHead}>Photos/ Videos</Text>
-          <View style={styles.flatlistView}>
-            <FlatList
-              horizontal={true}
-              data={PatientPhotoData}
-              renderItem={renderItem}
-              // keyExtractor={(item) => item.name}
-            />
-          </View>
-          <Text style={styles.textComponentsHead}>Description</Text>
-          <Text style={styles.textDescriptionData}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in officia deserunt mollit anim id est laborum
+          <Text style={styles.description}>More Description</Text>
+          <Text style={styles.lorem1}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+            similique minus quibusdam facilis nobis ipsum nihil consequuntur
+            aperiam vel! Consequuntur officia itaque pariatur dolor qui vitae
+            dolore eos atque? Neque!
           </Text>
-        </View>
 
-        <View style={styles.buttonSingle}>
-          <Button
-            style={styles.btnRespond}
-            mode="contained"
-            onPress={() => props.navigation.navigate("Patient-Chat")}
-          >
-            Respond
-          </Button>
         </View>
-
         <View style={styles.buttons}>
           <Button
-            style={styles.btnReschedule}
+            style={styles.availablebtn1}
             mode="contained"
-            onPress={() => console.log("Reschedule Pressed")}
+            onPress={() => console.log("Pressed")}
           >
-            Reschedule
+            Decline
           </Button>
           <Button
-            style={styles.btnCancel}
+            style={styles.availablebtn2}
             mode="contained"
-            onPress={() => console.log("Cancel Pressed")}
+            onPress={() => console.log("Pressed")}
           >
-            Cancel
+            Accept
           </Button>
         </View>
       </View>
@@ -132,49 +110,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  imagecenter: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  image2: {
-    width: 159,
-    height: 159,
-    marginBottom: 39,
-  },
   TimeSlot: {
     fontWeight: "600",
     fontSize: 14,
     lineHeight: 24,
     marginBottom: 270,
   },
-  buttonSingle: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  btnRespond: {
-    width: 310,
-    height: 40,
-    backgroundColor: "#DADADA",
-    marginBottom: 20,
-  },
-  btnReschedule: {
-    width: 140,
+  availablebtn1: {
+    width: 160,
     height: 40,
     marginRight: 29,
-    backgroundColor: "#DADADA",
+    backgroundColor: "#E2E8F0",
   },
-  btnCancel: {
-    width: 140,
+  availablebtn2: {
+    width: 160,
     height: 40,
-    backgroundColor: "#ffffff",
-    borderColor: "#000000",
-    borderWidth: 1,
+    backgroundColor: "#E2E8F0",
   },
-  textDescriptionData: {
+  lorem1: {
     width: 349,
-    height: 150,
+    height: 60,
     fontSize: 16,
     lineHeight: 18,
     marginBottom: 17,
@@ -186,9 +141,9 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 11,
   },
-  textComponentsHead: {
+  datandtime1: {
     fontWeight: "600",
-    fontSize: 20,
+    fontSize: 14,
     lineHeight: 24,
   },
   innerview: {
@@ -203,7 +158,7 @@ const styles = StyleSheet.create({
   flatlistView: {
     marginTop: 9,
   },
-  textHeader: {
+  text1: {
     fontWeight: "700",
     fontSize: 24,
     lineHeight: 28,
@@ -211,14 +166,12 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontWeight: "600",
-    textAlign: "center",
     fontSize: 22,
     lineHeight: 22,
     marginBottom: 4,
   },
   text3: {
     marginBottom: 11,
-    textAlign: "center",
   },
   image1: {
     width: 50,
@@ -230,6 +183,29 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 10,
   },
+  MainContainer: {
+    flex: 1,
+    padding: 6,
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+
+  text: {
+    fontSize: 25,
+    color: "red",
+    padding: 3,
+    marginBottom: 10,
+    textAlign: "center",
+  },
+
+  // Style for iOS ONLY...
+  datePicker: {
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: 320,
+    height: 260,
+    display: "flex",
+  },
 });
 
-export default InfoPatient;
+export default AcceptPatientSchedule;

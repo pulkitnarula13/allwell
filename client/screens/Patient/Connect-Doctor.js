@@ -11,6 +11,8 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+
 let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
@@ -70,7 +72,7 @@ const ConnectPatient = ({ navigation }) => {
 
   useEffect(() => {
     axios
-      .get("http://10.0.0.252:8080/api/v1/patients/symptoms")
+      .get(`${BASE_URL_DEV}/patients/symptoms`)
       .then((response) => {
         setSymptoms(response.data.data, "Api output");
       });

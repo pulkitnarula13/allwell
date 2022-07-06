@@ -4,14 +4,14 @@ import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 
-const PatientProfileSettings = ({ navigation }) => {
+const DoctorProfileSettings = ({ navigation }) => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const { logout } = useContext(AuthContext);
 
   const patientLogout = () => {
     logout();
-    navigation.navigate("Patient-Login");
+    navigation.navigate("Doctor-Login");
   };
 
   return (
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
 });
-export default PatientProfileSettings;
+export default DoctorProfileSettings;

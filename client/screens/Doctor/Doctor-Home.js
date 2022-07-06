@@ -21,6 +21,7 @@ import AppointmentCard from "../../components/AppointmentCard";
 import DetailCardHome from "../../components/DetailCardHome";
 import * as moment from "moment";
 import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
 const DoctorHome = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const DoctorHome = ({ navigation }) => {
 
     try {
       const data = await axios.get(
-        `http://10.0.0.252:8080/api/v1/appointments/doctor/${userInfo.id}`,
+        `${BASE_URL_DEV}/appointments/doctor/${userInfo.id}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,

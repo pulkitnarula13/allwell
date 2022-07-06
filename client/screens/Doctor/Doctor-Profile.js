@@ -2,7 +2,9 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
-const Doctorprofile = () => {
+import { TouchableOpacity } from "react-native-gesture-handler";
+const Doctorprofile = (props) => {
+
   return (
     <View style={styles.allview}>
       <View style={styles.main}>
@@ -10,9 +12,12 @@ const Doctorprofile = () => {
           <Text style={styles.profiletext}>Profile</Text>
         </View>
         <View style={styles.profileheading}>
+          <TouchableOpacity onPress={() => props.navigation.navigate("Doctor-Profile-Settings")}>
           <Button style={styles.btnsetting}>
             <Feather name="settings" size={24} color="black" />
           </Button>
+          </TouchableOpacity>
+
         </View>
       </View>
       <View style={styles.imagecenter}>
