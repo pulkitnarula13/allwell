@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "react-native-paper";
 import Questions from "../../components/Questions";
 
-const PatientQuestionfour = ({navigation}) => {
+const PatientQuestionfour = ({ navigation }) => {
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
@@ -14,7 +14,7 @@ const PatientQuestionfour = ({navigation}) => {
         />
       </View>
       <View>
-        <Questions data = "Question 3:  How are you feeling?"/>
+        <Questions data="Question 3:  How are you feeling?" />
       </View>
       <View
         style={{
@@ -36,7 +36,7 @@ const PatientQuestionfour = ({navigation}) => {
         <Button
           style={styles.availablebtn1}
           mode="contained"
-          onPress={() => navigation.navigate("Patient-Questiontwo") }
+          onPress={() => navigation.navigate("Patient-Questiontwo")}
         >
           Next
         </Button>

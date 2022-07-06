@@ -51,15 +51,17 @@ const PatientHome = () => {
     },
   ];
 
-  const [locationpermissioninfo, requestpermission] =
-    useForegroundPermissions();
+  const [locationpermissioninfo, requestpermission] =useForegroundPermissions();
 
   async function seePermission() {
+    
+
     if (locationpermissioninfo.status === PermissionStatus.UNDETERMINED) {
       const permissionResponse = await requestpermission();
-
+      console.log(locationpermissioninfo, "locationPermission");
       return permissionResponse.granted;
     }
+
     if (locationpermissioninfo.status === PermissionStatus.DENIED) {
       Alert.alert(
         "Sorry, we cannot get the permission for you as it is denied by the user "

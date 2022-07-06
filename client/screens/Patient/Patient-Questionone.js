@@ -1,7 +1,6 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
-import Questions from "../../components/Questions";
 
 const PatientQuestionone = ({navigation}) => {
   return (
