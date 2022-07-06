@@ -25,6 +25,7 @@ import DoctorAppointment from "../screens/Doctor/Doctor-Appointment";
 import PatientChat from "../screens/Doctor/Patient-Chat";
 import ForgotPassword from "../screens/Common/ForgotPassword";
 import PatientQuestionHome from "../screens/Patient/PatientQuestionHome";
+import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 import Greeting from "../screens/Common/Greeting";
 import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
 import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
@@ -66,13 +67,11 @@ const AppStack = () => {
         name="Doctor-Profile-Settings"
         component={DoctorProfileSettings}
       />
+      <Stack.Screen name="Chattingwithdoctor" component={Chattingwithdoctor} />
       <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
       {/* <Stack.Screen name="Doctor-Home" component={DoctorHome} /> */}
       <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
-      <Stack.Screen
-        name="Accept-Patient-Schedule"
-        component={AcceptPatientSchedule}
-      />
+      <Stack.Screen name="Accept-Patient-Schedule" component={AcceptPatientSchedule}/>
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
       <Stack.Screen name="Patient-Chat" component={PatientChat} />
@@ -82,7 +81,6 @@ const AppStack = () => {
       {/* PATIENT NAVIGATIONS STARTED */}
       <Stack.Screen name="Patient-question-home" component={PatientQuestionHome} />
       <Stack.Screen name="Requestwait" component={Requestwait} />
-      <Stack.Screen name="Available-Doctor" component={AvailableDoctor} />
       <Stack.Screen name="Patient-Home" component={PatientHome} />
       <Stack.Screen name="PatientQuestion1" component={PatientQuestion} />
       <Stack.Screen name="Doctor-Info" component={DoctorInfo} />

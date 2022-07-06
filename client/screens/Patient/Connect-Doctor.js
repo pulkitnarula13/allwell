@@ -113,7 +113,7 @@ const ConnectPatient = ({ navigation }) => {
             horizontal={true}
             data={symptoms}
             renderItem={renderSymptoms}
-            keyExtractor={(item) => item.image1}
+            keyExtractor={(item) => item.name}
           />
         </View>
 

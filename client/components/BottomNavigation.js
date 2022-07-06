@@ -9,6 +9,8 @@ import PatientHistory from "../screens/Patient/Patient-History";
 import ConnectPatient from "../screens/Patient/Connect-Doctor";
 import PatientHome from "../screens/Patient/Patient-Home";
 import PatientProfile from "../screens/Patient/Patient-Profile";
+import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
+
 
 
 const Bottomnavigation = ({ navigation }) => {
