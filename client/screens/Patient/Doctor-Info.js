@@ -1,10 +1,28 @@
-import { View, Text, Image, Dimensions, ScrollView } from "react-native";
-import React from "react";
+import { View, Text, Image, Dimensions, ScrollView, TextInput } from "react-native";
+import { React, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
+import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation } from 'react-native-popup-dialog';
+import StarRating from 'react-native-star-rating';
+
 
 const DoctorInfo = (props) => {
   let Screenheight = Dimensions.get("window").height;
+  let starCount = 1;
+
+  const [dialogbox, setDialogbox] = useState(false);
+  const [starRating, setStarRating] = useState();
+  const [doctorReviewText, setDoctorReviewText] = useState();
+
+  
+
+
+
+  function onStarRatingPress(rating) {
+    this.setState({
+      starCount: rating
+    });
+  }
   
   return (
     <ScrollView>
@@ -144,7 +162,97 @@ const DoctorInfo = (props) => {
             >
               Connect
             </Button>
+
+            <Button
+              onPress={() => setDialogbox(true)}
+              style={{
+                borderRadius: 10,
+                backgroundColor: "#D9D9D9",
+                width: 282,
+                height: 45,
+                marginTop: 15,
+                justifyContent: "center",
+              }} >
+                <Text style={styles.textWriteReview}>Write a review</Text>
+              </Button>
           </View>
+
+          <Dialog
+            visible= {dialogbox}
+            dialogAnimation={new SlideAnimation({
+              slideFrom: 'bottom',
+            })}
+            onTouchOutside={() => {
+              setDialogbox(false);
+            }}
+            rounded
+            width={1}
+            dialogStyle = {styles.dialogStyles}
+    // footer={
+    //   <DialogFooter>
+    //     <DialogButton
+    //       text="CANCEL"
+    //       onPress={() => {}}
+    //     />
+    //     <DialogButton
+    //       text="OK"
+    //       onPress={() => {}}
+    //     />
+    //   </DialogFooter>
+    // }
+            
+            >
+              <DialogContent>
+                <View style={styles.viewDoctorReviewModal}>
+                  <View style={styles.viewDoctorReviewModalBox}>
+                    <Text style={styles.textModalHeading}>Write a Review</Text>
+
+                    <Text style={styles.textModalRating}>Rate your experience with the doctor</Text>
+
+                    <View style={styles.viewDoctorStarRating}>
+                      <StarRating
+                        disabled={false}
+                        emptyStar={'ios-star-outline'}
+                        fullStar={'ios-star'}
+                        halfStar={'ios-star-half'}
+                        iconSet={'Ionicons'}
+                        maxStars={5}
+                        rating={starRating}
+                        selectedStar={(rating) => setStarRating(rating)}
+                        fullStarColor={'#74CBD4'}
+                      />
+                    </View>
+
+                    <View style={styles.viewTextAreaContainer}>
+                      <TextInput
+                        multiline={true}
+                        numberOfLines={4}
+                        placeholder="Write your review here"
+                        style={styles.textArea}
+                        onChangeText={(doctorReviewText) => setDoctorReviewText(doctorReviewText)}
+                        value={doctorReviewText}
+                          
+                      />
+                    </View>
+
+                    <Button 
+                      style={styles.btnSubmitReview}
+                      mode="contained"
+                      onPress={() => console.log("Review Submit Pressed")}
+                    >
+                      <Text style={styles.textButton}>Submit</Text>
+                    </Button>
+
+                  </View>
+                </View>
+              </DialogContent>
+
+            </Dialog>
+
+
+
+
+
         </View>
       </View>
     </ScrollView>
@@ -202,6 +310,60 @@ const styles = StyleSheet.create({
     width: 125,
     height: 39,
   },
+  viewTextAreaContainer: {
+    paddingTop: 40,
+    paddingBottom: 40,
+  },
+  textArea: {
+    height: 150,
+    justifyContent: "flex-start",
+    textAlignVertical: 'top',
+
+    borderRadius: 20,
+    padding: 30,
+    paddingTop: 30,
+    paddingBottom: 30,
+    backgroundColor: "#F6F6F6"
+  },
+  viewDoctorReviewModalBox: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 40,
+    textAlign: "center",
+
+  },
+  dialogStyles: {
+    bottom: 0,
+    marginBottom: 0,
+    marginTop: '85%',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+
+  },
+
+  textModalHeading: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+
+  },
+
+  textModalRating: {
+    textAlign: "center",
+    fontSize: 15,
+    paddingTop: 40,
+    paddingBottom: 10,
+    fontWeight: "600",
+  },
+
+  btnSubmitReview: {
+    backgroundColor: "#74CBD4",
+    borderRadius: 30,
+    width: 270,
+    height: 40,
+  },
+
+
 });
 
 export default DoctorInfo;
