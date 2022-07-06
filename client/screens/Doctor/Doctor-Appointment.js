@@ -1,13 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
+import { Tabs, TabScreen, useTabIndex, useTabNavigation } from "react-native-paper-tabs";
 import moment from "moment";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -65,26 +59,43 @@ const DoctorAppointment = (props) => {
         <View style={styles.viewCalendarStrip}>
           <CalendarStrip></CalendarStrip>
         </View>
-        <View style={styles.viewSelection}>
-          <Text
-            style={styles.textSelection}
-            onPress={() => console.log("Upcoming Pressed")}
-          >
-            Upcoming
-          </Text>
-          <Text
-            style={styles.textSelection}
-            onPress={() => console.log("Completed Pressed")}
-          >
-            Completed
-          </Text>
-          <Text
-            style={styles.textSelection}
-            onPress={() => console.log("Canceled Pressed")}
-          >
-            Canceled
-          </Text>
-        </View>
+        {/* <View style={styles.viewSelection}> */}
+          <Tabs>
+            <TabScreen label="Upcoming">
+              {/* <Text
+                style={styles.textSelection}
+                onPress={() => console.log("Upcoming Pressed")}
+              >
+                Upcoming
+              </Text> */}
+              <View>
+                <Text>Upcoming</Text>
+              </View>
+          </TabScreen>
+          <TabScreen label="Completed">
+            {/* <Text
+              style={styles.textSelection}
+              onPress={() => console.log("Completed Pressed")}
+            >
+              Completed
+            </Text> */}
+              <View>
+                <Text>Completed</Text>
+              </View>
+          </TabScreen>
+          <TabScreen label="Canceled">
+            {/* <Text
+              style={styles.textSelection}
+              onPress={() => console.log("Canceled Pressed")}
+            >
+              Canceled
+            </Text> */}
+              <View>
+                <Text>Canceled</Text>
+              </View>
+          </TabScreen>
+          </Tabs>
+        {/* </View> */}
 
         <View style={styles.viewDataContainer}>
           {/* Patient Meeting */}
