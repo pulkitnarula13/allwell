@@ -1,7 +1,13 @@
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
-import moment from "moment";
 import { ScrollView } from "react-native-gesture-handler";
 
 import CalendarStrip from "react-native-calendar-strip";
@@ -47,8 +53,9 @@ const Item = ({ name, image }) => (
   </View>
 );
 
-const SchedulePatient = () => {
+const SchedulePatient = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+
   return (
     <ScrollView>
       <View style={styles.viewPage}>
@@ -59,17 +66,20 @@ const SchedulePatient = () => {
           <CalendarStrip></CalendarStrip>
         </View>
         <View style={styles.viewSelection}>
-          <Text style={styles.textSelection}
+          <Text
+            style={styles.textSelection}
             onPress={() => console.log("All Pressed")}
           >
             All
           </Text>
-          <Text style={styles.textSelection}
+          <Text
+            style={styles.textSelection}
             onPress={() => console.log("Appointment Pressed")}
           >
             Appointments
           </Text>
-          <Text style={styles.textSelection}
+          <Text
+            style={styles.textSelection}
             onPress={() => console.log("Available Pressed")}
           >
             Available
@@ -77,55 +87,63 @@ const SchedulePatient = () => {
         </View>
 
         <View style={styles.viewDataContainer}>
-
           {/* Patient Meeting */}
-          <View style={styles.viewPatientMeeting}>
-            <Text style={styles.textPatientMeetingTime}>11:00 AM - 12:00 PM</Text>
-            <View style={styles.viewDividerLine}/>
-            <View style={styles.viewPatientData}>
-              <Image
-                style={styles.imagePatient}
-                source={require("../../assets/icon.png")}
-                resizeMode="contain"
-              />
-              <Text style={styles.textPatientName}>Imran Syahir</Text>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Info-Patient")}
+          >
+            <View style={styles.viewPatientMeeting}>
+              <Text style={styles.textPatientMeetingTime}>
+                11:00 AM - 12:00 PM
+              </Text>
+              <View style={styles.viewDividerLine} />
+              <View style={styles.viewPatientData}>
+                <Image
+                  style={styles.imagePatient}
+                  source={require("../../assets/icon.png")}
+                  resizeMode="contain"
+                />
+                <Text style={styles.textPatientName}>Imran Syahir</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
 
           {/* Available Slots */}
 
           <View style={styles.viewMeeting}>
             <Text style={styles.textMeetingTime}>12:00 PM - 1:00 PM</Text>
-            <View style={styles.viewDividerLine}/>
+            <View style={styles.viewDividerLine} />
             <View style={styles.viewButtons}>
-              <Text style={styles.textAvailable}
-                onPress={() => console.log("Available Pressed")}>Available</Text>
-            <Button
-              style={styles.btnBookSchedule}
-              mode="contained"
-              onPress={() => console.log("Book Schedule Pressed")}
-            >
-              <Text style={styles.textButton}>Book Schedule</Text>
-            </Button>
+              <Text
+                style={styles.textAvailable}
+                onPress={() => console.log("Available Pressed")}
+              >
+                Available
+              </Text>
+              <Button
+                style={styles.btnBookSchedule}
+                mode="contained"
+                onPress={() => console.log("Book Schedule Pressed")}
+              >
+                <Text style={styles.textButton}>Book Schedule</Text>
+              </Button>
             </View>
           </View>
-
         </View>
-        { /* End of whole page view */ }
-      </View> 
+        {/* End of whole page view */}
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   viewPage: {
-    backgroundColor: "#FCFCFC"
+    backgroundColor: "#FCFCFC",
   },
   viewPageName: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#FCFCFC"
+    backgroundColor: "#FCFCFC",
   },
   textPageName: {
     fontWeight: "700",
@@ -138,7 +156,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingTop: 20,
     paddingBottom: 20,
-    backgroundColor: "#D9D9D9"
+    backgroundColor: "#D9D9D9",
   },
   viewSelection: {
     display: "flex",
@@ -147,7 +165,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingBottom: 20,
     borderBottomColor: "#D9D9D9",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   textSelection: {
     fontSize: 18,
@@ -161,11 +179,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   viewDividerLine: {
-    borderBottomColor: 'black',
+    borderBottomColor: "black",
     borderBottomWidth: StyleSheet.hairlineWidth,
     paddingTop: 10,
     paddingBottom: 10,
-
   },
   viewPatientMeeting: {
     width: 300,
@@ -173,16 +190,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#C4C4C4",
     padding: 15,
     color: "white",
-    borderRadius: 20
+    borderRadius: 20,
   },
   textPatientMeetingTime: {
     color: "white",
-    fontSize: 18
+    fontSize: 18,
   },
   viewPatientData: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: 20
+    paddingTop: 20,
   },
   imagePatient: {
     width: 60,
@@ -193,7 +210,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 24,
     color: "white",
-    fontWeight: "600"
+    fontWeight: "600",
   },
   viewMeeting: {
     marginTop: 20,
@@ -201,36 +218,35 @@ const styles = StyleSheet.create({
     backgroundColor: "#C4C4C4",
     padding: 15,
     color: "black",
-    borderRadius: 20
+    borderRadius: 20,
   },
   textMeetingTime: {
     color: "black",
-    fontSize: 18
+    fontSize: 18,
   },
   viewButtons: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10
+    padding: 10,
   },
   textButton: {
     fontSize: 14,
     textTransform: "capitalize",
-    color: "white"
+    color: "white",
   },
   textAvailable: {
     fontSize: 18,
     fontWeight: "400",
-    paddingTop: 10
+    paddingTop: 10,
   },
 
   btnBookSchedule: {
     width: 150,
     height: 40,
     backgroundColor: "#74CBD4",
-    borderRadius: 30
-  }
-
+    borderRadius: 30,
+  },
 });
 
 export default SchedulePatient;

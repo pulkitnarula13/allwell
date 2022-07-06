@@ -44,7 +44,7 @@ const Item = ({ name, image }) => (
   </View>
 );
 
-const InfoPatient = () => {
+const InfoPatient = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   return (
     <ScrollView>
@@ -94,7 +94,7 @@ const InfoPatient = () => {
           <Button
             style={styles.btnRespond}
             mode="contained"
-            onPress={() => console.log("Respond Pressed")}
+            onPress={() => props.navigation.navigate("Patient-Chat")}
           >
             Respond
           </Button>

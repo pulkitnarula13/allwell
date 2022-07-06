@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import React, { useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 const DATA = [
   {
@@ -48,28 +47,7 @@ const Item = ({ name, image }) => (
 
 const AcceptPatientSchedule = () => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
-  const [datePicker, setDatePicker] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [timePicker, setTimePicker] = useState(false);
-  const [time, setTime] = useState(new Date(Date.now()));
 
-  function showDatePicker() {
-    setDatePicker(true);
-  }
-
-  function showTimePicker() {
-    setTimePicker(true);
-  }
-
-  function onDateSelected(event, value) {
-    setDate(value);
-    setDatePicker(false);
-  }
-
-  function onTimeSelected(event, value) {
-    setTime(value);
-    setTimePicker(false);
-  }
   return (
     <ScrollView>
       <View style={styles.outerview1}>
@@ -98,57 +76,7 @@ const AcceptPatientSchedule = () => {
             aperiam vel! Consequuntur officia itaque pariatur dolor qui vitae
             dolore eos atque? Neque!
           </Text>
-          <View>
-            <View style={styles.MainContainer}>
-              <Text style={styles.text}>Date = {date.toDateString()}</Text>
 
-              <Text style={styles.text}>
-                Time = {time.toLocaleTimeString("en-US")}
-              </Text>
-
-              {datePicker && (
-                <DateTimePicker
-                  value={date}
-                  mode={"date"}
-                  display={Platform.OS === "ios" ? "spinner" : "default"}
-                  is24Hour={true}
-                  onChange={onDateSelected}
-                  style={styles.datePicker}
-                />
-              )}
-
-              {timePicker && (
-                <DateTimePicker
-                  value={time}
-                  mode={"time"}
-                  display={Platform.OS === "ios" ? "spinner" : "default"}
-                  is24Hour={false}
-                  onChange={onTimeSelected}
-                  style={styles.datePicker}
-                />
-              )}
-
-              {!datePicker && (
-                <View style={{ margin: 10 }}>
-                  <Button
-                    title="Show Date Picker"
-                    color="green"
-                    onPress={showDatePicker}
-                  />
-                </View>
-              )}
-
-              {!timePicker && (
-                <View style={{ margin: 10 }}>
-                  <Button
-                    title="Show Time Picker"
-                    color="green"
-                    onPress={showTimePicker}
-                  />
-                </View>
-              )}
-            </View>
-          </View>
         </View>
         <View style={styles.buttons}>
           <Button
