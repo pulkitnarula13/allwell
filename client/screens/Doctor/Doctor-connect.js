@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     },
     headingview:{
         marginTop:50,  
-        alignItems:'center'
+        alignItems:"center"
     },
     headingtextview:{
         fontWeight:"700",

@@ -66,7 +66,7 @@ const CreatingAccount1 = (props) => {
 
 const styles = StyleSheet.create({
   firstHeading: {
-    fontSize: "24px",
+    fontSize: 24,
     fontWeight: "600",
     lineHeight: 29.05,
     textAlign: "center",

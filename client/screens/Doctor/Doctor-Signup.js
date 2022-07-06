@@ -44,7 +44,7 @@ const DoctorSignup = ({ navigation }) => {
     };
 
     
-    axios.post('http://192.168.1.73:8080/api/v1/doctors/register', mainData).then((response) => {
+    axios.post('http://10.0.0.252:8080/api/v1/doctors/register', mainData).then((response) => {
       navigation.navigate("DoctorSignupScreenLast");
       Alert.alert("Success", response.data.message);
     }).catch((error) => {
