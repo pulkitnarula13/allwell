@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
-        navigation.navigate("Login");
+        navigation.navigate("Patient-Login");
       })
       .catch((e) => {
         console.log(`register error ${e}`);
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
-        navigation.navigate("Doctor-Home");
+        navigation.navigate("Home");
       })
       .catch((e) => {
         console.log(e);
