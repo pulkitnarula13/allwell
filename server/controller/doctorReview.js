@@ -7,11 +7,7 @@ const { Patient } = require("../models/patient");
  * @param {*} req
  * @param {*} res
  */
-/**
- * @description API to fetch all appointments from database
- * @param {*} req
- * @param {*} res
- */
+
 const addDoctorReview = async (req, res) => {
   try {
     const data = req.body;
@@ -76,7 +72,7 @@ const getDoctorReviews = (req, res) => {
 };
 
 /**
- * @description API to fetch appointments by patient ID from DB
+ * @description API to fetch doctor reviews of a particular doctor from DB
  * @param {*} req
  * @param {*} res
  */
