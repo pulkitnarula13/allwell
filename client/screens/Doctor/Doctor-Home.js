@@ -38,6 +38,11 @@ const DoctorHome = ({ navigation }) => {
 
   const [waitingList, setWaitingList] = useState([]);
 
+  function changeDoctorStatus(e) {
+    setActiveDoctorStatus(e);
+    setDialogbox(false);
+  }
+
   const getPatientAppointments = async () => {
 
 
@@ -154,15 +159,21 @@ const DoctorHome = ({ navigation }) => {
             
             >
               <DialogContent>
-                <View style={styles.viewDoctorReviewModal}>
-                  <View style={styles.viewDoctorReviewModalBox}>
-                    <Text style={styles.textModalHeading}>Write a Review</Text>
+                <View style={styles.viewDoctorStatusModal}>
 
+                    <Text style={styles.textModalStatus}
+                      onPress={() => changeDoctorStatus("Active")}>Active</Text>
+                    <View style={styles.viewDividerLine} />
 
+                    <Text style={styles.textModalStatus} 
+                      onPress={() => changeDoctorStatus("Busy")}>Busy</Text>
+                    <View style={styles.viewDividerLine} />
+
+                    <Text style={styles.textModalStatus}
+                      onPress={() => changeDoctorStatus("Inactive")}>Inactive</Text>
 
 
                   </View>
-                </View>
               </DialogContent>
 
             </Dialog>
@@ -220,9 +231,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop:55,
     marginBottom:41
-    
-    
   },
+  viewDoctorStatusModal: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 40,
+    textAlign: "center",
+  },
+  viewDividerLine: {
+    borderBottomColor: "black",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  dialogStyles: {
+    bottom: 0,
+    marginBottom: 0,
+    marginTop: '120%',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+
+  textModalStatus: {
+    fontSize: 25,
+    paddingTop: 40,
+    paddingBottom: 20,
+    textAlign: "center",
+  }
+  
 });
 
 export default DoctorHome;
