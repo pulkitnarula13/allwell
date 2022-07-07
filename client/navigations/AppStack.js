@@ -30,6 +30,8 @@ import Greeting from "../screens/Common/Greeting";
 import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
 import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
 import ChooseSymptoms from "../screens/Patient/ChooseSymptoms";
+import PatientProfile from "../screens/Patient/Patient-Profile";
+import AccountInformation from "../screens/Patient/AccountInformation";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,11 +44,7 @@ const AppStack = () => {
     >
       {/* COMMON NAVIGATIONS STARTED */}
       <Stack.Screen name="Home" component={Bottomnavigation} />
-      <Stack.Screen name="Patient-Questiontwo" component={PatientQuestiontwo} />
-      <Stack.Screen
-        name="Patient-QuestionSummary"
-        component={PatientQuestionSummary}
-      />
+
       <Stack.Screen name="AvailableDoctor" component={AvailableDoctor} />
       <Stack.Screen name="forgot-password" component={ForgotPassword} />
       <Stack.Screen name="greeting" component={Greeting} />
@@ -57,6 +55,11 @@ const AppStack = () => {
       <Stack.Screen
         name="Doctor-Patient-Selection-Login"
         component={DoctorPatientSelectionLogin}
+      />
+       <Stack.Screen name="Patient-Questiontwo" component={PatientQuestiontwo} />
+      <Stack.Screen
+        name="Patient-QuestionSummary"
+        component={PatientQuestionSummary}
       />
       {/* COMMON NAVIGATIONS ENDED */}
 
@@ -75,7 +78,9 @@ const AppStack = () => {
       <Stack.Screen name="Accept-Patient-Schedule" component={AcceptPatientSchedule}/>
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
+      <Stack.Screen name="PatientProfile" component={PatientProfile} />
       <Stack.Screen name="Patient-Chat" component={PatientChat} />
+      <Stack.Screen name="AccountInformation" component={AccountInformation} />
 
       {/* DOCTOR NAVIGATIONS ENDED*/}
 

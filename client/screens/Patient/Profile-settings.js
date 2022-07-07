@@ -41,7 +41,7 @@ const PatientProfileSettings = ({ navigation }) => {
       </View>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Manage Family Member</Text>
-        <AntDesign name="right" size={24} color="black" />
+        <AntDesign onPress={()=>{navigation.navigate("Add-Family-Member")}} name="right" size={24} color="black" />
       </View>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>FAQ</Text>

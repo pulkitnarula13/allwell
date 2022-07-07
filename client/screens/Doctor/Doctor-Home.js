@@ -79,10 +79,10 @@ const DoctorHome = ({ navigation }) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.nameContainer}>
-          <Text>Welcome, Dr. {userInfo.name}</Text>
-          <Chip>{activeDoctorStatus}</Chip>
+          <Text style={styles.doctorname}>Welcome, Dr. {userInfo.name}</Text>
+          <Chip selectedColor="white" style={styles.chipstyle}>{activeDoctorStatus}</Chip>
         </View>
-        <View>
+        <View style={{marginBottom:68}}>
           <FlatList
             horizontal={true}
             data={confirmedAppointments}
@@ -91,9 +91,10 @@ const DoctorHome = ({ navigation }) => {
           />
         </View>
         <View style={styles.inboxContainer}>
-
-                <TouchableOpacity onPress={() => navigation.navigate('Doctor-Inbox')}>
+                <View style={{display:"flex",flexDirection:"row",marginBottom:11}}>
+                <TouchableOpacity style={{width:170}} onPress={() => navigation.navigate('Doctor-Inbox')}>
                   <DetailCardHome
+                  
                     item={inboxDetail}
                     config={{
                       icon: "message",
@@ -117,7 +118,7 @@ const DoctorHome = ({ navigation }) => {
                     item={waitingList}
                   />
                 </TouchableOpacity>
-
+                </View>
                 <View>
                   <TouchableOpacity 
                   onPress={() => navigation.navigate('Doctor-Urgent', {
@@ -134,11 +135,7 @@ const DoctorHome = ({ navigation }) => {
                     />
                   </TouchableOpacity>
                 </View>
-                <View>
-                  <TouchableOpacity style={styles.reviewButton}>
-                    <Text style={styles.review}>Review</Text>
-                  </TouchableOpacity>
-                </View>
+                
         </View>
       </View>
     </ScrollView>
@@ -146,9 +143,16 @@ const DoctorHome = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  doctorname:{
+    fontWeight:"600",
+    fontSize:20,
+    marginRight:13,
+    lineHeight:24.2
+  },
   container: {
     flex: 1,
-    
+    paddingLeft:30,
+    paddingRight:30,
     gap: 12,
   },
   inboxContainer: {
@@ -160,11 +164,20 @@ const styles = StyleSheet.create({
     borderWidth: "1px",
     borderRadius: 10,
     height: 60,
+    marginTop:63,
     justifyContent: "center",
     paddingLeft: 10,
   },
   review: {
     fontWeight: "bold",
+  },
+  chipstyle:{
+    width:87,
+    height:26,
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:"#A0AEC0"
   },
   contentContainer: {
     flex: 1,
@@ -172,9 +185,12 @@ const styles = StyleSheet.create({
   },
   nameContainer: {
     display: "flex",
-    justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
+    marginTop:55,
+    marginBottom:41
+    
+    
   },
 });
 

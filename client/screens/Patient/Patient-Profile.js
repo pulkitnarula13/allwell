@@ -1,21 +1,29 @@
-import { View, Text ,StyleSheet, Image} from 'react-native'
+import { View, Text ,StyleSheet, Image,Dimensions} from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 
 const  PatientProfile = (props)=> {
+  let width = Dimensions.get("window").width;
   return (
 
     <View style={styles.allview}>
         <View style={styles.main}>
         <View style={styles.profileheading}>
+          <View style={{display:"flex",flexDirection:"row"}}>
       <Text style={styles.profiletext}>Profile</Text>
-      </View>
-      <View style={styles.profileheading}>
+      <Button  style={styles.btnsetting1} onPress={() => props.navigation.navigate("AccountInformation")}>
+        <Feather name="edit-3" size={24} color="black" />
+        </Button>
+        </View>
+        <View>
       <Button style={styles.btnsetting} onPress={() => props.navigation.navigate("Patient-Profile-Settings")}>
         <Feather name="settings" size={24} color="black" />
         </Button>
+        </View>
+    
       </View>
+      
       </View>
       <View style={styles.imagecenter}>
       <Image
@@ -56,12 +64,14 @@ const  PatientProfile = (props)=> {
 const styles = StyleSheet.create({
     main:{display:"flex",
     flexDirection:"row",
-    justifyContent:"center"
+    justifyContent:"center",
+    alignItems:"center"
     
 },
     btnsetting:{
-        marginLeft:44
+        
     },
+    
     allview:{
         paddingLeft:53,
         paddingRight:53
@@ -103,13 +113,14 @@ const styles = StyleSheet.create({
         lineHeight:22
     },
     profileheading:{
+      
         display:"flex",
         flexDirection:"row",
-        justifyContent:"center",
+        justifyContent:"space-between",
         alignItems:"center",
         marginTop:38,
         marginBottom:26,
-        width:246
+        
     },
     imagecenter:{
         display:"flex",
@@ -120,7 +131,10 @@ const styles = StyleSheet.create({
        fontSize:24,
        fontWeight:"700",
        lineHeight:36,
-       textAlign:"center"
+       textAlign:"center",
+       width:75
+       
+       
     },
     image2: {
         width: 159,
