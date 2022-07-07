@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
   flatListColumn: {
     margin: 30,
   },
+  flatlistContainer:{
+    marginTop:67
+  }
 });
 
 export default AvailableDoctor;
