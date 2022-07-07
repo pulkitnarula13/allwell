@@ -43,9 +43,9 @@ const DoctorPatientSelectionSignup = ({ navigation }) => {
           <Text>I'm a Doctor</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      {/* <View>
         <Text>Already have an account ? </Text>
-      </View>
+      </View> */}
     </View>
   );
 };
