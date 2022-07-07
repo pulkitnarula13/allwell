@@ -12,6 +12,7 @@ import { Button } from "react-native-paper";
 import { ScrollView } from "react-native";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
+import { Ionicons } from "@expo/vector-icons";
 
 let Screenheight = Dimensions.get("window").height;
 
@@ -98,10 +99,9 @@ const ConnectPatient = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("Add-Family-Member")}
           >
-            <Image
-              style={styles.image1}
-              source={require("../../assets/icon.png")}
-            />
+            <Button>
+              <Ionicons name="ios-add-circle-outline" size={94} color="black" />
+            </Button>
           </TouchableOpacity>
         </View>
 

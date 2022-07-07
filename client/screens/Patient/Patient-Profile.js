@@ -1,10 +1,31 @@
 import { View, Text ,StyleSheet, Image,Dimensions} from 'react-native'
-import React from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
+import axios from 'axios';
+import { BASE_URL_DEV } from "@env";
+import { AuthContext } from '../../Context/AuthContext';
 
 const  PatientProfile = (props)=> {
   let width = Dimensions.get("window").width;
+  const { userInfo } = useContext(AuthContext);
+
+  const [PatientProfileData, setPatientProfileData] = useState();
+
+
+  useEffect(() => {
+    getPatientProfile();
+  }, []);
+
+  const getPatientProfile = async () => {
+    const userData = await axios.get(`${BASE_URL_DEV}/patients/${userInfo.id}`).then((userData)=>{
+      setPatientProfileData(userData);
+      console.log(userData);
+
+    })
+    
+  };
+
   return (
 
     <View style={styles.allview}>

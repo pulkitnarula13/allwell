@@ -8,11 +8,13 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from "expo-location";
+
 import { FloatingAction } from "react-native-floating-action";
 
 const PatientHome = ({navigation}) => {
   const [latitude, setlatitude] = useState("0");
   const [longitude, setlongitude] = useState("0");
+ 
 
   const DATA = [
     {
@@ -82,10 +84,16 @@ const PatientHome = ({navigation}) => {
     const location = await getCurrentPositionAsync().then((data) => {
       setlatitude(data.coords.latitude);
       setlongitude(data.coords.longitude);
-      console.log(data, "latitude");
+
+      console.log(data.coords.latitude,"latitude")
+      console.log(data.coords.longitude,"longitude")
+     
+
+      
      
     });
   }
+  
 
   const Item = ({ name, image }) => (
     <View style={styles.item}>
@@ -114,9 +122,12 @@ const PatientHome = ({navigation}) => {
       <ScrollView>
         <View style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
       <Text style={styles.heading12}>Medico</Text>
+      
       <Button style={{width:50,marginTop:50,marginRight:50}} onPress={getlocationhandler}>
               <MaterialCommunityIcons name="bell-badge-outline" size={24} color="#74CBD4" />
+
             </Button>
+            
       </View>
         <View
           style={{
