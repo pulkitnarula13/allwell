@@ -3,7 +3,6 @@ import { React, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation } from 'react-native-popup-dialog';
-import StarRating from 'react-native-star-rating';
 
 
 const DoctorInfo = (props) => {
@@ -11,18 +10,9 @@ const DoctorInfo = (props) => {
   let starCount = 1;
 
   const [dialogbox, setDialogbox] = useState(false);
-  const [starRating, setStarRating] = useState();
   const [doctorReviewText, setDoctorReviewText] = useState();
 
-  
 
-
-
-  function onStarRatingPress(rating) {
-    this.setState({
-      starCount: rating
-    });
-  }
   
   return (
     <ScrollView>
@@ -208,20 +198,6 @@ const DoctorInfo = (props) => {
                     <Text style={styles.textModalHeading}>Write a Review</Text>
 
                     <Text style={styles.textModalRating}>Rate your experience with the doctor</Text>
-
-                    <View style={styles.viewDoctorStarRating}>
-                      <StarRating
-                        disabled={false}
-                        emptyStar={'ios-star-outline'}
-                        fullStar={'ios-star'}
-                        halfStar={'ios-star-half'}
-                        iconSet={'Ionicons'}
-                        maxStars={5}
-                        rating={starRating}
-                        selectedStar={(rating) => setStarRating(rating)}
-                        fullStarColor={'#74CBD4'}
-                      />
-                    </View>
 
                     <View style={styles.viewTextAreaContainer}>
                       <TextInput

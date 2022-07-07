@@ -1,4 +1,4 @@
-import {View, Text,StyleSheet,Dimensions, Image,FlatList} from 'react-native';
+import {View, Text,StyleSheet,Dimensions, Image,FlatList, ScrollView} from 'react-native';
 import React from 'react';
 import { Button } from 'react-native-paper';
 let Screenheight = Dimensions.get("window").height;
@@ -63,7 +63,7 @@ const Connect = () => {
     
 return(
     <View style={styles.outerview}>
-
+        <ScrollView>
     <View style={styles.headingview}>
         <Text style={styles.headingtextview}>Connect With A Doctor</Text>
     </View>
@@ -107,7 +107,7 @@ return(
   </Button>
       </View>
 
-
+      </ScrollView>
     </View>
 
 

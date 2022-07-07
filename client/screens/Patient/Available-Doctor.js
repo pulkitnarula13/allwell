@@ -6,20 +6,35 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
-import React from "react";
+import { BASE_URL_DEV } from "@env";
+import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
 
 import AvailableDoctorCard from "../../components/availableDoctorCard";
 import { availableDoctorList } from "../../constants/availableDoctor";
+import { AuthContext } from "../../Context/AuthContext";
+import { Alert } from "react-native";
 
 const AvailableDoctor = (props) => {
-  
-  const Item = (data) => {
-    return (
-      <View style={styles.item}>
-        <Text style={styles.title}>{data.name}</Text>
-      </View>
-    );
-  };
+  const { userInfo } = useContext(AuthContext);
+  const [alldata, setalldata] = useState();
+
+  useEffect(() => {
+    console.log("Hello");
+    axios
+      .get(`${BASE_URL_DEV}/doctors`, {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      })
+      .then((response) => {
+        setalldata(response.data.data)
+        console.log(response.data.data)
+        Alert.alert("You are on available doctor screen");
+      }).catch((error) => {
+        Alert.alert(error.message);
+      });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,7 +42,9 @@ const AvailableDoctor = (props) => {
         <FlatList
           style={styles.flatlist}
           data={availableDoctorList}
-          renderItem={(data) => <AvailableDoctorCard {...data} navigation={props.navigation} />}
+          renderItem={(data) => (
+            <AvailableDoctorCard {...data} navigation={props.navigation} />
+          )}
           keyExtractor={(item) => item.id}
           numColumns={2}
           extraData={props.navigation}
@@ -55,9 +72,9 @@ const styles = StyleSheet.create({
   flatListColumn: {
     margin: 30,
   },
-  flatlistContainer:{
-    marginTop:67
-  }
+  flatlistContainer: {
+    marginTop: 67,
+  },
 });
 
 export default AvailableDoctor;
