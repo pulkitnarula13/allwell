@@ -3,15 +3,15 @@ import { React, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation } from 'react-native-popup-dialog';
+import { Rating } from "react-native-ratings";
 
 
 const DoctorInfo = (props) => {
   let Screenheight = Dimensions.get("window").height;
-  let starCount = 1;
 
   const [dialogbox, setDialogbox] = useState(false);
+  const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
-
 
   
   return (
@@ -178,18 +178,6 @@ const DoctorInfo = (props) => {
             rounded
             width={1}
             dialogStyle = {styles.dialogStyles}
-    // footer={
-    //   <DialogFooter>
-    //     <DialogButton
-    //       text="CANCEL"
-    //       onPress={() => {}}
-    //     />
-    //     <DialogButton
-    //       text="OK"
-    //       onPress={() => {}}
-    //     />
-    //   </DialogFooter>
-    // }
             
             >
               <DialogContent>
@@ -199,6 +187,17 @@ const DoctorInfo = (props) => {
 
                     <Text style={styles.textModalRating}>Rate your experience with the doctor</Text>
 
+                    <View style={styles.viewDoctorStarRating}>
+                      <Rating
+                        style={{marginLeft:13}}
+                        type='star'
+                        startingValue={starRating}
+                        ratingCount={5}
+                        onFinishRating={(starRating) => setStarRating(starRating)}
+                        imageSize={15}
+                      />
+                    </View>
+
                     <View style={styles.viewTextAreaContainer}>
                       <TextInput
                         multiline={true}
@@ -206,8 +205,7 @@ const DoctorInfo = (props) => {
                         placeholder="Write your review here"
                         style={styles.textArea}
                         onChangeText={(doctorReviewText) => setDoctorReviewText(doctorReviewText)}
-                        value={doctorReviewText}
-                          
+                        value={doctorReviewText}    
                       />
                     </View>
 
