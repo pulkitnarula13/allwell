@@ -2,7 +2,7 @@ import { View, Text, Image, Dimensions, ScrollView, TextInput } from "react-nati
 import { React, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
-import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
+import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation } from 'react-native-popup-dialog';
 import { Rating } from "react-native-ratings";
 
 
