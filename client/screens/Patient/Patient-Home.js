@@ -82,8 +82,8 @@ const PatientHome = ({navigation}) => {
     const location = await getCurrentPositionAsync().then((data) => {
       setlatitude(data.coords.latitude);
       setlongitude(data.coords.longitude);
-      console.log(data.coords.latitude, "latitude");
-      console.log(data.coords.longitude, "longitutde");
+      console.log(data, "latitude");
+     
     });
   }
 
@@ -297,7 +297,7 @@ const PatientHome = ({navigation}) => {
           </View>
         </View>
         <View>
-          <Text style={{ marginTop:20,fontWeight: "700", fontSize: 16 }}>Popular Doctors</Text>
+          <Text style={{marginTop:20,fontWeight: "700", fontSize: 16 }}>Popular Doctors</Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row",justifyContent:"center",marginTop:10 }}>
           <View

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import axios from "axios";
 
 const CreatingAccount3 = (props) => {
