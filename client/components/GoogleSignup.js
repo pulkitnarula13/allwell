@@ -53,8 +53,9 @@ const GoogleSignup = () => {
   };
 
   return (
-    <View>
-      <Button
+    <View >
+      <Button 
+      color="#74CBD4"
         title={accessToken ? "Get User Data" : "Login with Google account"}
         onPress={
           accessToken
