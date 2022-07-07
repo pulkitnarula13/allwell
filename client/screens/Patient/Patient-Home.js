@@ -296,6 +296,9 @@ const PatientHome = ({navigation}) => {
             </Button>
           </View>
         </View>
+        <View>
+          <Text style={{ marginTop:20,fontWeight: "700", fontSize: 16 }}>Popular Doctors</Text>
+        </View>
         <View style={{ display: "flex", flexDirection: "row",justifyContent:"center",marginTop:10 }}>
           <View
             style={{

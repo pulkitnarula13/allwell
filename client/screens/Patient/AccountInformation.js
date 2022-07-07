@@ -1,8 +1,10 @@
 import { View, Text,StyleSheet,Image ,ScrollView} from 'react-native'
 import React,{useState} from 'react'
 import { TextInput,Button } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as ImagePicker from "expo-image-picker";
 
- const AccountInformation = ()=> {
+ const AccountInformation = ({navigation})=> {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setemail] = useState("");
@@ -11,6 +13,31 @@ import { TextInput,Button } from 'react-native-paper';
     const [phonenumber, setphonenumber] = useState("");
     const [MSP, setMSP] = useState("")
     const [birthdate, setbirthdate] = useState("")
+    const [housenumber, sethousenumber] = useState("")
+    const [City, setCity] = useState("")
+    const [Pincode, setPincode] = useState("")
+    const [shortbio, setshortbio] = useState("")
+    const [image1, setimage1] = useState("../assets/icon.png");
+
+
+    const openimagelib = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      if (!result.cancelled) {
+        setimage1(result.uri);
+        props.setFirstStepperData(result);
+       
+          
+        
+      }
+    };
+
+
   return (
     <View style={styles.maxview}>
         
@@ -20,13 +47,15 @@ import { TextInput,Button } from 'react-native-paper';
       <Text style={styles.profiletext}>Account Information</Text>
       </View>
       <View style={styles.imageview}>
-      <Image
+      <TouchableOpacity onPress={openimagelib}>
+          <Image
             style={styles.imgstyle}
-            source={require("../../assets/icon.png")}
+            source={{ uri: image1 }}
             resizeMode="contain"
           />
-
+        </TouchableOpacity>
       </View>
+      
       <TextInput
             style={styles.inputbox1}
             mode="outlined"
@@ -48,6 +77,33 @@ import { TextInput,Button } from 'react-native-paper';
             value={email}
             onChangeText={(text) => setemail(text)}
           />
+          <View style={{display:"flex",flexDirection:"row",maxWidth:256}}>
+
+           <TextInput
+
+            style={styles.inputboxhouse}
+            mode="outlined"
+            label="House Number"
+            value={housenumber}
+            onChangeText={(text) => sethousenumber(text)}
+          />
+          <TextInput
+            style={styles.inputboxhouse}
+            mode="outlined"
+            label="City"
+            value={City}
+            onChangeText={(text) => setCity(text)}
+          />
+          </View>
+
+          <TextInput
+            style={styles.inputbox}
+            mode="outlined"
+            label="Pin Code"
+            value={Pincode}
+            onChangeText={(text) => setPincode(text)}
+          />
+
           <TextInput
             style={styles.inputbox}
             mode="outlined"
@@ -77,6 +133,14 @@ import { TextInput,Button } from 'react-native-paper';
             value={birthdate}
             onChangeText={(text) => setbirthdate(text)}
           />
+          <TextInput
+            style={styles.inputbox}
+            mode="outlined"
+            label="Short Bio"
+            value={shortbio}
+            multiline={true}
+            onChangeText={(text) => setshortbio(text)}
+          />
           </View>
           <View style={styles.btnview}>
           <Button
@@ -104,7 +168,7 @@ import { TextInput,Button } from 'react-native-paper';
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() => console.log("Pressed")}
+              onPress={() =>navigation.navigate("PatientProfile") }
             >
               Save
             </Button>
@@ -123,7 +187,8 @@ const styles = StyleSheet.create({
     },
     btnview:{
         display:"flex",
-        flexDirection:"row"
+        flexDirection:"row",
+        marginBottom:50
     },
     maxview:{
         display:"flex",
@@ -141,6 +206,14 @@ const styles = StyleSheet.create({
         width: 256,
         height: 40,
         marginBottom: 19,
+      },
+      inputboxhouse: {
+        width: 256,
+        height: 40,
+        marginBottom: 19,
+        marginRight:10,
+        display:"flex",
+        flex:1
       },
       inputbox1: {
         width: 256,
