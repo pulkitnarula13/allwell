@@ -31,14 +31,14 @@ const ConnectPatient = ({ navigation, route }) => {
   const { appointmentData } = useContext(AppointmentContext);
   const [selectedItem, setSelectedItems] = useState();
 
+  console.log(route, "navigation");
   useEffect(() => {
-
-
-    const filteredArray = route.params.symptomsData.filter(value => appointmentData.symptoms.includes(value._id));
+    const filteredArray = route.params.symptomsData.filter((value) =>
+      appointmentData.symptoms.includes(value._id)
+    );
     setSelectedItems(filteredArray);
+  }, [route]);
 
-  }, [route.params.symptomsData])
-  
   const Item = ({ name, image }) => (
     <View style={styles.item}>
       <Image
@@ -50,21 +50,20 @@ const ConnectPatient = ({ navigation, route }) => {
     </View>
   );
 
-
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
 
   const renderSymptoms = ({ item }) => {
     return (
       <View style={styles.item}>
-      <Image
-        style={styles.image1}
-        source={require("../../assets/icon.png")}
-        resizeMode="center"
-      />
-      <Text style={styles.name1}>{item.name}</Text>
-    </View>
-    )
-  }
+        <Image
+          style={styles.image1}
+          source={require("../../assets/icon.png")}
+          resizeMode="center"
+        />
+        <Text style={styles.name1}>{item.name}</Text>
+      </View>
+    );
+  };
 
   return (
     <ScrollView>

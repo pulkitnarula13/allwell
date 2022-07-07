@@ -6,7 +6,7 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { React, useState } from "react";
+import { React, useEffect, useState, FlatList } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import Dialog, {
@@ -16,13 +16,42 @@ import Dialog, {
   SlideAnimation,
 } from "react-native-popup-dialog";
 import { Rating } from "react-native-ratings";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
 const DoctorInfo = (props) => {
+  console.log(props, "props");
   let Screenheight = Dimensions.get("window").height;
 
   const [dialogbox, setDialogbox] = useState(false);
   const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
+  const [doctorInfo, setDoctorInfo] = useState();
+
+  useEffect(() => {
+    getDoctorInfoById();
+  }, []);
+
+  const getDoctorInfoById = async () => {
+    const response = await axios.get(
+      `${BASE_URL_DEV}/doctors/${props.route.params.id}`
+    );
+    console.log(response.data.data);
+    setDoctorInfo(response.data.data);
+  };
+
+  const specialityRender = (props) => {
+    return (
+      <View>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={require("../../assets/icon.png")}
+          resizeMode="contain"
+        />
+        <Text style={styles.text1}>{props?.item.name}</Text>
+      </View>
+    );
+  };
 
   return (
     <ScrollView>
@@ -48,12 +77,22 @@ const DoctorInfo = (props) => {
         <View style={{ width: 346, height: 100, marginTop: 12 }}>
           <View style={styles.containerdata15}>
             <View>
-              <Text style={styles.heading1}>Doctor Name</Text>
+              <Text style={styles.heading1}>
+                Dr. {doctorInfo ? doctorInfo.name : ""}
+              </Text>
             </View>
           </View>
           <View style={styles.containerdata16}>
-            <Text>Location</Text>
-            <Text>Wait time: 2-4hr</Text>
+            <View>
+              {doctorInfo?.address ? (
+                <Text>
+                  {doctorInfo.houseNumber} {doctorInfo.city}{" "}
+                  {doctorInfo.province}
+                </Text>
+              ) : (
+                <Text></Text>
+              )}
+            </View>
           </View>
 
           <View>
@@ -68,10 +107,7 @@ const DoctorInfo = (props) => {
               Introduction
             </Text>
             <Text style={{ fontSize: 16, fontWeight: "400", opacity: 0.6 }}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus quidem eos cumque facere neque, quaerat corrupti
-              placeat, quas sint consectetur similique temporibus doloribus,
-              fugit vitae. Perferendis praesentium ipsa error blanditiis.
+              {doctorInfo?.description}
             </Text>
           </View>
           <View style={{ marginTop: 19 }}>
@@ -86,22 +122,14 @@ const DoctorInfo = (props) => {
               Specialities
             </Text>
             <View style={styles.twoimages}>
-              <View>
-                <Image
-                  style={{ width: 50, height: 50, marginRight: 21 }}
-                  source={require("../../assets/icon.png")}
-                  resizeMode="contain"
+              {/* {doctorInfo?.specialities ? (
+                <FlatList
+                  style={{ marginBottom: 40 }}
+                  data={doctorInfo?.specialities}
+                  renderItem={specialityRender}
+                  keyExtractor={(item, index) => index}
                 />
-                <Text style={styles.text1}>General Physician</Text>
-              </View>
-              <View>
-                <Image
-                  style={{ width: 50, height: 50 }}
-                  source={require("../../assets/icon.png")}
-                  resizeMode="contain"
-                />
-                <Text style={styles.text1}>General Practitioner</Text>
-              </View>
+              ) : null} */}
             </View>
           </View>
 
