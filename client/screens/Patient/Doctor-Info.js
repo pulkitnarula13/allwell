@@ -2,27 +2,17 @@ import { View, Text, Image, Dimensions, ScrollView, TextInput } from "react-nati
 import { React, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
-import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation } from 'react-native-popup-dialog';
-import StarRating from 'react-native-star-rating';
+import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
+import { Rating } from "react-native-ratings";
 
 
 const DoctorInfo = (props) => {
   let Screenheight = Dimensions.get("window").height;
-  let starCount = 1;
 
   const [dialogbox, setDialogbox] = useState(false);
-  const [starRating, setStarRating] = useState();
+  const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
 
-  
-
-
-
-  function onStarRatingPress(rating) {
-    this.setState({
-      starCount: rating
-    });
-  }
   
   return (
     <ScrollView>
@@ -188,18 +178,6 @@ const DoctorInfo = (props) => {
             rounded
             width={1}
             dialogStyle = {styles.dialogStyles}
-    // footer={
-    //   <DialogFooter>
-    //     <DialogButton
-    //       text="CANCEL"
-    //       onPress={() => {}}
-    //     />
-    //     <DialogButton
-    //       text="OK"
-    //       onPress={() => {}}
-    //     />
-    //   </DialogFooter>
-    // }
             
             >
               <DialogContent>
@@ -210,16 +188,13 @@ const DoctorInfo = (props) => {
                     <Text style={styles.textModalRating}>Rate your experience with the doctor</Text>
 
                     <View style={styles.viewDoctorStarRating}>
-                      <StarRating
-                        disabled={false}
-                        emptyStar={'ios-star-outline'}
-                        fullStar={'ios-star'}
-                        halfStar={'ios-star-half'}
-                        iconSet={'Ionicons'}
-                        maxStars={5}
-                        rating={starRating}
-                        selectedStar={(rating) => setStarRating(rating)}
-                        fullStarColor={'#74CBD4'}
+                      <Rating
+                        style={{marginLeft:13}}
+                        type='star'
+                        startingValue={starRating}
+                        ratingCount={5}
+                        onFinishRating={(starRating) => setStarRating(starRating)}
+                        imageSize={15}
                       />
                     </View>
 
@@ -230,8 +205,7 @@ const DoctorInfo = (props) => {
                         placeholder="Write your review here"
                         style={styles.textArea}
                         onChangeText={(doctorReviewText) => setDoctorReviewText(doctorReviewText)}
-                        value={doctorReviewText}
-                          
+                        value={doctorReviewText}    
                       />
                     </View>
 

@@ -4,6 +4,7 @@ import { Button, TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
 const CreatingAccount3 = (props) => {
   const [height, setHeight] = useState(undefined);
@@ -19,7 +20,7 @@ const CreatingAccount3 = (props) => {
     
   const getSpeciallityList = async () => {
     const response = await axios.get(
-      "http://10.0.0.252:8080/api/v1/doctors/specialities"
+      `${BASE_URL_DEV}/doctors/specialities`
     );
 
     console.log(response.data.data);

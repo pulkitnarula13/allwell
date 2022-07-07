@@ -1,7 +1,11 @@
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, FlatList, Image, ImageBackground, TouchableWithoutFeedback } from "react-native";
+import { React, useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
+import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
+
+
+
 
 const DATA = [
   {
@@ -20,16 +24,28 @@ const DATA = [
 
 const PatientPhotoData = [
   {
-    name: "Photo1",
+    name: 'bd7acbea-c1b-46c2-aed5-3ad53abb21ba',
     image: "../../assets/icon.png",
   },
   {
-    name: "Photo2",
+    name: 'bd7acbea-c1b1-46c2-aed5-3ad53abb22ba',
     image: "../../assets/icon.png",
   },
   {
-    name: "Video1",
+    name: 'bd7acbea-c1b1-46c2-aed5-3ad53abb23ba',
     image: "../../assets/icon.png",
+  },
+];
+
+const images = [
+  {
+    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
   },
 ];
 
@@ -46,6 +62,9 @@ const Item = ({ name, image }) => (
 
 const InfoPatient = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  const renderImage = ({ item }) => <Item image={item.image} />;
+  const [dialogbox, setDialogbox] = useState(false);
+
   return (
     <ScrollView>
       <View style={styles.outerview1}>
@@ -76,9 +95,42 @@ const InfoPatient = (props) => {
             <FlatList
               horizontal={true}
               data={PatientPhotoData}
-              renderItem={renderItem}
-              // keyExtractor={(item) => item.name}
+              renderItem={({renderImage}) => (
+
+                <TouchableWithoutFeedback onPress={ () => this.setDialogbox(true)}>
+  
+                    <View>
+                      <Text>{renderImage}</Text>
+                       <ImageBackground src={renderImage}></ImageBackground>
+                    </View>
+  
+               </TouchableWithoutFeedback>
+              )}
             />
+            <Dialog
+            visible= {dialogbox}
+            dialogAnimation={new SlideAnimation({
+              slideFrom: 'bottom',
+            })}
+            onTouchOutside={() => {
+              setDialogbox(false);
+            }}
+            rounded
+            width={1}
+            dialogStyle = {styles.dialogStyles}
+            >
+              <DialogContent>
+                <View>
+                  <Text>Hello world</Text>
+                  <ImageBackground src={PatientPhotoData} resizeMode="cover" style={styles.imageFScreen}></ImageBackground>
+                </View>
+              </DialogContent>
+
+            </Dialog>
+
+         
+
+           
           </View>
           <Text style={styles.textComponentsHead}>Description</Text>
           <Text style={styles.textDescriptionData}>
@@ -230,6 +282,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 10,
   },
+  dialogStyles: {
+    width: '90%',
+    width: '90%',
+  },
+  imageFScreen: {
+    flex: 1,
+    justifyContent: "center",
+  }
+
 });
 
 export default InfoPatient;

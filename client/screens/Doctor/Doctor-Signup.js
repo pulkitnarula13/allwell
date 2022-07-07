@@ -5,6 +5,7 @@ import Stepper from "react-native-stepper-ui";
 import CreatingAccount2 from "../../components/CreatingAccount2";
 import CreatingAccount3 from "../../components/CreatingAccount3";
 import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
 const DoctorSignup = ({ navigation }) => {
   const [active, setActive] = useState(0);
@@ -44,7 +45,7 @@ const DoctorSignup = ({ navigation }) => {
     };
 
     
-    axios.post('http://10.0.0.252:8080/api/v1/doctors/register', mainData).then((response) => {
+    axios.post(`git shortlog -sn --all`, mainData).then((response) => {
       navigation.navigate("DoctorSignupScreenLast");
       Alert.alert("Success", response.data.message);
     }).catch((error) => {

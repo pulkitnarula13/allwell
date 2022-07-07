@@ -10,6 +10,9 @@ import ConnectPatient from "../screens/Patient/Connect-Doctor";
 import PatientHome from "../screens/Patient/Patient-Home";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
+import InfoPatient from "../screens/Doctor/Info-Patient";
+import DoctorInfo from "../screens/Patient/Doctor-Info";
+import AcceptPatientSchedule from "../screens/Doctor/Accept-Patient-Schedule";
 
 
 const Bottomnavigation = ({ navigation }) => {
@@ -40,9 +43,9 @@ const Bottomnavigation = ({ navigation }) => {
       case "schedule":
         return <DoctorAppointment navigation={navigation} jumpTo={jumpTo} />;
       case "inbox":
-        return <DoctorInbox navigation={navigation} jumpTo={jumpTo} />;
+        return <AcceptPatientSchedule navigation={navigation} jumpTo={jumpTo} />;
       case "docprofile":
-        return <DoctorProfile navigation={navigation} jumpTo={jumpTo} />;
+        return <InfoPatient navigation={navigation} jumpTo={jumpTo} />;
     }
   };
 
