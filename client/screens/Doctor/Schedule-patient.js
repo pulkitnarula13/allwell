@@ -55,6 +55,7 @@ const Item = ({ name, image }) => (
 
 const SchedulePatient = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  console.log(props.navigation);
 
   return (
     <ScrollView>
@@ -122,7 +123,7 @@ const SchedulePatient = (props) => {
               <Button
                 style={styles.btnBookSchedule}
                 mode="contained"
-                onPress={() => console.log("Book Schedule Pressed")}
+                onPress={() => props.navigation.navigate("AcceptPatientSchedule")}
               >
                 <Text style={styles.textButton}>Book Schedule</Text>
               </Button>

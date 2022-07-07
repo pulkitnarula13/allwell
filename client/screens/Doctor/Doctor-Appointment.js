@@ -68,7 +68,7 @@ const DoctorAppointment = (props) => {
               >
                 Upcoming
               </Text> */}
-              <View>
+              <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <Text>Upcoming</Text>
               </View>
           </TabScreen>
@@ -132,7 +132,7 @@ const DoctorAppointment = (props) => {
               <Button
                 style={styles.btnBookSchedule}
                 mode="contained"
-                onPress={() => console.log("Book Schedule Pressed")}
+                onPress={() => props.navigation.navigate("AcceptPatientSchedule")}
               >
                 <Text style={styles.textButton}>Book Schedule</Text>
               </Button>

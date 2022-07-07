@@ -14,7 +14,7 @@ const Greeting = ({ navigation }) => {
           With Medico, you can connect to the doctor anytime you want 24/7.
         </Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Patient-Signup")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}>
       <View style={style.button} >
         <Button
         style={{fontSize:14,lineHeight:33}}

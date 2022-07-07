@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import React, { useState } from "react";
 import { Button } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
