@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 const PatientQuestionSummary = ({navigation}) => {
 

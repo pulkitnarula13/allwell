@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 

@@ -16,7 +16,7 @@ import React, {
 } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Chip } from "react-native-paper";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native";
 import AppointmentCard from "../../components/AppointmentCard";
 import DetailCardHome from "../../components/DetailCardHome";
 import * as moment from "moment";

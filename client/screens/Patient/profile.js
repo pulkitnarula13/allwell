@@ -2,7 +2,7 @@ import { View, Text ,StyleSheet, Image} from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
 const  profile = ()=> {
   return (
     <View style={styles.allview}>

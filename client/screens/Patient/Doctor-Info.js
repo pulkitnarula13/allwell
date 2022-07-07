@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import Dialog, { DialogFooter, DialogButton, DialogContent, SlideAnimation } from 'react-native-popup-dialog';
 import { Rating } from "react-native-ratings";
+import axios from 'axios';
 
 
 const DoctorInfo = (props) => {
@@ -12,6 +13,10 @@ const DoctorInfo = (props) => {
   const [dialogbox, setDialogbox] = useState(false);
   const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
+
+
+  
+
 
   
   return (

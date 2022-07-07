@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "react-native-paper";
 import { Tabs, TabScreen, useTabIndex, useTabNavigation } from "react-native-paper-tabs";
 import moment from "moment";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 
 import CalendarStrip from "react-native-calendar-strip";
 const DATA = [
