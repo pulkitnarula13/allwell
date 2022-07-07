@@ -7,11 +7,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
+import AppointmentContext from "../../Context/AppointmentContext";
 
 let Screenheight = Dimensions.get("window").height;
 
@@ -26,9 +27,18 @@ const DATA = [
   },
 ];
 
+const ConnectPatient = ({ navigation, route }) => {
+  const { appointmentData } = useContext(AppointmentContext);
+  const [selectedItem, setSelectedItems] = useState();
+
+  useEffect(() => {
 
 
-const ConnectPatient = ({ navigation }) => {
+    const filteredArray = route.params.symptomsData.filter(value => appointmentData.symptoms.includes(value._id));
+    setSelectedItems(filteredArray);
+
+  }, [route.params.symptomsData])
+  
   const Item = ({ name, image }) => (
     <View style={styles.item}>
       <Image
@@ -39,45 +49,22 @@ const ConnectPatient = ({ navigation }) => {
       <Text style={styles.name1}>{name}</Text>
     </View>
   );
-  const SymptomCard = ({item}) => {
 
-
-    const setData = () => {
-        const val = selectedSymptoms;
-        val.push(item.item?._id);
-        setSelectedSymptoms(val);
-        console.log(val, "value");
-    }
-    return (
-      <TouchableOpacity
-        onPress={setData}
-      >
-        <View style={styles.item}>
-          <Image
-            style={styles.image2}
-            source={require("../../assets/icon.png")}
-            resizeMode="center"
-          />
-        </View>
-      </TouchableOpacity>
-    );
-  };
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
 
-  const renderSymptoms = ({ item }) => <SymptomCard item={item} />;
-
-  const [symptoms, setSymptoms] = useState([]);
-  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL_DEV}/patients/symptoms`)
-      .then((response) => {
-        setSymptoms(response.data.data, "Api output");
-      });
-    console.log(selectedSymptoms, "symptoms");
-  }, [selectedSymptoms]);
+  const renderSymptoms = ({ item }) => {
+    return (
+      <View style={styles.item}>
+      <Image
+        style={styles.image1}
+        source={require("../../assets/icon.png")}
+        resizeMode="center"
+      />
+      <Text style={styles.name1}>{item.name}</Text>
+    </View>
+    )
+  }
 
   return (
     <ScrollView>
@@ -111,7 +98,7 @@ const ConnectPatient = ({ navigation }) => {
         <View>
           <FlatList
             horizontal={true}
-            data={symptoms}
+            data={selectedItem}
             renderItem={renderSymptoms}
             keyExtractor={(item) => item.name}
           />
@@ -130,7 +117,7 @@ const ConnectPatient = ({ navigation }) => {
             Available Doctor
           </Button>
 
-          <Button   
+          <Button
             style={styles.availablebtn1}
             mode="contained"
             onPress={() => navigation.navigate("Patient-question-home")}

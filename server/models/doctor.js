@@ -32,13 +32,13 @@ const doctorSchema = new Schema({
 
   licenseNumber: {
     type: String,
-    unique: true
+    unique: true,
   },
 
   licenseImage: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
 
   description: {
@@ -70,27 +70,25 @@ const doctorSchema = new Schema({
 
   specialities: {
     type: [{ type: mongoose.Schema.Types.ObjectId }],
-    ref: "Specialization"
+    ref: "Specialization",
   },
-  
+
   languages: {
-    type: [{ type: String }]
+    type: [{ type: String }],
   },
 
   certifications: {
-    type: [{ type: String }]
+    type: [{ type: String }],
   },
-  
+
   experience: {
-    type: Number
+    type: Number,
   },
 
   roles: {
     type: [String],
     reuqired: true,
   },
-
-
 });
 
 exports.Doctor = mongoose.model("Doctor", doctorSchema);

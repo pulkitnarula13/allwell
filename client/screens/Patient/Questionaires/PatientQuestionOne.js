@@ -1,9 +1,9 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import React from "react";
-import { Button } from "react-native-paper";
-import Questions from "../../components/Questions";
+import Questions from "../../../components/Questions";
 
-const PatientQuestionthree = ({navigation}) => {
+const PatientQuestionOne = (props) => {
+
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
@@ -14,33 +14,16 @@ const PatientQuestionthree = ({navigation}) => {
         />
       </View>
       <View>
-        <Questions data = "Question 2:  How are you feeling?"/>
+        <Questions
+          data={props.mainData.question}
+          setAnswer={(val) => {
+            props.stepperData({
+              ...props.mainData,
+              answer: val,
+            });
+          }}
+        />
       </View>
-      {/* <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 40,
-        }}
-      >
-        <Button
-          style={styles.availablebtn}
-          mode="contained"
-          onPress={() => console.log("Pressed")}
-        >
-          Go Back
-        </Button>
-
-        <Button
-          style={styles.availablebtn1}
-          mode="contained"
-          onPress={() => navigation.navigate("Patient-Questiontwo") }
-        >
-          Next
-        </Button>
-      </View> */}
     </View>
   );
 };
@@ -76,9 +59,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 45,
     justifyContent: "center",
-
     fontWeight: "500",
-
     fontSize: 17,
   },
 
@@ -94,4 +75,4 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 });
-export default PatientQuestionthree;
+export default PatientQuestionOne;

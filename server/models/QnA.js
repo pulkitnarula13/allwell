@@ -10,7 +10,6 @@ const QNASchema = new Schema({
 
   answer: {
     type: String,
-    required: true,
   },
 
   images: {
