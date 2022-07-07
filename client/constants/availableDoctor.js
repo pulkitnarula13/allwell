@@ -5,7 +5,7 @@ export const availableDoctorList = [
         rating: "4.2",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+        image: '../assets/icon.png'
     },
     {
         id: 2,
@@ -13,8 +13,7 @@ export const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
-
+        image: '../assets/icon.png'
     },
     {
         id: 3,
@@ -22,7 +21,7 @@ export const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+        image: '../assets/icon.png'
 
     },
     {
@@ -31,7 +30,7 @@ export const availableDoctorList = [
         rating: "4.2",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+        image:'../assets/icon.png'
 
     },
     {
@@ -40,8 +39,7 @@ export const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
-
+        image: '../assets/icon.png'
     },
     {
         id: 6,
@@ -49,7 +47,7 @@ export const availableDoctorList = [
         rating: "4.0",
         specialities: "General Physician",
         waitTime: "2-4hr",
-        image: 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png'
+        image: '../assets/icon.png'
 
     },
 

@@ -30,7 +30,7 @@ const DoctorInfo = (props) => {
         style={{
           backgroundColor: "#fff",
           alignItems: "center",
-          height: Screenheight * 1.4,
+          height: Screenheight * 1.15,
           display: "flex",
           flex: 1,
         }}
@@ -329,6 +329,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     padding: 40,
+    
     textAlign: "center",
 
   },
@@ -360,6 +361,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#74CBD4",
     borderRadius: 30,
     width: 270,
+    marginBottom:40,
     height: 40,
   },
 
