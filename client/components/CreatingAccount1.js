@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 const CreatingAccount1 = (props) => {
-  const [image1, setimage1] = useState("../assets/icon.png");
+  const [image1, setimage1] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
 
   const openimagelib = async () => {
@@ -24,7 +24,7 @@ const CreatingAccount1 = (props) => {
       props.setFirstStepperData({
         image: result,
         ...props.mainData,
-      })
+      });
     }
   };
 
@@ -42,7 +42,9 @@ const CreatingAccount1 = (props) => {
         <TouchableOpacity onPress={openimagelib}>
           <Image
             style={{ width: 302, height: 194 }}
-            source={{ uri: image1 }}
+            source={
+              image1 ? { uri: image1 } : require("../assets/placeholder.png")
+            }
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -56,8 +58,8 @@ const CreatingAccount1 = (props) => {
             setLicenseNumber(data);
             props.setFirstStepperData({
               ...props.mainData,
-              licenseNumber: data
-            })
+              licenseNumber: data,
+            });
           }}
         />
       </View>

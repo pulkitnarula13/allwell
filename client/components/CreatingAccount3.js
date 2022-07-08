@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
-import { TouchableOpacity } from "react-native";
 import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+import { certificationsList } from "../constants/certifications";
+import { languagesList } from "../constants/languages";
 
 const CreatingAccount3 = (props) => {
   const [height, setHeight] = useState(undefined);
@@ -12,26 +14,33 @@ const CreatingAccount3 = (props) => {
   const [specialities, setSpecialities] = useState([]);
   const [yearOfExperience, setYearOfExperience] = useState(0);
   const [description, setDescription] = useState("");
+  const [certification, setCertifications] = useState(certificationsList);
+  const [languages, setLanguages] = useState(languagesList);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedCertification, setSelectedCertification] = useState("");
+  const [showCertificationDropDown, setShowCertificationDropDown] =
+    useState(false);
+  const [showLangaugesDropdown, setShowLanguagesDropdown] = useState(false);
+
+  useState(false);
 
   useEffect(() => {
     getSpeciallityList();
   }, []);
-    
-  const getSpeciallityList = async () => {
-    const response = await axios.get(
-      "http://10.0.0.252:8080/api/v1/doctors/specialities"
-    );
 
-    console.log(response.data.data);
+  const getSpeciallityList = async () => {
+    const response = await axios.get(`${BASE_URL_DEV}/doctors/specialities`);
+
     const manipulatedData = response.data.data.map((val) => {
       return {
         label: val.name,
-        value: val._id
-      }
-    })
+        value: val._id,
+      };
+    });
+
+    console.log(manipulatedData, "data");
     setSpecialities(manipulatedData);
   };
-
 
   return (
     <View>
@@ -46,15 +55,58 @@ const CreatingAccount3 = (props) => {
           value={selectedSpeciality}
           multiSelect
           setValue={(data) => {
+            console.log(data);
             setSelectedSpeciality(data);
             props.setThirdStepperData({
               ...props.mainData,
-              specialities: data
-            })
+              specialities: data.split(",")
+              .filter((data) => data),
+            });
           }}
           list={specialities}
         />
+
+        <Text style={styles.textspeciality}>Certifications</Text>
+        <DropDown
+          label={"Chose Your Certifications"}
+          mode={"outlined"}
+          visible={showCertificationDropDown}
+          showDropDown={() => setShowCertificationDropDown(true)}
+          onDismiss={() => setShowCertificationDropDown(false)}
+          value={selectedCertification}
+          multiSelect
+          setValue={(data) => {
+            setSelectedCertification(data);
+            props.setThirdStepperData({
+              ...props.mainData,
+              certifications: data.split(",")
+              .filter((data) => data),
+            });
+          }}
+          list={certification}
+        />
+
+        <Text style={styles.textspeciality}>Certifications</Text>
+        <DropDown
+          label={"Chose Your Languages"}
+          mode={"outlined"}
+          visible={showLangaugesDropdown}
+          showDropDown={() => setShowLanguagesDropdown(true)}
+          onDismiss={() => setShowLanguagesDropdown(false)}
+          value={selectedLanguage}
+          multiSelect
+          setValue={(data) => {
+            setSelectedLanguage(data);
+            props.setThirdStepperData({
+              ...props.mainData,
+              languages: data.split(",")
+              .filter((data) => data),
+            });
+          }}
+          list={languages}
+        />
       </View>
+
       <View>
         <Text style={styles.textspeciality}>Years of work experience</Text>
         <TextInput
@@ -64,8 +116,8 @@ const CreatingAccount3 = (props) => {
             setYearOfExperience(data);
             props.setThirdStepperData({
               ...props.mainData,
-              experience: data
-            })
+              experience: data,
+            });
           }}
         />
       </View>
@@ -76,11 +128,11 @@ const CreatingAccount3 = (props) => {
           multiline
           value={description}
           onChangeText={(data) => {
-            setDescription(data)
+            setDescription(data);
             props.setThirdStepperData({
               ...props.mainData,
-              description: data
-            })
+              description: data,
+            });
           }}
           placeholder="Describe About Yourself"
           onContentSizeChange={(event) => {

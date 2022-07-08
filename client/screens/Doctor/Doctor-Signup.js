@@ -12,6 +12,7 @@ const DoctorSignup = ({ navigation }) => {
   const [firstStepData, setFirstStepperData] = useState();
   const [secondStepperData, setSecondStepperData] = useState();
   const [thirdStepperData, setThirdStepperData] = useState();
+  const [thirData, setThirdData] = useState({});
 
   const content = [
     <CreatingAccount1
@@ -28,7 +29,14 @@ const DoctorSignup = ({ navigation }) => {
     />,
   ];
 
+  useEffect(() => {
+    setThirdData({...thirData, thirdStepperData})
+    console.log(thirData);
+
+  }, [thirdStepperData])
+
   const submitData = () => {
+    console.log(thirdStepperData, "thirdSymptomData");
     let mainData = {
       licenseImage: firstStepData.image.uri,
       licenseNumber: firstStepData.licenseNumber,
@@ -36,27 +44,33 @@ const DoctorSignup = ({ navigation }) => {
       email: secondStepperData.email,
       password: secondStepperData.password,
       phoneNumber: secondStepperData.phoneNumber,
-      specialities: thirdStepperData.specialities
-        .split(",")
-        .filter((data) => data),
+      specialities: thirdStepperData.specialities,
       experience: thirdStepperData.experience,
       description: thirdStepperData.description,
-    
+      languages: thirdStepperData.languages,
+      certifications: thirdStepperData.certifications
     };
 
-    
-    axios.post(`${BASE_URL_DEV}/doctors/register`, mainData).then((response) => {
-      navigation.navigate("DoctorSignupScreenLast");
-      Alert.alert("Success", response.data.message);
-    }).catch((error) => {
-      console.log(error);
-    })
+    axios
+      .post(`${BASE_URL_DEV}/doctors/register`, mainData)
+      .then((response) => {
+        navigation.navigate("DoctorSignupScreenLast");
+        Alert.alert("Success", response.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     // navigation.navigate("DoctorSignupScreenLast");
-   
   };
 
   return (
-    <View style={{ marginVertical: 30, marginHorizontal: 30, flexDirection: "column" }}>
+    <View
+      style={{
+        marginVertical: 30,
+        marginHorizontal: 30,
+        flexDirection: "column",
+      }}
+    >
       <Text style={styles.firstHeading}>Creating Account</Text>
       <Stepper
         active={active}
@@ -65,7 +79,6 @@ const DoctorSignup = ({ navigation }) => {
         onFinish={() => submitData(navigation)}
         onNext={() => setActive((p) => p + 1)}
         buttonStyle={styles.buttonstyle}
-        
       />
       <Text>Registration Process may take upto 3 hours for approval</Text>
     </View>
@@ -78,8 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     height: 50,
     justifyContent: "center",
-    flexBasis: "auto"
-
+    flexBasis: "auto",
   },
   firstHeading: {
     fontSize: 24,
