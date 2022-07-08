@@ -17,10 +17,18 @@ import { Alert } from "react-native";
 
 const AvailableDoctor = (props) => {
   const { userInfo } = useContext(AuthContext);
-  const [alldata, setalldata] = useState();
+  const [allDoctorsData, setAllDoctorsData] = useState();
 
   useEffect(() => {
-    console.log("Hello");
+
+  //   {
+  //     id: 1,
+  //     name: "Doctor 1",
+  //     rating: "4.2",
+  //     specialities: "General Physician",
+  //     waitTime: "2-4hr",
+  //     image: '../assets/icon.png'
+  // },
     axios
       .get(`${BASE_URL_DEV}/doctors`, {
         headers: {
@@ -28,10 +36,10 @@ const AvailableDoctor = (props) => {
         },
       })
       .then((response) => {
-        setalldata(response.data.data)
-        console.log(response.data.data)
-        Alert.alert("You are on available doctor screen");
-      }).catch((error) => {
+        setAllDoctorsData(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
         Alert.alert(error.message);
       });
   }, []);
@@ -41,7 +49,7 @@ const AvailableDoctor = (props) => {
       <View style={styles.flatlistContainer}>
         <FlatList
           style={styles.flatlist}
-          data={availableDoctorList}
+          data={allDoctorsData}
           renderItem={(data) => (
             <AvailableDoctorCard {...data} navigation={props.navigation} />
           )}

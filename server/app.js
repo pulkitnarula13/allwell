@@ -9,7 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 
 const PORT = process.env.PORT || 8080;
 const patientRoutes = require("./routes/patient");
-const morgan = require('morgan');
+const morgan = require("morgan");
 const doctorRoutes = require("./routes/doctor");
 const appointmentRoutes = require("./routes/appointment");
 const qnaRoutes = require("./routes/qna");
@@ -20,10 +20,9 @@ const { baseURL } = require("./constant");
 require("dotenv").config();
 
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-app.use(express.json({ limit: "50mb"}));
-
+app.use(express.json({ limit: "50mb" }));
 
 // Swagger doc
 
@@ -34,13 +33,13 @@ const swaggerOptions = {
       title: "Medico API",
       description: "Medico API Information",
       contact: {
-        name: "Medico Developers"
+        name: "Medico Developers",
       },
-      servers: ["http://localhost:8080"]
-    }
+      servers: ["http://localhost:8080"],
+    },
   },
-    apis: ['./routes/*.js', 'app.js']
-    // apis: ["app.js"]
+  apis: ["./routes/*.js", "app.js"],
+  // apis: ["app.js"]
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

@@ -3,13 +3,12 @@ const { Doctor } = require("../models/doctor");
 const { Patient } = require("../models/patient");
 const { QNA } = require("../models/QnA");
 
-
 /**
  * @description API to fetch all qna from DB
  * @param {*} req
  * @param {*} res
  */
- const getAllQNAPatients = (req, res) => {
+const getAllQNAPatients = (req, res) => {
   QNA.find({ patient: req.params.id })
     .then((result) => {
       return res.status(200).json({
@@ -69,5 +68,5 @@ const { QNA } = require("../models/QnA");
 // };
 
 module.exports = {
-    getAllQNAPatients
+  getAllQNAPatients,
 };

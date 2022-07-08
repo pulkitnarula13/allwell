@@ -18,7 +18,6 @@ const Doctorprofile = (props) => {
   const getDoctorProfile = async () => {
     const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
     setDocProfileData(userData.data.data);
-    console.log(userData.data.data);
   };
 
   return docProfileData ? (

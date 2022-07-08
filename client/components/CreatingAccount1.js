@@ -19,6 +19,7 @@ const CreatingAccount1 = (props) => {
 
     if (!result.cancelled) {
       setimage1(result.uri);
+      console.log(result.uri);
       props.setFirstStepperData(result);
       props.setFirstStepperData({
         image: result,

@@ -1,41 +1,46 @@
 import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
 
-const PatientQuestiontwo = ({navigation}) => {
-
-  const [image12, setimage12] = useState([]);
+const PatientQuestionImage = (props) => {
+  const [totalImages, setTotalImages] = useState([]);
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      base64: true,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
 
     if (!result.cancelled) {
-      setimage12([...image12, ...[{ image: result.uri }]]);
+      const data = totalImages;
+      data.push(result.base64);
+      setTotalImages(data);
+      props.setSixthStepperData({
+        ...props.mainData,
+        images: data,
+      });
     }
+
+    console.log(totalImages, "totalImages");
   };
- 
 
-
-  const Item = ({item}) =>  {
+  const Item = ({ item }) => {
     return (
       <View style={styles.item}>
-      <Image style={styles.image2} source={item.image} resizeMode="center" />
-    </View>
-    )
-  }
+        <Image style={styles.image2} source={item} resizeMode="center" />
+      </View>
+    );
+  };
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
         <Image
           style={styles.image1}
-          source={require("../../assets/icon.png")}
+          source={require("../../../assets/icon.png")}
           resizeMode="center"
         />
       </View>
@@ -44,43 +49,18 @@ const PatientQuestiontwo = ({navigation}) => {
         <TouchableOpacity onPress={openimagelib}>
           <Image
             style={styles.image1}
-            source={require("../../assets/camera.jpg")}
+            source={require("../../../assets/camera.jpg")}
             resizeMode="center"
           />
         </TouchableOpacity>
         <FlatList
-          style={{marginBottom:40}}
+          style={{ marginBottom: 40 }}
           horizontal={true}
-          data={image12}
+          data={totalImages}
           renderItem={Item}
-          keyExtractor={(item) => item.image}
+          keyExtractor={(item, index) => index}
         />
       </View>
-      {/* <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 40,
-        }}
-      >
-        <Button
-          style={styles.availablebtn}
-          mode="contained"
-          onPress={() => console.log("Pressed")}
-        >
-          Go Back
-        </Button>
-
-        <Button
-          style={styles.availablebtn1}
-          mode="contained"
-          onPress={() => navigation.navigate("Patient-QuestionSummary")}
-        >
-          Next
-        </Button>
-      </View> */}
     </View>
   );
 };
@@ -99,8 +79,7 @@ const styles = StyleSheet.create({
   image1: {
     width: 130,
     height: 130,
-    marginRight:20,
-    
+    marginRight: 20,
   },
   textheight: {
     width: 320,
@@ -147,4 +126,4 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 });
-export default PatientQuestiontwo;
+export default PatientQuestionImage;
