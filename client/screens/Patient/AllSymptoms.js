@@ -4,6 +4,7 @@ import AppointmentContext from "../../Context/AppointmentContext";
 import { StyleSheet, TouchableOpacity, View, Text, Image, FlatList } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function AllSymptoms(props) {
   useEffect(() => {
@@ -12,9 +13,14 @@ export default function AllSymptoms(props) {
 
   const [symptomsData, setSymptomsData] = useState([]);
   const { setAppointmentData } = useContext(AppointmentContext);
+  const { userInfo } = useContext(AuthContext);
 
   const getSymptoms = async () => {
-    const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`);
+    const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
 
     const modifiedData = data.data.data.map((item) => {
       item.isSelect = false;

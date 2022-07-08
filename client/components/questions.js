@@ -10,10 +10,10 @@ export default function Questions(props) {
       <Text style={styles.textstyle}>{props.data}</Text>
       <TextInput
         value={answer}
-        onChangeText={(value) => {
-          console.log(value, "target Value");
-          setAnswer(value);
-          props.setAnswer(value);
+        textC
+        onChange={(event) => {
+          setAnswer(event.target.value);
+          props.setAnswer(event.target.value);
         }}
         placeholder="Write your answer here"
         multiline={true}

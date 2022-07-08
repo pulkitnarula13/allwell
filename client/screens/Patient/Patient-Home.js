@@ -7,7 +7,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { Button } from "react-native-paper";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -16,6 +16,7 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from "expo-location";
+import { AuthContext } from "../../Context/AuthContext";
 
 import { FloatingAction } from "react-native-floating-action";
 import { BASE_URL_DEV } from "@env";
@@ -30,9 +31,13 @@ const PatientHome = ({ navigation }) => {
   }, []);
 
   const [symptomsData, setSymptomsData] = useState([]);
-
+  const { userInfo } = useContext(AuthContext)
   const getSymptoms = async () => {
-    const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`);
+    const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
     const modifiedData = data.data.data.map((item) => {
       item.image = "../../assets/icon1.png";
       return item;
