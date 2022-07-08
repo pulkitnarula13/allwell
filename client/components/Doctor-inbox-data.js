@@ -9,9 +9,7 @@ const Doctorinboxdata = () => {
 
   const Item = ({ name,image,date,info }) => (
     <View>
-      <TouchableOpacity
-      onPress={() => console.log("pressed")}
-      >
+      
     <View style={styles.main}>
       <Text style={styles.date1}>{date}</Text>
     <View style={styles.mainouter}>
@@ -41,7 +39,7 @@ const Doctorinboxdata = () => {
       </View>
     </View>
   </View>
-  </TouchableOpacity>
+  
   </View>
   );
 
