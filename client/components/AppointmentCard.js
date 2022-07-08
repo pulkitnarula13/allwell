@@ -3,12 +3,20 @@ import React from "react";
 import { Button } from "react-native-paper";
 
 const AppointmentCard = ({ item }) => {
+  console.log(item.date)
+ var newdate = new Date((item.date))
+ 
+
+
  
   return (
     <View style={styles.container}>
       <View style={styles.timeContainer}>
         <View style={styles.clock}><Button  icon="clock"></Button></View>
-        <Text style={styles.time}>{item.date}</Text>
+        <View style={{display:"flex",flexDirection:"column"}}>
+        <Text style={styles.time}>{`Date: ${newdate.getDate()} / ${newdate.getMonth()} / ${newdate.getFullYear()}  `}</Text>
+        <Text style={styles.time}>{`Time: ${newdate.getHours()} : ${newdate.getMinutes() ? newdate.getMinutes() : "00" }   `}</Text>
+        </View>
       </View>
       <View>
         <View style={styles.imageContainer}>
@@ -39,10 +47,12 @@ const styles = StyleSheet.create({
     height: 65,
   },
   clock: {
+    
     minWidth: 20,
     height: 20
   },
   time: {
+    fontSize:10,
     fontWeight: "bold",
   },
   flatListColumn: {
