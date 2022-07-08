@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
+import { useFonts } from 'expo-font';
+
 
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
@@ -14,7 +16,17 @@ export default function App() {
     symptoms: [],
   });
 
-  console.log(appointmentData, "in app.js");
+  // Using font Poppins
+  const [loaded] = useFonts({
+    Poppins: require('./assets/fonts/Poppins-Regular.ttf'),
+    PoppinsBold: require('./assets/fonts/Poppins-Bold.ttf'),
+    PoppinsSemiBold: require('./assets/fonts/Poppins-SemiBold.ttf'),
+  });
+  
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <AuthProvider>
       <AppointmentContext.Provider

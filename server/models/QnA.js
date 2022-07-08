@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const QNASchema = new Schema({
   question: {
     type: String,
-    required: true,
   },
 
   answer: {

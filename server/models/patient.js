@@ -36,7 +36,7 @@ const PatientSchema = mongoose.Schema({
   },
   roles: {
     type: [String],
-    reuqired: true,
+    required: true,
   },
   address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
 });
