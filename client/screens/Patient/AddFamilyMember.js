@@ -4,10 +4,9 @@ import { TextInput,Button } from 'react-native-paper';
 
  const AddFamilyMember = (props)=> {
   console.log(props);
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [email, setemail] = useState("");
-    const [Relationship, setRelationship] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [relationship, setRelationship] = useState("");
     const [MSP, setMSP] = useState("");
     const [birthdate, setbirthdate] = useState("");
   return (
@@ -29,17 +28,11 @@ import { TextInput,Button } from 'react-native-paper';
       <TextInput
             style={styles.inputbox1}
             mode="outlined"
-            label="Firstname"
-            value={firstname}
-            onChangeText={(text) => setFirstname(text)}
+            label="Full Name"
+            value={name}
+            onChangeText={(text) => setName(text)}
           />
-          <TextInput
-            style={styles.inputbox}
-            mode="outlined"
-            label="Lastname"
-            value={lastname}
-            onChangeText={(text) => setLastname(text)}
-          />
+
           <TextInput
             style={styles.inputbox}
             mode="outlined"
@@ -52,8 +45,8 @@ import { TextInput,Button } from 'react-native-paper';
           <TextInput
             style={styles.inputbox}
             mode="outlined"
-            label="Relationship"
-            value={Relationship}
+            label="Relationship with Member"
+            value={relationship}
             onChangeText={(text) => setRelationship(text)}
           />
           <TextInput
