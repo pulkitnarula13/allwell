@@ -16,6 +16,8 @@ import Dialog, {
 import { Rating } from "react-native-ratings";
 import axios from "axios";
 import AppointmentContext from "../../Context/AppointmentContext";
+import { DocReviewContext } from "../../Context/DocReviewContext";
+
 import { BASE_URL_DEV } from "@env";
 
 const DoctorInfo = (props) => {
@@ -26,14 +28,17 @@ const DoctorInfo = (props) => {
   const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
   const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
+  const { docReviewData, setDocReviewData } = useContext(DocReviewContext);
 
+  let docId = props.route.params.id;
+  
   useEffect(() => {
     getDoctorInfoById();
   }, []);
 
   const getDoctorInfoById = async () => {
     const response = await axios.get(
-      `${BASE_URL_DEV}/doctors/${props.route.params.id}`
+      `${BASE_URL_DEV}/doctors/${xc}`
     );
     setDoctorInfo(response.data.data);
   };
@@ -256,7 +261,14 @@ const DoctorInfo = (props) => {
                   <Button
                     style={styles.btnSubmitReview}
                     mode="contained"
-                    onPress={() => console.log("Review Submit Pressed")}
+                    // onPress={() => console.log("Review Submit Pressed")}
+                    onPress={() =>
+                      setDocReviewData({
+                        starRating,
+                        doctorReviewText,
+                        docId,
+                      }, navigation)
+                    }
                   >
                     <Text style={styles.textButton}>Submit</Text>
                   </Button>
