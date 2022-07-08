@@ -80,6 +80,10 @@ const AppStack = () => {
         name="Accept-Patient-Schedule"
         component={AcceptPatientSchedule}
       />
+      <Stack.Screen
+        name="Notfication"
+        component={Notification}
+      />
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
       <Stack.Screen name="AcceptPatientSchedule" component={AcceptPatientSchedule} />

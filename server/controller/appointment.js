@@ -191,20 +191,27 @@ const createAppointment = async (req, res) => {
       });
     }
 
-    const modifiedData = req.body.qna.map(async (val) => {
+    const modifiedData = await Promise.all(req.body.qna.map(async (val) => {
       if (val.images && val.images.length !== 0) {
         const array = [];
-        val.images.forEach(async (data) => {
-     
-          const uploadImage = await uploadImageTOS3(data, req.body.patient);
-          array.push(uploadImage);
-        });
-        val.images = array;
+
+      
+          for (let i =  0 ; i < val.images.length;i++) {
+            const uploadedImage = await upload(
+              `${Date.now() + "" + req.body.patient}`,
+              val.images[i],
+              "jpg",
+              "patient",
+              req.body.patient
+            );
+
+            array.push(uploadedImage);
+            val.images = array;
+          }
       }
       return val;
-    });
+    }));
 
-    console.log(modifiedData, "modified");
     const qna = await QNA.insertMany(modifiedData);
 
     const appointmentData = await Appointment.create({
@@ -227,19 +234,6 @@ const createAppointment = async (req, res) => {
   }
 };
 
-const uploadImageTOS3 = async (image, user) => {
-  const uploadedImage = await upload(
-    `${Date.now() + "" + user}`,
-    image,
-    "jpg",
-    "patient",
-    user
-  );
-
-  console.log(uploadedImage, "uploaded");
-
-  return uploadedImage;
-};
 module.exports = {
   createAppointment,
   getAllAppointments,
