@@ -134,7 +134,7 @@ const getDoctors = (req, res) => {
 };
 
 /**
- * @description API to updte doctors
+ * @description API to update doctors
  * @param {*} req
  * @param {*} res
  */
