@@ -16,6 +16,18 @@ const {
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
 
+// Routes
+/**
+ * @swagger
+ * /patient/:id:
+ *   get:
+ *     description: Get information of the patient using id
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get("/:id",validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT, ROLE.DOCTOR), getPatientById);
+
 
 // Routes
 /**
@@ -89,17 +101,6 @@ router.put("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, updateP
  */
 router.delete("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, deletePatient);
 
-// Routes
-/**
- * @swagger
- * /patient/:id:
- *   get:
- *     description: Get information of the patient using id
- *     responses:
- *       200:
- *         description: return positive response
- */
-router.get("/:id",verifyRoles(ROLE.ADMIN), getPatientById);
 
 // Routes
 /**
