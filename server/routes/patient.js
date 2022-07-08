@@ -16,18 +16,6 @@ const {
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
 
-// Routes
-/**
- * @swagger
- * /patient/:id:
- *   get:
- *     description: Get information of the patient using id
- *     responses:
- *       200:
- *         description: return positive response
- */
- router.get("/:id",validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT, ROLE.DOCTOR), getPatientById);
-
 
 // Routes
 /**
@@ -39,7 +27,19 @@ const verifyRoles = require("../middleware/roleVerification");
  *       200:
  *         description: return positive response
  */
- router.get("/symptoms", getSymptoms);
+ router.get("/symptoms",validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT, ROLE.DOCTOR), getSymptoms);
+
+ // Routes
+/**
+ * @swagger
+ * /patient/:id:
+ *   get:
+ *     description: Get information of the patient using id
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get("/:id",validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT, ROLE.DOCTOR), getPatientById);
  
 // Routes
 /**
