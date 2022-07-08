@@ -16,6 +16,7 @@ import Dialog, {
 import { Rating } from "react-native-ratings";
 import axios from "axios";
 import AppointmentContext from "../../Context/AppointmentContext";
+
 import { BASE_URL_DEV } from "@env";
 
 const DoctorInfo = (props) => {
@@ -26,14 +27,14 @@ const DoctorInfo = (props) => {
   const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
   const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
-
+  
   useEffect(() => {
     getDoctorInfoById();
   }, []);
 
   const getDoctorInfoById = async () => {
     const response = await axios.get(
-      `${BASE_URL_DEV}/doctors/${props.route.params.id}`
+      `${BASE_URL_DEV}/doctors/${xc}`
     );
     setDoctorInfo(response.data.data);
   };
@@ -58,7 +59,28 @@ const DoctorInfo = (props) => {
         <Text style={styles.text1}>{props?.item.name}</Text>
       </View>
     );
-  };
+  };  
+
+
+  const submitData = () => {
+    let data =  {
+      rating: starRating,
+      feedback: doctorReviewText,
+      doctor:  props.route.params.id
+    }
+
+    const response = await axios.post(
+      `${BASE_URL_DEV}/doctorReview`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+  }
+
+
 
   return (
     <ScrollView>
@@ -256,7 +278,8 @@ const DoctorInfo = (props) => {
                   <Button
                     style={styles.btnSubmitReview}
                     mode="contained"
-                    onPress={() => console.log("Review Submit Pressed")}
+                    // onPress={() => console.log("Review Submit Pressed")}
+                    onPress={submitData}
                   >
                     <Text style={styles.textButton}>Submit</Text>
                   </Button>
