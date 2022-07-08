@@ -40,11 +40,15 @@ const PatientQuestionHome = ({ navigation }) => {
 
   const createAppointment = async () => {
     navigation.navigate("Requestwait");
-    const response = await axios.post(`${BASE_URL_DEV}/appointments`, appointmentData, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`
+    const response = await axios.post(
+      `${BASE_URL_DEV}/appointments`,
+      appointmentData,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
       }
-    });
+    );
     console.log(response, "response");
   };
 
