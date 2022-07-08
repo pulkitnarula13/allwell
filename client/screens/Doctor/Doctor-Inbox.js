@@ -1,6 +1,11 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import React, { useEffect } from "react";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity,Image} from "react-native";
+import React, { useEffect,useState } from "react";
 import { Button } from "react-native-paper";
+import Dialog, {
+  DialogButton,
+  DialogContent,
+  SlideAnimation,
+} from "react-native-popup-dialog";
 import { Feather } from "@expo/vector-icons";
 import { Title, Paragraph } from "react-native-paper";
 import {
@@ -15,6 +20,7 @@ import Doctorinboxdata from "../../components/Doctor-inbox-data";
 import { ScrollView } from "react-native";
 
 const DoctorInbox = ({ navigation }) => {
+  const [dialogbox, setDialogbox] = useState(false);
   useEffect(() => {
     navigation.setOptions({
       title: `Inbox`,
@@ -41,20 +47,17 @@ const DoctorInbox = ({ navigation }) => {
         <Searchbars />
       </View>
       <Tabs>
-        <TabScreen label="Current">
+        <TabScreen  label="Current">
+        <TouchableOpacity
+      onPress={() => setDialogbox(true)}
+      >
           <View>
-            <View
-              style={{
-                padding: 14,
-                marginBottom: 34,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Doctorinboxdata />
-            </View>
+          <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
+          <Doctorinboxdata/>
           </View>
+          </View>
+          </TouchableOpacity>
+          
         </TabScreen>
         <TabScreen label="Compeleted">
           <View
@@ -74,29 +77,78 @@ const DoctorInbox = ({ navigation }) => {
           {/* <ExploreWitHookExamples1 /> */}
         </TabScreen>
       </Tabs>
-    </View>
-    // <View style={styles.Header}>
-    //   <View style={styles.headermain}>
-    //     <View style={styles.align}>
-    //       <Text style={styles.text2}>Inbox</Text>
-    //       <View style={styles.btnview}>
-    //         <Button style={styles.btnsetting}>
-    //           <Feather name="bookmark" size={24} color="black" />
-    //         </Button>
-    //         <Button style={styles.btnsetting}>
-    //           <Feather name="shopping-bag" size={24} color="black" />
-    //         </Button>
-    //       </View>
-    //     </View>
-    //   </View>
-    //   <View>
+      <Dialog
+            visible={dialogbox}
+            dialogAnimation={
+              new SlideAnimation({
+                slideFrom: "bottom",
+              })
+            }
+            onTouchOutside={() => {
+              setDialogbox(false);
+            }}
+            rounded
+            width={1}
+            dialogStyle={styles.dialogStyles}
+          >
+            <DialogContent style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+              <View style={styles.viewDoctorStatusModal}>
+                <Text
+                >
+                  Date
+                </Text>
+                <View style={styles.viewDividerLine} ></View>
 
-    //   </View>
-    // </View>
+                <Image style={styles.image1} source= {require('../../assets/icon.png')} resizeMode='center' />
+                <Text
+                >
+                  Name
+                </Text>
+                <Text
+                >
+                  Speciality
+                </Text>
+                </View>
+                <View style={styles.viewDividerLine} />
+                <View style={styles.button} >
+        <Button
+        style={{fontSize:14,lineHeight:33,color:"white"}}
+
+            color="white"
+          title="View the Chat"
+          
+        />
+        </View>
+              
+            </DialogContent>
+          </Dialog>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  viewDoctorStatusModal: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 40,
+    justifyContent:"center",
+    alignItems:"center",
+    textAlign: "center",
+  },
+  textModalStatus: {
+    fontSize: 25,
+    paddingTop: 40,
+    paddingBottom: 20,
+    textAlign: "center",
+  },
+  image1:{
+    width:98,
+    height:98,
+    borderRadius:49
+
+    
+},
+  
   main: {
     flex: 1,
   },
@@ -135,6 +187,20 @@ const styles = StyleSheet.create({
     lineHeight: 24.2,
     marginLeft: 85,
     marginTop: 19,
+  },
+  button: {
+    width: 315,
+    height: 49,
+    display: "flex",
+    flexDirection: "column",
+    
+    marginLeft:40,
+    marginTop:70,
+    backgroundColor:"#74CBD4",
+    textAlign:"center",
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius:100
   },
 });
 
