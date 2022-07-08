@@ -34,11 +34,15 @@ export default function PatientSignup({ navigation }) {
           alignContent: "center",
         }}
       >
+        {/* <Text style={styles.textHeading}>Sign up with email</Text> */}
         <KeyboardAvoidingView enabled>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={styles.inputStyle} 
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              label={'Name'}
               value={name}
+              mode={'outlined'}
               onChangeText={(name) => setName(name)}
               underlineColorAndroid="#f000"
               placeholder="Full Name"
@@ -47,7 +51,10 @@ export default function PatientSignup({ navigation }) {
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={styles.inputStyle} 
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
+              label={'Email'}
               value={email}
               onChangeText={(email) => setEmail(email)}
               underlineColorAndroid="#f000"
@@ -58,7 +65,10 @@ export default function PatientSignup({ navigation }) {
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={styles.inputStyle} 
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
+              label='Health Number'
               value={healthNumber}
               onChangeText={(healthNumber) => setHealthNumber(healthNumber)}
               underlineColorAndroid="#f000"
@@ -66,19 +76,24 @@ export default function PatientSignup({ navigation }) {
               placeholderTextColor="#8b9cb5"
             />
           </View>
-          <View style={styles.SectionStyle}>
+          <View style={styles.SectionDateStyle}>
             <DatePickerInput
               locale="en"
-              label="DOB"
+              label="Date of Birth"
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
               value={dob}
               onChange={(d) => setDOB(d)}
               inputMode="start"
-              style={styles.inputStyle}
+              style={styles.inputDateStyle}
             />
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={styles.inputStyle} 
+              label={'Password'}
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
               value={password}
               onChangeText={(password) => setPassword(password)}
               underlineColorAndroid="#f000"
@@ -88,7 +103,10 @@ export default function PatientSignup({ navigation }) {
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={styles.inputStyle} 
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
+              label={'Confirm Password'}
               value={confirmPassword}
               onChangeText={(confirmPassword) =>
                 setConfirmPassword(confirmPassword)
@@ -101,10 +119,13 @@ export default function PatientSignup({ navigation }) {
           <View style={styles.SectionStyle}>
             <TextInput
               value={phone}
-              style={styles.inputStyle}
+              label={'Phone'}
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
+              style={styles.inputStyle} 
               onChangeText={(phone) => setPhone(phone)}
               underlineColorAndroid="#f000"
-              placeholder="mobile number"
+              placeholder="Contact Number"
               placeholderTextColor="#8b9cb5"
             />
           </View>
@@ -152,13 +173,27 @@ export default function PatientSignup({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  textHeading: {
+    fontSize: 18,
+    fontWeight: '500',
+    marginLeft: 35,
+    paddingTop: 30
+  },
   SectionStyle: {
+    flexDirection: "row",
+    height: 50,
+    marginTop: 20,
+    marginLeft: 35,
+    marginRight: 35,
+  },
+  SectionDateStyle: {
     flexDirection: "row",
     height: 40,
     marginTop: 20,
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
+    width: 345,
   },
   txt: {
     margin: 10,
@@ -183,6 +218,11 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
+    padding: 0,
+
+  },
+  inputDateStyle: {
+    width: 200,
   },
   link: {
     color: "black",

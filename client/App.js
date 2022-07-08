@@ -1,23 +1,35 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
-import "react-native-gesture-handler";
+
 
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
-
+import AppointmentContext from "./Context/AppointmentContext";
 
 export default function App() {
+  const [appointmentData, setAppointmentData] = useState({
+    qna: [],
+    symptoms: [],
+  });
+
 
   return (
     <AuthProvider>
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <AppNav />
-        </NavigationContainer>
-      </PaperProvider>
+      <AppointmentContext.Provider
+        value={{
+          appointmentData,
+          setAppointmentData,
+        }}
+      >
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <AppNav />
+          </NavigationContainer>
+        </PaperProvider>
+      </AppointmentContext.Provider>
     </AuthProvider>
   );
 }

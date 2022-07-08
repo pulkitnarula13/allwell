@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
@@ -18,7 +18,6 @@ const Doctorprofile = (props) => {
   const getDoctorProfile = async () => {
     const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
     setDocProfileData(userData.data.data);
-    console.log(userData.data.data);
   };
 
   return docProfileData ? (

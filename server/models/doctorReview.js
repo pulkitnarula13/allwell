@@ -3,6 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const doctorReviewSchema = new Schema({
+
+  doctor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Doctor",
+  },
+
   rating: {
     type: Number,
     required: true,
@@ -12,10 +18,13 @@ const doctorReviewSchema = new Schema({
     type: String,
   },
 
-  authorId: {
+  patient: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Patient",
   },
+
+}, {
+  timestamps: true
 });
 
-exports.DoctorReview = mongoose.model("Review", doctorReviewSchema);
+exports.DoctorReview = mongoose.model("DoctorReview", doctorReviewSchema);

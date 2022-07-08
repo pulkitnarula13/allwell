@@ -27,14 +27,18 @@ const updateAppointment = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const cancelAppointment = (req, res) => {
+const cancelAppointment = (req, res) => {
   const id = req.params.id;
 
-  Appointment.findOneAndUpdate({ _id: id }, {
-    cancelled: true
-  }, {
-    returnOrignal: false,
-  }).then((result) => {
+  Appointment.findOneAndUpdate(
+    { _id: id },
+    {
+      cancelled: true,
+    },
+    {
+      returnOrignal: false,
+    }
+  ).then((result) => {
     res.status(200).json({
       message: "Appointment Cancelled",
       data: result,
@@ -47,41 +51,25 @@ const updateAppointment = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const confirmAppointment = (req, res) => {
+const confirmAppointment = (req, res) => {
   const id = req.params.id;
 
-  Appointment.findOneAndUpdate({ _id: id }, {
-    confirmed: true,
-    date: req.body.date
-  }, {
-    returnOrignal: false,
-  }).then((result) => {
+  Appointment.findOneAndUpdate(
+    { _id: id },
+    {
+      confirmed: true,
+      date: req.body.date,
+    },
+    {
+      returnOrignal: false,
+    }
+  ).then((result) => {
     res.status(200).json({
       message: "Appointment Confirmed",
       data: result,
     });
   });
 };
-
-// /**
-//  * @description API to delete Appointment
-//  * @param {*} req
-//  * @param {*} res
-//  */
-// const deleteAppointment = (req, res) => {
-//   const id = req.params.id;
-//   Appointment.findByIdAndDelete(id)
-//     .then((result) => {
-//       return res.status(200).json({
-//         message: "Appointment succesfully deleted",
-//       });
-//     })
-//     .catch((error) => {
-//       return res.status(500).json({
-//         message: error.message,
-//       });
-//     });
-// };
 
 /**
  * @description Api to fetch Appointment based on given ID
@@ -110,8 +98,11 @@ const getAppointmentById = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const getAllAppointments = (req, res) => {
+const getAllAppointments = (req, res) => {
   Appointment.find()
+    .populate({
+      path: "qna",
+    })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched all Appointments",
@@ -130,8 +121,11 @@ const getAppointmentById = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const getAppointmentByPatientId = (req, res) => {
-  Appointment.find({ patient: req.params.id})
+const getAppointmentByPatientId = (req, res) => {
+  Appointment.find({ patient: req.params.id })
+    .populate({
+      path: "qnas",
+    })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched  Appointment for given patient",
@@ -145,18 +139,19 @@ const getAppointmentById = (req, res) => {
     });
 };
 
-
 /**
  * @description API to fetch appointments from DB
  * @param {*} req
  * @param {*} res
  */
- const getAppointmentByDoctorId = (req, res) => {
-  Appointment.find({ doctor: req.params.id}).populate({
-    path: "patient"
-  }).populate({
-    path: "symptoms"
-  })
+const getAppointmentByDoctorId = (req, res) => {
+  Appointment.find({ doctor: req.params.id })
+    .populate({
+      path: "patient",
+    })
+    .populate({
+      path: "symptoms",
+    })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched  Appointment for given patient",
@@ -178,6 +173,7 @@ const getAppointmentById = (req, res) => {
 const createAppointment = async (req, res) => {
   try {
     const data = req.body;
+    console.log(data, "incoming");
 
     const findDoctor = await Doctor.findById(data.doctor);
 
@@ -218,8 +214,6 @@ const createAppointment = async (req, res) => {
 
     const qna = await QNA.insertMany(modifiedData);
 
-    console.log(qna);
-
     const appointmentData = await Appointment.create({
       date: data.date,
       doctor: data.doctor,
@@ -233,12 +227,12 @@ const createAppointment = async (req, res) => {
       data: appointmentData,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: error.message,
     });
   }
 };
-
 
 module.exports = {
   createAppointment,
@@ -248,5 +242,5 @@ module.exports = {
   updateAppointment,
   confirmAppointment,
   cancelAppointment,
-  getAppointmentById
+  getAppointmentById,
 };

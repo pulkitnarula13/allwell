@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "react-native-paper";
 import { Tabs, TabScreen, useTabIndex, useTabNavigation } from "react-native-paper-tabs";
 import moment from "moment";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 
 import CalendarStrip from "react-native-calendar-strip";
 const DATA = [
@@ -68,7 +68,7 @@ const DoctorAppointment = (props) => {
               >
                 Upcoming
               </Text> */}
-              <View>
+              <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <Text>Upcoming</Text>
               </View>
           </TabScreen>
@@ -132,7 +132,7 @@ const DoctorAppointment = (props) => {
               <Button
                 style={styles.btnBookSchedule}
                 mode="contained"
-                onPress={() => console.log("Book Schedule Pressed")}
+                onPress={() => props.navigation.navigate("AcceptPatientSchedule")}
               >
                 <Text style={styles.textButton}>Book Schedule</Text>
               </Button>

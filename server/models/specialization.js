@@ -13,6 +13,10 @@ const specializationSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+
+    symptoms: {
+        type: [mongoose.Schema.Types.ObjectId,]
     }
 })
 

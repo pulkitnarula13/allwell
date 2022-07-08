@@ -1,122 +1,152 @@
-import { View, Text, Image } from "react-native";
-import React from 'react'
-import { ScrollView } from 'react-native-gesture-handler';
-import { StyleSheet, FlatList } from "react-native";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+import AppointmentContext from "../../Context/AppointmentContext";
+import { StyleSheet, TouchableOpacity, View, Text, Image, FlatList } from "react-native";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
+import { AuthContext } from "../../Context/AuthContext";
 
-export default function AllSymptoms() {
-    const DATA = [
-        {
-          name: "Cough",
-          image: "../../assets/icon1.png",
-        },
-        {
-          name: "Muscle Cramp",
-          image: "../../assets/icon2.png",
-        },
-        {
-          name: "Sore Throad",
-          image: "../../assets/icon3.png",
-        },
-        {
-          name: "Stomach Pain",
-          image: "../../assets/icon4.png",
-        },
-        {
-            name: "Stomach Pain1",
-            image: "../../assets/icon5.png",
-          },
-          {
-            name: "Congestion1",
-            image: "../../assets/icon6.png",
-          },
-          {
-            name: "Fever1",
-            image: "../../assets/icon7.png",
-          },
-          {
-            name: "Fever2",
-            image: "../../assets/icon8.png",
-          },
-          {
-            name: "Fever3",
-            image: "../../assets/icon9.png",
-          },
-          {
-            name: "Cough1",
-            image: "../../assets/icon11.png",
-          },
-          {
-            name: "Muscle1 Cramp",
-            image: "../../assets/icon21.png",
-          },
-          {
-            name: "Sore1 Throad",
-            image: "../../assets/icon31.png",
-          },
-      ];
+export default function AllSymptoms(props) {
+  useEffect(() => {
+    getSymptoms();
+  }, []);
 
-      const Item = ({ name, image }) => (
+  const [symptomsData, setSymptomsData] = useState([]);
+  const { setAppointmentData } = useContext(AppointmentContext);
+  const { userInfo } = useContext(AuthContext);
+
+  const getSymptoms = async () => {
+    const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
+
+    const modifiedData = data.data.data.map((item) => {
+      item.isSelect = false;
+      item.selectedClass = styles.list;
+      item.image = "../../assets/icon1.png";
+      return item;
+    });
+
+    setSymptomsData(modifiedData);
+  };
+
+  const selectItem = (data) => {
+    data.item.isSelect = !data.item.isSelect;
+    data.item.selectedClass = data.item.isSelect
+      ? styles.selected
+      : styles.list;
+
+    const index = symptomsData.findIndex((item) => data.item._id === item._id);
+
+    let tempdata = symptomsData;
+    tempdata[index] = data.item;
+
+    setSymptomsData(tempdata);
+  };
+
+  const renderItem = (item) => {
+    return (
+      <TouchableOpacity
+        style={[styles.list, item.selectedClass]}
+        onPress={() => selectItem(item)}
+      >
         <View style={styles.item}>
           <Image
             style={{ width: 100, height: 100 }}
             source={require("../../assets/icon.png")}
             resizeMode="contain"
           />
-          <Text style={styles.name1}>{name}</Text>
+          <Text style={styles.name1}>{item.name}</Text>
         </View>
-      );
+      </TouchableOpacity>
+    );
+  };
 
-      const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  const getSelectedSymptoms = () => {
+    const selectedSymptoms = symptomsData
+      .filter((data) => {
+        if (data.isSelect) {
+          return true;
+        }
+        return false;
+      })
+      .map((item) => item._id);
 
+    setAppointmentData({
+      symptoms: selectedSymptoms,
+    });
+
+    props.navigation.navigate("Doctor-Connect", {
+      symptomsData,
+    });
+  };
 
   return (
     <View style={styles.mainscroll}>
-     <View style = {styles.mainflat}>
-     <FlatList
-            style={{ height: 417, marginRight: 36, marginLeft: 36 }}
-            horizontal={false}
-            data={DATA}
-            renderItem={renderItem}
-            numColumns={3}
-            keyExtractor={(item) => item.name}
-            showsHorizontalScrollIndicator={false}
-          />
-          </View>
-          <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-          <View style={styles.btn}>
-          <Button color="white" onPress={()=>{
-        console.log("continue pressed")
-          }}>Continue</Button>
-          </View>
-          </View>
-
+      <View style={styles.mainflat}>
+        <FlatList
+          style={{ height: 417, marginRight: 36, marginLeft: 36 }}
+          horizontal={false}
+          data={symptomsData}
+          renderItem={renderItem}
+          numColumns={3}
+          keyExtractor={(item) => item.name}
+          extraData={symptomsData}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View style={styles.btn}>
+          <Button color="white" onPress={getSelectedSymptoms}>
+            Continue
+          </Button>
+        </View>
+      </View>
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
-    mainscroll:{
-        display:"flex",
-        flex:1
-    },
-    btn:{
-        width:257,
-        height:40,
-        backgroundColor:"#74CBD4",
-        borderRadius:8
-    },
-    item:{
-        marginRight:10,
-        marginBottom:22
-    },
-    mainflat:{
-        marginTop:38,
-        marginBottom:110,
-        height:417,
-        justifyContent:"center"
-,
-alignItems:"center"    },
-name1:{
-textAlign:"center"
-},
-})
+  mainscroll: {
+    display: "flex",
+    flex: 1,
+  },
+  btn: {
+    width: 257,
+    height: 40,
+    backgroundColor: "#74CBD4",
+    borderRadius: 8,
+  },
+  item: {
+    marginRight: 10,
+    marginBottom: 22,
+  },
+  mainflat: {
+    marginTop: 38,
+    marginBottom: 110,
+    height: 417,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  name1: {
+    textAlign: "center",
+    color: "white",
+  },
+  selected: { backgroundColor: "#FA7B5F" },
+  list: {
+    paddingVertical: 5,
+    margin: 3,
+    flexDirection: "row",
+    backgroundColor: "#192338",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    zIndex: -1,
+  },
+});

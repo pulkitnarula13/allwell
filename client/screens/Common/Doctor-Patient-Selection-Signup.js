@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 const DoctorPatientSelectionSignup = ({ navigation }) => {
   return (
@@ -43,9 +43,9 @@ const DoctorPatientSelectionSignup = ({ navigation }) => {
           <Text>I'm a Doctor</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      {/* <View>
         <Text>Already have an account ? </Text>
-      </View>
+      </View> */}
     </View>
   );
 };

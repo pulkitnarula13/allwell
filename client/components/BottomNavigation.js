@@ -12,7 +12,6 @@ import PatientProfile from "../screens/Patient/Patient-Profile";
 import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 
 
-
 const Bottomnavigation = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
 
