@@ -61,7 +61,7 @@ function NotificationItem(props) {
 const styles = StyleSheet.create({
     listItem: {
         margin: 5,
-        borderBottomColor:"gray",
+        borderBottomColor:"grey",
         borderBottomWidth:1,
         paddingBottom: 5
     },

@@ -24,7 +24,7 @@ const DoctorInbox = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       title: `Inbox`,
-    })
+    });
   }, []);
   const windowWidth = Dimensions.get("window").width;
 
@@ -40,7 +40,6 @@ const DoctorInbox = ({ navigation }) => {
       </View>
     );
   }
-  
 
   return (
     <View style={styles.main}>
@@ -61,10 +60,18 @@ const DoctorInbox = ({ navigation }) => {
           
         </TabScreen>
         <TabScreen label="Compeleted">
-        <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
-          <View>
-          <Doctorinboxdata/>
-          </View>
+          <View
+            style={{
+              padding: 14,
+              marginBottom: 34,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View>
+              <Doctorinboxdata />
+            </View>
           </View>
 
           {/* <ExploreWitHookExamples1 /> */}
@@ -116,24 +123,6 @@ const DoctorInbox = ({ navigation }) => {
             </DialogContent>
           </Dialog>
     </View>
-    // <View style={styles.Header}>
-    //   <View style={styles.headermain}>
-    //     <View style={styles.align}>
-    //       <Text style={styles.text2}>Inbox</Text>
-    //       <View style={styles.btnview}>
-    //         <Button style={styles.btnsetting}>
-    //           <Feather name="bookmark" size={24} color="black" />
-    //         </Button>
-    //         <Button style={styles.btnsetting}>
-    //           <Feather name="shopping-bag" size={24} color="black" />
-    //         </Button>
-    //       </View>
-    //     </View>
-    //   </View>
-    //   <View>
-
-    //   </View>
-    // </View>
   );
 };
 

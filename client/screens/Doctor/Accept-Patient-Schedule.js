@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
+import React, { useContext, useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-
-
+import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+import { AuthContext } from "../../Context/AuthContext";
 
 const DATA = [
   {
@@ -49,15 +50,58 @@ const Item = ({ name, image }) => (
   </View>
 );
 
-const AcceptPatientSchedule = () => {
+const AcceptPatientSchedule = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
 
-  // Date Time Picker 
-  // (Ref:- https://github.com/react-native-datetimepicker/datetimepicker#usage)
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(date);
-  const [mode, setMode] = useState('date');
+  const [mode, setMode] = useState("date");
   const [show, setShow] = useState(true);
+  const [appointmentInfo, setAppointmentInfo] = useState(props.route.params);
+  const { userInfo } = useContext(AuthContext);
+
+  const confirmAppointment = async () => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL_DEV}/appointments/confirm/${appointmentInfo.item._id}`,
+        {
+          date,
+          time,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      Alert.alert("Success", response.data.message);
+      props.navigation.navigate("Doctor-Home");
+    } catch (error) {
+      console.log(error, "error");
+      Alert.alert("Error", error.message);
+    }
+  };
+
+  const cancelAppointment = async () => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL_DEV}/appointments/cancel/${appointmentInfo.item._id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      Alert.alert("Success", response.data.message);
+      props.navigation.navigate("Doctor-Home");
+    } catch (error) {
+      Alert.alert("Error", response.data.message);
+    }
+  };
+  console.log(appointmentInfo, "appointmentInfo");
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -71,27 +115,25 @@ const AcceptPatientSchedule = () => {
   };
 
   const showDatepicker = () => {
-    showMode('date');
+    showMode("date");
   };
 
   const showTimepicker = () => {
-    showMode('time');
+    showMode("time");
   };
 
   return (
     <ScrollView>
       <View style={styles.outerview1}>
-        
         <View style={styles.outerview}>
           <Text style={styles.text1}>Schedule Patient</Text>
         </View>
 
         <View style={styles.innerview}>
-          <Text style={styles.text2}>Patient Name</Text>
+          <Text style={styles.text2}>{appointmentInfo.item.patient.name}</Text>
 
           <View style={styles.text3}>
-            <Text>Request Time: 11:11am</Text>
-            <Text>06/17/2022</Text>
+            <Text>Request Time: {appointmentInfo.item.createdAt}</Text>
           </View>
 
           <Text style={styles.datandtime1}>Symptoms</Text>
@@ -99,7 +141,7 @@ const AcceptPatientSchedule = () => {
           <View style={styles.flatlistView}>
             <FlatList
               horizontal={true}
-              data={DATA}
+              data={appointmentInfo.item.symptoms}
               renderItem={renderItem}
               keyExtractor={(item) => item.name}
             />
@@ -107,138 +149,83 @@ const AcceptPatientSchedule = () => {
 
           <Text style={styles.description}>More Description</Text>
           <Text style={styles.lorem1}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            similique minus quibusdam facilis nobis ipsum nihil consequuntur
-            aperiam vel! Consequuntur officia itaque pariatur dolor qui vitae
-            dolore eos atque? Neque!
+            {appointmentInfo.item?.qna[0]?.answer}
           </Text>
-
         </View>
-        {/* Inner view ends here */}
-
-        {/* <View style={styles.viewSchedulerContainer}>
-          <View style={styles.viewDateTimeContainer}>
-            <View style={styles.viewDate}>
-              <Text style={styles.textDatePicker} onPress={showDatepicker}>Date Picker</Text>
-            </View>
-
-            <View style={styles.viewTime}>
-              <Text style={styles.textTimePicker} onPress={showTimepicker}>Time Picker</Text>
-            </View>
-          </View>
-
-          <View style={styles.viewDateTimePicker}>
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              onChange={onChange}
-            />
-          )}
-          </View>
-
-          <Text style={styles.textSelected}>selected: {date.toLocaleString()}</Text>
-
-        </View> */}
 
         <View style={styles.viewDateTimeContainer}>
           <Text style={styles.txtDate}>Date</Text>
-          <Calendar 
+          <Calendar
             style={{
               // marginLeft: 40,
               borderWidth: 1,
-              borderColor: 'gray',
+              borderColor: "gray",
               // height: 350,
               // width: '80%',
             }}
             selected={date}
-            onDayPress={day => {
-            setDate(day.dateString);
-          }}
-          enableSwipeMonths={true}
-          theme={{
-            backgroundColor: '#ffffff',
-            calendarBackground: '#ffffff',
-            textSectionTitleColor: '#b6c1cd',
-            textSectionTitleDisabledColor: '#d9e1e8',
-            selectedDayBackgroundColor: '#00adf5',
-            selectedDayTextColor: '#ffffff',
-            todayTextColor: '#00adf5',
-            dayTextColor: '#2d4150',
-            textDisabledColor: '#d9e1e8',
-            dotColor: '#00adf5',
-            selectedDotColor: '#ffffff',
-            arrowColor: 'orange',
-            disabledArrowColor: '#d9e1e8',
-            monthTextColor: 'blue',
-            indicatorColor: 'blue',
-            textDayFontFamily: 'Poppins',
-            textMonthFontFamily: 'Poppins',
-            textDayHeaderFontFamily: 'Poppins',
-            textDayFontWeight: '300',
-            textMonthFontWeight: 'bold',
-            textDayHeaderFontWeight: '300',
-            textDayFontSize: 16,
-            textMonthFontSize: 16,
-            textDayHeaderFontSize: 16
-          }}
+            onDayPress={(day) => {
+              setDate(day.dateString);
+            }}
+            enableSwipeMonths={true}
+            theme={{
+              backgroundColor: "#ffffff",
+              calendarBackground: "#ffffff",
+              textSectionTitleColor: "#b6c1cd",
+              textSectionTitleDisabledColor: "#d9e1e8",
+              selectedDayBackgroundColor: "#00adf5",
+              selectedDayTextColor: "#ffffff",
+              todayTextColor: "#00adf5",
+              dayTextColor: "#2d4150",
+              textDisabledColor: "#d9e1e8",
+              dotColor: "#00adf5",
+              selectedDotColor: "#ffffff",
+              arrowColor: "orange",
+              disabledArrowColor: "#d9e1e8",
+              monthTextColor: "blue",
+              indicatorColor: "blue",
+              textDayFontWeight: "300",
+              textMonthFontWeight: "bold",
+              textDayHeaderFontWeight: "300",
+              textDayFontSize: 16,
+              textMonthFontSize: 16,
+              textDayHeaderFontSize: 16,
+            }}
           />
 
           <View style={styles.viewDividerLine} />
 
-
           <View style={styles.viewTimePicker}>
-          <Text style={styles.txtSelectedDate}>Select Time:</Text>
-          {show && (
-            <DateTimePicker  
+            <Text style={styles.txtSelectedDate}>Select Time:</Text>
+            {show && (
+              <DateTimePicker
                 value={time}
-                mode={'time'}
+                mode={"time"}
                 is24Hour={true}
                 onChange={onChange}
               />
-          )}
+            )}
           </View>
-
-
-
-
-
-            
-
-
-
         </View>
 
-
-
-
-        <View>
-
-
-
-        </View>
+        <View></View>
 
         <View style={styles.buttons}>
           <Button
             style={styles.availablebtn1}
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={cancelAppointment}
           >
             Decline
           </Button>
           <Button
             style={styles.availablebtn2}
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={confirmAppointment}
           >
             Accept
           </Button>
         </View>
-
-
-
       </View>
     </ScrollView>
   );
@@ -368,14 +355,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "D9D9D9",
     borderRadius: 10,
-
   },
-
-
 
   viewDateTimePicker: {
     textAlign: "center",
-    paddingRight: 150
+    paddingRight: 150,
   },
 
   textSelected: {
@@ -391,7 +375,6 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 18,
     padding: 10,
-
   },
 
   txtTime: {
@@ -409,7 +392,6 @@ const styles = StyleSheet.create({
   viewTimePicker: {
     paddingBottom: 20,
   },
-
 });
 
 export default AcceptPatientSchedule;

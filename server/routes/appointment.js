@@ -93,7 +93,7 @@ router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateApp
  *       200:
  *         description: return positive response
  */
- router.put("/confirm/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), confirmAppointment);
+ router.put("/confirm/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT), confirmAppointment);
 
  // Routes
 /**

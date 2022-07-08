@@ -59,6 +59,7 @@ const confirmAppointment = (req, res) => {
     {
       confirmed: true,
       date: req.body.date,
+      time: req.body.time
     },
     {
       returnOrignal: false,
@@ -152,6 +153,9 @@ const getAppointmentByDoctorId = (req, res) => {
     .populate({
       path: "symptoms",
     })
+    .populate({
+      path: "qna"
+    })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched  Appointment for given patient",
@@ -173,7 +177,6 @@ const getAppointmentByDoctorId = (req, res) => {
 const createAppointment = async (req, res) => {
   try {
     const data = req.body;
-    console.log(data, "incoming");
 
     const findDoctor = await Doctor.findById(data.doctor);
 
@@ -220,6 +223,7 @@ const createAppointment = async (req, res) => {
       patient: data.patient,
       symptoms: data.symptoms,
       qna: qna,
+      urgent: data.urgent
     });
 
     return res.status(201).json({

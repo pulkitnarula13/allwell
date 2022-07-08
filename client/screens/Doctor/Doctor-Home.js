@@ -43,11 +43,6 @@ const DoctorHome = ({ navigation }) => {
           },
         }
       );
-
-      // const modifiedData = data.data.data.map((val) => {
-      //   val.date = moment(val.date).format("ll");
-      //   return val;
-      // });
       setPatientAppointments(data.data.data);
 
       const confirmedAppointments = data.data.data.filter(

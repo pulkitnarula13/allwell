@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import Stepper from "react-native-stepper-ui";
 import PatientQuestionSummary from "./PatientQuestionSummary";
@@ -39,17 +39,24 @@ const PatientQuestionHome = ({ navigation }) => {
     useContext(AppointmentContext);
 
   const createAppointment = async () => {
+
+    console.log(appointmentData, "appointmentData");
+    try {
+      const response = await axios.post(
+        `${BASE_URL_DEV}/appointments`,
+        appointmentData,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      Alert.alert("Success", response.data.message);
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+    
     navigation.navigate("Requestwait");
-    const response = await axios.post(
-      `${BASE_URL_DEV}/appointments`,
-      appointmentData,
-      {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-    );
-    console.log(response, "response");
   };
 
   useEffect(() => {

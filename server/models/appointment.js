@@ -8,10 +8,13 @@ const Appointment = new Schema(
       type: Date,
     },
 
+    time: {
+      type: String
+    },
+
     doctor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Doctor",
-      required: true,
     },
 
     patient: {

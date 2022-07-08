@@ -32,13 +32,15 @@ const DoctorInfo = (props) => {
     getDoctorInfoById();
   }, []);
 
+  console.log(props, "props");
+
+
   const getDoctorInfoById = async () => {
     const response = await axios.get(
-      `${BASE_URL_DEV}/doctors/${xc}`
+      `${BASE_URL_DEV}/doctors/${props.route.params.id}`
     );
     setDoctorInfo(response.data.data);
   };
-
 
 
   const doctorSelect = () => {
@@ -63,14 +65,14 @@ const DoctorInfo = (props) => {
   };  
 
 
-  const submitData = () => {
+  const submitData = async () => {
     let data =  {
       rating: starRating,
       feedback: doctorReviewText,
       doctor:  props.route.params.id
     }
 
-    const response =  axios.post(
+    const response = axios.post(
       `${BASE_URL_DEV}/doctorReview`,
       data,
       {

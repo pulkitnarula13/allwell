@@ -2,11 +2,17 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Chip } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
+import moment from "moment";
+
 
 const WaitingCard = ({ item, navigation }) => {
+
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Accept-Patient-Schedule")}
+      onPress={() => navigation.navigate("Accept-Patient-Schedule", {
+        item: item
+      })}
     >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
@@ -23,7 +29,7 @@ const WaitingCard = ({ item, navigation }) => {
         </View>
         <View style={styles.chipCotainer}>
           <View>
-            <Text style={styles.desc}>Request on: {item.date}</Text>
+            <Text style={styles.desc}>Request on: {moment(item.createdAt).format("DD-MM-YYYY")}</Text>
           </View>
           <View style={styles.chip}>
             {item.symptoms.map((symptom, index) => {
