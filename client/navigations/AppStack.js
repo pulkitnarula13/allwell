@@ -33,6 +33,7 @@ import PatientQuestionSummary from "../screens/Patient/Questionaires/PatientQues
 import Notification from "../screens/Doctor/Notification";
 import AllSymptoms from "../screens/Patient/AllSymptoms";
 import ConnectPatient from "../screens/Patient/Connect-Doctor";
+import DoctorHome from "../screens/Doctor/Doctor-Home";
 
 const Stack = createNativeStackNavigator();
 
@@ -90,6 +91,7 @@ const AppStack = () => {
       <Stack.Screen name="PatientProfile" component={PatientProfile} />
       <Stack.Screen name="Patient-Chat" component={PatientChat} />
       <Stack.Screen name="AccountInformation" component={AccountInformation} />
+      <Stack.Screen name="Doctor-Home" component={DoctorHome} />
 
       {/* DOCTOR NAVIGATIONS ENDED*/}
 

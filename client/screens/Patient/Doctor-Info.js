@@ -65,7 +65,7 @@ const DoctorInfo = (props) => {
   };  
 
 
-  const submitData = () => {
+  const submitData = async () => {
     let data =  {
       rating: starRating,
       feedback: doctorReviewText,
