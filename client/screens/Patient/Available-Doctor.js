@@ -53,7 +53,7 @@ const AvailableDoctor = (props) => {
           renderItem={(data) => (
             <AvailableDoctorCard {...data} navigation={props.navigation} />
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item._id}
           numColumns={2}
           extraData={props.navigation}
           columnWrapperStyle={styles.flatListColumn}

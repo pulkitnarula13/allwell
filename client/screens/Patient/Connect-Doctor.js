@@ -14,6 +14,7 @@ import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import AppointmentContext from "../../Context/AppointmentContext";
 import { Ionicons } from "@expo/vector-icons";
+import { AuthContext } from "../../Context/AuthContext";
 
 let Screenheight = Dimensions.get("window").height;
 
@@ -29,6 +30,8 @@ const DATA = [
 ];
 
 const ConnectPatient = ({ navigation, route }) => {
+  const { userInfo } = useContext(AuthContext)
+  const [symptomsData, setSymptomsData] = useState([]);
   const { appointmentData } = useContext(AppointmentContext);
   const [selectedItem, setSelectedItems] = useState();
 
@@ -39,6 +42,25 @@ const ConnectPatient = ({ navigation, route }) => {
     );
     setSelectedItems(filteredArray);
   }, [route]);
+
+
+  useEffect(() => {
+    getSymptoms();
+  }, []);
+
+  const getSymptoms = async () => {
+    const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
+    const modifiedData = data.data.data.map((item) => {
+      item.image = "../../assets/icon1.png";
+      return item;
+    });
+
+    setSymptomsData(modifiedData);
+  };
 
   const Item = ({ name, image }) => (
     <View style={styles.item}>
@@ -51,7 +73,21 @@ const ConnectPatient = ({ navigation, route }) => {
     </View>
   );
 
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  const Item1= ({ name, image }) => (
+    <TouchableOpacity onPress={() => navigation.navigate("All-Symptoms")}>
+      <View style={styles.item}>
+        <Image
+          style={{ width: 100, height: 100, marginRight: 14 }}
+          source={require("../../assets/icon.png")}
+          resizeMode="contain"
+        />
+        <Text style={styles.name1}>{name}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  const renderItem = ({ item }) => <Item1 name={item.name} image={item.image} />;
+
 
   const renderSymptoms = ({ item }) => {
     return (
@@ -85,44 +121,57 @@ const ConnectPatient = ({ navigation, route }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("Add-Family-Member")}
           >
-            <Button>
+            <Button
+            onPress={() => navigation.navigate("Add-Family-Member")}
+            >
               <Ionicons name="ios-add-circle-outline" size={94} color="black" />
             </Button>
           </TouchableOpacity>
         </View>
 
         <View style={styles.symptoms}>
-          <Text style={styles.subheadingtextview}>Selected Symptoms</Text>
+          <Text style={styles.subheadingtextview}>Select Symptoms</Text>
+          <Text
+              onPress={() => {
+                navigation.navigate("All-Symptoms");
+              }}
+              style={{ marginRight: 40, fontWeight: "700" }}
+            >
+              View All
+            </Text>
         </View>
         <View>
-          <FlatList
-            horizontal={true}
-            data={selectedItem}
-            renderItem={renderSymptoms}
-            keyExtractor={(item) => item.name}
-          />
-        </View>
+            <FlatList
+              style={{ height: 110, marginRight: 36, marginLeft: 36 }}
+              horizontal={true}
+              data={symptomsData}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.name}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
 
         <View style={styles.speciality}>
-          <Text style={styles.subheadingtextview}>Selected Speciality</Text>
+          <Text style={styles.subheadingtextview}>Select Speciality</Text>
           <Text style={styles.subheadingtextview1}>Neurologists</Text>
         </View>
         <View style={{ alignItems: "center" }}>
+        <Button
+            style={styles.availablebtn1}
+            mode="contained"
+            onPress={() => navigation.navigate("Patient-question-home")}
+          >
+            Connect Now
+          </Button>
           <Button
             style={styles.availablebtn}
             mode="contained"
             onPress={() => navigation.navigate("AvailableDoctor")}
           >
-            Available Doctor
+            View Specialist List
           </Button>
 
-          <Button
-            style={styles.availablebtn1}
-            mode="contained"
-            onPress={() => navigation.navigate("Patient-question-home")}
-          >
-            ASAP
-          </Button>
+          
         </View>
       </View>
     </ScrollView>
@@ -147,7 +196,7 @@ const styles = StyleSheet.create({
     width: 282,
     height: 45,
     justifyContent: "center",
-    marginTop: 68,
+    marginTop: 19,
     fontWeight: "500",
     fontSize: 17,
   },
@@ -178,6 +227,9 @@ const styles = StyleSheet.create({
   symptoms: {
     // position:'absolute',
     // top:400
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
     marginTop: 24,
   },
 

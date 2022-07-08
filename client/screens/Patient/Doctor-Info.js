@@ -40,6 +40,7 @@ const DoctorInfo = (props) => {
   };
 
 
+
   const doctorSelect = () => {
     props.navigation.navigate("Patient-question-home");
     setAppointmentData({
@@ -69,7 +70,7 @@ const DoctorInfo = (props) => {
       doctor:  props.route.params.id
     }
 
-    const response = await axios.post(
+    const response =  axios.post(
       `${BASE_URL_DEV}/doctorReview`,
       data,
       {

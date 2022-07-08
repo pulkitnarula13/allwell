@@ -155,7 +155,7 @@ const PatientHome = ({ navigation }) => {
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() => console.log("Pressed")}
+              onPress={() => navigation.navigate("Patient-question-home")}
             >
               Chat with a doctor
             </Button>
