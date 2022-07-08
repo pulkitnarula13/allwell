@@ -14,6 +14,8 @@ const doctorRoutes = require("./routes/doctor");
 const appointmentRoutes = require("./routes/appointment");
 const qnaRoutes = require("./routes/qna");
 const doctorReview = require("./routes/doctorReview");
+const familyMemberRoutes = require('./routes/familyMember');
+
 
 const { baseURL } = require("./constant");
 
@@ -71,6 +73,8 @@ app.use(`${baseURL}/doctors`, doctorRoutes);
 app.use(`${baseURL}/appointments`, appointmentRoutes);
 app.use(`${baseURL}/qna`, qnaRoutes);
 app.use(`${baseURL}/doctorReview`, doctorReview);
+app.use(`${baseURL}/familyMember`, familyMemberRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`All well server running at port ${PORT}`);
