@@ -262,26 +262,6 @@ const DoctorInfo = (props) => {
                   </Button>
                 </View>
 
-                <View style={styles.viewTextAreaContainer}>
-                  <TextInput
-                    multiline={true}
-                    numberOfLines={4}
-                    placeholder="Write your review here"
-                    style={styles.textArea}
-                    onChangeText={(doctorReviewText) =>
-                      setDoctorReviewText(doctorReviewText)
-                    }
-                    value={doctorReviewText}
-                  />
-                </View>
-
-                <Button
-                  style={styles.btnSubmitReview}
-                  mode="contained"
-                  onPress={() => console.log("Review Submit Pressed")}
-                >
-                  <Text style={styles.textButton}>Submit</Text>
-                </Button>
               </View>
             </DialogContent>
           </Dialog>

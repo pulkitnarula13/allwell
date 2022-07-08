@@ -102,6 +102,7 @@ const PatientQuestionHome = ({ navigation }) => {
       <Stepper
         active={active}
         content={content}
+        buttonStyle={{width:150,height:49,backgroundColor:"#74CBD4",justifyContent:"center",alignItems:"center",borderRadius:100}}
         onBack={() => setActive((p) => p - 1)}
         onFinish={() => createAppointment()}
         onNext={() => setActive((p) => p + 1)}
