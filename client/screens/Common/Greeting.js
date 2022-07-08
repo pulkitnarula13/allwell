@@ -3,7 +3,7 @@ import React from "react";
 import GoogleSignup from "../../components/GoogleSignup";
 import { Divider } from "react-native-paper";
 import { Text } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Greeting = ({ navigation }) => {
   return (
@@ -14,25 +14,29 @@ const Greeting = ({ navigation }) => {
           With Medico, you can connect to the doctor anytime you want 24/7.
         </Text>
       </View>
-      <View style={style.button}>
+      <TouchableOpacity onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}>
+      <View style={style.button} >
         <Button
         style={{fontSize:14,lineHeight:33}}
 
         color="white"
           title="Signup with Email"
-          onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}
+          
         />
         </View>
+        </TouchableOpacity>
         <View style={style.button1}>
       <GoogleSignup />
       </View>
-      <View style={style.button1}>
+      <TouchableOpacity onPress={() => navigation.navigate("Doctor-Patient-Selection-Login")}>
+      <View style={style.button1} >
         <Button
         color="#74CBD4"
           title="Login"
-          onPress={() => navigation.navigate("Doctor-Patient-Selection-Login")}
+          
         />
         </View>
+        </TouchableOpacity>
         <Divider />
         {/* <TouchableOpacity style={style.guest}>
           <Text> Continue as Guest</Text>

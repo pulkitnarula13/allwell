@@ -6,27 +6,26 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { React, useEffect, useState, FlatList } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import Dialog, {
-  DialogFooter,
-  DialogButton,
   DialogContent,
   SlideAnimation,
 } from "react-native-popup-dialog";
 import { Rating } from "react-native-ratings";
 import axios from "axios";
+import AppointmentContext from "../../Context/AppointmentContext";
 import { BASE_URL_DEV } from "@env";
 
 const DoctorInfo = (props) => {
-  console.log(props, "props");
   let Screenheight = Dimensions.get("window").height;
 
   const [dialogbox, setDialogbox] = useState(false);
   const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
+  const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
 
   useEffect(() => {
     getDoctorInfoById();
@@ -36,9 +35,17 @@ const DoctorInfo = (props) => {
     const response = await axios.get(
       `${BASE_URL_DEV}/doctors/${props.route.params.id}`
     );
-    console.log(response.data.data);
     setDoctorInfo(response.data.data);
   };
+
+
+  const doctorSelect = () => {
+    props.navigation.navigate("Patient-question-home");
+    setAppointmentData({
+      ...appointmentData,
+      doctor: props.route.params.id
+    })
+  }
 
   const specialityRender = (props) => {
     return (
@@ -90,7 +97,7 @@ const DoctorInfo = (props) => {
                   {doctorInfo.province}
                 </Text>
               ) : (
-                <Text></Text>
+                null
               )}
             </View>
           </View>
@@ -122,14 +129,7 @@ const DoctorInfo = (props) => {
               Specialities
             </Text>
             <View style={styles.twoimages}>
-              {/* {doctorInfo?.specialities ? (
-                <FlatList
-                  style={{ marginBottom: 40 }}
-                  data={doctorInfo?.specialities}
-                  renderItem={specialityRender}
-                  keyExtractor={(item, index) => index}
-                />
-              ) : null} */}
+
             </View>
           </View>
 
@@ -186,7 +186,7 @@ const DoctorInfo = (props) => {
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() => props.navigation.navigate("Patient-question-home")}
+              onPress={doctorSelect}
             >
               Connect
             </Button>

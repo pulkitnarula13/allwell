@@ -17,6 +17,7 @@ const PatientQuestionOne = (props) => {
         <Questions
           data={props.mainData.question}
           setAnswer={(val) => {
+            console.log(val, "inside patientQuestioOne");
             props.stepperData({
               ...props.mainData,
               answer: val,

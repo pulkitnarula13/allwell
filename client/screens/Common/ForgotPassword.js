@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Dimensions } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 

@@ -11,15 +11,14 @@ import { Rating } from "react-native-ratings";
 import { Button } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 const AvailableDoctorCard = (props) => {
-
-  console.log(props, "props");
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate("Doctor-Info", {
-          id: props.item._id
-        })}
+        onPress={() =>
+          props.navigation.navigate("Doctor-Info", {
+            id: props.item._id,
+          })
+        }
       >
         <View
           style={{
@@ -30,7 +29,11 @@ const AvailableDoctorCard = (props) => {
           }}
         >
           <Image
-            source={{ uri: props.item.profilePicture ? props.item.profilePicture : require("../assets/icon.png") }}
+            source={{
+              uri: props.item.profilePicture
+                ? props.item.profilePicture
+                : require("../assets/icon.png"),
+            }}
             style={styles.image}
             resizeMode="contain"
           />

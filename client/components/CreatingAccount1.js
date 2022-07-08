@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 const CreatingAccount1 = (props) => {
@@ -19,6 +19,7 @@ const CreatingAccount1 = (props) => {
 
     if (!result.cancelled) {
       setimage1(result.uri);
+      console.log(result.uri);
       props.setFirstStepperData(result);
       props.setFirstStepperData({
         image: result,

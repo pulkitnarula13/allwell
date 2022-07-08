@@ -9,11 +9,13 @@ import PatientQuestionFour from "./PatientQuestionFour";
 import PatientQuestionFifth from "./PatientQuestionFifth";
 import PatientQuestionImage from "./PatientQuestionImage";
 import AppointmentContext from "../../../Context/AppointmentContext";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const PatientQuestionHome = ({ navigation }) => {
-
-
   const [active, setActive] = useState(0);
+  const { userInfo } = useContext(AuthContext);
   const [firstStepData, setFirstStepperData] = useState({
     question: "What is the issue you are facing ?",
   });
@@ -33,12 +35,32 @@ const PatientQuestionHome = ({ navigation }) => {
 
   const [patientSummary, setPatientSummary] = useState([]);
 
-  const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
-  
+  const { appointmentData, setAppointmentData } =
+    useContext(AppointmentContext);
+
+  const createAppointment = async () => {
+    navigation.navigate("Requestwait");
+    const response = await axios.post(`${BASE_URL_DEV}/appointments`, appointmentData, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
+    console.log(response, "response");
+  };
+
   useEffect(() => {
-    const data = [firstStepData, secondStepperData, thirdStepperData, fourthStepperData, fifthStepperData, sixthStepperData];
+    const data = [
+      firstStepData,
+      secondStepperData,
+      thirdStepperData,
+      fourthStepperData,
+      fifthStepperData,
+      sixthStepperData,
+    ];
+    console.log(data, "patientHome");
     setPatientSummary(data);
   }, [sixthStepperData]);
+
   const content = [
     <PatientQuestionOne
       mainData={firstStepData}
@@ -77,9 +99,7 @@ const PatientQuestionHome = ({ navigation }) => {
         active={active}
         content={content}
         onBack={() => setActive((p) => p - 1)}
-        onFinish={() => {
-          navigation.navigate("Requestwait");
-        }}
+        onFinish={() => createAppointment()}
         onNext={() => setActive((p) => p + 1)}
         stepStyle={{ display: "none" }}
       />

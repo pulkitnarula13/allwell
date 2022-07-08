@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { List } from "react-native-paper";
 import AppointmentContext from "../../../Context/AppointmentContext";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const PatientQuestionSummary = ({ data }) => {
   const [expanded, setExpanded] = useState(true);
@@ -9,24 +10,23 @@ const PatientQuestionSummary = ({ data }) => {
 
   const handlePress = () => setExpanded(!expanded);
 
-  const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
-
+  const { appointmentData, setAppointmentData } =
+    useContext(AppointmentContext);
+  const { userInfo } = useContext(AuthContext);
   useEffect(() => {
     const dbData = data.map((val) => {
       if (!val.question) {
         val.question = "";
-        val.answer = ""
+        val.answer = "";
       }
       return val;
-    })
-    
+    });
 
     setAppointmentData({
       ...appointmentData,
-      qna: dbData
-    })
-    
-    console.log(appointmentData, "CONTEXT");
+      qna: dbData,
+      patient: userInfo.id,
+    });
     const output = data.pop();
     setImagesList(output);
   }, [data]);
@@ -70,12 +70,12 @@ const PatientQuestionSummary = ({ data }) => {
         </List.Section>
       </View>
       <Text>Photos Uploaded</Text>
-      <FlatList
+      {/* <FlatList
         data={imagesList.images}
         renderItem={renderImages}
         horizontal={true}
         keyExtractor={(data, index) => index}
-      />
+      /> */}
     </View>
   );
 };

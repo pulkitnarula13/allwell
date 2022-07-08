@@ -66,6 +66,7 @@ const AppStack = () => {
 
       {/* DOCTOR NAVIGATIONS STARTED*/}
       <Stack.Screen name="Doctor-Inbox" component={DoctorInbox} />
+     
       <Stack.Screen name="Doctor-Waiting-List" component={DoctorWaitingList} />
       <Stack.Screen name="Doctor-Urgent" component={DoctorUrgent} />
       <Stack.Screen
@@ -81,6 +82,7 @@ const AppStack = () => {
       />
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
+      <Stack.Screen name="AcceptPatientSchedule" component={AcceptPatientSchedule} />
       <Stack.Screen name="PatientProfile" component={PatientProfile} />
       <Stack.Screen name="Patient-Chat" component={PatientChat} />
       <Stack.Screen name="AccountInformation" component={AccountInformation} />

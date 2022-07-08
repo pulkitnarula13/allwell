@@ -2,9 +2,16 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Chip } from "react-native-paper";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native";
 import AppointmentCard from "../../components/AppointmentCard";
 import DetailCardHome from "../../components/DetailCardHome";
+import Dialog, {
+  DialogButton,
+  DialogContent,
+  SlideAnimation,
+} from "react-native-popup-dialog";
+
+import * as moment from "moment";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 
@@ -12,6 +19,7 @@ const DoctorHome = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
 
   const [activeDoctorStatus, setActiveDoctorStatus] = useState("Active");
+  const [dialogbox, setDialogbox] = useState(false);
   const [patientAppointments, setPatientAppointments] = useState([]);
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
   const [urgentAppointments, setUrgentAppointments] = useState([]);
@@ -19,6 +27,11 @@ const DoctorHome = ({ navigation }) => {
   const [inboxDetail, setInboxDetail] = useState([]);
 
   const [waitingList, setWaitingList] = useState([]);
+
+  function changeDoctorStatus(e) {
+    setActiveDoctorStatus(e);
+    setDialogbox(false);
+  }
 
   const getPatientAppointments = async () => {
     try {
@@ -66,7 +79,11 @@ const DoctorHome = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.nameContainer}>
           <Text style={styles.doctorname}>Welcome, Dr. {userInfo.name}</Text>
-          <Chip selectedColor="white" style={styles.chipstyle}>
+          <Chip
+            selectedColor="white"
+            style={styles.chipstyle}
+            onPress={() => setDialogbox(true)}
+          >
             {activeDoctorStatus}
           </Chip>
         </View>
@@ -131,6 +148,48 @@ const DoctorHome = ({ navigation }) => {
               />
             </TouchableOpacity>
           </View>
+
+          <Dialog
+            visible={dialogbox}
+            dialogAnimation={
+              new SlideAnimation({
+                slideFrom: "bottom",
+              })
+            }
+            onTouchOutside={() => {
+              setDialogbox(false);
+            }}
+            rounded
+            width={1}
+            dialogStyle={styles.dialogStyles}
+          >
+            <DialogContent>
+              <View style={styles.viewDoctorStatusModal}>
+                <Text
+                  style={styles.textModalStatus}
+                  onPress={() => changeDoctorStatus("Active")}
+                >
+                  Active
+                </Text>
+                <View style={styles.viewDividerLine} />
+
+                <Text
+                  style={styles.textModalStatus}
+                  onPress={() => changeDoctorStatus("Busy")}
+                >
+                  Busy
+                </Text>
+                <View style={styles.viewDividerLine} />
+
+                <Text
+                  style={styles.textModalStatus}
+                  onPress={() => changeDoctorStatus("Inactive")}
+                >
+                  Inactive
+                </Text>
+              </View>
+            </DialogContent>
+          </Dialog>
         </View>
       </View>
     </ScrollView>
@@ -184,6 +243,32 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 55,
     marginBottom: 41,
+  },
+  viewDoctorStatusModal: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 40,
+    textAlign: "center",
+  },
+  viewDividerLine: {
+    borderBottomColor: "black",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  dialogStyles: {
+    bottom: 0,
+    marginBottom: 0,
+    marginTop: "120%",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+
+  textModalStatus: {
+    fontSize: 25,
+    paddingTop: 40,
+    paddingBottom: 20,
+    textAlign: "center",
   },
 });
 

@@ -1,7 +1,7 @@
 import { View, Text,StyleSheet,Image ,ScrollView} from 'react-native'
 import React,{useState} from 'react'
 import { TextInput,Button } from 'react-native-paper';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import * as ImagePicker from "expo-image-picker";
 
  const AccountInformation = ({navigation})=> {

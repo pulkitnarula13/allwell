@@ -5,7 +5,7 @@ import {
   Dimensions,
   ScrollView,
   Alert,
-  Touchable,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
@@ -16,10 +16,10 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from "expo-location";
+
 import { FloatingAction } from "react-native-floating-action";
 import { BASE_URL_DEV } from "@env";
 import axios from "axios";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const PatientHome = ({ navigation }) => {
   const [latitude, setlatitude] = useState("0");
@@ -70,8 +70,9 @@ const PatientHome = ({ navigation }) => {
     const location = await getCurrentPositionAsync().then((data) => {
       setlatitude(data.coords.latitude);
       setlongitude(data.coords.longitude);
+
       console.log(data.coords.latitude, "latitude");
-      console.log(data.coords.longitude, "longitutde");
+      console.log(data.coords.longitude, "longitude");
     });
   }
 
@@ -88,7 +89,9 @@ const PatientHome = ({ navigation }) => {
     </TouchableOpacity>
   );
   let Screenheight = Dimensions.get("window").height;
+
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+
   return (
     <View
       style={{
@@ -101,6 +104,13 @@ const PatientHome = ({ navigation }) => {
     >
       <View style={{ paddingLeft: 20, backgroundColor: "#FFFFFFF" }}>
         <ScrollView>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          ></View>
           <View
             style={{
               marginTop: 17.81,
@@ -190,7 +200,7 @@ const PatientHome = ({ navigation }) => {
             <FlatList
               style={{ height: 110, marginRight: 36, marginLeft: 36 }}
               horizontal={true}
-              data={symptomsData.slice(0, 4)}
+              data={symptomsData}
               renderItem={renderItem}
               keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
@@ -207,18 +217,30 @@ const PatientHome = ({ navigation }) => {
             <Text style={{ fontWeight: "700", fontSize: 16 }}>
               Near By Doctors
             </Text>
-          </View>
-          <View>
-            <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 16 }}>
-              Popular Doctors
-            </Text>
+            {/* <Button
+            style={{
+              borderRadius: 10,
+              backgroundColor: "gray",
+              width: 230,
+              height: 40,
+              justifyContent: "center",
+              marginRight: 31,
+              borderColor: "#000000",
+              borderWidth: 1,
+              marginLeft: 3,
+              marginBottom: 50,
+            }}
+            mode="contained"
+            onPress={() => console.log("Pressed")}
+          >
+            Try Chat Bot
+          </Button> */}
           </View>
           <View
             style={{
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
-              marginTop: 10,
             }}
           >
             <View
@@ -305,6 +327,11 @@ const PatientHome = ({ navigation }) => {
                 <Text style={{ color: "black" }}>5Km</Text>
               </Button>
             </View>
+          </View>
+          <View>
+            <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 16 }}>
+              Popular Doctors
+            </Text>
           </View>
           <View
             style={{

@@ -1,11 +1,9 @@
-import { View, Text, Image, Switch, TouchableOpacity } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
-import { StyleSheet, FlatList } from "react-native";
-import { Button } from "react-native-paper";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import AppointmentContext from "../../Context/AppointmentContext";
+import { StyleSheet, TouchableOpacity, View, Text, Image, FlatList } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import { Button } from "react-native-paper";
 
 export default function AllSymptoms(props) {
   useEffect(() => {
@@ -39,7 +37,6 @@ export default function AllSymptoms(props) {
     let tempdata = symptomsData;
     tempdata[index] = data.item;
 
-    console.log(tempdata);
     setSymptomsData(tempdata);
   };
 
@@ -62,22 +59,23 @@ export default function AllSymptoms(props) {
   };
 
   const getSelectedSymptoms = () => {
-    const selectedSymptoms = symptomsData.filter((data) => {
-      if (data.isSelect) {
-        return true;
-      }
-      return false;
-    }).map(item => item._id);
+    const selectedSymptoms = symptomsData
+      .filter((data) => {
+        if (data.isSelect) {
+          return true;
+        }
+        return false;
+      })
+      .map((item) => item._id);
 
     setAppointmentData({
-      symptoms: selectedSymptoms
-    })
+      symptoms: selectedSymptoms,
+    });
 
     props.navigation.navigate("Doctor-Connect", {
-      symptomsData
+      symptomsData,
     });
-    
-  }
+  };
 
   return (
     <View style={styles.mainscroll}>
@@ -101,10 +99,7 @@ export default function AllSymptoms(props) {
         }}
       >
         <View style={styles.btn}>
-          <Button
-            color="white"
-            onPress={getSelectedSymptoms}
-          >
+          <Button color="white" onPress={getSelectedSymptoms}>
             Continue
           </Button>
         </View>
@@ -136,7 +131,7 @@ const styles = StyleSheet.create({
   },
   name1: {
     textAlign: "center",
-    color: "white"
+    color: "white",
   },
   selected: { backgroundColor: "#FA7B5F" },
   list: {

@@ -38,7 +38,6 @@ const AvailableDoctor = (props) => {
       .then((response) => {
         setAllDoctorsData(response.data.data);
         console.log(response.data.data);
-        Alert.alert("You are on available doctor screen");
       })
       .catch((error) => {
         Alert.alert(error.message);
