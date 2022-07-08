@@ -18,7 +18,7 @@ const DoctorInbox = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       title: `Inbox`,
-    })
+    });
   }, []);
   const windowWidth = Dimensions.get("window").width;
 
@@ -34,7 +34,6 @@ const DoctorInbox = ({ navigation }) => {
       </View>
     );
   }
-  
 
   return (
     <View style={styles.main}>
@@ -43,20 +42,33 @@ const DoctorInbox = ({ navigation }) => {
       </View>
       <Tabs>
         <TabScreen label="Current">
-          
           <View>
-          <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
-          
-          <Doctorinboxdata/>
+            <View
+              style={{
+                padding: 14,
+                marginBottom: 34,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Doctorinboxdata />
+            </View>
           </View>
-          </View>
-          
         </TabScreen>
         <TabScreen label="Compeleted">
-        <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
-          <View>
-          <Doctorinboxdata/>
-          </View>
+          <View
+            style={{
+              padding: 14,
+              marginBottom: 34,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View>
+              <Doctorinboxdata />
+            </View>
           </View>
 
           {/* <ExploreWitHookExamples1 /> */}
@@ -85,7 +97,6 @@ const DoctorInbox = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  
   main: {
     flex: 1,
   },

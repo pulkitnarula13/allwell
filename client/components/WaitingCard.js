@@ -6,7 +6,9 @@ import { TouchableOpacity } from "react-native";
 const WaitingCard = ({ item, navigation }) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Accept-Patient-Schedule")}
+      onPress={() => navigation.navigate("Accept-Patient-Schedule", {
+        item: item
+      })}
     >
       <View style={styles.container}>
         <View style={styles.imageContainer}>

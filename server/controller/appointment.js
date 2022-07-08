@@ -59,6 +59,7 @@ const confirmAppointment = (req, res) => {
     {
       confirmed: true,
       date: req.body.date,
+      time: req.body.time
     },
     {
       returnOrignal: false,
@@ -151,6 +152,9 @@ const getAppointmentByDoctorId = (req, res) => {
     })
     .populate({
       path: "symptoms",
+    })
+    .populate({
+      path: "qna"
     })
     .then((result) => {
       return res.status(200).json({
