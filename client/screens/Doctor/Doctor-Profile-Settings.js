@@ -11,7 +11,7 @@ const DoctorProfileSettings = ({ navigation }) => {
 
   const patientLogout = () => {
     logout();
-    navigation.navigate("Doctor-Login");
+    navigation.navigate("greeting");
   };
 
   return (
