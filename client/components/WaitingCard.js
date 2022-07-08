@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Chip } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
+import moment from "moment";
+
 
 const WaitingCard = ({ item, navigation }) => {
   return (
@@ -25,7 +27,7 @@ const WaitingCard = ({ item, navigation }) => {
         </View>
         <View style={styles.chipCotainer}>
           <View>
-            <Text style={styles.desc}>Request on: {item.date}</Text>
+            <Text style={styles.desc}>Request on: {moment(item.createdAt).format("DD-MM-YYYY")}</Text>
           </View>
           <View style={styles.chip}>
             {item.symptoms.map((symptom, index) => {
