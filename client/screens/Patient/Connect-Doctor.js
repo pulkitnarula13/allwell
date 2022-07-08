@@ -34,7 +34,7 @@ const ConnectPatient = ({ navigation, route }) => {
 
   console.log(route, "navigation");
   useEffect(() => {
-    const filteredArray = route.params.symptomsData.filter((value) =>
+    const filteredArray = route?.params?.symptomsData.filter((value) =>
       appointmentData.symptoms.includes(value._id)
     );
     setSelectedItems(filteredArray);
