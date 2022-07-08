@@ -124,7 +124,7 @@ const PatientHome = ({ navigation }) => {
               justifyContent: "space-between",
             }}
           >
-            <Text style={styles.heading}>Hello,Guest</Text>
+            <Text style={styles.heading}>Hello, {userInfo.name}</Text>
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Button onPress={getlocationhandler}>
                 <Ionicons name="location-outline" size={24} color="#74CBD4" />

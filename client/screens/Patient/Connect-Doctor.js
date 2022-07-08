@@ -30,6 +30,7 @@ const DATA = [
 
 const ConnectPatient = ({ navigation, route }) => {
   const { appointmentData } = useContext(AppointmentContext);
+  const { setAppointmentData } = useContext(AppointmentContext);
   const [selectedItem, setSelectedItems] = useState();
 
   console.log(route, "navigation");
@@ -65,6 +66,14 @@ const ConnectPatient = ({ navigation, route }) => {
       </View>
     );
   };
+
+  async function asapButtonClick(){
+    setAppointmentData({
+      ...appointmentData,
+      urgent: true,
+    });
+    navigation.navigate("Patient-question-home");
+  }
 
   return (
     <ScrollView>
@@ -119,7 +128,7 @@ const ConnectPatient = ({ navigation, route }) => {
           <Button
             style={styles.availablebtn1}
             mode="contained"
-            onPress={() => navigation.navigate("Patient-question-home")}
+            onPress={asapButtonClick}
           >
             ASAP
           </Button>
