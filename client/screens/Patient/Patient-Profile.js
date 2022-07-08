@@ -7,24 +7,34 @@ import { BASE_URL_DEV } from "@env";
 import { AuthContext } from '../../Context/AuthContext';
 
 const  PatientProfile = (props)=> {
-  let width = Dimensions.get("window").width;
+  
   const { userInfo } = useContext(AuthContext);
 
   const [PatientProfileData, setPatientProfileData] = useState();
 
-
   useEffect(() => {
-    getPatientProfile();
+    getdata();
   }, []);
 
-  const getPatientProfile = async () => {
-    const userData = await axios.get(`${BASE_URL_DEV}/patients/${userInfo.id}`).then((userData)=>{
-      setPatientProfileData(userData);
-      console.log(userData);
 
-    })
+  const getdata = async () => {
+    try {
+  const userdata = await axios.get(
+    `${BASE_URL_DEV}/patients/${userInfo.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+  );
+  // setPatientProfileData(data.data.data);
+  console.log(userdata.data.data)
+  setPatientProfileData(userdata.data.data);
     
-  };
+  }catch (error) {
+    console.log(error);
+  }
+};
 
   return (
 
@@ -55,7 +65,7 @@ const  PatientProfile = (props)=> {
       </View>
       <View style={styles.info1}>
       <Text style={styles.infotext1}>Email</Text>
-      <Text style={styles.infotext11}>John@medico.com</Text>
+      <Text style={styles.infotext11}>{PatientProfileData?.email}</Text>
       </View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>Mobile Number</Text>
@@ -63,7 +73,7 @@ const  PatientProfile = (props)=> {
       </View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>MSP Number</Text>
-      <Text style={styles.infotext11}>123 456 7890</Text>
+      <Text style={styles.infotext11}>{PatientProfileData?.healthNumber}</Text>
       </View>
       <View style={styles.info2}>
       <Text style={styles.infotext2}>Address</Text>
@@ -71,7 +81,7 @@ const  PatientProfile = (props)=> {
       </View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>Date of birth</Text>
-      <Text style={styles.infotext11}>1980. 08. 18</Text>
+      <Text style={styles.infotext11}>{PatientProfileData?.dob}</Text>
       </View>
       <View style={styles.info3}>
       <Text style={styles.infotext13}>Short Bio</Text>
