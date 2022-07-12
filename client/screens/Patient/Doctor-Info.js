@@ -170,10 +170,10 @@ const DoctorInfo = (props) => {
               Certifications
             </Text>
             <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
-              {"\u2022"} Lorem Ipsum Dolor
+              {"\u2022"} Patient Care Technician
             </Text>
             <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
-              {"\u2022"} Lorem Ipsum Dolor
+              {"\u2022"} Certified Clinical Medical Assistant (CCMA)
             </Text>
           </View>
 

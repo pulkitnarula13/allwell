@@ -3,7 +3,7 @@ const ROLE = require("../config/roles");
 const router = express.Router();
 
 const {
-  createAppointment, getAllAppointments, getAppointmentByPatientId, getAppointmentByDoctorId, confirmAppointment, cancelAppointment, updateAppointment, getAppointmentById,
+  createAppointment, getAllAppointments, getAppointmentByPatientId, getAppointmentByDoctorId, confirmAppointment, cancelAppointment, updateAppointment, getAppointmentById, completeAppointment,
 } = require("../controller/appointment");
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
@@ -94,6 +94,18 @@ router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateApp
  *         description: return positive response
  */
  router.put("/confirm/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT), confirmAppointment);
+
+ /**
+ * @swagger
+ * /complete/:id:
+ *   put:
+ *     description: Confirm the appointment using id from the database
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+  router.put("/complete/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT), completeAppointment);
+
 
  // Routes
 /**

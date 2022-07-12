@@ -66,8 +66,8 @@ const CreatingAccount3 = (props) => {
           list={specialities}
         />
 
-        <Text style={styles.textspeciality}>Certifications</Text>
-        <DropDown
+        {/* <Text style={styles.textspeciality}>Certifications</Text> */}
+        {/* <DropDown
           label={"Chose Your Certifications"}
           mode={"outlined"}
           visible={showCertificationDropDown}
@@ -84,10 +84,10 @@ const CreatingAccount3 = (props) => {
             });
           }}
           list={certification}
-        />
+        /> */}
 
-        <Text style={styles.textspeciality}>Certifications</Text>
-        <DropDown
+        {/* <Text style={styles.textspeciality}>Certifications</Text> */}
+        {/* <DropDown
           label={"Chose Your Languages"}
           mode={"outlined"}
           visible={showLangaugesDropdown}
@@ -104,7 +104,7 @@ const CreatingAccount3 = (props) => {
             });
           }}
           list={languages}
-        />
+        /> */}
       </View>
 
       <View>

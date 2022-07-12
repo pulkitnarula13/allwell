@@ -1,26 +1,58 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity,Image} from "react-native";
-import React, { useEffect,useState } from "react";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import Dialog, {
-  DialogButton,
   DialogContent,
   SlideAnimation,
 } from "react-native-popup-dialog";
-import { Feather } from "@expo/vector-icons";
-import { Title, Paragraph } from "react-native-paper";
-import {
-  Tabs,
-  TabScreen,
-  useTabIndex,
-  useTabNavigation,
-} from "react-native-paper-tabs";
+import { Tabs, TabScreen } from "react-native-paper-tabs";
 
 import Searchbars from "../../components/searchbar";
 import Doctorinboxdata from "../../components/Doctor-inbox-data";
-import { ScrollView } from "react-native";
+import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
 const DoctorInbox = ({ navigation }) => {
   const [dialogbox, setDialogbox] = useState(false);
+
+  const [completedAppointments, setCompletedAppointments] = useState([]);
+  const [currentAppointmnents, setCurrentAppointments] = useState([]);
+  const [currentPatient, setCurrentPatient] = useState();
+
+  const { userInfo } = useContext(AuthContext);
+
+  const getPatientAppointments = async () => {
+    try {
+      const data = await axios.get(
+        `${BASE_URL_DEV}/appointments/doctor/${userInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      const completedAppointments = data.data.data.filter(
+        (data) => data.completed && !data.cancelled
+      );
+
+      setCompletedAppointments(completedAppointments);
+
+      const currentAppointmnents = data.data.data.filter(
+        (data) => !data.completed && data.confirmed && !data.cancelled
+      );
+
+      setCurrentAppointments(currentAppointmnents);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPatientAppointments();
+  }, []);
+
   useEffect(() => {
     navigation.setOptions({
       title: `Inbox`,
@@ -28,36 +60,32 @@ const DoctorInbox = ({ navigation }) => {
   }, []);
   const windowWidth = Dimensions.get("window").width;
 
-  function ExploreWitHookExamples() {
-    return (
-      <View
-        style={{
-          width: windowWidth,
-          backgroundColor: "blue",
-        }}
-      >
-        <Doctorinboxdata />
-      </View>
-    );
-  }
-
   return (
     <View style={styles.main}>
       <View style={styles.search}>
         <Searchbars />
       </View>
       <Tabs>
-        <TabScreen  label="Current">
-        <TouchableOpacity
-      onPress={() => setDialogbox(true)}
-      >
+        <TabScreen label="Current">
           <View>
-          <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
-          <Doctorinboxdata/>
+            <View
+              style={{
+                padding: 14,
+                marginBottom: 34,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Doctorinboxdata
+                currentPatient={(val) => {
+                  setCurrentPatient(val)
+                }}
+                setDialogbox={(val) => setDialogbox(val)}
+                currentAppointmnents={currentAppointmnents}
+              />
+            </View>
           </View>
-          </View>
-          </TouchableOpacity>
-          
         </TabScreen>
         <TabScreen label="Compeleted">
           <View
@@ -70,7 +98,11 @@ const DoctorInbox = ({ navigation }) => {
             }}
           >
             <View>
-              <Doctorinboxdata />
+              <Doctorinboxdata
+                currentPatient={(val) => setCurrentPatient(val)}
+                setDialogbox={(val) => setDialogbox(val)}
+                completedAppointments={completedAppointments}
+              />
             </View>
           </View>
 
@@ -78,50 +110,58 @@ const DoctorInbox = ({ navigation }) => {
         </TabScreen>
       </Tabs>
       <Dialog
-            visible={dialogbox}
-            dialogAnimation={
-              new SlideAnimation({
-                slideFrom: "bottom",
-              })
-            }
-            onTouchOutside={() => {
-              setDialogbox(false);
-            }}
-            rounded
-            width={1}
-            dialogStyle={styles.dialogStyles}
-          >
-            <DialogContent style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-              <View style={styles.viewDoctorStatusModal}>
-                <Text
-                >
-                  Date
-                </Text>
-                <View style={styles.viewDividerLine} ></View>
+        visible={dialogbox}
+        dialogAnimation={
+          new SlideAnimation({
+            slideFrom: "bottom",
+          })
+        }
+        onTouchOutside={() => {
+          setDialogbox(false);
+        }}
+        rounded
+        width={1}
+        dialogStyle={styles.dialogStyles}
+      >
+        <DialogContent
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View style={styles.viewDoctorStatusModal}>
+            <Text>{currentPatient?.date}</Text>
+            <View style={styles.viewDividerLine}></View>
 
-                <Image style={styles.image1} source= {require('../../assets/icon.png')} resizeMode='center' />
-                <Text
-                >
-                  Name
-                </Text>
-                <Text
-                >
-                  Speciality
-                </Text>
-                </View>
-                <View style={styles.viewDividerLine} />
-                <View style={styles.button} >
-        <Button
-        style={{fontSize:14,lineHeight:33,color:"white"}}
+            <Image
+              style={styles.image1}
+              source={require("../../assets/icon.png")}
+              resizeMode="center"
+            />
+            <Text>Patient: {currentPatient?.patient}</Text>
+            <Text>Symptoms : {currentPatient?.symptoms}</Text>
 
-            color="white"
-          title="View the Chat"
-          
-        />
-        </View>
-              
-            </DialogContent>
-          </Dialog>
+          </View>
+          <View style={styles.viewDividerLine} />
+          <View style={styles.button}>
+            <Button
+              style={{ fontSize: 14, lineHeight: 33, color: "white" }}
+              color="white"
+              title="View the Chat"
+              onPress={() => {
+                console.log(currentPatient, "currentPatient");
+                navigation.navigate("Chatting", {
+                  qna: currentPatient.qna,
+                  patient: currentPatient.patient,
+                  appointmentInfo: currentPatient.appointmentInfo
+                });
+                setDialogbox(false)
+              }}
+            />
+          </View>
+        </DialogContent>
+      </Dialog>
     </View>
   );
 };
@@ -131,8 +171,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     padding: 40,
-    justifyContent:"center",
-    alignItems:"center",
+    justifyContent: "center",
+    alignItems: "center",
     textAlign: "center",
   },
   textModalStatus: {
@@ -141,14 +181,12 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     textAlign: "center",
   },
-  image1:{
-    width:98,
-    height:98,
-    borderRadius:49
+  image1: {
+    width: 98,
+    height: 98,
+    borderRadius: 49,
+  },
 
-    
-},
-  
   main: {
     flex: 1,
   },
@@ -193,14 +231,14 @@ const styles = StyleSheet.create({
     height: 49,
     display: "flex",
     flexDirection: "column",
-    
-    marginLeft:40,
-    marginTop:70,
-    backgroundColor:"#74CBD4",
-    textAlign:"center",
-    justifyContent:"center",
-    alignItems:"center",
-    borderRadius:100
+
+    marginLeft: 40,
+    marginTop: 70,
+    backgroundColor: "#74CBD4",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
   },
 });
 

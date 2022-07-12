@@ -103,7 +103,7 @@ const DoctorAppointment = (props) => {
           <TouchableOpacity onPress={() => props.navigation.navigate("Info-Patient")}>
             <View style={styles.viewPatientMeeting}>
               <Text style={styles.textPatientMeetingTime}>
-                11:00 AM - 12:00 PM
+                12:00  - 1:00 PM
               </Text>
               <View style={styles.viewDividerLine} />
               <View style={styles.viewPatientData}>
@@ -112,7 +112,7 @@ const DoctorAppointment = (props) => {
                   source={require("../../assets/icon.png")}
                   resizeMode="contain"
                 />
-                <Text style={styles.textPatientName}>Imran Syahir</Text>
+                <Text style={styles.textPatientName}>Mark</Text>
               </View>
             </View>
           </TouchableOpacity>

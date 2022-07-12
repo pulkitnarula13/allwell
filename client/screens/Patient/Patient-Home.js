@@ -31,12 +31,12 @@ const PatientHome = ({ navigation }) => {
   }, []);
 
   const [symptomsData, setSymptomsData] = useState([]);
-  const { userInfo } = useContext(AuthContext)
+  const { userInfo } = useContext(AuthContext);
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`
-      }
+        Authorization: `Bearer ${userInfo.token}`,
+      },
     });
     const modifiedData = data.data.data.map((item) => {
       item.image = "../../assets/icon1.png";
@@ -222,24 +222,6 @@ const PatientHome = ({ navigation }) => {
             <Text style={{ fontWeight: "700", fontSize: 16 }}>
               Near By Doctors
             </Text>
-            {/* <Button
-            style={{
-              borderRadius: 10,
-              backgroundColor: "gray",
-              width: 230,
-              height: 40,
-              justifyContent: "center",
-              marginRight: 31,
-              borderColor: "#000000",
-              borderWidth: 1,
-              marginLeft: 3,
-              marginBottom: 50,
-            }}
-            mode="contained"
-            onPress={() => console.log("Pressed")}
-          >
-            Try Chat Bot
-          </Button> */}
           </View>
           <View
             style={{
@@ -272,7 +254,7 @@ const PatientHome = ({ navigation }) => {
                 resizeMode="contain"
               />
               <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
+                Dr. Prabh
               </Text>
               <Text style={{ fontWeight: "100", fontSize: 12 }}>
                 General Phisician
@@ -287,7 +269,7 @@ const PatientHome = ({ navigation }) => {
                   size={24}
                   color="#74CBD4"
                 />
-                <Text style={{ color: "black" }}>5Km</Text>
+                <Text style={{ color: "black" }}>2km</Text>
               </Button>
             </View>
             <View
@@ -314,10 +296,10 @@ const PatientHome = ({ navigation }) => {
                 resizeMode="contain"
               />
               <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
+                Dr. Song
               </Text>
               <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
+                Dermatologist
               </Text>
               <Button
                 style={{ display: "flex", flexDirection: "row" }}
@@ -329,7 +311,7 @@ const PatientHome = ({ navigation }) => {
                   size={24}
                   color="#74CBD4"
                 />
-                <Text style={{ color: "black" }}>5Km</Text>
+                <Text style={{ color: "black" }}>3km</Text>
               </Button>
             </View>
           </View>
@@ -370,10 +352,10 @@ const PatientHome = ({ navigation }) => {
                 resizeMode="contain"
               />
               <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
+                Dr. Jasleen
               </Text>
               <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
+                Cardialogist
               </Text>
               <Button
                 style={{ display: "flex", flexDirection: "row" }}
@@ -385,7 +367,7 @@ const PatientHome = ({ navigation }) => {
                   size={24}
                   color="#74CBD4"
                 />
-                <Text style={{ color: "black" }}>5Km</Text>
+                <Text style={{ color: "black" }}>4km</Text>
               </Button>
             </View>
             <View
@@ -412,10 +394,10 @@ const PatientHome = ({ navigation }) => {
                 resizeMode="contain"
               />
               <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
+                Dr. Ya Nu
               </Text>
               <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
+                Physiotherapist
               </Text>
               <Button
                 style={{ display: "flex", flexDirection: "row" }}
@@ -427,12 +409,12 @@ const PatientHome = ({ navigation }) => {
                   size={24}
                   color="#74CBD4"
                 />
-                <Text style={{ color: "black" }}>5Km</Text>
+                <Text style={{ color: "black" }}>3km</Text>
               </Button>
             </View>
           </View>
         </ScrollView>
-        <FloatingAction
+        {/* <FloatingAction
           onOpen={() => {
             navigation.navigate("Chattingwithdoctor");
           }}
@@ -446,7 +428,7 @@ const PatientHome = ({ navigation }) => {
               color="white"
             />
           }
-        />
+        /> */}
       </View>
     </View>
   );

@@ -19,13 +19,9 @@ let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
   {
-    name: "John Doe",
+    name: "Mark",
     image: "../../assets/icon1.png",
-  },
-  {
-    name: "Alia Bhatt",
-    image: "../../assets/icon2.png",
-  },
+  }
 ];
 
 const ConnectPatient = ({ navigation, route }) => {
@@ -33,7 +29,6 @@ const ConnectPatient = ({ navigation, route }) => {
   const { setAppointmentData } = useContext(AppointmentContext);
   const [selectedItem, setSelectedItems] = useState();
 
-  console.log(route, "navigation");
   useEffect(() => {
     const filteredArray = route?.params?.symptomsData.filter((value) =>
       appointmentData.symptoms.includes(value._id)
@@ -56,7 +51,7 @@ const ConnectPatient = ({ navigation, route }) => {
 
   const renderSymptoms = ({ item }) => {
     return (
-      <View style={styles.item}>
+        <View style={styles.item}>
         <Image
           style={styles.image1}
           source={require("../../assets/icon.png")}
@@ -112,10 +107,10 @@ const ConnectPatient = ({ navigation, route }) => {
           />
         </View>
 
-        <View style={styles.speciality}>
+        {/* <View style={styles.speciality}>
           <Text style={styles.subheadingtextview}>Selected Speciality</Text>
           <Text style={styles.subheadingtextview1}>Neurologists</Text>
-        </View>
+        </View> */}
         <View style={{ alignItems: "center" }}>
           <Button
             style={styles.availablebtn}

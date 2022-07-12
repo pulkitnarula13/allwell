@@ -48,7 +48,7 @@ const DoctorHome = ({ navigation }) => {
       const confirmedAppointments = data.data.data.filter(
         (data) => data.confirmed && !data.cancelled
       );
-      setConfirmedAppointments(confirmedAppointments);
+    setConfirmedAppointments(confirmedAppointments);
 
       const urgentAppointments = data.data.data.filter(
         (data) =>

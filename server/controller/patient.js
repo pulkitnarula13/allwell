@@ -43,8 +43,9 @@ const registerPatient = async (req, res) => {
         token,
         savedPatient
       },
-    });
+    }); 
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: error.message,
     });
