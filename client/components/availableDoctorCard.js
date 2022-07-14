@@ -29,23 +29,19 @@ const AvailableDoctorCard = (props) => {
           }}
         >
           <Image
-            source={{
-              uri: props.item.profilePicture
-                ? props.item.profilePicture
-                : require("../assets/icon.png"),
-            }}
+            source={require("../assets/icon.png")}
             style={styles.image}
             resizeMode="contain"
           />
           <View style={styles.ratingContainer}>
             <Text>{props.item.rating}</Text>
-            <Rating
+            {/* <Rating
               type="custom"
               ratingBackgroundColor="#74CBD4"
               ratingColor="#74CBD4"
               ratingCount={1}
               imageSize={15}
-            />
+            /> */}
           </View>
         </View>
       </TouchableOpacity>
@@ -63,7 +59,7 @@ const AvailableDoctorCard = (props) => {
           size={24}
           color="#74CBD4"
         />
-        <Text style={{ color: "black" }}>5Km</Text>
+        <Text style={{ color: "black" }}>2km</Text>
       </Button>
     </View>
   );

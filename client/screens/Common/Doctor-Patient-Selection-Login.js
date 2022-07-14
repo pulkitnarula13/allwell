@@ -18,11 +18,11 @@ const DoctorPatientSelectionLogin = ({ navigation }) => {
           }}
         >
           <Image
-            style={{ width: 112, height: 112  }}
-            source={require("../../assets/adaptive-icon.png")}
+            style={{ width: 186, height: 186  }}
+            source={require("../../assets/images/patientsignup.png")}
           />
-          <Text>I'm a Patient</Text>
         </TouchableOpacity>
+        <Text>I'm a Patient</Text>
       </View>
       <View style={{borderRadius: 20,borderColor:"#74CBD4",borderWidth:2,marginBottom:30}}>
         <TouchableOpacity
@@ -37,11 +37,13 @@ const DoctorPatientSelectionLogin = ({ navigation }) => {
           }}
         >
           <Image
-            style={{ width: 112, height: 112, borderRadius: 4 }}
-            source={require("../../assets/adaptive-icon.png")}
+            style={{ width: 234, height: 160, borderRadius: 4 }}
+            resizeMode="cover"
+            source={require("../../assets/images/doctorsignup.png")}
           />
-          <Text>I'm a Doctor</Text>
+       
         </TouchableOpacity>
+        <Text>I'm a Doctor</Text>
       </View>
       {/* <View>
         <Text>Already have an account ? </Text>

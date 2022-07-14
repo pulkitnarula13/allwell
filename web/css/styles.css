@@ -1,0 +1,546 @@
+/* Base Colour Settings:
+
+    primary: #74CBD4
+    text:#1A202C
+    background: #fcfcfc
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fcfcfc;
+  font-family: "poppins";
+  font-size: 12pt;
+  line-height: 1;
+  color: #1a202c;
+  padding: 10px;
+  min-width: 700px;
+}
+
+.highLight {
+  color:#74CBD4;
+  text-transform: uppercase;
+}
+
+/*************************************************/
+/*********** Header Formatting *******************/
+/*************************************************/
+/* .header {
+  position: relative;
+  height: 40vh;
+  /* background-image: url(../img/goal.jpg); */
+/* background-size: cover;
+  background-position: top left; */
+
+/***** Clip the image *****/
+/* clip-path: polygon(0 0, 100% 0%, 100% 70%, 0% 100%);
+} */
+/* Logo */
+.logo-box {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5%;
+  display: flex;
+  gap: 5px;
+}
+
+.logo {
+  width: 100px;
+
+  /***** Animate the Logo *****/
+  /* animation: logoRight 2s; */
+}
+
+.logoName {
+  padding-top: 0px;
+  font-size: 14pt;
+ display: flex;
+ justify-content:center;
+ align-items: center;
+  font-weight: 700;
+  text-align: center;
+}
+nav.topNav {
+    background-color: #74cbd4;
+}
+ul {
+  background-color: #74cbd4;
+}
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 10px 0;
+}
+
+nav li {
+  padding: 10px 0;
+  background-color: #74cbd4;
+}
+
+nav li a {
+  color: #fcfcfc;
+  padding: 10px 20px;
+  color: #1a202c;
+  text-decoration: none;
+}
+
+nav {
+  font-size: larger;
+}
+
+li a {
+  display: inline-block;
+  position: relative;
+  color: #74cbd4;
+}
+
+li a:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fcfcfc;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+li a:hover:after {
+  transform: scaleX(0.7);
+  transform-origin: center;
+  color: #74cbd4;
+}
+
+.sitesInfo-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 40pt;
+}
+
+/* .headingBox {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  min-width: 600px;
+  text-align: center;
+
+  /* Center the Heading Box within its' Container */
+/* transform: translate(-50%, -50%);
+} */
+
+/* .mainHeading {
+  color: white;
+  margin-bottom: 30px; */
+
+/* Advanced CSS for converting Text */
+/* text-transform: uppercase; */
+
+/* Advanced CSS Hack to prevent Animation Stuttering */
+/* backface-visibility: hidden;
+} */
+
+/* .mainHeading-main {
+  display: block;
+  padding-left: 13px;
+  font-size: 40px;
+  font-weight: 700; */
+
+/* Advanced CSS to control Letter Spacing (similar to kerning) */
+/* letter-spacing: 25px; */
+
+/***** Animate the Main Heading *****/
+/* animation: slideRight 2s ease-out;
+} */
+
+/* .mainHeading-sub {
+  display: block;
+  font-size: 15px;
+  font-weight: 700; */
+
+/* Advanced CSS to control Letter Spacing (similar to kerning) */
+/* letter-spacing: 11.5px; */
+
+/***** Animate the Sub Heading *****/
+/* animation: slideLeft 2s ease-out;
+} */
+
+/*************************************************/
+/*********** Button Formatting *******************/
+/*************************************************/
+
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  border-radius: 100px;
+
+  /* Smooths out transitions within this container -
+        eliminates sudden "jumping" */
+  transition: all 0.5s;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary {
+  background: #f15a22; /* Langara Orange */
+  color: white;
+}
+
+.btn-animated {
+  animation: slideUp 2s ease-out 0.25s;
+  animation-fill-mode: backwards;
+}
+
+/*************************************************/
+/************* SiteInfo Formatting ***************/
+/*************************************************/
+
+/************* SiteInfo Format Headings **********/
+.sites {
+  background-color: #fcfcfc;
+  padding: 7rem 0;
+  /* margin-top: -27vh; */
+}
+
+.secondaryHeading {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.secondaryHeading-title {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #74cbd4;
+}
+
+/* .secondaryHeading-title:hover {
+  transform: skew(-30deg, -9deg);
+  text-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.4);
+} */
+
+/*********** SiteInfo Format Content *************/
+.sitesInfo {
+  display: grid;
+  grid-template-columns: 3fr 3fr;
+}
+
+/*********** SiteInfo Format Text Side ***********/
+.siteInfo-text {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.sitesInfo-text h2 {
+  font-size: 1.3rem;
+  width: 500px;
+  height: 300px;
+}
+
+/*********** SiteInfo Format Images **************/
+.sitesInfo-images {
+  position: relative;
+}
+
+.img {
+  width: 50vw;
+  height: auto;
+}
+
+/* .imgBox {
+  position: absolute;
+  transition: all 0.2s;
+} */
+
+/**************** ImgBox Position ****************/
+/* .imgBox1 {
+  left: 5rem;
+  top: 1rem;
+} */
+
+/* .imgBox2 {
+  left: 17rem;
+  top: 5rem;
+}
+
+.imgBox3 {
+  left: 10rem;
+  top: 10rem;
+}
+
+.imgBox:hover {
+  outline: 1.5rem solid #f15a22;
+  outline-offset: 1rem;
+  transform: scale(1.2) translateY(-0.75rem);
+  z-index: 1;
+} */
+.teamcontainer {
+  display: flex;
+}
+/*************************************************/
+/*********** Program Section Formatting **********/
+/*************************************************/
+.programs {
+  padding-top: 2.5rem;
+}
+/* .outercontainer{
+  width: 100vw;
+  background-color: #732a10; */
+
+/***************** Build the Cards Grid***********/
+.cards-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr repeat(2, 300px 0.25fr) 300px 1fr;
+}
+
+.cards-container2 {
+  padding-top: 40px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr repeat(2, 300px 0.25fr) 300px 1fr;
+}
+
+
+.card1 {
+  grid-column: 2/3;
+}
+.card2 {
+  grid-column: 4/5;
+}
+.card3 {
+  grid-column: 6/7;
+}
+.card4 {
+  grid-column: 2/3;
+}
+.card5 {
+  grid-column: 4/5;
+}
+.card6 {
+  grid-column: 6/7;
+}
+/***************** Format Cards*******************/
+.cards {
+  position: relative;
+  height: 15rem;
+  perspective: 150rem;
+}
+
+.cards-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  backface-visibility: hidden;
+  transition: all 0.9s ease;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.4);
+}
+
+.cards-side img{
+  height: 15rem;
+  width: 19rem;
+}
+
+.cards-side1 {
+  
+  color: white;
+}
+
+.cards-side2 {
+  text-align: center;
+  padding-top: 5rem;
+  background-color:#fcfcfc;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #74CBD4;
+  transform: rotateY(180deg);
+}
+
+.cards-side2 h3{
+  color: #74CBD4;
+}
+
+.cards-side2 p{
+  padding-top: 2rem;
+}
+
+/**************** Animation Cards ****************/
+.cards:hover .cards-side1 {
+  transform: rotateY(180deg);
+}
+
+.cards:hover .cards-side2 {
+  transform: rotateY(360deg);
+}
+
+.teamMembers {
+  text-align: center;
+  margin-bottom: 5rem;
+  padding-top: 5rem;
+}
+
+.teamHeading {
+  padding-bottom: 5rem;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #74cbd4;
+}
+
+
+.team-container1 {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr repeat(3, 300px 0.2fr) 300px 1fr;
+  align-items: center;
+}
+
+.team-container2 {
+  padding-top: 40px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr repeat(2, 300px 0.2fr) 300px 1fr;
+}
+
+.member1 {
+  grid-column: 2/3;
+}
+.member2 {
+  grid-column: 4/5;
+}
+.member3 {
+  grid-column: 6/7;
+}
+.member4 {
+  grid-column: 8/9;
+}
+.member5 {
+  grid-column: 2/3;
+}
+.member6 {
+  grid-column: 4/5;
+}
+.member7 {
+  grid-column: 6/7;
+}
+
+.memberInfo{
+  padding-top: 20px;
+}
+
+.memberInfo h3, .memberInfo h4, .memberInfo p {
+  padding-top: 8px;
+}
+.memberInfo h3 {
+  color:#74CBD4;
+}
+
+
+.photo img {
+  width: 15vh;
+  height: 15vh;
+  align-items: center;
+}
+/*************************************************/
+/*********** Keyframe Animation Coding ***********/
+/*************************************************/
+
+/* Logo Animation */
+/* @keyframes logoRight {
+  0% {
+    transform: translateX(-300px);
+  }
+
+  50% {
+    transform: translateX(50px) rotate(180deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(-360deg);
+  }
+} */
+
+/* Main Heading Animation */
+/* @keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  85% {
+    opacity: 0.75;
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+} */
+
+/* Sub-Heading Animation */
+/* @keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  85% {
+    opacity: 0.75;
+    transform: translateX(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+} */
+
+/* Button Animation */
+/* @keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */

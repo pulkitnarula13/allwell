@@ -12,4 +12,4 @@ export const SymptomsList = {
     "Eye Problem":require('../assets/symptoms/Eyeproblem.png'),
     "joint problem":require('../assets/symptoms/joint problem.png'),
     Skinproblem:require('../assets/symptoms/Skinproblem.png'),
-}   
+}       

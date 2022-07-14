@@ -47,6 +47,7 @@ export default function AllSymptoms(props) {
   };
 
   const renderItem = (item) => {
+    console.log(item, "item"); 
     return (
       <TouchableOpacity
         style={[styles.list, item.selectedClass]}
@@ -58,7 +59,7 @@ export default function AllSymptoms(props) {
             source={require("../../assets/icon.png")}
             resizeMode="contain"
           />
-          <Text style={styles.name1}>{item.name}</Text>
+          <Text>{item.item.name}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -139,12 +140,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
   },
-  selected: { backgroundColor: "#FA7B5F" },
+  selected: { backgroundColor: "#74CBD4" },
   list: {
     paddingVertical: 5,
     margin: 3,
     flexDirection: "row",
-    backgroundColor: "#192338",
     justifyContent: "flex-start",
     alignItems: "center",
     zIndex: -1,

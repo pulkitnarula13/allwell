@@ -14,8 +14,7 @@ const  PatientProfile = (props)=> {
 
   useEffect(() => {
     getdata();
-  }, []);
-
+  }, [])
 
   const getdata = async () => {
     try {

@@ -94,7 +94,6 @@ const PatientHome = ({ navigation }) => {
   }
 
   const Item1 = ({ name, image }) => {
-    
     return (
       <View
         style={{
@@ -130,10 +129,7 @@ const PatientHome = ({ navigation }) => {
           <Text style={{ fontWeight: "100", fontSize: 12 }}>
             General Phisician
           </Text>
-          <Button
-            style={{ display: "flex", flexDirection: "row" }}
-            
-          >
+          <Button style={{ display: "flex", flexDirection: "row" }}>
             <Ionicons
               style={{ marginRight: 10 }}
               name="location-outline"
@@ -143,13 +139,11 @@ const PatientHome = ({ navigation }) => {
             <Text style={{ color: "black" }}>5Km</Text>
           </Button>
         </View>
-        
       </View>
     );
   };
 
   const Item = ({ name, image }) => {
-    console.log(SymptomsList[name]);
     return (
       <TouchableOpacity onPress={() => navigation.navigate("All-Symptoms")}>
         <View
@@ -175,10 +169,11 @@ const PatientHome = ({ navigation }) => {
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   const renderItem1 = ({ item }) => (
-    <Item1 name={item.name} image={item.image} />);
+    <Item1 name={item.name} image={item.image} />
+  );
 
-    const renderItem2 = ({ item }) => (
-      <Item1 name={item.name} image={item.image} />
+  const renderItem2 = ({ item }) => (
+    <Item1 name={item.name} image={item.image} />
   );
 
   return (
@@ -309,24 +304,6 @@ const PatientHome = ({ navigation }) => {
             <Text style={{ fontWeight: "700", fontSize: 16 }}>
               Near By Doctors
             </Text>
-            {/* <Button
-            style={{
-              borderRadius: 10,
-              backgroundColor: "gray",
-              width: 230,
-              height: 40,
-              justifyContent: "center",
-              marginRight: 31,
-              borderColor: "#000000",
-              borderWidth: 1,
-              marginLeft: 3,
-              marginBottom: 50,
-            }}
-            mode="contained"
-            onPress={() => console.log("Pressed")}
-          >
-            Try Chat Bot
-          </Button> */}
           </View>
           <View>
             <FlatList
@@ -354,23 +331,7 @@ const PatientHome = ({ navigation }) => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          
         </ScrollView>
-        <FloatingAction
-          onOpen={() => {
-            navigation.navigate("Chattingwithdoctor");
-          }}
-          animated={false}
-          color="#718096"
-          buttonSize={75}
-          floatingIcon={
-            <MaterialCommunityIcons
-              name="message-processing-outline"
-              size={24}
-              color="white"
-            />
-          }
-        />
       </View>
     </View>
   );
@@ -414,7 +375,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
     borderRadius: 10,
   },
-
   imageview: {
     width: 35,
     height: 233,
@@ -435,5 +395,4 @@ const styles = StyleSheet.create({
     height: 39,
   },
 });
-
 export default PatientHome;

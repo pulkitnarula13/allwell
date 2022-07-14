@@ -47,13 +47,14 @@ const AppStack = () => {
       {/* COMMON NAVIGATIONS STARTED */}
       <Stack.Screen name="Home" component={Bottomnavigation} />
 
-      <Stack.Screen name="AvailableDoctor" component={AvailableDoctor} />
-      <Stack.Screen name="forgot-password" component={ForgotPassword} />
+      
       <Stack.Screen name="greeting" component={Greeting} />
       <Stack.Screen
         name="Doctor-Patient-Selection-Signup"
         component={DoctorPatientSelectionSignup}
       />
+      <Stack.Screen name="AvailableDoctor" component={AvailableDoctor} />
+      <Stack.Screen name="forgot-password" component={ForgotPassword} />
       <Stack.Screen
         name="Doctor-Patient-Selection-Login"
         component={DoctorPatientSelectionLogin}
@@ -84,6 +85,11 @@ const AppStack = () => {
       <Stack.Screen
         name="Notfication"
         component={Notification}
+      />
+
+<Stack.Screen
+        name="Chatting"
+        component={Chattingwithdoctor}
       />
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />

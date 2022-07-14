@@ -11,7 +11,6 @@ import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 
 import AvailableDoctorCard from "../../components/availableDoctorCard";
-import { availableDoctorList } from "../../constants/availableDoctor";
 import { AuthContext } from "../../Context/AuthContext";
 import { Alert } from "react-native";
 
@@ -21,14 +20,6 @@ const AvailableDoctor = (props) => {
 
   useEffect(() => {
 
-  //   {
-  //     id: 1,
-  //     name: "Doctor 1",
-  //     rating: "4.2",
-  //     specialities: "General Physician",
-  //     waitTime: "2-4hr",
-  //     image: '../assets/icon.png'
-  // },
     axios
       .get(`${BASE_URL_DEV}/doctors`, {
         headers: {
@@ -78,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   flatListColumn: {
-    margin: 30,
+    // margin: "30pt",
   },
   flatlistContainer: {
     marginTop: 67,

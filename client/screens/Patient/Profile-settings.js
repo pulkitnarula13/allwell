@@ -19,10 +19,7 @@ const PatientProfileSettings = ({ navigation }) => {
       <View style={styles.outerview}>
         <Text style={styles.profiletext}>Profile</Text>
       </View>
-      <View style={styles.info1}>
-        <Text style={styles.infotext1}>Account Information</Text>
-        <AntDesign name="right" size={24} color="black" />
-      </View>
+      
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Settings</Text>
         <AntDesign name="up" size={24} color="black" />

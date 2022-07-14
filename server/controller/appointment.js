@@ -73,6 +73,30 @@ const confirmAppointment = (req, res) => {
 };
 
 /**
+ * @description API to confirm Appointment
+ * @param {*} req
+ * @param {*} res
+ */
+ const completeAppointment = (req, res) => {
+  const id = req.params.id;
+
+  Appointment.findOneAndUpdate(
+    { _id: id },
+    {
+      completed: true,
+    },
+    {
+      returnOrignal: false,
+    }
+  ).then((result) => {
+    res.status(200).json({
+      message: "Appointment Completed",
+      data: result,
+    });
+  });
+};
+
+/**
  * @description Api to fetch Appointment based on given ID
  * @param {*} req
  * @param {*} res
@@ -247,4 +271,5 @@ module.exports = {
   confirmAppointment,
   cancelAppointment,
   getAppointmentById,
+  completeAppointment
 };

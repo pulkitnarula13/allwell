@@ -88,7 +88,6 @@ const SchedulePatient = (props) => {
         </View>
 
         <View style={styles.viewDataContainer}>
-          {/* Patient Meeting */}
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Info-Patient")}
           >
@@ -103,7 +102,7 @@ const SchedulePatient = (props) => {
                   source={require("../../assets/icon.png")}
                   resizeMode="contain"
                 />
-                <Text style={styles.textPatientName}>Imran Syahir</Text>
+                <Text style={styles.textPatientName}>Mark</Text>
               </View>
             </View>
           </TouchableOpacity>
