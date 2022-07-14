@@ -21,8 +21,20 @@ import { AuthContext } from "../../Context/AuthContext";
 import { FloatingAction } from "react-native-floating-action";
 import { BASE_URL_DEV } from "@env";
 import axios from "axios";
+import { SymptomsList } from "../../constants/symptoms";
 
 const PatientHome = ({ navigation }) => {
+  const nearby = [
+    {
+      id: "Dr.Beth Smith",
+      image: "./assets/doctor1.jpg",
+    },
+    {
+      id: "Dr.John Legend",
+      image: "./assets/doctor2.jpg",
+    },
+  ];
+
   const [latitude, setlatitude] = useState("0");
   const [longitude, setlongitude] = useState("0");
 
@@ -31,12 +43,12 @@ const PatientHome = ({ navigation }) => {
   }, []);
 
   const [symptomsData, setSymptomsData] = useState([]);
-  const { userInfo } = useContext(AuthContext)
+  const { userInfo } = useContext(AuthContext);
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`
-      }
+        Authorization: `Bearer ${userInfo.token}`,
+      },
     });
     const modifiedData = data.data.data.map((item) => {
       item.image = "../../assets/icon1.png";
@@ -81,21 +93,93 @@ const PatientHome = ({ navigation }) => {
     });
   }
 
-  const Item = ({ name, image }) => (
-    <TouchableOpacity onPress={() => navigation.navigate("All-Symptoms")}>
-      <View style={styles.item}>
-        <Image
-          style={{ width: 100, height: 100, marginRight: 14 }}
-          source={require("../../assets/icon.png")}
-          resizeMode="contain"
-        />
-        <Text style={styles.name1}>{name}</Text>
+  const Item1 = ({ name, image }) => {
+    
+    return (
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <View
+          style={{
+            width: 187,
+            height: 187,
+            borderWidth: 2,
+            display: "flex",
+            justifyContent: "center",
+            marginRight: 10,
+            alignItems: "center",
+            borderColor: "black",
+            borderRadius: 8,
+          }}
+        >
+          <Image
+            style={{
+              width: 65,
+              height: 65,
+              borderRadius: 100,
+              backgroundColor: "gray",
+            }}
+            source={nearby.name}
+            resizeMode="cover"
+          />
+          <Text style={{ fontWeight: "500", fontSize: 16 }}>{nearby.name}</Text>
+          <Text style={{ fontWeight: "100", fontSize: 12 }}>
+            General Phisician
+          </Text>
+          <Button
+            style={{ display: "flex", flexDirection: "row" }}
+            
+          >
+            <Ionicons
+              style={{ marginRight: 10 }}
+              name="location-outline"
+              size={24}
+              color="#74CBD4"
+            />
+            <Text style={{ color: "black" }}>5Km</Text>
+          </Button>
+        </View>
+        
       </View>
-    </TouchableOpacity>
-  );
+    );
+  };
+
+  const Item = ({ name, image }) => {
+    console.log(SymptomsList[name]);
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate("All-Symptoms")}>
+        <View
+          style={{
+            borderWidth: 3,
+            borderColor: "#74CBD4",
+            borderRadius: 100,
+            padding: 10,
+            marginRight: 14,
+          }}
+        >
+          <Image
+            style={{ width: 76, height: 76 }}
+            source={SymptomsList[name]}
+            resizeMode="cover"
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   let Screenheight = Dimensions.get("window").height;
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  const renderItem1 = ({ item }) => (
+    <Item1 name={item.name} image={item.image} />);
+
+    const renderItem2 = ({ item }) => (
+      <Item1 name={item.name} image={item.image} />
+  );
 
   return (
     <View
@@ -135,7 +219,7 @@ const PatientHome = ({ navigation }) => {
             </View>
           </View>
           <View style={{ marginTop: 50 }}>
-            <Text style={styles.heading}>Not feeling well</Text>
+            <Text style={styles.heading}>Not feeling well?</Text>
           </View>
 
           <View
@@ -147,13 +231,14 @@ const PatientHome = ({ navigation }) => {
           >
             <Button
               style={{
-                color: "#FFFFFF",
-                borderRadius: 10,
+                color: "white",
+                borderRadius: 100,
                 backgroundColor: "#74CBD4",
                 width: 282,
                 height: 45,
                 justifyContent: "center",
               }}
+              color="white"
               mode="contained"
               onPress={() => navigation.navigate("Patient-question-home")}
             >
@@ -199,7 +284,9 @@ const PatientHome = ({ navigation }) => {
               height: 50,
             }}
           >
-            <Text>To connect with specialist</Text>
+            <Text style={{ fontSize: 14, fontWeight: "600", color: "#A0AEC0" }}>
+              To connect with specialist
+            </Text>
           </View>
           <View>
             <FlatList
@@ -241,196 +328,33 @@ const PatientHome = ({ navigation }) => {
             Try Chat Bot
           </Button> */}
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <View
-              style={{
-                width: 187,
-                height: 187,
-                borderWidth: 2,
-                display: "flex",
-                justifyContent: "center",
-                marginRight: 10,
-                alignItems: "center",
-                borderColor: "black",
-                borderRadius: 8,
-              }}
-            >
-              <Image
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: 100,
-                  backgroundColor: "gray",
-                }}
-                source={require("../../assets/icon.png")}
-                resizeMode="contain"
-              />
-              <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
-              </Text>
-              <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
-              </Text>
-              <Button
-                style={{ display: "flex", flexDirection: "row" }}
-                onPress={getlocationhandler}
-              >
-                <Ionicons
-                  style={{ marginRight: 10 }}
-                  name="location-outline"
-                  size={24}
-                  color="#74CBD4"
-                />
-                <Text style={{ color: "black" }}>5Km</Text>
-              </Button>
-            </View>
-            <View
-              style={{
-                width: 187,
-                height: 187,
-                borderWidth: 2,
-                display: "flex",
-                justifyContent: "center",
-                marginRight: 10,
-                alignItems: "center",
-                borderColor: "black",
-                borderRadius: 8,
-              }}
-            >
-              <Image
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: 100,
-                  backgroundColor: "gray",
-                }}
-                source={require("../../assets/icon.png")}
-                resizeMode="contain"
-              />
-              <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
-              </Text>
-              <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
-              </Text>
-              <Button
-                style={{ display: "flex", flexDirection: "row" }}
-                onPress={getlocationhandler}
-              >
-                <Ionicons
-                  style={{ marginRight: 10 }}
-                  name="location-outline"
-                  size={24}
-                  color="#74CBD4"
-                />
-                <Text style={{ color: "black" }}>5Km</Text>
-              </Button>
-            </View>
+          <View>
+            <FlatList
+              style={{ height: 210, marginRight: 36, marginLeft: 36 }}
+              horizontal={true}
+              data={nearby}
+              renderItem={renderItem1}
+              keyExtractor={(item) => item.name}
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
+
           <View>
             <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 16 }}>
               Popular Doctors
             </Text>
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              marginTop: 10,
-            }}
-          >
-            <View
-              style={{
-                width: 187,
-                height: 187,
-                borderWidth: 2,
-                display: "flex",
-                justifyContent: "center",
-                marginRight: 10,
-                alignItems: "center",
-                borderColor: "black",
-                borderRadius: 8,
-              }}
-            >
-              <Image
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: 100,
-                  backgroundColor: "gray",
-                }}
-                source={require("../../assets/icon.png")}
-                resizeMode="contain"
-              />
-              <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
-              </Text>
-              <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
-              </Text>
-              <Button
-                style={{ display: "flex", flexDirection: "row" }}
-                onPress={getlocationhandler}
-              >
-                <Ionicons
-                  style={{ marginRight: 10 }}
-                  name="location-outline"
-                  size={24}
-                  color="#74CBD4"
-                />
-                <Text style={{ color: "black" }}>5Km</Text>
-              </Button>
-            </View>
-            <View
-              style={{
-                width: 187,
-                height: 187,
-                borderWidth: 2,
-                display: "flex",
-                justifyContent: "center",
-                marginRight: 10,
-                alignItems: "center",
-                borderColor: "black",
-                borderRadius: 8,
-              }}
-            >
-              <Image
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: 100,
-                  backgroundColor: "gray",
-                }}
-                source={require("../../assets/icon.png")}
-                resizeMode="contain"
-              />
-              <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                Dr.Lora Smith
-              </Text>
-              <Text style={{ fontWeight: "100", fontSize: 12 }}>
-                General Phisician
-              </Text>
-              <Button
-                style={{ display: "flex", flexDirection: "row" }}
-                onPress={getlocationhandler}
-              >
-                <Ionicons
-                  style={{ marginRight: 10 }}
-                  name="location-outline"
-                  size={24}
-                  color="#74CBD4"
-                />
-                <Text style={{ color: "black" }}>5Km</Text>
-              </Button>
-            </View>
+          <View>
+            <FlatList
+              style={{ height: 210, marginRight: 36, marginLeft: 36 }}
+              horizontal={true}
+              data={nearby}
+              renderItem={renderItem2}
+              keyExtractor={(item) => item.name}
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
+          
         </ScrollView>
         <FloatingAction
           onOpen={() => {

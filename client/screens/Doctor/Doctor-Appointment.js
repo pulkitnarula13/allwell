@@ -68,8 +68,8 @@ const DoctorAppointment = (props) => {
               >
                 Upcoming
               </Text> */}
-              <View style={{ padding:14,marginBottom:34,display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <Text>Upcoming</Text>
+              <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <Text >Upcoming</Text>
               </View>
           </TabScreen>
           <TabScreen label="Completed">
