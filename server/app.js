@@ -23,6 +23,7 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(morgan("dev"));
+app.use(express.static('web'));
 
 app.use(express.json({ limit: "50mb" }));
 
