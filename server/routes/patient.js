@@ -115,7 +115,7 @@ router.delete("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, dele
  router.post(
   "/symptoms",
   validateToken,
-  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR),
+  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
   createSymptom
 );
 

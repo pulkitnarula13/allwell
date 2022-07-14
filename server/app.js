@@ -16,12 +16,12 @@ const qnaRoutes = require("./routes/qna");
 const doctorReview = require("./routes/doctorReview");
 const familyMemberRoutes = require('./routes/familyMember');
 
-
-const { baseURL } = require("./constant");
-
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
+
 app.use(morgan("dev"));
 app.use(express.static('web'));
 

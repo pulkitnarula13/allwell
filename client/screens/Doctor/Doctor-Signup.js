@@ -69,18 +69,23 @@ const DoctorSignup = ({ navigation }) => {
         marginVertical: 30,
         marginHorizontal: 30,
         flexDirection: "column",
+        
       }}
     >
-      <Text style={styles.firstHeading}>Creating Account</Text>
+      <View style={styles.stepperstyle}>
       <Stepper
         active={active}
         content={content}
+        buttonStyle={{width:157.5,height:49,backgroundColor:"#74CBD4",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:100,marginLeft:20,marginBottom:22}}
         onBack={() => setActive((p) => p - 1)}
         onFinish={() => submitData(navigation)}
         onNext={() => setActive((p) => p + 1)}
-        buttonStyle={styles.buttonstyle}
+        stepStyle={{backgroundColor:"#74CBD4"}}
+       
+       
       />
-      <Text>Registration Process may take upto 3 hours for approval</Text>
+      </View>
+      
     </View>
   );
 };
@@ -100,6 +105,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 24,
   },
+  stepperstyle:{
+    marginTop:23,
+    justifyContent:"center",
+    
+    
+  }
 });
 
 export default DoctorSignup;
