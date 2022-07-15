@@ -49,7 +49,12 @@ const registerDoctor = async (req, res) => {
       languages: req.body.languages,
       certifications: req.body.certifications,
       licenseImage: uploadLicenseImage,
-      location: req.body.location
+      location: {
+        coordinates: [
+          req.body.location.longitude,
+          req.body.location.latitude,
+        ]
+      }
     });
 
     return res.status(200).json({
@@ -123,16 +128,18 @@ const loginDoctor = async (req, res) => {
 
   const options = {
     location: {
-      $geoWithin: {
-        $centerSphere: [[longitude, latitude], 10 / 3963.2]
+      $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: 
+              [longitude, latitude],
+          },
+          $maxDistance: 1000 * 1000
       }
-    }
+  }
    
   }
   Doctor.find(options)
-    .populate({
-      path: "address",
-    })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched all doctors",
