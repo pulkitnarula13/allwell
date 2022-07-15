@@ -44,7 +44,7 @@ const DoctorSignup = ({ navigation }) => {
       phoneNumber: secondStepperData.phoneNumber,
       specialities: thirdStepperData.specialities,
       experience: thirdStepperData.experience,
-      description: thirdStepperData.description,
+      doctorDescription: thirdStepperData.description,
       languages: thirdStepperData.languages,
       certifications: thirdStepperData.certifications,
       location: thirdStepperData.location
