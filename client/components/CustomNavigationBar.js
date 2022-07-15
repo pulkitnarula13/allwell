@@ -3,7 +3,7 @@ import App from "../App";
 
 const CustomNavigationBar = (props) => {
   return (
-    <Appbar.Header>
+    <Appbar.Header style={{backgroundColor:"white"}}>
       {props.back ? (
         <Appbar.BackAction onPress={props.navigation.goBack} />
       ) : null}

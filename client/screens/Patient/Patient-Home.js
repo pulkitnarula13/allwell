@@ -136,7 +136,7 @@ const PatientHome = ({ navigation }) => {
     );
   };
 
-  const Item1 = ({ name, image, distance, specialities }) => {
+  const Item1 = ({ name, distance, specialities }) => {
     console.log(specialities, "specialities inside");
     return (
       <View
@@ -170,7 +170,7 @@ const PatientHome = ({ navigation }) => {
             resizeMode="cover"
           />
           <Text style={{ fontWeight: "500", fontSize: 16 }}>{name}</Text>
-          <View>
+          {/* <View>
             <FlatList
               // style={{ height: 110, marginRight: 36, marginLeft: 36 }}
               horizontal={true}
@@ -179,7 +179,7 @@ const PatientHome = ({ navigation }) => {
               keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
             />
-          </View>
+          </View> */}
           {/* <Text style={{ fontWeight: "100", fontSize: 12 }}>
             
           </Text> */}

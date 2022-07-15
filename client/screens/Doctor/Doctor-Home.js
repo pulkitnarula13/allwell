@@ -92,8 +92,9 @@ const DoctorHome = ({ navigation }) => {
         </View>
         <View style={styles.inboxContainer}>
           <View
-            style={{ display: "flex", flexDirection: "row", marginBottom: 11 }}
+            style={{width:360, display: "flex", flexDirection: "column", marginBottom: 11,justifyContent:"center" }}
           >
+            <View style={{width:360, display: "flex", flexDirection: "row", marginBottom: 11,justifyContent:"center",alignItems:"center" }}>
             <TouchableOpacity
               style={{ width: 170 }}
               onPress={() => navigation.navigate("Doctor-Inbox")}
@@ -124,8 +125,8 @@ const DoctorHome = ({ navigation }) => {
                 item={waitingList}
               />
             </TouchableOpacity>
-          </View>
-          <View>
+            </View>
+            <View style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Doctor-Urgent", {
@@ -143,6 +144,8 @@ const DoctorHome = ({ navigation }) => {
               />
             </TouchableOpacity>
           </View>
+          </View>
+          
 
           <Dialog
             visible={dialogbox}
@@ -194,18 +197,19 @@ const DoctorHome = ({ navigation }) => {
 const styles = StyleSheet.create({
   doctorname: {
     fontWeight: "600",
-    fontSize: 20,
+    fontFamily:"Poppins",
+    fontSize: 22,
     marginRight: 13,
     lineHeight: 24.2,
   },
   container: {
     flex: 1,
-    paddingLeft: 30,
-    paddingRight: 30,
+    backgroundColor:"white",
     gap: 12,
   },
   inboxContainer: {
     display: "flex",
+    width:360,
     gap: 16,
   },
   reviewButton: {
@@ -226,7 +230,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#A0AEC0",
+    backgroundColor: "#74CBD4",
   },
   contentContainer: {
     flex: 1,
@@ -237,6 +241,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 55,
+    marginLeft:27,
     marginBottom: 41,
   },
   viewDoctorStatusModal: {

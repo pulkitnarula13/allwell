@@ -29,19 +29,20 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },   
   solidContainerConfig: {
-    backgroundColor: "#718096",
+    backgroundColor: "#74CBD4",
     height: 170,
     marginRight:20,
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
-    borderRadius: 8,
+    borderRadius: 20,
     gap: 20,
     justifyContent: "space-evenly"
   },
   outlineContainerConfig: {
-    backgroundColor: "#718096",
+    backgroundColor: "#74CBD4",
     height: 170,
+    
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
-    borderRadius: 8,
+    borderRadius: 20,
     gap: 20,
     justifyContent: "space-evenly"
   },
