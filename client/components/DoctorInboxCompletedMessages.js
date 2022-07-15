@@ -5,15 +5,14 @@ import { FlatList } from "react-native";
 import { DATA } from "../constants/Doctor-inboxvalues";
 import { AuthContext } from "../Context/AuthContext";
 
-const DoctorCurrentMessages = (props) => {
-  console.log(props, "props");
+const DoctorCompletedMessages = (props) => {
 
   const [currentData, setCurrentData] = useState();
   const [dialogbox, setDialogbox] = useState(false);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
-    const modifiedData = props?.currentAppointmnents?.map((data) => {
+    const modifiedData = props?.completedAppointments?.map((data) => {
       return {
         image: "../../assets/icon.png",
         date: `${new Date(data.date).getDate()} / ${new Date(
@@ -110,4 +109,4 @@ const styles = StyleSheet.create({
     height: 62,
   },
 });
-export default DoctorCurrentMessages;
+export default DoctorCompletedMessages;

@@ -8,10 +8,11 @@ import Dialog, {
 import { Tabs, TabScreen } from "react-native-paper-tabs";
 
 import Searchbars from "../../components/searchbar";
-import Doctorinboxdata from "../../components/Doctor-inbox-data";
+import DoctorCurrentMessages from "../../components/Doctor-inbox-data";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
+import DoctorCompletedMessages from "../../components/DoctorInboxCompletedMessages";
 
 const DoctorInbox = ({ navigation }) => {
   const [dialogbox, setDialogbox] = useState(false);
@@ -37,6 +38,7 @@ const DoctorInbox = ({ navigation }) => {
         (data) => data.completed && !data.cancelled
       );
 
+      console.log(completedAppointments, "complte");
       setCompletedAppointments(completedAppointments);
 
       const currentAppointmnents = data.data.data.filter(
@@ -77,7 +79,7 @@ const DoctorInbox = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <Doctorinboxdata
+              <DoctorCurrentMessages
                 currentPatient={(val) => {
                   setCurrentPatient(val)
                 }}
@@ -98,7 +100,7 @@ const DoctorInbox = ({ navigation }) => {
             }}
           >
             <View>
-              <Doctorinboxdata
+              <DoctorCompletedMessages
                 currentPatient={(val) => setCurrentPatient(val)}
                 setDialogbox={(val) => setDialogbox(val)}
                 completedAppointments={completedAppointments}
