@@ -144,11 +144,10 @@ const DoctorInbox = ({ navigation }) => {
 
           </View>
           <View style={styles.viewDividerLine} />
-          <View style={styles.button}>
+          <View style={styles.button} >
             <Button
-              style={{ fontSize: 14, lineHeight: 33, color: "white" }}
+              style={{ fontSize: 14, lineHeight: 33}}
               color="white"
-              title="View the Chat"
               onPress={() => {
                 console.log(currentPatient, "currentPatient");
                 navigation.navigate("Chatting", {
@@ -158,7 +157,7 @@ const DoctorInbox = ({ navigation }) => {
                 });
                 setDialogbox(false)
               }}
-            />
+            >View the chat</Button>
           </View>
         </DialogContent>
       </Dialog>

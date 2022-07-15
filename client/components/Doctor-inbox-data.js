@@ -1,18 +1,18 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Rating } from "react-native-ratings";
 import { FlatList } from "react-native";
 import { DATA } from "../constants/Doctor-inboxvalues";
+import { AuthContext } from "../Context/AuthContext";
 
 const Doctorinboxdata = (props) => {
   console.log(props, "props");
 
   const [currentData, setCurrentData] = useState();
   const [dialogbox, setDialogbox] = useState(false);
-
+  const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(props?.currentAppointmnents, "inside inbox");
     const modifiedData = props?.currentAppointmnents?.map((data) => {
       return {
         image: "../../assets/icon.png",
@@ -23,7 +23,8 @@ const Doctorinboxdata = (props) => {
         info: data.qna[0].answer,
         patient: data.patient.name,
         qna: data.qna,
-        appointmentInfo: data._id
+        appointmentInfo: data._id,
+        doctor: userInfo,
       };
     });
 
@@ -31,40 +32,38 @@ const Doctorinboxdata = (props) => {
     setCurrentData(modifiedData);
   }, [props.currentAppointmnents]);
 
-
   const openDialog = (data) => {
-   props.setDialogbox(true);
-   props.currentPatient(data)
-  }
+    props.setDialogbox(true);
+    props.currentPatient(data);
+  };
 
   const renderItem = ({ item }) => {
-    console.log(item, "ITEM");
     return (
       <TouchableOpacity onPress={() => openDialog(item)}>
-      <View style={styles.main}>
-        <Text style={styles.date1}>{item.date}</Text>
-        <View style={styles.mainouter}>
-          <View style={styles.inner}>
-            <View>
-              <Image
-                style={styles.image2}
-                source={require("../assets/icon.png")}
-                resizeMode="contain"
-              />
-              <Text style={{ textAlign: "center" }}> {item.patient}</Text>
-            </View>
-            <View style={{ marginLeft: 30 }}>
-              <View style={{ display: "flex", flexDirection: "column" }}>
-                <Text>Date: {item.date}</Text>
-                <Text>Symptoms: {item.symptoms}</Text>
-                <Text>More Information: {item.qna[0].answer}</Text>
+        <View style={styles.main}>
+          <Text style={styles.date1}>{item.date}</Text>
+          <View style={styles.mainouter}>
+            <View style={styles.inner}>
+              <View>
+                <Image
+                  style={styles.image2}
+                  source={require("../assets/icon.png")}
+                  resizeMode="contain"
+                />
+                <Text style={{ textAlign: "center" }}> {item.patient}</Text>
+              </View>
+              <View style={{ marginLeft: 30 }}>
+                <View style={{ display: "flex", flexDirection: "column" }}>
+                  <Text>Date: {item.date}</Text>
+                  <Text>Symptoms: {item.symptoms}</Text>
+                  <Text>More Information: {item.qna[0].answer}</Text>
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-    )
+      </TouchableOpacity>
+    );
   };
 
   return (

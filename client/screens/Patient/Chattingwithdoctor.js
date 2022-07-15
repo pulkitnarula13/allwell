@@ -1,9 +1,10 @@
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, FlatList, Image } from "react-native";
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import { GiftedChat } from "react-native-gifted-chat";
+import { Bubble, GiftedChat, Composer, InputToolbar } from "react-native-gifted-chat";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
-import { BASE_URL_DEV} from "@env";
+import { BASE_URL_DEV } from "@env";
+import { Button, Divider } from "react-native-paper";
 
 export default function Chattingwithdoctor(props) {
   const [messages, setMessages] = useState([]);
@@ -11,22 +12,68 @@ export default function Chattingwithdoctor(props) {
 
   console.log(props, "Chatting");
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: `Question : ${props.route.params.qna[0].question} Answer: ${props.route.params.qna[0].answer}`,
+    modifyChat();
+  }, []);
+
+  function renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          left: {
+            backgroundColor: "#79bdcc",
+          },
+        }}
+      />
+    );
+  }
+
+  const RenderComposer = (props) => {
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <Composer {...props} />
+        <Button icon="check" color="#79bdcc" onPress={completeAppointment}>
+          Complete
+        </Button>
+      </View>
+    );
+  };
+
+  const RenderSend = (props) => {
+    return (
+        <Button icon="send">
+        </Button>
+    );
+  };
+
+  const modifyChat = () => {
+    const modifiedData = [];
+    props.route.params.qna.forEach((qna) => {
+      modifiedData.push({
+        _id: qna.question,
+        text: (
+          <View>
+            <Text>{qna.question}</Text>
+            <Divider />
+            <Text style={{ backgroundColor: "#fff" }}>{qna.answer}</Text>
+          </View>
+        ),
+        image: qna?.images[0],
         createdAt: new Date(),
         user: {
           _id: 2,
           name: props.route.params.patient,
           avatar: "https://placeimg.com/140/140/any",
         },
-      },
-    ]);
-  }, []);
+      });
+    });
+
+    console.log(modifiedData, "modified");
+    setMessages(modifiedData.reverse());
+  };
 
   const completeAppointment = async () => {
-    console.log('Completed function', props);
+    console.log("Completed function", props);
     try {
       const response = await axios.put(
         `${BASE_URL_DEV}/appointments/complete/${props.route.params.appointmentInfo}`,
@@ -37,7 +84,7 @@ export default function Chattingwithdoctor(props) {
           },
         }
       );
-      console.log('response', response);
+      console.log("response", response);
 
       Alert.alert("Success", response.data.message);
       props.navigation.navigate("Doctor-Inbox");
@@ -47,16 +94,17 @@ export default function Chattingwithdoctor(props) {
     }
   };
   const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages)
+    setMessages(
+      (previousMessages) => GiftedChat.append(previousMessages, messages)
     );
-    completeAppointment();
   }, []);
 
   return (
     <GiftedChat
       messages={messages}
+      renderBubble={renderBubble}
       onSend={(messages) => onSend(messages)}
+      alwaysShowSend={true}
       user={{
         _id: 1,
       }}
