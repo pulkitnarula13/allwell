@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         marginRight: 30,
         lineHeight: 20,
         overflow: 'hidden',
-        display: '-webkit-box',
+        // display: '-webkit-box',
         WebkitLineClamp: 2,
         WebkitBoxOrient: 'vertical',
     },

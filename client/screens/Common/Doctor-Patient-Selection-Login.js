@@ -21,9 +21,12 @@ const DoctorPatientSelectionLogin = ({ navigation }) => {
             style={{ width: 186, height: 186  }}
             source={require("../../assets/images/patientsignup.png")}
           />
+
         </TouchableOpacity>
-        <Text>I'm a Patient</Text>
       </View>
+      <Text style={style.txt}>I'm a Patient</Text>
+
+
       <View style={{borderRadius: 20,borderColor:"#74CBD4",borderWidth:2,marginBottom:30}}>
         <TouchableOpacity
           onPress={() => navigation.navigate("Doctor-Login")}
@@ -40,11 +43,11 @@ const DoctorPatientSelectionLogin = ({ navigation }) => {
             style={{ width: 234, height: 160, borderRadius: 4 }}
             resizeMode="cover"
             source={require("../../assets/images/doctorsignup.png")}
-          />
-       
+          />       
         </TouchableOpacity>
-        <Text>I'm a Doctor</Text>
       </View>
+      <Text style={style.txt1}>I'm a Doctor</Text>
+
       {/* <View>
         <Text>Already have an account ? </Text>
       </View> */}
@@ -58,6 +61,19 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
+  txt: {
+    textAlign: "center",
+    fontWeight: 'bold',
+    marginTop: -50,
+    marginBottom: 40
+  },
+
+  txt1: {
+    textAlign: "center",
+    fontWeight: 'bold',
+    marginTop: -20,
+  }
 });
 
 export default DoctorPatientSelectionLogin;
