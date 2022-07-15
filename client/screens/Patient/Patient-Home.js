@@ -119,7 +119,9 @@ const PatientHome = ({ navigation }) => {
             latitude,
           })
         );
+        
         setUserLocation(address);
+        console.log(userLocation)
         setlongitude(longitude);
         setlatitude(latitude);
         setLocationLoading(false);
@@ -169,7 +171,7 @@ const PatientHome = ({ navigation }) => {
             source={name}
             resizeMode="cover"
           />
-          <Text style={{ fontWeight: "500", fontSize: 16 }}>{name}</Text>
+          <Text style={{ fontWeight: "400", fontSize: 16,fontFamily:"poppins" }}>{name}</Text>
           {/* <View>
             <FlatList
               // style={{ height: 110, marginRight: 36, marginLeft: 36 }}
@@ -207,7 +209,6 @@ const PatientHome = ({ navigation }) => {
             borderWidth: 3,
             borderColor: "#74CBD4",
             borderRadius: 100,
-            padding: 10,
             marginRight: 14,
           }}
         >
@@ -264,8 +265,8 @@ const PatientHome = ({ navigation }) => {
         flex: 1,
       }}
     >
-      <View style={{ paddingLeft: 20, backgroundColor: "#FFFFFFF" }}>
-        <ScrollView>
+      <View style={{ marginLeft:33, backgroundColor: "#FFFFFFF" }}>
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} >
           <View
             style={{
               display: "flex",
@@ -286,7 +287,7 @@ const PatientHome = ({ navigation }) => {
               <Button onPress={getlocationhandler}>
                 <Ionicons name="location-outline" size={24} color="#74CBD4" />
               </Button>
-              <Text style={{ marginRight: 50, marginTop: 15 }}>
+              <Text style={{ marginRight: 50, marginTop: 15,width:150,heigh:40 }}>
                 {locationLoading ? (
                   <ActivityIndicator size="small" color="#bbd0d8" />
                 ) : (
@@ -296,7 +297,7 @@ const PatientHome = ({ navigation }) => {
             </View>
           </View>
           <View style={{ marginTop: 50 }}>
-            <Text style={styles.heading}>Not feeling well?</Text>
+            <Text style={styles.heading13}>Not feeling well?</Text>
           </View>
 
           <View
@@ -337,8 +338,9 @@ const PatientHome = ({ navigation }) => {
             >
               <Text
                 style={{
-                  fontSize: 18,
-                  fontWeight: "bold",
+                  fontSize: 16,
+                  fontWeight: "600",
+                  fontFamily:"poppins",
                   alignItems: "flex-start",
                 }}
               >
@@ -349,7 +351,7 @@ const PatientHome = ({ navigation }) => {
               onPress={() => {
                 navigation.navigate("All-Symptoms");
               }}
-              style={{ marginRight: 40, fontWeight: "700" }}
+              style={{ marginRight: 40, fontWeight: "700",textDecorationLine:"underline",textDecorationColor:"#74CBD4",lineHeight:24 }}
             >
               View All
             </Text>
@@ -383,7 +385,7 @@ const PatientHome = ({ navigation }) => {
               marginBottom: 17,
             }}
           >
-            <Text style={{ fontWeight: "700", fontSize: 16 }}>
+            <Text style={{ fontWeight: "600", fontSize: 16,fontFamily:"poppins" }}>
               Near By Doctors
             </Text>
           </View>
@@ -399,8 +401,8 @@ const PatientHome = ({ navigation }) => {
           </View>
 
           <View>
-            <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 16 }}>
-              Popular Doctors
+            <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 18,fontFamily:"Inter" }}>
+              Popular Specialists
             </Text>
           </View>
           <View>
@@ -441,7 +443,14 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 22,
-    fontWeight: "700",
+    fontWeight: "600",
+    fontFamily:"poppins",
+    marginBottom: 26.66,
+  },
+  heading13: {
+    fontSize: 16,
+    fontWeight: "600",
+    fontFamily:"poppins",
     marginBottom: 26.66,
   },
   heading12: {
