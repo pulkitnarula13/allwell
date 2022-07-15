@@ -139,7 +139,9 @@ const loginDoctor = async (req, res) => {
   }
    
   }
-  Doctor.find(options)
+  Doctor.find(options).populate({
+    path: "specialities"
+  })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched all doctors",

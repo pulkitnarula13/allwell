@@ -11,12 +11,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { Button } from "react-native-paper";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-// import {
-//   getCurrentPositionAsync,
-//   useForegroundPermissions,
-//   PermissionStatus,
-// } from "expo-location";
-
 import * as Location from "expo-location";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -25,31 +19,32 @@ import { BASE_URL_DEV } from "@env";
 import axios from "axios";
 import { SymptomsList } from "../../constants/symptoms";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getDistance, getPreciseDistance } from "geolib";
 
 const PatientHome = ({ navigation }) => {
-  const nearby = [
-    {
-      id: "Dr.Beth Smith",
-      image: "./assets/doctor1.jpg",
-    },
-    {
-      id: "Dr.John Legend",
-      image: "./assets/doctor2.jpg",
-    },
-  ];
+  const [nearbyDoctors, setNearByDoctors] = useState([]);
 
-  const [latitude, setlatitude] = useState("0");
+  const [latitude, setlatitude] = useState(0);
   const [userLocation, setUserLocation] = useState("");
-  const [longitude, setlongitude] = useState("0");
+  const [longitude, setlongitude] = useState(0);
   const [locationLoading, setLocationLoading] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     getSymptoms();
-    const address = await AsyncStorage.getItem("user-location");
-    if (address) {
-      setUserLocation(address);
-    }
+    SetLocationData();
   }, []);
+
+  const SetLocationData = async () => {
+    const mainLocation = JSON.parse(await AsyncStorage.getItem("user-location"));
+
+    if (mainLocation) {
+      setUserLocation(mainLocation.address);
+      setlatitude(mainLocation.latitude);
+      setlongitude(mainLocation.longitude);
+      getNearbyDoctorList();
+    }
+  }
+
 
   const [symptomsData, setSymptomsData] = useState([]);
   const { userInfo } = useContext(AuthContext);
@@ -67,6 +62,24 @@ const PatientHome = ({ navigation }) => {
 
     setSymptomsData(modifiedData);
   };
+
+  const getNearbyDoctorList = async () => {
+    const response = await axios.get(`${BASE_URL_DEV}/doctors/location?longitude=${longitude}&latitude=${latitude}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    const modifiedData = response.data.data.map((val) => {
+      val.distance = getDistance(
+        { latitude: latitude, longitude: longitude },
+        { latitude: val.location.coordinates[1], longitude: val.location.coordinates[1] }
+      );
+
+      return val;
+    });
+    console.log(modifiedData, "mdoifed");
+    setNearByDoctors(modifiedData);
+  }
 
   async function getlocationhandler() {
     setLocationLoading(true);
@@ -91,14 +104,32 @@ const PatientHome = ({ navigation }) => {
 
       for (let item of response) {
         let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
-        AsyncStorage.setItem("user-location", address);
+        AsyncStorage.setItem("user-location", JSON.stringify({
+          address,
+          longitude,
+          latitude
+
+        }));
         setUserLocation(address);
+        setlongitude(longitude);
+        setlatitude(latitude);
         setLocationLoading(false);
       }
     }
   }
 
-  const Item1 = ({ name, image }) => {
+
+  const renderSpecialities = ({item}) => {
+    console.log(item, "I");
+    return (
+       <View>
+         <Text>{item.name}</Text>
+       </View>
+    )
+  }
+
+  const Item1 = ({ name, image, distance, specialities }) => {
+    console.log(specialities, "specialities inside");
     return (
       <View
         style={{
@@ -127,13 +158,23 @@ const PatientHome = ({ navigation }) => {
               borderRadius: 100,
               backgroundColor: "gray",
             }}
-            source={nearby.name}
+            source={name}
             resizeMode="cover"
           />
-          <Text style={{ fontWeight: "500", fontSize: 16 }}>{nearby.name}</Text>
-          <Text style={{ fontWeight: "100", fontSize: 12 }}>
-            General Phisician
-          </Text>
+          <Text style={{ fontWeight: "500", fontSize: 16 }}>{name}</Text>
+          <View>
+          <FlatList
+              // style={{ height: 110, marginRight: 36, marginLeft: 36 }}
+              horizontal={true}
+              data={specialities}
+              renderItem={renderSpecialities}
+              keyExtractor={(item) => item.name}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          {/* <Text style={{ fontWeight: "100", fontSize: 12 }}>
+            
+          </Text> */}
           <Button style={{ display: "flex", flexDirection: "row" }}>
             <Ionicons
               style={{ marginRight: 10 }}
@@ -141,7 +182,7 @@ const PatientHome = ({ navigation }) => {
               size={24}
               color="#74CBD4"
             />
-            <Text style={{ color: "black" }}>5Km</Text>
+            <Text style={{ color: "black" }}>{(distance/10000000).toFixed(1)} km</Text>
           </Button>
         </View>
       </View>
@@ -172,15 +213,15 @@ const PatientHome = ({ navigation }) => {
 
   let Screenheight = Dimensions.get("window").height;
 
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
-  const renderItem1 = ({ item }) => (
-    <Item1 name={item.name} image={item.image} />
-  );
+  const renderItem = ({ item }) => <Item name={item.name} image={item.image}  />;
+  const renderItem1 = ({ item }) => {console.log(item, "IEM");
+   return ( <Item1 name={item.name} image={item.image} distance={item.distance} specialities={item.specialities} />)
+  }
 
   const renderItem2 = ({ item }) => (
-    <Item1 name={item.name} image={item.image} />
+    <Item1 name={item.name} image={item.image} distance={item.distance} specialities={item.specialities}   />
   );
-
+ 
   return (
     <View
       style={{
@@ -318,7 +359,7 @@ const PatientHome = ({ navigation }) => {
             <FlatList
               style={{ height: 210, marginRight: 36, marginLeft: 36 }}
               horizontal={true}
-              data={nearby}
+              data={nearbyDoctors}
               renderItem={renderItem1}
               keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
@@ -334,7 +375,7 @@ const PatientHome = ({ navigation }) => {
             <FlatList
               style={{ height: 210, marginRight: 36, marginLeft: 36 }}
               horizontal={true}
-              data={nearby}
+              data={nearbyDoctors}
               renderItem={renderItem2}
               keyExtractor={(item) => item.name}
               showsHorizontalScrollIndicator={false}
