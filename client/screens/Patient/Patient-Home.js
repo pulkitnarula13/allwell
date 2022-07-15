@@ -35,7 +35,9 @@ const PatientHome = ({ navigation }) => {
   }, []);
 
   const SetLocationData = async () => {
-    const mainLocation = JSON.parse(await AsyncStorage.getItem("user-location"));
+    const mainLocation = JSON.parse(
+      await AsyncStorage.getItem("user-location")
+    );
 
     if (mainLocation) {
       setUserLocation(mainLocation.address);
@@ -43,8 +45,7 @@ const PatientHome = ({ navigation }) => {
       setlongitude(mainLocation.longitude);
       getNearbyDoctorList();
     }
-  }
-
+  };
 
   const [symptomsData, setSymptomsData] = useState([]);
   const { userInfo } = useContext(AuthContext);
@@ -64,22 +65,28 @@ const PatientHome = ({ navigation }) => {
   };
 
   const getNearbyDoctorList = async () => {
-    const response = await axios.get(`${BASE_URL_DEV}/doctors/location?longitude=${longitude}&latitude=${latitude}`, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const response = await axios.get(
+      `${BASE_URL_DEV}/doctors/location?longitude=${longitude}&latitude=${latitude}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
     const modifiedData = response.data.data.map((val) => {
       val.distance = getDistance(
         { latitude: latitude, longitude: longitude },
-        { latitude: val.location.coordinates[1], longitude: val.location.coordinates[1] }
+        {
+          latitude: val.location.coordinates[1],
+          longitude: val.location.coordinates[1],
+        }
       );
 
       return val;
     });
     console.log(modifiedData, "mdoifed");
     setNearByDoctors(modifiedData);
-  }
+  };
 
   async function getlocationhandler() {
     setLocationLoading(true);
@@ -104,12 +111,14 @@ const PatientHome = ({ navigation }) => {
 
       for (let item of response) {
         let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
-        AsyncStorage.setItem("user-location", JSON.stringify({
-          address,
-          longitude,
-          latitude
-
-        }));
+        AsyncStorage.setItem(
+          "user-location",
+          JSON.stringify({
+            address,
+            longitude,
+            latitude,
+          })
+        );
         setUserLocation(address);
         setlongitude(longitude);
         setlatitude(latitude);
@@ -118,15 +127,14 @@ const PatientHome = ({ navigation }) => {
     }
   }
 
-
-  const renderSpecialities = ({item}) => {
+  const renderSpecialities = ({ item }) => {
     console.log(item, "I");
     return (
-       <View>
-         <Text>{item.name}</Text>
-       </View>
-    )
-  }
+      <View>
+        <Text>{item.name}</Text>
+      </View>
+    );
+  };
 
   const Item1 = ({ name, image, distance, specialities }) => {
     console.log(specialities, "specialities inside");
@@ -163,7 +171,7 @@ const PatientHome = ({ navigation }) => {
           />
           <Text style={{ fontWeight: "500", fontSize: 16 }}>{name}</Text>
           <View>
-          <FlatList
+            <FlatList
               // style={{ height: 110, marginRight: 36, marginLeft: 36 }}
               horizontal={true}
               data={specialities}
@@ -182,7 +190,9 @@ const PatientHome = ({ navigation }) => {
               size={24}
               color="#74CBD4"
             />
-            <Text style={{ color: "black" }}>{(distance/10000000).toFixed(1)} km</Text>
+            <Text style={{ color: "black" }}>
+              {(distance / 10000000).toFixed(1)} km
+            </Text>
           </Button>
         </View>
       </View>
@@ -214,15 +224,36 @@ const PatientHome = ({ navigation }) => {
 
   let Screenheight = Dimensions.get("window").height;
 
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image}  />;
-  const renderItem1 = ({ item }) => {console.log(item, "IEM");
-   return ( <Item1 name={item.name} image={item.image} distance={item.distance} specialities={item.specialities} />)
-  }
+  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  const renderItem1 = ({ item }) => {
+    console.log(item, "IEM");
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate("Doctor-Info", {
+        id: item._id
+      })}>
+        <Item1
+          name={item.name}
+          image={item.image}
+          distance={item.distance}
+          specialities={item.specialities}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   const renderItem2 = ({ item }) => (
-    <Item1 name={item.name} image={item.image} distance={item.distance} specialities={item.specialities}   />
+    <TouchableOpacity onPress={() => navigation.navigate("Doctor-Info", {
+      id: item._id
+    })}> 
+      <Item1
+        name={item.name}
+        image={item.image}
+        distance={item.distance}
+        specialities={item.specialities}
+      />
+    </TouchableOpacity>
   );
- 
+
   return (
     <View
       style={{
@@ -448,6 +479,6 @@ const styles = StyleSheet.create({
   symptomsName: {
     textAlign: "center",
     marginLeft: -20,
-  }
+  },
 });
 export default PatientHome;
