@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
-import {  Button } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 // import {
 //   getCurrentPositionAsync,
@@ -45,14 +45,11 @@ const PatientHome = ({ navigation }) => {
 
   useEffect(async () => {
     getSymptoms();
-    const address = await AsyncStorage.getItem('user-location');
-    console.log(address, "address");
+    const address = await AsyncStorage.getItem("user-location");
     if (address) {
       setUserLocation(address);
     }
   }, []);
-
-
 
   const [symptomsData, setSymptomsData] = useState([]);
   const { userInfo } = useContext(AuthContext);
@@ -85,7 +82,6 @@ const PatientHome = ({ navigation }) => {
 
     let { coords } = await Location.getCurrentPositionAsync();
 
-
     if (coords) {
       const { latitude, longitude } = coords;
       let response = await Location.reverseGeocodeAsync({
@@ -95,7 +91,7 @@ const PatientHome = ({ navigation }) => {
 
       for (let item of response) {
         let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
-        AsyncStorage.setItem('user-location', address);
+        AsyncStorage.setItem("user-location", address);
         setUserLocation(address);
         setLocationLoading(false);
       }
@@ -218,7 +214,11 @@ const PatientHome = ({ navigation }) => {
                 <Ionicons name="location-outline" size={24} color="#74CBD4" />
               </Button>
               <Text style={{ marginRight: 50, marginTop: 15 }}>
-               {locationLoading ?  <ActivityIndicator size="small" color="#bbd0d8" /> :  userLocation}
+                {locationLoading ? (
+                  <ActivityIndicator size="small" color="#bbd0d8" />
+                ) : (
+                  userLocation
+                )}
               </Text>
             </View>
           </View>

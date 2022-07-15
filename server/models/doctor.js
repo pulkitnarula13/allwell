@@ -16,6 +16,10 @@ const doctorSchema = new Schema({
     type: String,
   },
 
+  location: {
+    type: Object
+  },
+
   email: {
     type: String,
     unique: true,

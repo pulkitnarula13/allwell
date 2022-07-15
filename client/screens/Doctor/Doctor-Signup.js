@@ -31,12 +31,10 @@ const DoctorSignup = ({ navigation }) => {
 
   useEffect(() => {
     setThirdData({...thirData, thirdStepperData})
-    console.log(thirData);
 
   }, [thirdStepperData])
 
   const submitData = () => {
-    console.log(thirdStepperData, "thirdSymptomData");
     let mainData = {
       licenseImage: firstStepData.image.uri,
       licenseNumber: firstStepData.licenseNumber,
@@ -48,7 +46,8 @@ const DoctorSignup = ({ navigation }) => {
       experience: thirdStepperData.experience,
       description: thirdStepperData.description,
       languages: thirdStepperData.languages,
-      certifications: thirdStepperData.certifications
+      certifications: thirdStepperData.certifications,
+      location: thirdStepperData.location
     };
 
     axios

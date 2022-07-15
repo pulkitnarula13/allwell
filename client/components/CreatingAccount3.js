@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { certificationsList } from "../constants/certifications";
 import { languagesList } from "../constants/languages";
+import * as Location from "expo-location";
 
 const CreatingAccount3 = (props) => {
   const [height, setHeight] = useState(undefined);
@@ -16,6 +17,9 @@ const CreatingAccount3 = (props) => {
   const [description, setDescription] = useState("");
   const [certification, setCertifications] = useState(certificationsList);
   const [languages, setLanguages] = useState(languagesList);
+  const [latitude, setlatitude] = useState("0");
+  const [longitude, setlongitude] = useState("0");
+  const [userLocation, setUserLocation] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCertification, setSelectedCertification] = useState("");
   const [showCertificationDropDown, setShowCertificationDropDown] =
@@ -42,6 +46,45 @@ const CreatingAccount3 = (props) => {
     setSpecialities(manipulatedData);
   };
 
+  async function getlocationhandler() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert(
+        "Permission not granted",
+        "Allow the app to use location service.",
+        [{ text: "OK" }],
+        { cancelable: false }
+      );
+    }
+
+    let { coords } = await Location.getCurrentPositionAsync();
+
+    if (coords) {
+      const { latitude, longitude } = coords;
+      let response = await Location.reverseGeocodeAsync({
+        latitude,
+        longitude,
+      });
+
+      setlatitude(latitude);
+      setlongitude(longitude);
+
+      for (let item of response) {
+        let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
+        console.log(longitude, latitude, "longitude");
+        setUserLocation(address);
+        props.setThirdStepperData({
+          ...props.mainData,
+          location: {
+            type: "Point",
+            longitude,
+            latitude,
+          },
+        });
+      }
+    }
+  }
+
   return (
     <View>
       <View style={styles.dropdownlistview}>
@@ -59,8 +102,7 @@ const CreatingAccount3 = (props) => {
             setSelectedSpeciality(data);
             props.setThirdStepperData({
               ...props.mainData,
-              specialities: data.split(",")
-              .filter((data) => data),
+              specialities: data.split(",").filter((data) => data),
             });
           }}
           list={specialities}
@@ -138,6 +180,13 @@ const CreatingAccount3 = (props) => {
           onContentSizeChange={(event) => {
             setHeight(event.nativeEvent.contentSize.height);
           }}
+        />
+        <TextInput
+          label="Address"
+          value={userLocation}
+          right={
+            <TextInput.Icon onPress={getlocationhandler} name="map-marker" />
+          }
         />
       </View>
 

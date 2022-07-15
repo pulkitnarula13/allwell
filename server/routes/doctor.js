@@ -11,6 +11,7 @@ const {
   getDoctorById,
   getDoctorSpecialities,
   createSpecialization,
+  getDoctorsByLocation,
 } = require("../controller/doctor");
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
@@ -53,6 +54,18 @@ router.post("/login", loginDoctor);
  */
  router.get("/specialities", getDoctorSpecialities);
 
+ // Routes
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Get all the doctors based on location
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get("/location/", getDoctorsByLocation);
+
 // Routes
 /**
  * @swagger
@@ -64,6 +77,7 @@ router.post("/login", loginDoctor);
  *         description: return positive response
  */
 router.get("/", getDoctors);
+
 
 // Routes
 /**

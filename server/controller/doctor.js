@@ -32,7 +32,6 @@ const registerDoctor = async (req, res) => {
       req.body.name
     );
 
-
     const output = await Doctor.create({
       name: req.body.name,
       dob: req.body.dob,
@@ -50,6 +49,7 @@ const registerDoctor = async (req, res) => {
       languages: req.body.languages,
       certifications: req.body.certifications,
       licenseImage: uploadLicenseImage,
+      location: req.body.location
     });
 
     return res.status(200).json({
@@ -110,6 +110,42 @@ const loginDoctor = async (req, res) => {
   }
 };
 
+
+
+/**
+ * @description API to fetch all doctors based on location
+ * @param {*} req
+ * @param {*} res
+ */
+ const getDoctorsByLocation = (req, res) => {
+  const longitude = Number(req.query.longitude);
+  const latitude = Number(req.query.latitude);
+
+  const options = {
+    location: {
+      $geoWithin: {
+        $centerSphere: [[longitude, latitude], 10 / 3963.2]
+      }
+    }
+   
+  }
+  Doctor.find(options)
+    .populate({
+      path: "address",
+    })
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched all doctors",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
 /**
  * @description API to fetch all doctors from database
  * @param {*} req
@@ -132,6 +168,7 @@ const getDoctors = (req, res) => {
       });
     });
 };
+
 
 /**
  * @description API to update doctors
@@ -252,5 +289,6 @@ module.exports = {
   registerDoctor,
   loginDoctor,
   getDoctorSpecialities,
-  createSpecialization
+  createSpecialization,
+  getDoctorsByLocation
 };
