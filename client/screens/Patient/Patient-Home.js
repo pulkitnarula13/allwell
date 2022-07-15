@@ -8,20 +8,23 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, FlatList } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import {  Button } from "react-native-paper";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  getCurrentPositionAsync,
-  useForegroundPermissions,
-  PermissionStatus,
-} from "expo-location";
+// import {
+//   getCurrentPositionAsync,
+//   useForegroundPermissions,
+//   PermissionStatus,
+// } from "expo-location";
+
+import * as Location from "expo-location";
 import { AuthContext } from "../../Context/AuthContext";
 
 import { FloatingAction } from "react-native-floating-action";
 import { BASE_URL_DEV } from "@env";
 import axios from "axios";
 import { SymptomsList } from "../../constants/symptoms";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PatientHome = ({ navigation }) => {
   const nearby = [
@@ -36,14 +39,24 @@ const PatientHome = ({ navigation }) => {
   ];
 
   const [latitude, setlatitude] = useState("0");
+  const [userLocation, setUserLocation] = useState("");
   const [longitude, setlongitude] = useState("0");
+  const [locationLoading, setLocationLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     getSymptoms();
+    const address = await AsyncStorage.getItem('user-location');
+    console.log(address, "address");
+    if (address) {
+      setUserLocation(address);
+    }
   }, []);
+
+
 
   const [symptomsData, setSymptomsData] = useState([]);
   const { userInfo } = useContext(AuthContext);
+
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
       headers: {
@@ -58,39 +71,35 @@ const PatientHome = ({ navigation }) => {
     setSymptomsData(modifiedData);
   };
 
-  const [locationpermissioninfo, requestpermission] =
-    useForegroundPermissions();
-
-  async function seePermission() {
-    if (locationpermissioninfo.status === PermissionStatus.UNDETERMINED) {
-      const permissionResponse = await requestpermission();
-      return permissionResponse.granted;
-    }
-
-    if (locationpermissioninfo.status === PermissionStatus.DENIED) {
-      Alert.alert(
-        "Sorry, we cannot get the permission for you as it is denied by the user "
-      );
-
-      return false;
-    }
-  }
-
   async function getlocationhandler() {
-    const haspermission = await seePermission();
-    console.log(haspermission, "has permission");
-
-    if (!haspermission) {
-      return;
+    setLocationLoading(true);
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert(
+        "Permission not granted",
+        "Allow the app to use location service.",
+        [{ text: "OK" }],
+        { cancelable: false }
+      );
     }
 
-    const location = await getCurrentPositionAsync().then((data) => {
-      setlatitude(data.coords.latitude);
-      setlongitude(data.coords.longitude);
+    let { coords } = await Location.getCurrentPositionAsync();
 
-      console.log(data.coords.latitude, "latitude");
-      console.log(data.coords.longitude, "longitude");
-    });
+
+    if (coords) {
+      const { latitude, longitude } = coords;
+      let response = await Location.reverseGeocodeAsync({
+        latitude,
+        longitude,
+      });
+
+      for (let item of response) {
+        let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
+        AsyncStorage.setItem('user-location', address);
+        setUserLocation(address);
+        setLocationLoading(false);
+      }
+    }
   }
 
   const Item1 = ({ name, image }) => {
@@ -209,7 +218,7 @@ const PatientHome = ({ navigation }) => {
                 <Ionicons name="location-outline" size={24} color="#74CBD4" />
               </Button>
               <Text style={{ marginRight: 50, marginTop: 15 }}>
-                {latitude},{longitude}
+               {locationLoading ?  <ActivityIndicator size="small" color="#bbd0d8" /> :  userLocation}
               </Text>
             </View>
           </View>
