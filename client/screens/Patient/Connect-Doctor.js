@@ -14,6 +14,8 @@ import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import AppointmentContext from "../../Context/AppointmentContext";
 import { Ionicons } from "@expo/vector-icons";
+import { SymptomsList } from "../../constants/symptoms";
+
 
 let Screenheight = Dimensions.get("window").height;
 
@@ -49,16 +51,23 @@ const ConnectPatient = ({ navigation, route }) => {
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
 
-  const renderSymptoms = ({ item }) => {
+  const renderSymptoms = ({ item, image }) => {
     return (
-        <View style={styles.item}>
+        <View style={styles.symptopmsView}>
+          <View style={styles.symptopmsImgView}>
+        {/* <Image
+      style={styles.image1}
+      source={require("../../assets/icon.png")}
+      resizeMode="center"
+    /> */}
         <Image
-          style={styles.image1}
-          source={require("../../assets/icon.png")}
-          resizeMode="center"
-        />
+          style={{ width: 74, height: 74 }}
+          source={SymptomsList[item.name]}
+          resizeMode="cover" />
+        </View>
         <Text style={styles.name1}>{item.name}</Text>
       </View>
+
     );
   };
 
@@ -113,19 +122,19 @@ const ConnectPatient = ({ navigation, route }) => {
         </View> */}
         <View style={{ alignItems: "center" }}>
           <Button
-            style={styles.availablebtn}
+            style={styles.viewDoctorsBtn}
             mode="contained"
             onPress={() => navigation.navigate("AvailableDoctor")}
           >
-            Available Doctor
+            <Text style={styles.viewDoctorsTxt}>View Doctors</Text>
           </Button>
 
           <Button
-            style={styles.availablebtn1}
+            style={styles.connectNowBtn}
             mode="contained"
             onPress={asapButtonClick}
           >
-            ASAP
+            <Text style={styles.connectNowTxt}>Connect Now</Text>
           </Button>
         </View>
       </View>
@@ -145,9 +154,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  availablebtn: {
-    backgroundColor: "#D9D9D9",
-    borderRadius: 10,
+  viewDoctorsBtn: {
+    backgroundColor: "#74CBD4",
+    borderRadius: 100,
     width: 282,
     height: 45,
     justifyContent: "center",
@@ -155,17 +164,29 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 17,
   },
-  availablebtn1: {
+  viewDoctorsTxt: {
+    color: 'white',
+    fontWeight: '800',
+    fontSize: 15,
+    textTransform: 'capitalize',
+  },
+  connectNowBtn: {
     backgroundColor: "#ffff",
-    borderRadius: 10,
+    borderRadius: 100,
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "#74CBD4",
     width: 282,
     height: 45,
     justifyContent: "center",
     marginTop: 18,
     fontWeight: "500",
     fontSize: 17,
+  },
+connectNowTxt: {
+    color: '#74CBD4',
+    fontWeight: '800',
+    fontSize: 15,
+    textTransform: 'capitalize',
   },
   subheadingtextview1: {
     fontWeight: "700",
@@ -204,6 +225,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginRight: 21,
     marginTop: 24,
+  },
+  symptopmsView: {
+    display: "flex", 
+    flexDirection: "column", 
+    textAlign: "center",
+
+  },
+  symptopmsImgView: {
+    borderWidth: 3,
+    borderColor: "#74CBD4",
+    borderRadius: 100,
+    padding: 10,
+    marginRight: 14,
   },
   headingview: {
     marginTop: 50,
