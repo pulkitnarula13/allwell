@@ -26,7 +26,7 @@ const PatientHistory = ({ navigation }) => {
       <View style={styles.search}>
         <Searchbars />
       </View>
-      <Tabs>
+      <Tabs style={{backgroundColor:"white"}}>
         <TabScreen label="Current">
           <View>
             <View
