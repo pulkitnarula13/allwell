@@ -97,9 +97,9 @@ const Doctorprofile = (props) => {
       <View style={styles.info3}>
         <Text style={styles.infotext13}>Short Bio</Text>
         <Text style={styles.infotext12}>
-          {docProfileData.description ? (
+          {docProfileData.doctorDescription ? (
             <View>
-              <Text>{docProfileData.description}</Text>
+              <Text>{docProfileData.doctorDescription}</Text>
             </View>
           ) : (
             <View>

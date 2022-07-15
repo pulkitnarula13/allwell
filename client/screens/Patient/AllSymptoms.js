@@ -5,6 +5,8 @@ import { StyleSheet, TouchableOpacity, View, Text, Image, FlatList } from "react
 import { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
+import { SymptomsList } from "../../constants/symptoms";
+
 
 export default function AllSymptoms(props) {
   useEffect(() => {

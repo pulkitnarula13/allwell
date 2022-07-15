@@ -53,7 +53,7 @@ const doctorSchema = new Schema({
     unique: true,
   },
 
-  description: {
+  doctorDescription: {
     type: String,
   },
 
