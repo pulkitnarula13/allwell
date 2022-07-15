@@ -92,7 +92,7 @@ const DoctorHome = ({ navigation }) => {
         </View>
         <View style={styles.inboxContainer}>
           <View
-            style={{width:360, display: "flex", flexDirection: "column", marginBottom: 11,justifyContent:"center" }}
+            style={{width:360, display: "flex",  flexDirection: "column", marginBottom: 11,justifyContent:"center" }}
           >
             <View style={{width:360, display: "flex", flexDirection: "row", marginBottom: 11,justifyContent:"center",alignItems:"center" }}>
             <View style={{flex:1}}>
@@ -217,6 +217,8 @@ const styles = StyleSheet.create({
     display: "flex",
     width:360,
     gap: 16,
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   reviewButton: {
     borderColor: "#74CBD4",

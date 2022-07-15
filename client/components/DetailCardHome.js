@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#74CBD4",
     flex:1,
     height: 170,
-    marginRight:20,
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
     borderRadius: 20,
     gap: 20,

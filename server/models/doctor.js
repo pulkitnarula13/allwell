@@ -44,13 +44,11 @@ const doctorSchema = new Schema({
 
   licenseNumber: {
     type: String,
-    unique: true,
   },
 
   licenseImage: {
     type: String,
     required: true,
-    unique: true,
   },
 
   doctorDescription: {
