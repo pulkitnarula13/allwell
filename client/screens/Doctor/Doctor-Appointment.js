@@ -60,26 +60,26 @@ const DoctorAppointment = (props) => {
           <CalendarStrip></CalendarStrip>
         </View>
         {/* <View style={styles.viewSelection}> */}
-          <Tabs>
-            <TabScreen label="Upcoming">
+          <Tabs style={{backgroundColor:"white",color:"#74CBD4"}}>
+            <TabScreen  style={{color:"#74CBD4"}} label="Upcoming">
               {/* <Text
                 style={styles.textSelection}
                 onPress={() => console.log("Upcoming Pressed")}
               >
                 Upcoming
               </Text> */}
-              <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <Text >Upcoming</Text>
+              <View style={{borderColor:"#74CBD4",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"black"}}>
+                <Text style={{color:"#74CBD4"}} >Upcoming</Text>
               </View>
           </TabScreen>
-          <TabScreen label="Completed">
+          <TabScreen backgroundColor="white" label="Completed">
             {/* <Text
               style={styles.textSelection}
               onPress={() => console.log("Completed Pressed")}
             >
               Completed
             </Text> */}
-              <View>
+              <View style={{backgroundColor:"white"}}>
                 <Text>Completed</Text>
               </View>
           </TabScreen>

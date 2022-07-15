@@ -67,8 +67,8 @@ const DoctorInbox = ({ navigation }) => {
       <View style={styles.search}>
         <Searchbars />
       </View>
-      <Tabs>
-        <TabScreen label="Current">
+      <Tabs style={{backgroundColor:"white"}}>
+        <TabScreen color="black" backgroundColor="black" style={{color:"black"}}  label="Current">
           <View>
             <View
               style={{
