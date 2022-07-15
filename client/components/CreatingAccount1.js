@@ -29,8 +29,8 @@ const CreatingAccount1 = (props) => {
   };
 
   return (
-    <View>
-      <View>
+    <View style={{marginLeft:50,marginRight:50}} >
+      <View style={{marginTop:55}}>
         <Text style={styles.accountHeading}>To register a doctor account,</Text>
       </View>
       <View>
@@ -41,7 +41,7 @@ const CreatingAccount1 = (props) => {
       <View style={styles.imageContainer}>
         <TouchableOpacity onPress={openimagelib}>
           <Image
-            style={{ width: 302, height: 194 }}
+            style={{ width: 292, height: 194 }}
             source={
               image1 ? { uri: image1 } : require("../assets/placeholder.png")
             }
@@ -49,7 +49,7 @@ const CreatingAccount1 = (props) => {
           />
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{marginBottom:40}}>
         <Text style={styles.textspeciality}>License Number</Text>
         <TextInput
           value={licenseNumber}
@@ -62,6 +62,9 @@ const CreatingAccount1 = (props) => {
             });
           }}
         />
+      </View>
+      <View style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:22}}>
+      <Text style={{width:247,fontSize:12}}>Registration Process may take upto 3 hours</Text>
       </View>
     </View>
   );
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "gray",
     marginTop: 20,
+    width:292
   },
   accountHeading1: {
     fontSize: 16,
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
     color: "#718096",
     lineHeight: 19.36,
     marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 32,
   },
   accountImage: {
     width: 302,
@@ -119,6 +123,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginBottom:20
   },
   textspeciality: {
     fontSize: 14,

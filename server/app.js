@@ -16,13 +16,14 @@ const qnaRoutes = require("./routes/qna");
 const doctorReview = require("./routes/doctorReview");
 const familyMemberRoutes = require('./routes/familyMember');
 
-
-const { baseURL } = require("./constant");
-
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
+
 app.use(morgan("dev"));
+app.use(express.static('web'));
 
 app.use(express.json({ limit: "50mb" }));
 
@@ -68,12 +69,12 @@ app.get("/", (req, res) => {
   res.status(200).send("All Well API");
 });
 
-app.use(`${baseURL}/patients`, patientRoutes);
-app.use(`${baseURL}/doctors`, doctorRoutes);
-app.use(`${baseURL}/appointments`, appointmentRoutes);
-app.use(`${baseURL}/qna`, qnaRoutes);
-app.use(`${baseURL}/doctorReview`, doctorReview);
-app.use(`${baseURL}/familyMember`, familyMemberRoutes);
+app.use(`/patients`, patientRoutes);
+app.use(`/doctors`, doctorRoutes);
+app.use(`/appointments`, appointmentRoutes);
+app.use(`/qna`, qnaRoutes);
+app.use(`/doctorReview`, doctorReview);
+app.use(`/familyMember`, familyMemberRoutes);
 
 
 app.listen(PORT, () => {

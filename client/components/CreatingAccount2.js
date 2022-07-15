@@ -18,9 +18,10 @@ const CreatingAccount2 = (props) => {
   const [phonenumber, setphonenumber] = useState("");
 
   return (
-    <KeyboardAvoidingView>
-      <View>
+   
+      <View style={{marginTop:37,display:"flex",justifyContent:"center",alignItems:"center"}}>
         <ScrollView>
+        <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
           <TextInput
             style={styles.inputbox1}
             mode="outlined"
@@ -34,6 +35,8 @@ const CreatingAccount2 = (props) => {
               })
             }}
           />
+          </View>
+          <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
           <TextInput
             style={styles.inputbox}
             mode="outlined"
@@ -47,6 +50,8 @@ const CreatingAccount2 = (props) => {
               })
             }}
           />
+          </View>
+          <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
           <TextInput
             style={styles.inputbox}
             mode="outlined"
@@ -60,6 +65,8 @@ const CreatingAccount2 = (props) => {
               })
             }}
           />
+          </View>
+          <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
           <TextInput
             style={styles.inputbox}
             mode="outlined"
@@ -73,6 +80,8 @@ const CreatingAccount2 = (props) => {
               })
             }}
           />
+          </View>
+          <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
           <TextInput
             style={styles.inputboxlast}
             mode="outlined"
@@ -86,12 +95,13 @@ const CreatingAccount2 = (props) => {
               })
             }}
           />
-          <View>
+          </View>
+          <View style={{marginBottom:22}}>
             <Text>By signing up, you agree to Medico’s privacy policy</Text>
           </View>
         </ScrollView>
       </View>
-    </KeyboardAvoidingView>
+   
   );
 };
 
