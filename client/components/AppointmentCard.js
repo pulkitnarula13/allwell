@@ -84,7 +84,9 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   name: {
-    fontWeight: "bold",
+    fontWeight: "400",
+    fontFamily:"poppins",
+    fontSize:16
   },
 });
 
