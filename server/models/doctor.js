@@ -17,7 +17,15 @@ const doctorSchema = new Schema({
   },
 
   location: {
-    type: Object
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: "Point",
+      index: "2dsphere"
+    },
+    coordinates: {
+      type: [Number]
+    }
   },
 
   email: {
@@ -94,5 +102,9 @@ const doctorSchema = new Schema({
     reuqired: true,
   },
 });
+
+doctorSchema.index({
+  location: "2dsphere"
+})
 
 exports.Doctor = mongoose.model("Doctor", doctorSchema);
