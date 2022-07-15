@@ -166,6 +166,7 @@ const PatientHome = ({ navigation }) => {
             resizeMode="cover"
           />
         </View>
+        <Text style={styles.symptomsName}>{name}</Text>
       </TouchableOpacity>
     );
   };
@@ -294,7 +295,7 @@ const PatientHome = ({ navigation }) => {
           </View>
           <View>
             <FlatList
-              style={{ height: 110, marginRight: 36, marginLeft: 36 }}
+              style={{ height: 130, marginRight: 18, marginLeft: 18 }}
               horizontal={true}
               data={symptomsData}
               renderItem={renderItem}
@@ -403,5 +404,9 @@ const styles = StyleSheet.create({
     width: 125,
     height: 39,
   },
+  symptomsName: {
+    textAlign: "center",
+    marginLeft: -20,
+  }
 });
 export default PatientHome;

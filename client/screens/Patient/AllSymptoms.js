@@ -48,7 +48,7 @@ export default function AllSymptoms(props) {
     setSymptomsData(tempdata);
   };
 
-  const renderItem = (item) => {
+  const renderItem = (item, image) => {
     console.log(item, "item"); 
     return (
       <TouchableOpacity
@@ -56,10 +56,10 @@ export default function AllSymptoms(props) {
         onPress={() => selectItem(item)}
       >
         <View style={styles.item}>
-          <Image
-            style={{ width: 100, height: 100 }}
-            source={require("../../assets/icon.png")}
-            resizeMode="contain"
+        <Image
+            style={{ width: 76, height: 76 }}
+            source={SymptomsList[item.item.name]}
+            resizeMode="cover"
           />
           <Text>{item.item.name}</Text>
         </View>
