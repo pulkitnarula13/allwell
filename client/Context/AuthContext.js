@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   const patientLogin = ({ email, password }, navigation) => {
     setIsLoading(true);
-
+    console.log(`${BASE_URL_DEV}/patients/login`);
     axios
       .post(`${BASE_URL_DEV}/patients/login`, {
         email,
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => {
         Alert.alert("error", e.message);
-        console.log(`login error ${e}`);
+        console.log(e);
         setIsLoading(false);
       });
   };
