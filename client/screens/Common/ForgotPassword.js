@@ -8,7 +8,7 @@ const { width, height } = Dimensions.get("window");
 const ForgotPassword = () => {
   const [email, setemail] = useState("");
   //   const [image1, setimage1] = useState(".../assets/icon.png");
-  //   const [clicked, setclicked] = useState(false);
+    const [clicked, setclicked] = useState(false);
 
   const changepage = () => {
     setclicked(true);
