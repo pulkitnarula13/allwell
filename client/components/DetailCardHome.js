@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },   
   solidContainerConfig: {
     backgroundColor: "#74CBD4",
+    flex:1,
     height: 170,
     marginRight:20,
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   outlineContainerConfig: {
     backgroundColor: "#74CBD4",
     height: 170,
-    
+    flex:1,
     filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
     borderRadius: 20,
     gap: 20,
@@ -48,15 +49,17 @@ const styles = StyleSheet.create({
   },
   solidTextConfig:  {
     color: "white",
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "700",
+    fontFamily:"inter",
     marginBottom:42
 
   },
   outlineTextConfig: {
     color: "white",
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "700",
+    fontFamily:"inter",
     marginBottom:42
   },
   buttonContainer: {

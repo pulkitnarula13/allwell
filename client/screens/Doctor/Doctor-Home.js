@@ -95,11 +95,13 @@ const DoctorHome = ({ navigation }) => {
             style={{width:360, display: "flex", flexDirection: "column", marginBottom: 11,justifyContent:"center" }}
           >
             <View style={{width:360, display: "flex", flexDirection: "row", marginBottom: 11,justifyContent:"center",alignItems:"center" }}>
+            <View style={{flex:1}}>
             <TouchableOpacity
               style={{ width: 170 }}
               onPress={() => navigation.navigate("Doctor-Inbox")}
             >
               <DetailCardHome
+              
                 item={inboxDetail}
                 config={{
                   icon: "message",
@@ -108,7 +110,8 @@ const DoctorHome = ({ navigation }) => {
                 }}
               />
             </TouchableOpacity>
-
+            </View>
+            <View style={{flex:1}}>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Doctor-Waiting-List", {
@@ -126,7 +129,9 @@ const DoctorHome = ({ navigation }) => {
               />
             </TouchableOpacity>
             </View>
+            </View>
             <View style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+            <View style={{flex:1}}>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Doctor-Urgent", {
@@ -143,6 +148,7 @@ const DoctorHome = ({ navigation }) => {
                 }}
               />
             </TouchableOpacity>
+            </View>
           </View>
           </View>
           
