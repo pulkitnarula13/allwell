@@ -57,12 +57,13 @@ export default function AllSymptoms(props) {
       >
         <View style={styles.item}>
         <Image
-            style={{ width: 76, height: 76 }}
+            style={{ width: 74, height: 70 }}
             source={SymptomsList[item.item.name]}
             resizeMode="cover"
           />
-          <Text>{item.item.name}</Text>
+          
         </View>
+        <Text style={{textAlign:"center"}}>{item.item.name}</Text>
       </TouchableOpacity>
     );
   };
@@ -90,7 +91,7 @@ export default function AllSymptoms(props) {
     <View style={styles.mainscroll}>
       <View style={styles.mainflat}>
         <FlatList
-          style={{ height: 417, marginRight: 36, marginLeft: 36 }}
+          style={{ height: 447,width:390,  marginLeft: 36 }}
           horizontal={false}
           data={symptomsData}
           renderItem={renderItem}
@@ -108,7 +109,7 @@ export default function AllSymptoms(props) {
         }}
       >
         <View style={styles.btn}>
-          <Button color="white" onPress={getSelectedSymptoms}>
+          <Button style={{justifyContent:"center",alignItems:"center"}} color="white" onPress={getSelectedSymptoms}>
             Continue
           </Button>
         </View>
@@ -119,22 +120,35 @@ export default function AllSymptoms(props) {
 const styles = StyleSheet.create({
   mainscroll: {
     display: "flex",
+    alignItems:"center",
     flex: 1,
   },
   btn: {
-    width: 257,
-    height: 40,
+    width: 315,
+    height: 49,
     backgroundColor: "#74CBD4",
-    borderRadius: 8,
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius: 100,
   },
   item: {
     marginRight: 10,
-    marginBottom: 22,
+    marginBottom: 15,
+    borderWidth:2,
+    width:100,
+    height:100,
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius:100,
+    borderColor:"#74CBD4"
   },
   mainflat: {
     marginTop: 38,
-    marginBottom: 110,
-    height: 417,
+    marginBottom: 54,
+    width:1000,
+    height: 447,
+    display:"flex",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -146,7 +160,7 @@ const styles = StyleSheet.create({
   list: {
     paddingVertical: 5,
     margin: 3,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
     zIndex: -1,
