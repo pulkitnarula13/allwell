@@ -171,7 +171,9 @@ const PatientHome = ({ navigation }) => {
             source={name}
             resizeMode="cover"
           />
-          <Text style={{ fontWeight: "400", fontSize: 16,fontFamily:"poppins" }}>{name}</Text>
+          <Text style={{ fontWeight: "400", fontSize: 16, 
+          // fontFamily:"poppins" 
+            }}>{name}</Text>
           {/* <View>
             <FlatList
               // style={{ height: 110, marginRight: 36, marginLeft: 36 }}
@@ -287,7 +289,7 @@ const PatientHome = ({ navigation }) => {
               <Button onPress={getlocationhandler}>
                 <Ionicons name="location-outline" size={24} color="#74CBD4" />
               </Button>
-              <Text style={{ marginRight: 50, marginTop: 15,width:150,heigh:40 }}>
+              <Text style={{ marginRight: 50, marginTop: 15,width:150,height:40 }}>
                 {locationLoading ? (
                   <ActivityIndicator size="small" color="#bbd0d8" />
                 ) : (
@@ -340,7 +342,7 @@ const PatientHome = ({ navigation }) => {
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
-                  fontFamily:"poppins",
+                  // fontFamily:"poppins",
                   alignItems: "flex-start",
                 }}
               >
@@ -385,7 +387,9 @@ const PatientHome = ({ navigation }) => {
               marginBottom: 17,
             }}
           >
-            <Text style={{ fontWeight: "600", fontSize: 16,fontFamily:"poppins" }}>
+            <Text style={{ fontWeight: "600", fontSize: 16,
+            // fontFamily:"poppins" 
+            }}>
               Near By Doctors
             </Text>
           </View>
@@ -401,7 +405,9 @@ const PatientHome = ({ navigation }) => {
           </View>
 
           <View>
-            <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 18,fontFamily:"Inter" }}>
+            <Text style={{ marginTop: 20, fontWeight: "700", fontSize: 18, 
+            // fontFamily:"Poppins" 
+            }}>
               Popular Specialists
             </Text>
           </View>
@@ -444,13 +450,13 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 22,
     fontWeight: "600",
-    fontFamily:"poppins",
+    // fontFamily:"poppins",
     marginBottom: 26.66,
   },
   heading13: {
     fontSize: 16,
     fontWeight: "600",
-    fontFamily:"poppins",
+    // fontFamily:"poppins",
     marginBottom: 26.66,
   },
   heading12: {

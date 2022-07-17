@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: "400",
-    fontFamily:"poppins",
+    // fontFamily:"poppins",
     fontSize:16
   },
 });

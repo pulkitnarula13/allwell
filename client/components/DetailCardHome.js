@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "700",
-    fontFamily:"inter",
+    // fontFamily:"Poppins",
     marginBottom:42
 
   },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "700",
-    fontFamily:"inter",
+    // fontFamily:"Poppins",
     marginBottom:42
   },
   buttonContainer: {
