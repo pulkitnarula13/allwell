@@ -1,5 +1,5 @@
 const { FamilyMember } = require("../models/familyMember");
-const { Address } = require("../models/address");
+// const { Address } = require("../models/address");
 const { Patient } = require("../models/patient");
 
 const upload = require("../utils/upload");
@@ -15,20 +15,20 @@ const addFamilyMember = async (req, res) => {
     try {
         const data = req.body;
   
-        const findPatient = await Patient.findById(data.patient);
-        if (!findPatient) {
-            return res.status(404).json({
-            message: "Patient not found",
-            });
-        }
+        // const findPatient = await Patient.findById(data.patient);
+        // if (!findPatient) {
+        //     return res.status(404).json({
+        //     message: "Patient not found",
+        //     });
+        // }
 
-        const uploadMemberImage = await upload(
-            `${Date.now() + "" + data.name}`,
-            data.familyMemberImage,
-            "jpg",
-            "patient",
-            data.patient
-          );
+        // const uploadMemberImage = await upload(
+        //     `${Date.now() + "" + data.name}`,
+        //     data.familyMemberImage,
+        //     "jpg",
+        //     "patient",
+        //     data.patient
+        //   );
   
         const memberData = await FamilyMember.create({
             name: data.name,
@@ -39,19 +39,24 @@ const addFamilyMember = async (req, res) => {
             relationship: data.relationship,
             creatorPatient: data.patient,
             roles: [ROLE.PATIENT],
-            profilePicture: uploadMemberImage
+            profilePicture: ''
 
         });
+
+        console.log(memberData);
     
         return res.status(201).json({
             message: "Family member created succesfully",
             data: memberData,
         });
     } 
+
     catch (error) {
+        console.log(error.message);
         return res.status(500).json({
             message: error.message,
         });
+
     }
 };
   
@@ -71,6 +76,34 @@ const updateFamilyMember = (req, res) => {
             res.status(200).json({
             message: "Succesfully updated the family member",
             data: result,
+        });
+    });
+};
+
+
+
+/**
+ * @description API to get all family members from the database
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ */
+const getAllFamilyMembers = (req, res) => {
+    const id = req.params.id;
+
+    FamilyMember.find()
+    // .populate({
+    //   path: "patient",
+    // })
+    .then((result) => {
+        return res.status(200).json({
+            message: `Family member found succesfully`,
+            data: result,
+        });
+    })
+    .catch((error) => {
+        return res.status(404).json({
+            message: error.message,
         });
     });
 };
@@ -149,4 +182,5 @@ module.exports = {
   deleteFamilyMember,
   getMembersByPatient,
   getFamilyMemberById,
+  getAllFamilyMembers,
 };

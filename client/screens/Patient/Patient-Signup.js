@@ -1,14 +1,5 @@
 import React, { useState, createRef, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Text, Image, KeyboardAvoidingView, Keyboard, TouchableOpacity, ScrollView } from "react-native";
 import { Button, TextInput, RadioButton } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import { DatePickerInput } from "react-native-paper-dates";
@@ -24,6 +15,25 @@ export default function PatientSignup({ navigation }) {
   const [dob, setDOB] = useState(undefined);
   const [healthNumber, setHealthNumber] = useState();
   const [gender, setGender] = useState();
+
+
+  const submitData = async () => {
+    let data =  {
+      rating: starRating,
+      feedback: doctorReviewText,
+      doctor:  props.route.params.id
+    }
+
+    const response = axios.post(
+      `${BASE_URL_DEV}/doctorReview`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: "#ebf0f3" }}>

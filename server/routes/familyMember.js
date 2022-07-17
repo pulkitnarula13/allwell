@@ -8,14 +8,13 @@ const {
     deleteFamilyMember,
     getMembersByPatient,
     getFamilyMemberById,
+    getAllFamilyMembers,
 } = require("../controller/familyMember");
 
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
 
 
-        // Routes
- 
 // Routes
 /**
  * @swagger
@@ -39,6 +38,19 @@ router.post("/", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), addFamily
  *         description: return positive response
  */
 router.get("/patient/:id", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), getMembersByPatient);
+
+// Routes
+// /**
+//  * @swagger
+//  * /familyMember
+//  *   get:
+//  *     description: Get all the family members from the Database.
+//  *     responses:
+//  *       200:
+//  *         description: return positive response
+//  */
+router.get("/", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), getAllFamilyMembers);
+
 
 // Routes
 /**

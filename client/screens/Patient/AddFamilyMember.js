@@ -1,6 +1,13 @@
-import { View, Text,StyleSheet,Image ,ScrollView} from 'react-native'
-import React,{useState} from 'react'
-import { TextInput,Button } from 'react-native-paper';
+import { View, Text, StyleSheet, Image, ScrollView} from 'react-native'
+import React, { useState, useContext } from 'react'
+import { TextInput, Button, RadioButton } from 'react-native-paper';
+import { DatePickerInput } from "react-native-paper-dates";
+import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+
+
+
 
  const AddFamilyMember = (props)=> {
   console.log(props);
@@ -8,7 +15,40 @@ import { TextInput,Button } from 'react-native-paper';
     const [email, setEmail] = useState("");
     const [relationship, setRelationship] = useState("");
     const [MSP, setMSP] = useState("");
-    const [birthdate, setbirthdate] = useState("");
+    const [birthdate, setbirthdate] = useState(undefined);
+    const [gender, setGender] = useState();
+
+    const { userInfo } = useContext(AuthContext);
+
+
+
+
+    const addMember = async () => {
+      let data =  {
+        name: name,
+        email: email,
+        dob:  birthdate,
+        healthNumber: MSP,
+        gender: gender,
+        relationship: relationship,
+        creatorPatient: userInfo.id,
+        roles: 'Patient',
+        profilePicture: "",
+      }
+
+      console.log(data);
+  
+      const response = axios.post(
+        `${BASE_URL_DEV}/familyMember`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+    }
+
   return (
     <View style={styles.maxview}>
         
@@ -38,7 +78,7 @@ import { TextInput,Button } from 'react-native-paper';
             mode="outlined"
             label="Email"
             value={email}
-            onChangeText={(text) => setemail(text)}
+            onChangeText={(text) => setEmail(text)}
           />
          
           
@@ -56,13 +96,40 @@ import { TextInput,Button } from 'react-native-paper';
             value={MSP}
             onChangeText={(text) => setMSP(text)}
           />
-           <TextInput
+           {/* <TextInput
             style={styles.inputbox}
             mode="outlined"
             label="Birth Date"
             value={birthdate}
             onChangeText={(text) => setbirthdate(text)}
-          />
+          /> */}
+            <DatePickerInput
+              locale="en"
+              label="Date of Birth"
+              outlineColor="black" activeOutlineColor="#74CBD4"
+              mode={'outlined'}
+              value={birthdate}
+              onChange={(d) => setbirthdate(d)}
+              inputMode="start"
+              style={styles.inputDateStyle}
+            />
+          </View>
+          <View style={styles.genderView}>
+            <RadioButton
+              value="Male"
+              status={gender === "Male" ? "checked" : "unchecked"}
+              onPress={() => setGender("Male")}
+              color="#74CBD4"
+            />
+            <Text>Male</Text>
+            <RadioButton
+              value="Female"
+              status={gender === "Female" ? "checked" : "unchecked"}
+              onPress={() => setGender("Female")}
+              color="#74CBD4"
+              uncheckedColor='#74CBD4'
+            />
+            <Text>Female</Text>
           </View>
           <View style={styles.btnview}>
           <Button
@@ -90,8 +157,9 @@ import { TextInput,Button } from 'react-native-paper';
                 justifyContent: "center",
               }}
               mode="contained"
-              onPress={() =>  props.navigation.navigate('Home')
-              }
+              // onPress={() =>  props.navigation.navigate('Home')}
+              onPress={addMember}
+              
             >
               Add
             </Button>
@@ -152,5 +220,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#D9D9D9",
         borderRadius: 10,
       },
+    genderView: {
+      display: 'flex',
+      flexDirection: 'row',
+    }
 });
 export default AddFamilyMember
