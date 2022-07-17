@@ -32,10 +32,6 @@ const DoctorProfileSettings = ({ navigation }) => {
         <AntDesign name="right" size={24} color="black" />
       </View>
       <View style={styles.info1}>
-        <Text style={styles.infotext1}>Manage Family Member</Text>
-        <AntDesign name="right" size={24} color="black" />
-      </View>
-      <View style={styles.info1}>
         <Text style={styles.infotext1}>FAQ</Text>
         <AntDesign name="right" size={24} color="black" />
       </View>
