@@ -203,7 +203,7 @@ const DoctorHome = ({ navigation }) => {
 const styles = StyleSheet.create({
   doctorname: {
     fontWeight: "600",
-    fontFamily:"Poppins",
+    // fontFamily:"Poppins",
     fontSize: 22,
     marginRight: 13,
     lineHeight: 24.2,
