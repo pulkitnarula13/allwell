@@ -8,13 +8,17 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 const PORT = process.env.PORT || 8080;
-const patientRoutes = require("./routes/patient");
 const morgan = require("morgan");
+
+// Routes
+const patientRoutes = require("./routes/patient");
 const doctorRoutes = require("./routes/doctor");
 const appointmentRoutes = require("./routes/appointment");
 const qnaRoutes = require("./routes/qna");
 const doctorReview = require("./routes/doctorReview");
-const familyMemberRoutes = require('./routes/familyMember');
+const familyMember = require('./routes/familyMember');
+
+// Base URL
 const { baseURL } = require("./constant");
 
 require("dotenv").config();
@@ -53,7 +57,7 @@ mongoose.connect(process.env.MONGO_URI, (error) => {
   if (error) {
     console.log(`Error connecting the database ${error}`);
   } else {
-    console.log(`Connected to Allwell Database`);
+    console.log(`Connected to Medico Database`);
   }
 });
 // Routes
@@ -67,7 +71,7 @@ mongoose.connect(process.env.MONGO_URI, (error) => {
  *         description: Returns a mysterious string.
  */
 app.get("/", (req, res) => {
-  res.status(200).send("All Well API");
+  res.status(200).send("Medico APIs");
 });
 
 app.use(`${baseURL}/patients`, patientRoutes);
@@ -75,9 +79,9 @@ app.use(`${baseURL}/doctors`, doctorRoutes);
 app.use(`${baseURL}/appointments`, appointmentRoutes);
 app.use(`${baseURL}/qna`, qnaRoutes);
 app.use(`${baseURL}/doctorReview`, doctorReview);
-app.use(`${baseURL}/familyMember`, familyMemberRoutes);
+app.use(`${baseURL}/familyMember`, familyMember);
 
 
 app.listen(PORT, () => {
-  console.log(`All well server running at port ${PORT}`);
+  console.log(`Medico server running at port ${PORT}`);
 });
