@@ -97,7 +97,7 @@ const doctorSchema = new Schema({
 
   roles: {
     type: [String],
-    reuqired: true,
+    required: true,
   },
 });
 
