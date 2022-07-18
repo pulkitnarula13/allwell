@@ -6,6 +6,7 @@ import moment from "moment";
 import { ScrollView } from "react-native";
 
 import CalendarStrip from "react-native-calendar-strip";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const DATA = [
   {
     name: "Headache",
@@ -47,17 +48,25 @@ const Item = ({ name, image }) => (
     <Text style={styles.name1}>{name}</Text>
   </View>
 );
+const datenow = Date.now();
 
 const DoctorAppointment = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   return (
     <ScrollView>
       <View style={styles.viewPage}>
-        <View style={styles.viewPageName}>
-          <Text style={styles.textPageName}>Appointment</Text>
-        </View>
+        
         <View style={styles.viewCalendarStrip}>
-          <CalendarStrip></CalendarStrip>
+          <CalendarStrip
+          style={{height:161, paddingTop: 20, paddingBottom: 10}}
+          calendarHeaderStyle={{color: 'white'}}
+          dateNumberStyle={{color: 'white',borderWidth:1,borderColor:"white",padding:10,justifyContent:"center",alignItems:"center",display:"flex",borderRadius:10,marginRight:8}}
+          dateNameStyle={{color: 'white'}}
+          startingDate={datenow}
+          selectedDate={{color:"red"}}
+          highlightDateNumberStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20}}
+          // highlightDateNameStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20,width:49}}
+          ></CalendarStrip>
         </View>
         {/* <View style={styles.viewSelection}> */}
           <Tabs style={{backgroundColor:"white",color:"#74CBD4"}}>
@@ -102,9 +111,13 @@ const DoctorAppointment = (props) => {
 
           <TouchableOpacity onPress={() => props.navigation.navigate("Info-Patient")}>
             <View style={styles.viewPatientMeeting}>
+              <View style={{display:"flex",flexDirection:"row"}}>
+              <Button style={{}} color="#74CBD4" icon="clock"></Button>
               <Text style={styles.textPatientMeetingTime}>
+              
                 12:00  - 1:00 PM
               </Text>
+              </View>
               <View style={styles.viewDividerLine} />
               <View style={styles.viewPatientData}>
                 <Image
@@ -134,6 +147,7 @@ const DoctorAppointment = (props) => {
                 mode="contained"
                 onPress={() => props.navigation.navigate("AcceptPatientSchedule")}
               >
+
                 <Text style={styles.textButton}>Book Schedule</Text>
               </Button>
             </View>
@@ -146,6 +160,7 @@ const DoctorAppointment = (props) => {
 };
 
 const styles = StyleSheet.create({
+  
   viewPage: {
     backgroundColor: "#FCFCFC",
   },
@@ -168,6 +183,9 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: "#74CBD4",
     color: "white",
+  
+
+    
   },
   viewSelection: {
     display: "flex",
@@ -192,44 +210,54 @@ const styles = StyleSheet.create({
   viewDividerLine: {
     borderBottomColor: "black",
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
   },
   viewPatientMeeting: {
-    width: 300,
+    width: 343,
     marginTop: 20,
     backgroundColor: "white",
     padding: 15,
+    height:130,
+    padding:20,
     color: "black",
     borderColor: "#CBD5E0",
     borderWidth: 1,
     borderRadius: 20,
+    
   },
   textPatientMeetingTime: {
     color: "black",
-    fontSize: 18,
+    fontSize: 12, 
+    marginTop:7,
+    marginLeft:-19
   },
   viewPatientData: {
     display: "flex",
     flexDirection: "row",
-    paddingTop: 20,
+    marginTop:16,
+    height:48
   },
   imagePatient: {
-    width: 60,
-    height: 60,
+    width: 48,
+    borderRadius:50,
+    height: 48,
+    marginTop:-10
   },
   textPatientName: {
     paddingLeft: 20,
     paddingTop: 5,
-    fontSize: 24,
+    fontSize: 16,
     color: "black",
-    fontWeight: "600",
+    fontWeight: "400",
+    lineHeight:18
   },
   viewMeeting: {
     marginTop: 20,
-    width: 300,
+    width: 341,
     backgroundColor: "white",
     padding: 15,
+    height:104,
     color: "black",
     borderColor: "#CBD5E0",
     borderWidth: 1,
@@ -237,7 +265,7 @@ const styles = StyleSheet.create({
   },
   textMeetingTime: {
     color: "black",
-    fontSize: 18,
+    fontSize: 12,
   },
   viewButtons: {
     display: "flex",
@@ -251,16 +279,20 @@ const styles = StyleSheet.create({
     color: "white",
   },
   textAvailable: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "400",
     paddingTop: 10,
   },
 
   btnBookSchedule: {
     width: 150,
-    height: 40,
+    height: 49,
+    textAlign:"center",
+    justifyContent:"center",
+    alignItems:"center",
     backgroundColor: "#74CBD4",
     borderRadius: 30,
+    marginTop:-5
   },
 });
 
