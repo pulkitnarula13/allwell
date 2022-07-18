@@ -49,7 +49,6 @@ export default function AllSymptoms(props) {
   };
 
   const renderItem = (item, image) => {
-    console.log(item, "item"); 
     return (
       <TouchableOpacity
         style={[styles.list, item.selectedClass]}
