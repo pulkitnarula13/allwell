@@ -5,6 +5,7 @@ import {
   Dimensions,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
 import { React, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -18,6 +19,7 @@ import axios from "axios";
 import AppointmentContext from "../../Context/AppointmentContext";
 
 import { BASE_URL_DEV } from "@env";
+import { AuthContext } from "../../Context/AuthContext";
 
 const DoctorInfo = (props) => {
   let Screenheight = Dimensions.get("window").height;
@@ -27,13 +29,11 @@ const DoctorInfo = (props) => {
   const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
   const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
-  
+  const { userInfo } = useContext(AuthContext);
+
   useEffect(() => {
     getDoctorInfoById();
   }, []);
-
-  console.log(props, "props");
-
 
   const getDoctorInfoById = async () => {
     const response = await axios.get(
@@ -69,18 +69,28 @@ const DoctorInfo = (props) => {
     let data =  {
       rating: starRating,
       feedback: doctorReviewText,
-      doctor:  props.route.params.id
+      doctor:  props.route.params.id,
+      patient: userInfo.id
     }
 
-    const response = axios.post(
-      `${BASE_URL_DEV}/doctorReview`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-    );
+    console.log(`${BASE_URL_DEV}/review`);
+    try {
+      const response = await axios.post(
+        `${BASE_URL_DEV}/review/doc`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      Alert.alert("Success", "Succesfully reviewed the doctor");
+      setDialogbox(false);
+    } catch(error) {
+      Alert.alert("Error", error.message)
+      setDialogbox(false);
+    }
+    
   }
 
 

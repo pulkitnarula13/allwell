@@ -78,7 +78,7 @@ app.use(`${baseURL}/patients`, patientRoutes);
 app.use(`${baseURL}/doctors`, doctorRoutes);
 app.use(`${baseURL}/appointments`, appointmentRoutes);
 app.use(`${baseURL}/qna`, qnaRoutes);
-app.use(`${baseURL}/doctorReview`, doctorReview);
+app.use(`${baseURL}/review`, doctorReview);
 app.use(`${baseURL}/familyMember`, familyMember);
 
 

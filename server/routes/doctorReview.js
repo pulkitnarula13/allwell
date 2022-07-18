@@ -11,7 +11,19 @@ const {
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
 
+// Routes
+/**
+ * @swagger
+ * /doctorReview:
+ *   post:
+ *     description: Add a new doctor Review by patient
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.post("/doc", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), addDoctorReview);
 
+ 
 // // Routes
 /**
  * @swagger
@@ -24,17 +36,6 @@ const verifyRoles = require("../middleware/roleVerification");
  */
  router.get("/", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT, ROLE.DOCTOR), getDoctorReviews);
  
-// Routes
-/**
- * @swagger
- * /doctorReview:
- *   post:
- *     description: Add a new doctor Review by patient
- *     responses:
- *       200:
- *         description: return positive response
- */
-router.post("/", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), addDoctorReview);
 
 // Routes
 /**

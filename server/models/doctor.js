@@ -99,6 +99,10 @@ const doctorSchema = new Schema({
     type: [String],
     required: true,
   },
+
+  rating: {
+    type: Number
+  }
 });
 
 doctorSchema.index({
