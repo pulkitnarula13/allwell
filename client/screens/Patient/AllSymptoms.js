@@ -99,6 +99,7 @@ export default function AllSymptoms(props) {
           keyExtractor={(item) => item.name}
           extraData={symptomsData}
           showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
         />
       </View>
       <View
