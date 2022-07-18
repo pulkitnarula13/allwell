@@ -26,6 +26,7 @@ const AvailableDoctorCard = (props) => {
             flexDirection: "row",
             justifyContent: "space-between",
             marginBottom: 15,
+            marginTop:18
           }}
         >
           <Image
@@ -34,18 +35,19 @@ const AvailableDoctorCard = (props) => {
             resizeMode="contain"
           />
           <View style={styles.ratingContainer}>
-            <Text>{props.item.rating}</Text>
-            {/* <Rating
+            
+            <Rating
               type="custom"
               ratingBackgroundColor="#74CBD4"
               ratingColor="#74CBD4"
               ratingCount={1}
               imageSize={15}
-            /> */}
+            />
+            <Text>{props.item.rating}4.0</Text>
           </View>
         </View>
       </TouchableOpacity>
-      <Text style={{ marginBottom: 5 }}>{props.item.name}</Text>
+      <Text style={{ marginBottom: 5,marginRight:-10,fontSize:16,fontWeight:"400" }}>{props.item.name}</Text>
 
       <Text style={{ marginBottom: 5, fontWeight: "100" }}>
         {/* {props.item.specialities.map((speciality) => {
@@ -59,7 +61,7 @@ const AvailableDoctorCard = (props) => {
           size={24}
           color="#74CBD4"
         />
-        <Text style={{ color: "black" }}>2km</Text>
+        <Text style={{ color: "black",marginBottom:15 }}>2km</Text>
       </Button>
     </View>
   );
@@ -69,20 +71,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: 168.7,
+    height:182,
     borderWidth: 2,
-    marginRight: 11.3,
+    marginRight: 10.3,
     borderColor: "#E2E8F0",
     borderRadius: 8,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginBottom:30
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 65,
+    height: 65,
+    marginRight:7,
+    borderRadius:100
+   
   },
   ratingContainer: {
     display: "flex",
+    marginRight:-50,
+    marginTop:-10,
     flexDirection: "row",
   },
 });
