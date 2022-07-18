@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -73,6 +74,10 @@ const styles = StyleSheet.create({
   },
   flatlistContainer: {
     marginTop: 67,
+    marginLeft:21,
+    marginRight:11,
+    height:660
+
   },
 });
 
