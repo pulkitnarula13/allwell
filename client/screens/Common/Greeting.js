@@ -14,29 +14,35 @@ const Greeting = ({ navigation }) => {
           With Medico, you can connect to the doctor anytime you want 24/7.
         </Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}>
-      <View style={style.button} >
-        <Button
-        style={{fontSize:14,lineHeight:33}}
 
-        color="white"
-          title="Signup with Email"
-          
-        />
+      {/* Signup Button */}
+      <TouchableOpacity onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}>
+        <View style={style.button} >
+          <Button
+            style={{fontSize:14,lineHeight:33}}
+            onPress={() => navigation.navigate("Doctor-Patient-Selection-Signup")}
+            color="white"
+            title="Signup with Email"  
+          />
         </View>
-        </TouchableOpacity>
-        <View style={style.button1}>
-      <GoogleSignup />
+      </TouchableOpacity>
+
+      {/* Google Signup/Login Button */}
+      <View style={style.button1}>
+        <GoogleSignup />
       </View>
+
+      {/* Login Button  */}
       <TouchableOpacity onPress={() => navigation.navigate("Doctor-Patient-Selection-Login")}>
-      <View style={style.button1} >
-        <Button
-        color="#74CBD4"
-          title="Login"
-          
-        />
+        <View style={style.button1} >
+          <Button
+            color="#74CBD4"
+            title="Login"
+            onPress={() => navigation.navigate("Doctor-Patient-Selection-Login")}
+          />
         </View>
-        </TouchableOpacity>
+      </TouchableOpacity>
+        
         <Divider />
         {/* <TouchableOpacity style={style.guest}>
           <Text> Continue as Guest</Text>
