@@ -57,12 +57,13 @@ export default function AllSymptoms(props) {
       >
         <View style={styles.item}>
         <Image
-            style={{ width: 76, height: 76 }}
+            style={{ width: 74, height: 70 }}
             source={SymptomsList[item.item.name]}
             resizeMode="cover"
           />
-          <Text>{item.item.name}</Text>
+          
         </View>
+        <Text style={{marginBottom:39,fontSize:14,fontWeight:"400"}}>{item.item.name}</Text>
       </TouchableOpacity>
     );
   };
@@ -90,7 +91,7 @@ export default function AllSymptoms(props) {
     <View style={styles.mainscroll}>
       <View style={styles.mainflat}>
         <FlatList
-          style={{ height: 417, marginRight: 36, marginLeft: 36 }}
+          style={{ height: 500, marginRight: 36, marginLeft: 36 }}
           horizontal={false}
           data={symptomsData}
           renderItem={renderItem}
@@ -108,7 +109,7 @@ export default function AllSymptoms(props) {
         }}
       >
         <View style={styles.btn}>
-          <Button color="white" onPress={getSelectedSymptoms}>
+          <Button color="white" style={{fontSize:16,font:"600"}} onPress={getSelectedSymptoms}>
             Continue
           </Button>
         </View>
@@ -122,19 +123,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   btn: {
-    width: 257,
-    height: 40,
+    width: 315,
+    height: 49,
     backgroundColor: "#74CBD4",
-    borderRadius: 8,
+    borderRadius: 100,
+    textAlign:"center",
+    justifyContent:"center",
+    alignItems:"center"
   },
   item: {
     marginRight: 10,
-    marginBottom: 22,
+    width:100,
+    height:100,
+    marginBottom: 15,
+    borderWidth:1,
+    borderColor:"#74CBD4",
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius:100,
+    
   },
   mainflat: {
     marginTop: 38,
-    marginBottom: 110,
-    height: 417,
+    marginBottom: 54,
+    height: 500,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -144,9 +156,9 @@ const styles = StyleSheet.create({
   },
   selected: { backgroundColor: "#74CBD4" },
   list: {
-    paddingVertical: 5,
+    
     margin: 3,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
     zIndex: -1,
