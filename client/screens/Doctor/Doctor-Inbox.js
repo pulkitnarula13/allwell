@@ -124,28 +124,21 @@ const DoctorInbox = ({ navigation }) => {
         width={1}
         dialogStyle={styles.dialogStyles}
       >
-        <DialogContent
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View style={styles.viewDoctorStatusModal}>
-            <Text>{currentPatient?.date}</Text>
-            <View style={styles.viewDividerLine}></View>
+        <DialogContent>
+          <View style={styles.viewPatientDataModal}>
+            <Text style={styles.modalDate}>{currentPatient?.date}</Text>
+            {/* <View style={styles.viewDividerLine}></View> */}
 
             <Image
               style={styles.image1}
               source={require("../../assets/icon.png")}
               resizeMode="center"
             />
-            <Text>Patient: {currentPatient?.patient}</Text>
-            <Text>Symptoms : {currentPatient?.symptoms}</Text>
+            <Text style={styles.modalName}> {currentPatient?.patient}</Text>
+            <Text style={styles.modalSymptoms}>Symptoms : {currentPatient?.symptoms}</Text>
 
           </View>
-          <View style={styles.viewDividerLine} />
-          <View style={styles.button} >
+          <View style={styles.modalButtonView} >
             <Button
               style={{ fontSize: 14, lineHeight: 33}}
               color="white"
@@ -167,7 +160,7 @@ const DoctorInbox = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  viewDoctorStatusModal: {
+  viewPatientDataModal: {
     display: "flex",
     flexDirection: "column",
     padding: 40,
@@ -240,6 +233,55 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 100,
   },
+
+  dialogStyles:  {
+    bottom: 0,
+    marginBottom: 0,
+    marginTop: "100%",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+
+  modalDate: {
+    paddingRight: '60%',
+    paddingBottom: 40,
+    fontSize: '15%',
+    fontWeight: 'bold'
+  },
+
+  modalName: {
+    fontSize: '15%',
+    fontWeight: 'bold',
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
+
+  modalSymptoms: {
+    fontSize: '13%',
+  },
+
+  viewDividerLine: {
+    borderBottomColor: "gray",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+
+  modalButtonView: {
+    width: 315,
+    height: 49,
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 70,
+    backgroundColor: "#74CBD4",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+    marginBottom: 20
+  }
 });
 
 export default DoctorInbox;
