@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet,Image } from "react-native";
+import { View, Text, StyleSheet,Image, TouchableOpacity, Alert } from "react-native";
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
@@ -17,48 +17,47 @@ const PatientProfileSettings = ({ navigation }) => {
 
   return (
     <View>
-      
-      
       <View style={styles.info10}>
-        <Text style={styles.infotext1}>Settings</Text>
-        <AntDesign style={{marginRight: -33,}} name="up" size={24} color="black" />
-      </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
-      <View style={styles.info1}>
         <Text style={styles.infotext1}>Push notifications</Text>
         <Switch
-        style={{marginRight: -33,}}
+        
           color="#74CBD4"
           value={isSwitchOn}
           onValueChange={onToggleSwitch}
         />
       </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
-      <View style={styles.info1}>
-        <Text style={styles.infotext1}>Touch ID</Text>
-        <AntDesign style={{marginRight: -33,}} name="right" size={24} color="black" />
-      </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+    
+      <TouchableOpacity onPress={()=>{navigation.navigate("Managefamilymembers")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Manage Family Member</Text>
-        <AntDesign style={{marginRight: -33,}} onPress={()=>{navigation.navigate("Add-Family-Member")}} name="right" size={24} color="black" />
+        <AntDesign  onPress={()=>{navigation.navigate("Add-Family-Member")}} name="right" size={24} color="black" />
       </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      </TouchableOpacity>
+      <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      <TouchableOpacity onPress={()=>{navigation.navigate("FAQ-patient")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>FAQ</Text>
-        <AntDesign style={{marginRight: -33,}} name="right" size={24} color="black" />
+        <AntDesign  name="right" size={24} color="black" />
       </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      </TouchableOpacity>
+
+
+      <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      <TouchableOpacity onPress={()=>{navigation.navigate("Privacypolicy-patient")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Privacy Policy</Text>
-        <AntDesign  style={{marginRight: -33,}} name="right" size={24} color="black" />
+        <AntDesign   name="right" size={24} color="black" />
       </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      </TouchableOpacity>
+      <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
+      <TouchableOpacity onPress={()=>{navigation.navigate("Termsofuse-patient")}}>
       <View style={styles.info2}>
         <Text style={styles.infotext1}>Term of Use</Text>
-        <AntDesign style={{marginRight: -33,}} name="right" size={24} color="black" />
+        <AntDesign  name="right" size={24} color="black" />
       </View>
-      <View style={{width:360,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:68}}></View>
+      </TouchableOpacity>
+      <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:68}}></View>
       <View style={styles.buttonarea}>
         <Button
           style={styles.availablebtn}
@@ -88,7 +87,34 @@ const PatientProfileSettings = ({ navigation }) => {
                   resizeMode="cover"
                 />
             
-          <Text style={{color:"#74CBD4",fontSize:16,fontWeight:"600"}}>Delete Account</Text>
+          <Text style={{color:"#74CBD4",fontSize:16,fontWeight:"600"}} onPress={()=>{
+            Alert.alert(
+              "Alert Title",
+              "My Alert Msg",
+              [
+                {
+                  text: "Yes",
+                  onPress: () => {Alert.alert("Account Deleted")
+                  navigation.navigate("greeting");
+                },
+                  style: "cancel",
+                },
+                {
+                  text: "No",
+                  onPress: () => console.log("Cancel Pressed"),
+                  style: "cancel",
+                },
+              ],
+              {
+                cancelable: true,
+                onDismiss: () =>
+                  Alert.alert(
+                    "This alert was dismissed by tapping outside of the alert dialog."
+                  ),
+              }
+            );
+
+          }}>Delete Account</Text>
         </Button>
       </View>
     </View>
