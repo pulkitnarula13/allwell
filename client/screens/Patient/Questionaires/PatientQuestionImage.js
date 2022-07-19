@@ -31,7 +31,7 @@ const PatientQuestionImage = (props) => {
   const Item = ({ item }) => {
     return (
       <View style={styles.item}>
-        <Image style={styles.image2} source={item} resizeMode="center" />
+        <Image style={styles.image2} source={item} resizeMode="cover" />
       </View>
     );
   };
@@ -44,14 +44,16 @@ const PatientQuestionImage = (props) => {
           resizeMode="center"
         />
       </View>
-      <Text>Add Photos/Videos</Text>
-      <View style={{ display: "flex", flexDirection: "row" }}>
+      <Text style={{fontSize:14,fontWeight:"600",marginBottom:5}}>Add Photos/Videos</Text>
+      <View style={{ display: "flex", flexDirection: "row",height:130 }}>
         <TouchableOpacity onPress={openimagelib}>
+         <View style={{width:130,height:130,borderWidth:1,borderColor:"#A0AEC0",justifyContent:"center",alignItems:"center",borderRadius:10}}>
           <Image
-            style={styles.image1}
+            style={styles.image3}
             source={require("../../../assets/camera.jpg")}
-            resizeMode="center"
+            resizeMode="cover"
           />
+          </View>
         </TouchableOpacity>
         <FlatList
           style={{ marginBottom: 40 }}
@@ -76,9 +78,14 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 10,
   },
+  image3: {
+    width: 82,
+    height: 82,
+    borderRadius: 10,
+  },
   image1: {
-    width: 130,
-    height: 130,
+    width: 235,
+    height: 284,
     marginRight: 20,
   },
   textheight: {
@@ -117,6 +124,7 @@ const styles = StyleSheet.create({
   imageview: {
     display: "flex",
     justifyContent: "center",
+    marginTop:40,
     alignItems: "center",
     marginBottom: 38,
   },

@@ -29,7 +29,7 @@ const PatientQuestionFifth = (props) => {
 const styles = StyleSheet.create({
   image1: {
     width: 235,
-    height: 248,
+    height: 284,
   },
   textheight: {
     width: 320,
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 38,
+    marginTop:40
   },
   outer: {
     display: "flex",

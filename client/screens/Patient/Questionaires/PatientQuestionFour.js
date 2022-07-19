@@ -23,22 +23,23 @@ const PatientQuestionFour = (props) => {
           }}
         />
       </View>
+      
       <View
         style={{
           justifyContent: "center",
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
-          marginTop: 40,
         }}
       ></View>
+     
     </View>
   );
 };
 const styles = StyleSheet.create({
   image1: {
     width: 235,
-    height: 248,
+    height: 284,
   },
   textheight: {
     width: 320,
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginTop:40,
     marginBottom: 38,
   },
   outer: {

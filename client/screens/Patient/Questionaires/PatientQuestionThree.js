@@ -30,24 +30,9 @@ const PatientQuestionThree = (props) => {
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
-          marginTop: 40,
+          
         }}
       >
-        {/* <Button
-          style={styles.availablebtn}
-          mode="contained"
-          onPress={() => console.log("Pressed")}
-        >
-          Go Back
-        </Button>
-
-        <Button
-          style={styles.availablebtn1}
-          mode="contained"
-          onPress={() => navigation.navigate("Patient-Questiontwo")}
-        >
-          Next
-        </Button> */}
       </View>
     </View>
   );
@@ -55,7 +40,7 @@ const PatientQuestionThree = (props) => {
 const styles = StyleSheet.create({
   image1: {
     width: 235,
-    height: 248,
+    height: 284,
   },
   textheight: {
     width: 320,
@@ -93,6 +78,7 @@ const styles = StyleSheet.create({
   imageview: {
     display: "flex",
     justifyContent: "center",
+    marginTop:40,
     alignItems: "center",
     marginBottom: 38,
   },

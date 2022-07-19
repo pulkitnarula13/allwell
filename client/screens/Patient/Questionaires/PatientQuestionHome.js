@@ -12,6 +12,8 @@ import AppointmentContext from "../../../Context/AppointmentContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../../Context/AuthContext";
+import Bottomnavigation from "../../../components/BottomNavigation";
+
 
 const PatientQuestionHome = ({ navigation }) => {
   const [active, setActive] = useState(0);
@@ -107,14 +109,16 @@ const PatientQuestionHome = ({ navigation }) => {
   return (
     <View>
       <Stepper
+  
         active={active}
         content={content}
         buttonStyle={{width:150,height:49,backgroundColor:"#74CBD4",justifyContent:"center",alignItems:"center",borderRadius:100}}
         onBack={() => setActive((p) => p - 1)}
         onFinish={() => createAppointment()}
         onNext={() => setActive((p) => p + 1)}
-        stepStyle={{ display: "none" }}
+        stepStyle={{ display: "none",width:330 }}
       />
+      <Bottomnavigation/>
     </View>
   );
 };

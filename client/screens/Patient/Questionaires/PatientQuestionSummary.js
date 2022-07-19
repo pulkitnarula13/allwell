@@ -52,30 +52,16 @@ const PatientQuestionSummary = ({ data }) => {
 
   return (
     <View style={styles.outer}>
-      <View style={styles.imageview}>
-        <Image
-          style={styles.image1}
-          source={require("../../assets/icon.png")}
-          resizeMode="center"
-        />
-      </View>
-
       <View>
         <List.Section title="Questions">
           <FlatList
+        
             data={data}
             renderItem={Item}
             keyExtractor={(item) => item.question}
           />
         </List.Section>
       </View>
-      <Text>Photos Uploaded</Text>
-      {/* <FlatList
-        data={imagesList.images}
-        renderItem={renderImages}
-        horizontal={true}
-        keyExtractor={(data, index) => index}
-      /> */}
     </View>
   );
 };
@@ -139,6 +125,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     padding: 30,
+    height:500
   },
 });
 export default PatientQuestionSummary;
