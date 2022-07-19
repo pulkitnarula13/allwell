@@ -19,7 +19,7 @@ const doctorReview = require("./routes/doctorReview");
 const familyMember = require('./routes/familyMember');
 
 // Base URL
-const { baseURL } = require("./constant");
+// const { baseURL } = require("./constant");
 
 require("dotenv").config();
 
@@ -74,12 +74,12 @@ app.get("/", (req, res) => {
   res.status(200).send("Medico APIs");
 });
 
-app.use(`${baseURL}/patients`, patientRoutes);
-app.use(`${baseURL}/doctors`, doctorRoutes);
-app.use(`${baseURL}/appointments`, appointmentRoutes);
-app.use(`${baseURL}/qna`, qnaRoutes);
-app.use(`${baseURL}/review`, doctorReview);
-app.use(`${baseURL}/familyMember`, familyMember);
+app.use(`/patients`, patientRoutes);
+app.use(`/doctors`, doctorRoutes);
+app.use(`/appointments`, appointmentRoutes);
+app.use(`/qna`, qnaRoutes);
+app.use(`/review`, doctorReview);
+app.use(`/familyMember`, familyMember);
 
 
 app.listen(PORT, () => {
