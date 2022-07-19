@@ -70,7 +70,7 @@ const DoctorHome = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView>
+    <ScrollView   showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <View style={styles.nameContainer}>
           <Text style={styles.doctorname}>Welcome, Dr. {userInfo.name}</Text>
@@ -82,7 +82,7 @@ const DoctorHome = ({ navigation }) => {
             {activeDoctorStatus}
           </Chip>
         </View>
-        <View style={{ marginBottom: 68 }}>
+        <View style={{ marginBottom: 20 }}>
           <FlatList
             horizontal={true}
             data={confirmedAppointments}
@@ -101,7 +101,6 @@ const DoctorHome = ({ navigation }) => {
               onPress={() => navigation.navigate("Doctor-Inbox")}
             >
               <DetailCardHome
-              
                 item={inboxDetail}
                 config={{
                   icon: "message",
@@ -205,13 +204,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     // fontFamily:"Poppins",
     fontSize: 22,
-    marginRight: 13,
     lineHeight: 24.2,
   },
   container: {
     flex: 1,
     backgroundColor:"white",
-    gap: 12,
   },
   inboxContainer: {
     display: "flex",
@@ -235,6 +232,7 @@ const styles = StyleSheet.create({
   chipstyle: {
     width: 87,
     height: 26,
+    marginRight: 16,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -248,8 +246,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     marginTop: 55,
-    marginLeft:27,
+    marginLeft:16,
     marginBottom: 41,
   },
   viewDoctorStatusModal: {

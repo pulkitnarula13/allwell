@@ -1,72 +1,91 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Button } from "react-native-paper";
+import { Avatar, Button } from "react-native-paper";
 
 const AppointmentCard = ({ item }) => {
   var newdate = new Date(item.date);
-  console.log(item.patient);
+
+  const selectItem = () => {};
+
   return (
-    <View style={styles.container}>
-      <View style={styles.timeContainer}>
-        <View style={styles.clock}>
-          <Button color="#74CBD4" icon="clock"></Button>
+    <TouchableOpacity onPress={selectItem}>
+      <View style={styles.container}>
+        <View style={styles.timeContainer}>
+          <View style={styles.clock}>
+            <Image
+              style={{ width: 20, height: 20 }}
+              source={require("../assets/icons/medico_icon_clock.png")}
+            />
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              marginLeft: -20,
+            }}
+          >
+            <Text style={styles.time}>{`${newdate.getHours()}:${
+              newdate.getMinutes() ? newdate.getMinutes() : "00" }`} { `- ${newdate.getHours() + 1}:${
+                newdate.getMinutes() ? newdate.getMinutes() : "00" }` }</Text>
+          </View>
         </View>
-        <View style={{ display: "flex", flexDirection: "column",justifyContent:"flex-start", marginLeft:-20, }}>
-          <Text
-            style={styles.time}
-          >{`Date: ${newdate.getDate()} / ${newdate.getMonth()} / ${newdate.getFullYear()}  `}</Text>
-          <Text style={styles.time}>{`Time: ${newdate.getHours()} : ${
-            newdate.getMinutes() ? newdate.getMinutes() : "00"
-          }   `}</Text>
+        <View>
+          <View style={styles.imageContainer}>
+            {!item?.profilePicture ? (
+              <Avatar.Text
+                style={{ backgroundColor: "#74CBD4" }}
+                size={65}
+                label={item.patient.name[0]}
+                color="#fff"
+              />
+            ) : (
+              <Image
+                style={styles.image}
+                source={
+                  item.profilePicture
+                    ? item.profilePicture
+                    : require("../assets/icon.png")
+                }
+              />
+            )}
+
+            <Text style={styles.name}>{item.patient.name}</Text>
+            <Text style={styles.symptomName}>{item.symptoms[0].name}</Text>
+          </View>
         </View>
       </View>
-      <View>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={
-              item.profilePicture
-                ? item.profilePicture
-                : require("../assets/icon.png")
-            }
-          />
-          <Text style={styles.name}>{item.patient.name}</Text>
-          {/* <Text style={styles.name}>{item.patient}</Text> */}
-        </View>
-        <View></View>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: "2px",
-    borderColor: "#74CBD4",
-    borderRadius: 20,
-    padding: 4,
-    marginLeft:27,
-    width: 170,
-    height: 170,
-    margin: 8,
+    borderWidth: "1px",
+    borderColor: "#D9D9D9",
+    borderRadius: 8,
+    marginLeft: 16,
+    width: 168.7,
+    height: 182,
     gap: 8,
   },
   image: {
     width: 65,
     height: 65,
-    borderRadius:100,
-    marginBottom:6
+    borderRadius: 100,
+    marginBottom: 6,
   },
   clock: {
     minWidth: 20,
-    display:"flex",
-    justifyContent:"flex-start",
+    display: "flex",
+    justifyContent: "flex-start",
     height: 20,
+    marginRight: 25,
+    marginLeft: 12
   },
   time: {
-    fontSize: 10,
-    fontWeight: "bold",
+    fontSize: 12,
   },
   flatListColumn: {
     margin: 8,
@@ -74,20 +93,26 @@ const styles = StyleSheet.create({
   timeContainer: {
     display: "flex",
 
-    marginBottom:11,
-    marginTop:10,
-    justifyContent:"flex-start",
+    marginBottom: 11,
+    marginTop: 10,
+    justifyContent: "flex-start",
     flexDirection: "row",
+    alignItems: "center"
   },
   imageContainer: {
     alignItems: "center",
-    gap: 8,
+    marginBottom: 10
   },
   name: {
     fontWeight: "400",
     // fontFamily:"poppins",
-    fontSize:16
+    fontSize: 16,
+    marginTop: 10
   },
+  symptomName: {
+    fontSize: 12,
+    color: "#718096"
+  }
 });
 
 export default AppointmentCard;
