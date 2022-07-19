@@ -23,7 +23,7 @@ const verifyRoles = require("../middleware/roleVerification");
  */
  router.post("/doc", validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), addDoctorReview);
 
- 
+
 // // Routes
 /**
  * @swagger
@@ -47,7 +47,7 @@ const verifyRoles = require("../middleware/roleVerification");
  *       200:
  *         description: return positive response
  */
-router.get("/doctor/:id", validateToken, verifyRoles(ROLE.ADMIN, ROLE.DOCTOR), getReviewsByDocId);
+router.get("/doctor/:id", validateToken, verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT), getReviewsByDocId);
 
 
 

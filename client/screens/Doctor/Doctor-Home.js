@@ -24,8 +24,6 @@ const DoctorHome = ({ navigation }) => {
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
   const [urgentAppointments, setUrgentAppointments] = useState([]);
 
-  const [inboxDetail, setInboxDetail] = useState([]);
-
   const [waitingList, setWaitingList] = useState([]);
 
   function changeDoctorStatus(e) {
@@ -55,6 +53,7 @@ const DoctorHome = ({ navigation }) => {
           data.urgent && !data.completed && !data.confirmed && !data.cancelled
       );
       setUrgentAppointments(urgentAppointments);
+
 
       const waitingList = data.data.data.filter(
         (data) => !data.confirmed && !data.cancelled && !data.urgent
@@ -86,7 +85,7 @@ const DoctorHome = ({ navigation }) => {
           <FlatList
             horizontal={true}
             data={confirmedAppointments}
-            renderItem={AppointmentCard}
+            renderItem={(item) => <AppointmentCard item={item.item} navigation={navigation} />}
             keyExtractor={(item) => item.createdAt}
           />
         </View>
@@ -101,7 +100,7 @@ const DoctorHome = ({ navigation }) => {
               onPress={() => navigation.navigate("Doctor-Inbox")}
             >
               <DetailCardHome
-                item={inboxDetail}
+                item={confirmedAppointments}
                 config={{
                   icon: "message",
                   title: "Inbox",
@@ -254,11 +253,10 @@ const styles = StyleSheet.create({
   viewDoctorStatusModal: {
     display: "flex",
     flexDirection: "column",
-    padding: 40,
     textAlign: "center",
   },
   viewDividerLine: {
-    borderBottomColor: "black",
+    borderBottomColor: "gray",
     borderBottomWidth: StyleSheet.hairlineWidth,
     paddingTop: 10,
     paddingBottom: 10,

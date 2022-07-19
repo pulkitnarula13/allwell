@@ -2,10 +2,16 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { Avatar, Button } from "react-native-paper";
 
-const AppointmentCard = ({ item }) => {
+const AppointmentCard = ({ item, navigation }) => {
   var newdate = new Date(item.date);
 
-  const selectItem = () => {};
+  const selectItem = () => {
+    navigation.navigate("Chatting", {
+      qna: item.qna,
+      patient: item.patient,
+      appointmentInfo: item._id
+    });
+  };
 
   return (
     <TouchableOpacity onPress={selectItem}>
