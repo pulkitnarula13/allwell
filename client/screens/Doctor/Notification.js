@@ -2,6 +2,7 @@ import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
 import NotificationItem from "./Notification-item";
+import { Tabs, TabScreen } from "react-native-paper-tabs";
 
 function Notification() {
   const listOFNotification = [
@@ -24,13 +25,29 @@ function Notification() {
     },
   ];
   return (
-    <ScrollView>
-      <View style={{ marginTop: 20, flexDirection: "column" }}>
-        {listOFNotification.map((item, index) => (
-          <NotificationItem key={index} item={item} />
-        ))}
+    
+      <View style={{  flexDirection: "column" ,flex:1}}>
+      <Tabs style={{ backgroundColor: "#fff" }}>
+        <TabScreen label="drug">
+          <ScrollView>
+          <NotificationItem item = {listOFNotification[0]}/>
+          </ScrollView>
+        </TabScreen>
+
+        <TabScreen label="dr.message">
+        <ScrollView>
+        <NotificationItem item = {listOFNotification[1]}/>
+        </ScrollView>
+        </TabScreen>
+        <TabScreen label="general">
+        <ScrollView>
+        <NotificationItem item = {listOFNotification[2]}/>
+        </ScrollView>
+        </TabScreen>
+      </Tabs>
+        
       </View>
-    </ScrollView>
+    
   );
 }
 
