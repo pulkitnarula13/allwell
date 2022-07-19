@@ -11,13 +11,14 @@ import * as ImagePicker from "expo-image-picker";
     const [password, setpassword] = useState("");
     const [confirmpassword, setconfirmpassword] = useState("");
     const [phonenumber, setphonenumber] = useState("");
-    const [MSP, setMSP] = useState("")
-    const [birthdate, setbirthdate] = useState("")
-    const [housenumber, sethousenumber] = useState("")
-    const [City, setCity] = useState("")
-    const [Pincode, setPincode] = useState("")
-    const [shortbio, setshortbio] = useState("")
+    const [MSP, setMSP] = useState("");
+    const [birthdate, setbirthdate] = useState("");
+    const [housenumber, sethousenumber] = useState("");
+    const [City, setCity] = useState("");
+    const [Pincode, setPincode] = useState("");
+    const [shortbio, setshortbio] = useState("");
     const [image1, setimage1] = useState("../assets/icon.png");
+    const [changedImage, setchangedImage] = useState("");
 
 
     const openimagelib = async () => {
@@ -29,12 +30,10 @@ import * as ImagePicker from "expo-image-picker";
       });
   
       if (!result.cancelled) {
-        setimage1(result.uri);
-        props.setFirstStepperData(result);
-       
-          
-        
+        setimage1(result.uri);  
+        props.setFirstStepperData(result);  
       }
+      
     };
 
 

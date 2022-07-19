@@ -31,7 +31,7 @@ const PatientQuestionTwo = (props) => {
           alignItems: "center",
           display: "flex",
           flexDirection: "row",
-          marginTop: 40,
+          
         }}
       ></View>
     </View>
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   imageview: {
     display: "flex",
     justifyContent: "center",
+    marginTop:40,
     alignItems: "center",
     marginBottom: 38,
   },

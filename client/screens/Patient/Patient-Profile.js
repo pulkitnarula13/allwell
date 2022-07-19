@@ -26,7 +26,7 @@ const  PatientProfile = (props)=> {
       },
     }
   );
-  // setPatientProfileData(data.data.data);
+
   console.log(userdata.data.data)
   setPatientProfileData(userdata.data.data);
     
