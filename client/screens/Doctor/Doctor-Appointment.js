@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
   },
   viewCalendarStrip: {
     marginTop: 20,
+    height: 161,
     marginBottom: 20,
     paddingTop: 20,
     paddingBottom: 20,

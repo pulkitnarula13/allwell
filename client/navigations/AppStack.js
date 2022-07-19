@@ -34,6 +34,10 @@ import Notification from "../screens/Doctor/Notification";
 import AllSymptoms from "../screens/Patient/AllSymptoms";
 import ConnectPatient from "../screens/Patient/Connect-Doctor";
 import DoctorHome from "../screens/Doctor/Doctor-Home";
+import Managefamilymembers from "../screens/Patient/Managefamilymembers";
+import FAQ from "../screens/Patient/FAQ";
+import Privacypolicy from "../screens/Patient/Privacypolicy";
+import Termsofuse from "../screens/Patient/Termsofuse";
 
 const Stack = createNativeStackNavigator();
 
@@ -91,6 +95,10 @@ const AppStack = () => {
         name="Chatting"
         component={Chattingwithdoctor}
       />
+      <Stack.Screen name="Termsofuse-patient" component={Termsofuse} />
+      <Stack.Screen name="Privacypolicy-patient" component={Privacypolicy} />
+      <Stack.Screen name="FAQ-patient" component={FAQ} />
+      <Stack.Screen name="Managefamilymembers" component={Managefamilymembers} />
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
       <Stack.Screen name="AcceptPatientSchedule" component={AcceptPatientSchedule} />
