@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   dialogStyles: {
     bottom: 0,
     marginBottom: 0,
-    marginTop: "120%",
+    marginTop: "130%",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
   },
