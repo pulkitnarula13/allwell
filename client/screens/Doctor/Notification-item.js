@@ -14,7 +14,7 @@ function NotificationItem(props) {
     }
     return (
         <View style={styles.listItem}>
-            <View style={{ flexDirection: 'row', justifyContent: 'end' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                 <Text style={styles.timeStyle}>
                     {item.time}
                 </Text>
@@ -25,7 +25,7 @@ function NotificationItem(props) {
                     <Text style={styles.itemName}>
                         {item.name}
                     </Text>
-                    <View>
+                    <View style={{width:370}}>
                         {longText && !showMore ?
                             <Text style={styles.textMessage} onLayout={(e) => {
                                 if (e.nativeEvent.layout.height > 40) {
@@ -46,8 +46,8 @@ function NotificationItem(props) {
                         }
                         {showButton && (
                             <View style={styles.readMoreButton}>
-                                <Text onPress={handleShowMore} >
-                                    {showMore ? 'Read less' : 'Read more'}
+                                <Text style={{color:"#74CBD4",right:-30}} onPress={handleShowMore} >
+                                    {showMore ? '...Read less' : '...Read more'}
                                 </Text>
                             </View>
                         )}
@@ -61,18 +61,19 @@ function NotificationItem(props) {
 const styles = StyleSheet.create({
     listItem: {
         margin: 5,
+        marginTop:19,
         borderBottomColor:"grey",
         borderBottomWidth:1,
         paddingBottom: 5
     },
     timeStyle: {
         fontSize: 12,
-        fontWeight: 'bold',
+        fontWeight: '400',
         marginRight: 10
     },
     avatarStyle: {
-        width: 50,
-        height: 50,
+        width: 62,
+        height: 62,
     },
     mainItem: {
         marginLeft: 10,
@@ -84,6 +85,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     textMessage: {
+        width:251,
+        height:33,
         marginRight: 30,
         lineHeight: 20,
         overflow: 'hidden',
@@ -92,8 +95,7 @@ const styles = StyleSheet.create({
         WebkitBoxOrient: 'vertical',
     },
     readMoreButton: {
-        color: 'gray',
-        textDecorationLine: 'underline',
+        
         right: 30,
         flexDirection: 'row',
         justifyContent: 'end'
