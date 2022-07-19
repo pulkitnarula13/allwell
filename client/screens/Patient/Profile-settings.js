@@ -89,8 +89,8 @@ const PatientProfileSettings = ({ navigation }) => {
             
           <Text style={{color:"#74CBD4",fontSize:16,fontWeight:"600"}} onPress={()=>{
             Alert.alert(
-              "Alert Title",
-              "My Alert Msg",
+              "Delete Account",
+              "Do you want to delete your account?",
               [
                 {
                   text: "Yes",
