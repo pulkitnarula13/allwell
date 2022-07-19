@@ -24,8 +24,8 @@ export default function App() {
           setAppointmentData,
         }}
       >
-        <PaperProvider theme={theme}>
-          <NavigationContainer>
+        <PaperProvider>
+          <NavigationContainer theme={theme}>
             <AppNav />
           </NavigationContainer>
         </PaperProvider>

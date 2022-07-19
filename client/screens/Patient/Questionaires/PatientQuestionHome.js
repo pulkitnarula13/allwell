@@ -55,6 +55,7 @@ const PatientQuestionHome = ({ navigation }) => {
       );
       Alert.alert("Success", response.data.message);
     } catch (error) {
+      console.log(error);
       Alert.alert("Error", error.message);
     }
     

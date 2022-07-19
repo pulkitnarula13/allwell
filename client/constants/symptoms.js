@@ -1,5 +1,5 @@
 export const SymptomsList = {
-    Headache: require('../assets/symptoms/Headache.png'),
+    Headache: require('../assets/symptoms/headache.png'),
     Fever: require('../assets/symptoms/fever.png'),
     Nausea: require('../assets/symptoms/nausea.png'),
     Cold: require('../assets/symptoms/cold.png'),

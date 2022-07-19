@@ -38,6 +38,9 @@ const PatientSchema = mongoose.Schema({
     type: [String],
     required: true,
   },
+  familyMember: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "FamilyMember" }
+  ],
   address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
 });
 

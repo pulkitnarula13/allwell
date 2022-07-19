@@ -143,6 +143,8 @@ const loginDoctor = async (req, res) => {
   }
   Doctor.find(options).populate({
     path: "specialities"
+  }).populate({
+    path: "rating"
   })
     .then((result) => {
       return res.status(200).json({

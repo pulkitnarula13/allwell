@@ -1,42 +1,20 @@
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
-import { Tabs, TabScreen, useTabIndex, useTabNavigation } from "react-native-paper-tabs";
-import moment from "moment";
-import { ScrollView } from "react-native";
-
+import { Tabs, TabScreen } from "react-native-paper-tabs";
 import CalendarStrip from "react-native-calendar-strip";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-const DATA = [
-  {
-    name: "Headache",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Cough",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Muscle Cramp",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Sore Throad",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Stomach Pain",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Congestion",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Fever",
-    image: "../../assets/icon.png",
-  },
-];
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Item = ({ name, image }) => (
   <View style={styles.item}>
@@ -51,88 +29,155 @@ const Item = ({ name, image }) => (
 const datenow = Date.now();
 
 const DoctorAppointment = (props) => {
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
-  return (
-    <ScrollView>
-      <View style={styles.viewPage}>
-        
-        <View style={styles.viewCalendarStrip}>
-          <CalendarStrip
-          style={{height:161, paddingTop: 20, paddingBottom: 10}}
-          calendarHeaderStyle={{color: 'white'}}
-          dateNumberStyle={{color: 'white',borderWidth:1,borderColor:"white",padding:10,justifyContent:"center",alignItems:"center",display:"flex",borderRadius:10,marginRight:8}}
-          dateNameStyle={{color: 'white'}}
-          startingDate={datenow}
-          selectedDate={{color:"red"}}
-          highlightDateNumberStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20}}
-          // highlightDateNameStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20,width:49}}
-          ></CalendarStrip>
-        </View>
-        {/* <View style={styles.viewSelection}> */}
-          <Tabs style={{backgroundColor:"white",color:"#74CBD4"}}>
-            <TabScreen  style={{color:"#74CBD4"}} label="Upcoming">
-              {/* <Text
-                style={styles.textSelection}
-                onPress={() => console.log("Upcoming Pressed")}
-              >
-                Upcoming
-              </Text> */}
-              <View style={{borderColor:"#74CBD4",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"black"}}>
-                <Text style={{color:"#74CBD4"}} >Upcoming</Text>
-              </View>
-          </TabScreen>
-          <TabScreen backgroundColor="white" label="Completed">
-            {/* <Text
-              style={styles.textSelection}
-              onPress={() => console.log("Completed Pressed")}
-            >
-              Completed
-            </Text> */}
-              <View style={{backgroundColor:"white"}}>
-                <Text>Completed</Text>
-              </View>
-          </TabScreen>
-          <TabScreen label="Canceled">
-            {/* <Text
-              style={styles.textSelection}
-              onPress={() => console.log("Canceled Pressed")}
-            >
-              Canceled
-            </Text> */}
-              <View>
-                <Text>Canceled</Text>
-              </View>
-          </TabScreen>
-          </Tabs>
-        {/* </View> */}
+  const [confirmedAppointments, setConfirmedAppointments] = useState([]);
+  const { userInfo } = useContext(AuthContext);
 
-        <View style={styles.viewDataContainer}>
-          {/* Patient Meeting */}
+  useEffect(() => {
+    getPatientAppointments();
+  }, []);
 
-          <TouchableOpacity onPress={() => props.navigation.navigate("Info-Patient")}>
-            <View style={styles.viewPatientMeeting}>
-              <View style={{display:"flex",flexDirection:"row"}}>
-              <Button style={{}} color="#74CBD4" icon="clock"></Button>
-              <Text style={styles.textPatientMeetingTime}>
-              
-                12:00  - 1:00 PM
-              </Text>
-              </View>
-              <View style={styles.viewDividerLine} />
-              <View style={styles.viewPatientData}>
-                <Image
-                  style={styles.imagePatient}
-                  source={require("../../assets/icon.png")}
-                  resizeMode="contain"
-                />
-                <Text style={styles.textPatientName}>Mark</Text>
-              </View>
+  const getPatientAppointments = async () => {
+    try {
+      const data = await axios.get(
+        `${BASE_URL_DEV}/appointments/doctor/${userInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      const confirmedAppointments = data.data.data.filter(
+        (data) => data.confirmed && !data.cancelled
+      );
+
+      console.log(confirmedAppointments, "confired");
+      setConfirmedAppointments(confirmedAppointments);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const PatientAppointmentRender = ({ item }) => {
+    var newdate = new Date(item.date);
+    return (
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("Info-Patient")}
+      >
+        <View style={styles.viewPatientMeeting}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <View style={styles.clock}>
+              <Image
+                style={{ width: 20, height: 20 }}
+                source={require("../../assets/icons/medico_icon_clock.png")}
+              />
             </View>
-          </TouchableOpacity>
+            <Text style={styles.time}>
+              {`${newdate.getHours()}:${
+                newdate.getMinutes() ? newdate.getMinutes() : "00"
+              }`}{" "}
+              {`- ${newdate.getHours() + 1}:${
+                newdate.getMinutes() ? newdate.getMinutes() : "00"
+              }`}
+            </Text>
+          </View>
+          <View style={styles.viewDividerLine} />
+          <View style={styles.viewPatientData}>
+            <Image
+              style={styles.imagePatient}
+              source={require("../../assets/icon.png")}
+              resizeMode="contain"
+            />
+            <Text style={styles.textPatientName}>{item.patient.name}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
-          {/* Available Slots */}
+  return (
+    <SafeAreaView>
+      <ScrollView>
+        <View>
+          <View style={styles.viewCalendarStrip}>
+            <CalendarStrip
+              style={{ height: 161, paddingTop: 20, paddingBottom: 10 }}
+              calendarHeaderStyle={{ color: "#fff" }}
+              daySelectionAnimation={{
+                type: "background",
+                duration: 200,
+                borderWidth: 1,
+                borderHighlightColor: "white",
+              }}
+              scrollToOnSetSelectedDate={true}
+              calendarAnimation={{ type: "sequence", duration: 30 }}
+              dateNumberStyle={{
+                color: "white",
+                borderWidth: 1,
+                borderColor: "white",
+                padding: 10,
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                borderRadius: 10,
+                marginRight: 8,
+              }}
+              dateNameStyle={{ color: "white" }}
+              startingDate={datenow}
+              selectedDate={{ color: "red" }}
+              highlightDateNumberStyle={{
+                backgroundColor: "white",
+                borderRadius: 20,
+                color: "#74CBD4",
+                // borderWidth: 1,
+                // borderColor: "white",
+                padding: 10,
+                // borderRadius: 20,
+              }}
+              // highlightDateNameStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20,width:49}}
+            ></CalendarStrip>
+          </View>
+          <Tabs style={{backgroundColor:"white"}}>
+        <TabScreen color="black" backgroundColor="black" style={{color:"black"}}  label="Current">
+          <View>
+            <View
+              style={{
+                padding: 14,
+                marginBottom: 34,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+             <Text>Hello</Text>
+            </View>
+          </View>
+        </TabScreen>
+        <TabScreen label="Compeleted">
+          <View
+            style={{
+              padding: 14,
+              marginBottom: 34,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View>
+            <Text>Working</Text>
+            </View>
+          </View>
 
-          <View style={styles.viewMeeting}>
+          {/* <ExploreWitHookExamples1 /> */}
+        </TabScreen>
+      </Tabs>
+
+          <View style={styles.viewDataContainer}>
+            {/* Patient Meeting */}
+
+            {/* Available Slots */}
+
+            {/* <View style={styles.viewMeeting}>
             <Text style={styles.textMeetingTime}>12:00 PM - 1:00 PM</Text>
             <View style={styles.viewDividerLine} />
             <View style={styles.viewButtons}>
@@ -145,24 +190,29 @@ const DoctorAppointment = (props) => {
               <Button
                 style={styles.btnBookSchedule}
                 mode="contained"
-                onPress={() => props.navigation.navigate("AcceptPatientSchedule")}
+                onPress={() =>
+                  props.navigation.navigate("AcceptPatientSchedule")
+                }
               >
-
                 <Text style={styles.textButton}>Book Schedule</Text>
               </Button>
             </View>
+          </View> */}
           </View>
+          {/* End of whole page view */}
         </View>
-        {/* End of whole page view */}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  
   viewPage: {
     backgroundColor: "#FCFCFC",
+  
+  },
+  time: {
+    fontSize: 12,
   },
   viewPageName: {
     display: "flex",
@@ -183,9 +233,14 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: "#74CBD4",
     color: "white",
-  
-
-    
+  },
+  clock: {
+    minWidth: 20,
+    display: "flex",
+    justifyContent: "flex-start",
+    height: 20,
+    marginRight: 25,
+    marginLeft: 12,
   },
   viewSelection: {
     display: "flex",
@@ -218,31 +273,30 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: "white",
     padding: 15,
-    height:130,
-    padding:20,
+    height: 130,
+    padding: 20,
     color: "black",
     borderColor: "#CBD5E0",
     borderWidth: 1,
     borderRadius: 20,
-    
   },
   textPatientMeetingTime: {
     color: "black",
-    fontSize: 12, 
-    marginTop:7,
-    marginLeft:-19
+    fontSize: 12,
+    marginTop: 7,
+    marginLeft: -19,
   },
   viewPatientData: {
     display: "flex",
     flexDirection: "row",
-    marginTop:16,
-    height:48
+    marginTop: 16,
+    height: 48,
   },
   imagePatient: {
     width: 48,
-    borderRadius:50,
+    borderRadius: 50,
     height: 48,
-    marginTop:-10
+    marginTop: -10,
   },
   textPatientName: {
     paddingLeft: 20,
@@ -250,14 +304,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "black",
     fontWeight: "400",
-    lineHeight:18
+    lineHeight: 18,
   },
   viewMeeting: {
     marginTop: 20,
     width: 341,
     backgroundColor: "white",
     padding: 15,
-    height:104,
+    height: 104,
     color: "black",
     borderColor: "#CBD5E0",
     borderWidth: 1,
@@ -287,12 +341,12 @@ const styles = StyleSheet.create({
   btnBookSchedule: {
     width: 150,
     height: 49,
-    textAlign:"center",
-    justifyContent:"center",
-    alignItems:"center",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#74CBD4",
     borderRadius: 30,
-    marginTop:-5
+    marginTop: -5,
   },
 });
 

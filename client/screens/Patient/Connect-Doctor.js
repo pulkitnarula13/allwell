@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "react-native-paper";
+import { Avatar, Button } from "react-native-paper";
 import { ScrollView } from "react-native";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
@@ -16,14 +16,20 @@ import AppointmentContext from "../../Context/AppointmentContext";
 import { Ionicons } from "@expo/vector-icons";
 import { SymptomsList } from "../../constants/symptoms";
 
-
 let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
   {
     name: "Mark",
-    image: "../../assets/icon1.png",
-  }
+    profilePicture: "../../assets/icon1.png",
+  },
+  {
+    name: "Jessica",
+  },
+  {
+    name: "Mark",
+    profilePicture: "../../assets/icon1.png",
+  },
 ];
 
 const ConnectPatient = ({ navigation, route }) => {
@@ -38,13 +44,23 @@ const ConnectPatient = ({ navigation, route }) => {
     setSelectedItems(filteredArray);
   }, [route]);
 
-  const Item = ({ name, image }) => (
+  const Item = ({ name, profilePicture }) => (
     <View style={styles.item}>
-      <Image
-        style={styles.image1}
-        source={require("../../assets/icon.png")}
-        resizeMode="center"
-      />
+      {!profilePicture ? (
+        <Avatar.Text
+          style={{ backgroundColor: "#74CBD4" }}
+          size={65}
+          label={name[0]}
+          color="#fff"
+        />
+      ) : (
+        <Image
+          style={styles.image1}
+          source={require("../../assets/icon.png")}
+          resizeMode="center"
+        />
+      )}
+
       <Text style={styles.name1}>{name}</Text>
     </View>
   );
@@ -53,25 +69,27 @@ const ConnectPatient = ({ navigation, route }) => {
 
   const renderSymptoms = ({ item, image }) => {
     return (
-        <View style={styles.symptopmsView}>
-          <View style={styles.symptopmsImgView}>
-        {/* <Image
-      style={styles.image1}
-      source={require("../../assets/icon.png")}
-      resizeMode="center"
-    /> */}
-        <Image
-          style={{ width: 74, height: 74 }}
-          source={SymptomsList[item.name]}
-          resizeMode="cover" />
+      <View
+        style={{
+          marginTop: 12,
+          justifyContent: "center",
+          alignItems: "center",
+          marginRight: 14,
+        }}
+      >
+        <View style={styles.symptopmsImgView}>
+          <Image
+            style={{ width: 74, height: 74 }}
+            source={SymptomsList[item.name]}
+            resizeMode="cover"
+          />
         </View>
-        <Text style={styles.name1}>{item.name}</Text>
+        <Text style={styles.symptomName}>{item.name}</Text>
       </View>
-
     );
   };
 
-  async function asapButtonClick(){
+  async function asapButtonClick() {
     setAppointmentData({
       ...appointmentData,
       urgent: true,
@@ -83,25 +101,28 @@ const ConnectPatient = ({ navigation, route }) => {
     <ScrollView>
       <View style={styles.outerview}>
         <View style={styles.headingview}>
-          <Text style={styles.headingtextview}>Connect with a doctor</Text>
-        </View>
-        <View style={styles.subheadingview}>
-          <Text style={styles.subheadingtextview}>Choose a family</Text>
+          <Text style={styles.headingtextview}>Choose your account</Text>
         </View>
         <View style={styles.familyContainer}>
           <FlatList
             horizontal={true}
             data={DATA}
             renderItem={renderItem}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item, index) => index}
           />
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Add-Family-Member")}
+          <View
+            style={{ display: "flex", justifyContent: "center", marginTop: 8 }}
           >
-            <Button>
-              <Ionicons name="ios-add-circle-outline" size={94} color="black" />
-            </Button>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Add-Family-Member")}
+            >
+              <Image
+                style={{ width: 74, height: 74 }}
+                source={require("../../assets/icons/medico_icon_alert.png")}
+              />
+            </TouchableOpacity>
+            <Text>Add Patient</Text>
+          </View>
         </View>
 
         <View style={styles.symptoms}>
@@ -112,7 +133,7 @@ const ConnectPatient = ({ navigation, route }) => {
             horizontal={true}
             data={selectedItem}
             renderItem={renderSymptoms}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item, index) => index}
           />
         </View>
 
@@ -144,11 +165,11 @@ const ConnectPatient = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   outerview: {
-    backgroundColor: "#fff",
     height: Screenheight * 1.4,
     display: "flex",
     flex: 1,
-    padding: 32,
+    marginLeft: 16,
+    marginRight: 16,
   },
   familyContainer: {
     flexDirection: "row",
@@ -165,10 +186,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   viewDoctorsTxt: {
-    color: 'white',
-    fontWeight: '800',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 15,
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
   connectNowBtn: {
     backgroundColor: "#ffff",
@@ -182,11 +203,11 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 17,
   },
-connectNowTxt: {
-    color: '#74CBD4',
-    fontWeight: '800',
+  connectNowTxt: {
+    color: "#74CBD4",
+    fontWeight: "bold",
     fontSize: 15,
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
   subheadingtextview1: {
     fontWeight: "700",
@@ -220,28 +241,27 @@ connectNowTxt: {
     height: 24,
     textAlign: "center",
   },
+  symptomName: {
+    width: 74,
+    height: 24,
+    marginTop: 8,
+    textAlign: "center",
+  },
   item: {
     display: "flex",
     flexDirection: "column",
-    marginRight: 21,
+    marginRight: 16,
     marginTop: 24,
-  },
-  symptopmsView: {
-    display: "flex", 
-    flexDirection: "column", 
-    textAlign: "center",
-
   },
   symptopmsImgView: {
     borderWidth: 3,
     borderColor: "#74CBD4",
     borderRadius: 100,
     padding: 10,
-    marginRight: 14,
   },
   headingview: {
     marginTop: 50,
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   headingtextview: {
     fontWeight: "700",

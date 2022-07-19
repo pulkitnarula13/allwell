@@ -8,9 +8,10 @@ import {
 } from "react-native";
 import React from "react";
 import { Rating } from "react-native-ratings";
-import { Button } from "react-native-paper";
+import { Avatar, Button, Chip } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 const AvailableDoctorCard = (props) => {
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -20,49 +21,67 @@ const AvailableDoctorCard = (props) => {
           })
         }
       >
+        <View style={styles.ratingContainer}>
+          <Rating
+            type="custom"
+            ratingColor="#74CBD4"
+            ratingCount={1}
+            imageSize={15}
+            ratingBackgroundColor="#74CBD4"
+            readonly={true}
+          />
+          <Text style={{paddingLeft: 4}}>{props.item.rating}</Text>
+        </View>
         <View
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 15,
-            marginTop:18
+            justifyContent: "center",
+            marginBottom: 4,
           }}
         >
-          <Image
-            source={require("../assets/icon.png")}
-            style={styles.image}
-            resizeMode="contain"
-          />
-          <View style={styles.ratingContainer}>
-            
-            <Rating
-              type="custom"
-              ratingBackgroundColor="#74CBD4"
-              ratingColor="#74CBD4"
-              ratingCount={1}
-              imageSize={15}
+          {!props.item.profilePicture ? (
+            <Avatar.Text
+              style={{ backgroundColor: "#74CBD4" }}
+              size={65}
+              label={props.item.name[0]}
+              color="#fff"
             />
-            <Text>{props.item.rating}4.0</Text>
-          </View>
+          ) : (
+            <Image
+              source={props.item.profilePicture}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          )}
         </View>
       </TouchableOpacity>
-      <Text style={{ marginBottom: 5,marginRight:-10,fontSize:16,fontWeight:"400" }}>{props.item.name}</Text>
+      <Text
+        style={{
+          marginBottom: 5,
+          marginRight: -10,
+          fontSize: 16,
+          fontWeight: "400",
+        }}
+      >
+        {props.item.name}
+      </Text>
 
       <Text style={{ marginBottom: 5, fontWeight: "100" }}>
-        {/* {props.item.specialities.map((speciality) => {
-
-        })} */}
+        <View style={styles.chip}>
+          <Text style={{ fontSize: 10, color: "#718096" }}>
+            {props.item.specialities[0].name}
+          </Text>
+        </View>
       </Text>
-      <Button style={{ display: "flex", flexDirection: "row" }}>
-        <Ionicons
-          style={{ marginRight: 10 }}
-          name="location-outline"
-          size={24}
-          color="#74CBD4"
-        />
-        <Text style={{ color: "black",marginBottom:15 }}>2km</Text>
-      </Button>
+      <View
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
+        <Ionicons name="location-outline" size={24} color="#74CBD4" />
+        <Text style={{ color: "black" }}>
+          {(props.item.distance / 10000000).toFixed(1)} km
+        </Text>
+      </View>
     </View>
   );
 };
@@ -70,8 +89,9 @@ const AvailableDoctorCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
     width: 168.7,
-    height:182,
+    height: 182,
     borderWidth: 2,
     marginRight: 10.3,
     borderColor: "#E2E8F0",
@@ -79,20 +99,35 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:30
+    marginBottom: 30,
+  },
+  chipItem: {
+    fontSize: 6,
+    marginHorizontal: 0,
+    marginVertical: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  chip: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginHorizontal: 0,
+    marginVertical: 0,
+    minHeight: 12,
   },
   image: {
     width: 65,
     height: 65,
-    marginRight:7,
-    borderRadius:100
-   
+    borderRadius: 100,
   },
   ratingContainer: {
     display: "flex",
-    marginRight:-50,
-    marginTop:-10,
     flexDirection: "row",
+    justifyContent: "flex-end",
+    width: "100%",
+    paddingRight: 10,
+    paddingTop: 10
   },
 });
 

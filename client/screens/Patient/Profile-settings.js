@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
+import { StackActions } from "@react-navigation/native";
 
 
 const PatientProfileSettings = ({ navigation }) => {
@@ -11,8 +12,7 @@ const PatientProfileSettings = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
 
   const patientLogout = () => {
-    logout();
-    navigation.navigate("greeting");
+    logout(navigation);
   };
 
   return (
