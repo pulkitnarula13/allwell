@@ -1,12 +1,11 @@
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { Button } from "react-native-paper";
-import { Tabs, TabScreen, useTabIndex, useTabNavigation } from "react-native-paper-tabs";
-import moment from "moment";
-import { ScrollView } from "react-native";
+
+import { Tabs, TabScreen } from "react-native-paper-tabs";
 
 import CalendarStrip from "react-native-calendar-strip";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import DoctorAppointmentCard from "../../components/DoctorAppointmentCard";
 const DATA = [
   {
     name: "Headache",
@@ -53,114 +52,53 @@ const datenow = Date.now();
 const DoctorAppointment = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   return (
-    <ScrollView>
-      <View style={styles.viewPage}>
-        
-        <View style={styles.viewCalendarStrip}>
-          <CalendarStrip
-          style={{height:161, paddingTop: 20, paddingBottom: 10}}
-          calendarHeaderStyle={{color: 'white'}}
-          dateNumberStyle={{color: 'white',borderWidth:1,borderColor:"white",padding:10,justifyContent:"center",alignItems:"center",display:"flex",borderRadius:10,marginRight:8}}
-          dateNameStyle={{color: 'white'}}
+    <View style={{ display: "flex", flex: 1 }}>
+      <View style={styles.viewCalendarStrip}>
+        <CalendarStrip
+          style={{ height: 161, paddingTop: 20, paddingBottom: 10 }}
+          calendarHeaderStyle={{ color: "white" }}
+          dateNumberStyle={{
+            color: "white",
+            borderWidth: 1,
+            borderColor: "white",
+            padding: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            borderRadius: 10,
+            marginRight: 8,
+          }}
+          dateNameStyle={{ color: "white" }}
           startingDate={datenow}
-          selectedDate={{color:"red"}}
-          highlightDateNumberStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20}}
+          selectedDate={{ color: "red" }}
+          highlightDateNumberStyle={{
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderColor: "white",
+            padding: 10,
+            borderRadius: 20,
+          }}
           // highlightDateNameStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20,width:49}}
-          ></CalendarStrip>
-        </View>
-        {/* <View style={styles.viewSelection}> */}
-          <Tabs style={{backgroundColor:"white",color:"#74CBD4"}}>
-            <TabScreen  style={{color:"#74CBD4"}} label="Upcoming">
-              {/* <Text
-                style={styles.textSelection}
-                onPress={() => console.log("Upcoming Pressed")}
-              >
-                Upcoming
-              </Text> */}
-              <View style={{borderColor:"#74CBD4",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"black"}}>
-                <Text style={{color:"#74CBD4"}} >Upcoming</Text>
-              </View>
-          </TabScreen>
-          <TabScreen backgroundColor="white" label="Completed">
-            {/* <Text
-              style={styles.textSelection}
-              onPress={() => console.log("Completed Pressed")}
-            >
-              Completed
-            </Text> */}
-              <View style={{backgroundColor:"white"}}>
-                <Text>Completed</Text>
-              </View>
-          </TabScreen>
-          <TabScreen label="Canceled">
-            {/* <Text
-              style={styles.textSelection}
-              onPress={() => console.log("Canceled Pressed")}
-            >
-              Canceled
-            </Text> */}
-              <View>
-                <Text>Canceled</Text>
-              </View>
-          </TabScreen>
-          </Tabs>
-        {/* </View> */}
-
-        <View style={styles.viewDataContainer}>
-          {/* Patient Meeting */}
-
-          <TouchableOpacity onPress={() => props.navigation.navigate("Info-Patient")}>
-            <View style={styles.viewPatientMeeting}>
-              <View style={{display:"flex",flexDirection:"row"}}>
-              <Button style={{}} color="#74CBD4" icon="clock"></Button>
-              <Text style={styles.textPatientMeetingTime}>
-              
-                12:00  - 1:00 PM
-              </Text>
-              </View>
-              <View style={styles.viewDividerLine} />
-              <View style={styles.viewPatientData}>
-                <Image
-                  style={styles.imagePatient}
-                  source={require("../../assets/icon.png")}
-                  resizeMode="contain"
-                />
-                <Text style={styles.textPatientName}>Mark</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          {/* Available Slots */}
-
-          <View style={styles.viewMeeting}>
-            <Text style={styles.textMeetingTime}>12:00 PM - 1:00 PM</Text>
-            <View style={styles.viewDividerLine} />
-            <View style={styles.viewButtons}>
-              <Text
-                style={styles.textAvailable}
-                onPress={() => console.log("Available Pressed")}
-              >
-                Available
-              </Text>
-              <Button
-                style={styles.btnBookSchedule}
-                mode="contained"
-                onPress={() => props.navigation.navigate("AcceptPatientSchedule")}
-              >
-
-                <Text style={styles.textButton}>Book Schedule</Text>
-              </Button>
-            </View>
-          </View>
-        </View>
-        {/* End of whole page view */}
+        ></CalendarStrip>
       </View>
-    </ScrollView>
+
+      <Tabs style={{ backgroundColor: "#fff" }}>
+        <TabScreen label="Upcoming">
+          <DoctorAppointmentCard />
+        </TabScreen>
+
+        <TabScreen label="Completed">
+          <DoctorAppointmentCard />
+        </TabScreen>
+        <TabScreen label="Canceled">
+          <DoctorAppointmentCard />
+        </TabScreen>
+      </Tabs>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  
   viewPage: {
     backgroundColor: "#FCFCFC",
   },
@@ -178,14 +116,12 @@ const styles = StyleSheet.create({
   },
   viewCalendarStrip: {
     marginTop: 20,
+    height: 161,
     marginBottom: 20,
     paddingTop: 20,
     paddingBottom: 20,
     backgroundColor: "#74CBD4",
     color: "white",
-  
-
-    
   },
   viewSelection: {
     display: "flex",
@@ -218,31 +154,30 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: "white",
     padding: 15,
-    height:130,
-    padding:20,
+    height: 130,
+    padding: 20,
     color: "black",
     borderColor: "#CBD5E0",
     borderWidth: 1,
     borderRadius: 20,
-    
   },
   textPatientMeetingTime: {
     color: "black",
-    fontSize: 12, 
-    marginTop:7,
-    marginLeft:-19
+    fontSize: 12,
+    marginTop: 7,
+    marginLeft: -19,
   },
   viewPatientData: {
     display: "flex",
     flexDirection: "row",
-    marginTop:16,
-    height:48
+    marginTop: 16,
+    height: 48,
   },
   imagePatient: {
     width: 48,
-    borderRadius:50,
+    borderRadius: 50,
     height: 48,
-    marginTop:-10
+    marginTop: -10,
   },
   textPatientName: {
     paddingLeft: 20,
@@ -250,14 +185,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "black",
     fontWeight: "400",
-    lineHeight:18
+    lineHeight: 18,
   },
   viewMeeting: {
     marginTop: 20,
     width: 341,
     backgroundColor: "white",
     padding: 15,
-    height:104,
+    height: 104,
     color: "black",
     borderColor: "#CBD5E0",
     borderWidth: 1,
@@ -287,12 +222,12 @@ const styles = StyleSheet.create({
   btnBookSchedule: {
     width: 150,
     height: 49,
-    textAlign:"center",
-    justifyContent:"center",
-    alignItems:"center",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#74CBD4",
     borderRadius: 30,
-    marginTop:-5
+    marginTop: -5,
   },
 });
 
