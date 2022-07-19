@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { Avatar, Button } from "react-native-paper";
 
+
 const AppointmentCard = ({ item, navigation }) => {
   var newdate = new Date(item.date);
 
@@ -20,7 +21,7 @@ const AppointmentCard = ({ item, navigation }) => {
           <View style={styles.clock}>
             <Image
               style={{ width: 20, height: 20 }}
-              source={require("../assets/icons/medico_icon_clock.png")}
+              source={require("../assets/icons/medico_icon-clock.svg")}
             />
           </View>
           <View
