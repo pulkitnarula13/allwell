@@ -40,11 +40,11 @@ import * as ImagePicker from "expo-image-picker";
   return (
     <View style={styles.maxview}>
         
-        <ScrollView>
+        <ScrollView
+        showsVerticalScrollIndicator={false}
+        >
         <View style={styles.overall}>
-       <View style={styles.outerview}>
-      <Text style={styles.profiletext}>Account Information</Text>
-      </View>
+      
       <View style={styles.imageview}>
       <TouchableOpacity onPress={openimagelib}>
           <Image
@@ -76,7 +76,7 @@ import * as ImagePicker from "expo-image-picker";
             value={email}
             onChangeText={(text) => setemail(text)}
           />
-          <View style={{display:"flex",flexDirection:"row",maxWidth:256}}>
+          <View style={{display:"flex",flexDirection:"row",maxWidth:287}}>
 
            <TextInput
 
@@ -144,15 +144,16 @@ import * as ImagePicker from "expo-image-picker";
           <View style={styles.btnview}>
           <Button
               style={{
-                borderRadius: 10,
+                borderRadius: 100,
                 backgroundColor: "#FCFCFC",
                 width: 150,
-                height: 45,
+                height: 49,
                 justifyContent: "center",
-                marginRight:30,
-                borderColor:"#000000",
-                borderWidth:1
+                marginRight:29,
+                borderColor:"#74CBD4",
+                borderWidth:2
               }}
+              labelStyle={{color:"#74CBD4",fontSize:16,fontWeight:"600"}}
               mode="contained"
               onPress={() => console.log("Pressed")}
             >
@@ -160,12 +161,15 @@ import * as ImagePicker from "expo-image-picker";
             </Button>
             <Button
               style={{
-                borderRadius: 10,
-                backgroundColor: "#D9D9D9",
+                borderRadius: 100,
+                backgroundColor: "#74CBD4",
                 width: 150,
-                height: 45,
+                height: 49,
                 justifyContent: "center",
+                borderColor:"#74CBD4",
+                borderWidth:2
               }}
+              labelStyle={{color:"white",fontSize:16,fontWeight:"600"}}
               mode="contained"
               onPress={() =>navigation.navigate("PatientProfile") }
             >
@@ -187,7 +191,9 @@ const styles = StyleSheet.create({
     btnview:{
         display:"flex",
         flexDirection:"row",
-        marginBottom:50
+        marginBottom:50,
+        justifyContent:"center",
+        alignItems:"center"
     },
     maxview:{
         display:"flex",
@@ -202,12 +208,12 @@ const styles = StyleSheet.create({
         marginBottom:46
     },
     inputbox: {
-        width: 256,
+        width: 287,
         height: 40,
         marginBottom: 19,
       },
       inputboxhouse: {
-        width: 256,
+        width: 287,
         height: 40,
         marginBottom: 19,
         marginRight:10,
@@ -215,15 +221,16 @@ const styles = StyleSheet.create({
         flex:1
       },
       inputbox1: {
-        width: 256,
+        width: 287,
         height: 40,
         marginBottom: 19,
       },
     imageview:{
         display:"flex",
+        marginTop:23,
         justifyContent:"center",
         alignItems:"center",
-        marginBottom:11
+        marginBottom:24
     },
     profiletext:{
         fontSize:24,
@@ -232,9 +239,11 @@ const styles = StyleSheet.create({
         textAlign:"center"
      },
      imgstyle: {
-        width: 159,
-        height: 159,
-        backgroundColor: "#D9D9D9",
+        width: 95,
+        height: 95,
+        backgroundColor: "white",
+        borderWidth:2,
+        borderColor:"#D9D9D9",
         borderRadius: 10,
       },
 });
