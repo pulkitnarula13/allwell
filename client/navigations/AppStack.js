@@ -39,6 +39,7 @@ import FAQ from "../screens/Patient/FAQ";
 import Privacypolicy from "../screens/Patient/Privacypolicy";
 import Termsofuse from "../screens/Patient/Termsofuse";
 import PatientChatting from "../components/Patient-Chatting";
+import Requestwaitgif from "../screens/Patient/Requestwaitgif";
 
 const Stack = createNativeStackNavigator();
 
@@ -115,6 +116,7 @@ const AppStack = () => {
         name="Patient-question-home"
         component={PatientQuestionHome}
       />
+      <Stack.Screen name="Requestwaitgif" component={Requestwaitgif} />
       <Stack.Screen name="PatientChatting" component={PatientChatting} />
       <Stack.Screen name="Requestwait" component={Requestwait} />
       <Stack.Screen name="Patient-Home" component={PatientHome} />

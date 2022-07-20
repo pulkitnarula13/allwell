@@ -41,8 +41,10 @@ const PatientQuestionHome = ({ navigation }) => {
     useContext(AppointmentContext);
 
   const createAppointment = async () => {
+    navigation.navigate("Requestwaitgif");
     getDoctorById();
     console.log(doctorInfo, "doc Info");
+    
   };
 
   const getDoctorById = async () => {
@@ -65,12 +67,13 @@ const PatientQuestionHome = ({ navigation }) => {
           },
         }
       );
+      !response ? navigation.navigate("Requestwaitgif") : navigation.navigate("Requestwait");
       Alert.alert("Success", response.data.message);
     } catch (error) {
       console.log(error);
       Alert.alert("Error", error.message);
     }
-    // navigation.navigate("Requestwait");
+    
 
     console.log(response.data.data, "response");
     setDoctorInfo(response.data.data);
