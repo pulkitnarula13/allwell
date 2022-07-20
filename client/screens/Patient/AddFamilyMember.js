@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Image, ScrollView} from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import React, { useState, useContext } from 'react'
-import { TextInput, Button, RadioButton } from 'react-native-paper';
+import { TextInput, Button } from 'react-native-paper';
 import { DatePickerInput } from "react-native-paper-dates";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
@@ -16,31 +16,33 @@ import { BASE_URL_DEV } from "@env";
     const [relationship, setRelationship] = useState("");
     const [MSP, setMSP] = useState("");
     const [birthdate, setbirthdate] = useState(undefined);
-    const [gender, setGender] = useState();
-
     const { userInfo } = useContext(AuthContext);
 
 
 
 
-    const addMember = async () => {
-      let data =  {
-        name: name,
-        email: email,
-        dob:  birthdate,
-        healthNumber: MSP,
-        gender: gender,
-        relationship: relationship,
-        creatorPatient: userInfo.id,
-        roles: 'Patient',
-        profilePicture: "",
-      }
+    const clearData = () => {
+      setName('');
+      setEmail('');
+      setRelationship('');
+      setMSP('');
+      setbirthdate(undefined);
+      props.navigation.navigate("Doctor-Connect");
+    }
 
-      console.log(data);
+    const addMember = async () => {
+
+      console.log(userInfo, "userInfo");
   
-      const response = axios.post(
-        `${BASE_URL_DEV}/familyMember`,
-        data,
+      const response = axios.put(
+        `${BASE_URL_DEV}/patients/family/${userInfo.id}`,
+        {
+          name: name,
+          email: email,
+          dob:  birthdate,
+          healthNumber: MSP,
+          relationship: relationship,
+        },
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -104,7 +106,7 @@ import { BASE_URL_DEV } from "@env";
             onChangeText={(text) => setbirthdate(text)}
           /> */}
             <DatePickerInput
-              locale="en"
+              locale = 'en'
               label="Date of Birth"
               outlineColor="black" activeOutlineColor="#74CBD4"
               mode={'outlined'}
@@ -114,54 +116,23 @@ import { BASE_URL_DEV } from "@env";
               style={styles.inputDateStyle}
             />
           </View>
-          <View style={styles.genderView}>
-            <RadioButton
-              value="Male"
-              status={gender === "Male" ? "checked" : "unchecked"}
-              onPress={() => setGender("Male")}
-              color="#74CBD4"
-            />
-            <Text>Male</Text>
-            <RadioButton
-              value="Female"
-              status={gender === "Female" ? "checked" : "unchecked"}
-              onPress={() => setGender("Female")}
-              color="#74CBD4"
-              uncheckedColor='#74CBD4'
-            />
-            <Text>Female</Text>
-          </View>
+          
           <View style={styles.btnview}>
           <Button
-              style={{
-                borderRadius: 10,
-                backgroundColor: "#FCFCFC",
-                width: 150,
-                height: 45,
-                justifyContent: "center",
-                marginRight:30,
-                borderColor:"#000000",
-                borderWidth:1
-              }}
+              style={styles.cancelBtn}
               mode="contained"
-              onPress={() => console.log("Pressed")}
+              onPress={clearData}
             >
-              Remove
+              <Text style={styles.cancelBtnText}>Cancel</Text>
             </Button>
             <Button
-              style={{
-                borderRadius: 10,
-                backgroundColor: "#D9D9D9",
-                width: 150,
-                height: 45,
-                justifyContent: "center",
-              }}
+              style={styles.addBtn}
               mode="contained"
               // onPress={() =>  props.navigation.navigate('Home')}
               onPress={addMember}
               
             >
-              Add
+              <Text style={styles.addBtnText}>Add</Text>
             </Button>
           </View>
           </ScrollView>
@@ -220,9 +191,35 @@ const styles = StyleSheet.create({
         backgroundColor: "#D9D9D9",
         borderRadius: 10,
       },
-    genderView: {
-      display: 'flex',
-      flexDirection: 'row',
-    }
+      cancelBtn: {
+          borderRadius: 100,
+          backgroundColor: "#FCFCFC",
+          width: 150,
+          height: 45,
+          justifyContent: "center",
+          marginRight:30,
+          borderColor:"#74CBD4",
+          borderWidth:1,
+      },
+
+      cancelBtnText: {
+        color: '#74CBD4',
+        textTransform: 'capitalize',
+        fontWeight: 'bold',
+      },
+
+      addBtn: {
+        borderRadius: 100,
+        backgroundColor: "#74CBD4",
+        width: 150,
+        height: 45,
+        justifyContent: "center",
+      },
+
+      addBtnText: {
+        color: '#ffffff',
+        textTransform: 'capitalize',
+        fontWeight: 'bold',
+      }
 });
 export default AddFamilyMember

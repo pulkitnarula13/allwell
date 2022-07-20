@@ -94,14 +94,14 @@ router.put("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, updateP
 // Routes
 /**
  * @swagger
- * /patient/:id:
+ * /patient/family/:id:
  *   put:
- *     description: Update information of a patient in the database
+ *     description: Add family member of a patient
  *     responses:
  *       200:
  *         description: return positive response
  */
- router.put("/family/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, addFamilyForPatient);
+ router.put("/family/:id", addFamilyForPatient);
 
 
 // Routes

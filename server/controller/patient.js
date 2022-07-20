@@ -128,17 +128,17 @@ const getPatients = (req, res) => {
  const addFamilyForPatient = async (req, res) => {
   const id = req.params.id;
 
-  const uploadProfilePicture = await upload(
-    `${Date.now() + "" + req.body.name}`,
-    req.body.profilePicture,
-    "jpg",
-    "patient",
-    req.body.name
-  );
+  // const uploadProfilePicture = await upload(
+  //   `${Date.now() + "" + req.body.name}`,
+  //   req.body.profilePicture,
+  //   "jpg",
+  //   "patient",
+  //   req.body.name
+  // );
 
 
   const familyMember = await FamilyMember.create({
-    profilePicture: uploadProfilePicture,
+    profilePicture: '',
     name: req.body.name,
     email: req.body.email,
     relationship: req.body.relationship,

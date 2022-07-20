@@ -117,8 +117,8 @@ const ConnectPatient = ({ navigation, route }) => {
               onPress={() => navigation.navigate("Add-Family-Member")}
             >
               <Image
-                style={{ width: 74, height: 74 }}
-                source={require("../../assets/icons/medico_icon_alert.png")}
+                style={{ width: 70, height: 70 }}
+                source={require("../../assets/icons/medico_icon_plus.png")}
               />
             </TouchableOpacity>
             <Text>Add Patient</Text>
