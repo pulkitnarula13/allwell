@@ -194,7 +194,6 @@ const updatePatient = async (req, res) => {
     //   req.body.name
     // );
 
-    console.log(req.body, "req");
 
     let uploadProfilePicture;
 

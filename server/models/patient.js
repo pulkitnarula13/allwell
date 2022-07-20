@@ -41,6 +41,9 @@ const PatientSchema = mongoose.Schema({
   familyMember: [
     { type: mongoose.Schema.Types.ObjectId, ref: "FamilyMember" }
   ],
+  expoToken: {
+    type: String
+  },
   address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
 });
 

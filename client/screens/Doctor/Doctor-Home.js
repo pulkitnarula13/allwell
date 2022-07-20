@@ -14,6 +14,7 @@ import Dialog, {
 import * as moment from "moment";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
+import PushNotification from "../../components/PushNotification";
 
 const DoctorHome = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
@@ -72,6 +73,7 @@ const DoctorHome = ({ navigation }) => {
     <ScrollView   showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <View style={styles.nameContainer}>
+          <PushNotification />
           <Text style={styles.doctorname}>Welcome, Dr. {userInfo.name}</Text>
           <Chip
             selectedColor="white"
