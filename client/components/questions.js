@@ -15,7 +15,7 @@ export default function Questions(props) {
           console.log(value, "target Value");
           setAnswer(value);
           props.setAnswer(value);
-        }}
+      }}
         placeholder="Write your answer here"
         multiline={true}
         height={130}

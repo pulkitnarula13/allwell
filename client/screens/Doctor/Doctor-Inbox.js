@@ -173,11 +173,13 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 20,
     textAlign: "center",
+   
   },
   image1: {
     width: 98,
     height: 98,
     borderRadius: 49,
+
   },
 
   main: {
@@ -246,7 +248,6 @@ const styles = StyleSheet.create({
     paddingRight: '60%',
     paddingBottom: 40,
     fontSize: '15%',
-    fontWeight: 'bold'
   },
 
   modalName: {

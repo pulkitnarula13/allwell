@@ -204,6 +204,12 @@ const createAppointment = async (req, res) => {
 
     const findDoctor = await Doctor.findById(data.doctor);
 
+
+    if (!findDoctor && data.urgent) {
+      const findDoctorList = await Doctor.find().sort({ 'rating': -1});
+      console.log(findDoctorList, "findDoctorList");
+    }
+
     if (!findDoctor) {
       return res.status(404).json({
         message: "Doctor not found",

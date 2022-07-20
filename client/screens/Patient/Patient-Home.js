@@ -40,11 +40,10 @@ const PatientHome = ({ navigation }) => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
     SetLocationData();
-
   }, []);
 
-  const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
   };
 
   const SetLocationData = async () => {
@@ -77,7 +76,6 @@ const PatientHome = ({ navigation }) => {
   };
 
   const getNearbyDoctorList = async (latitude, longitude) => {
-    console.log(longitude, latitude, "long");
     const response = await axios.get(
       `${BASE_URL_DEV}/doctors/location?longitude=${longitude}&latitude=${latitude}`,
       {
@@ -97,6 +95,7 @@ const PatientHome = ({ navigation }) => {
 
       return val;
     });
+
     setNearByDoctors(modifiedData);
   };
 
@@ -141,7 +140,6 @@ const PatientHome = ({ navigation }) => {
         setlatitude(latitude);
         setLocationLoading(false);
       }
-
     }
   }
 
@@ -175,19 +173,26 @@ const PatientHome = ({ navigation }) => {
             borderRadius: 8,
           }}
         >
-          <View style={{ marginBottom: 8}}>
-          {
-            !profilePicture ? <Avatar.Text style={{ backgroundColor: "#74CBD4"}} size={65} label={name[0]}  color="#fff" /> :  <Image
-            style={{
-              width: 65,
-              height: 65,
-            }}
-            source={profilePicture}
-            resizeMode="cover"
-          />
-          }
+          <View style={{ marginBottom: 8 }}>
+            {!profilePicture ? (
+              <Avatar.Text
+                style={{ backgroundColor: "#74CBD4" }}
+                size={65}
+                label={name[0]}
+                color="#fff"
+              />
+            ) : (
+              <Image
+                style={{
+                  width: 65,
+                  height: 65,
+                }}
+                source={profilePicture}
+                resizeMode="cover"
+              />
+            )}
           </View>
-         
+
           <Text
             style={{
               fontWeight: "400",
@@ -196,7 +201,16 @@ const PatientHome = ({ navigation }) => {
           >
             Dr. {name}
           </Text>
-          <View style={{ display: "flex", flexDirection: "row", alignItems: "center", fontSize: 12, marginTop: 8, marginRight: 8 }}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              fontSize: 12,
+              marginTop: 8,
+              marginRight: 8,
+            }}
+          >
             <Ionicons
               style={{ marginRight: 4 }}
               name="location-outline"
@@ -278,14 +292,18 @@ const PatientHome = ({ navigation }) => {
     <View
       style={{
         backgroundColor: "#FAFAFA",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
-      <View style={{ marginLeft: 16, marginRight: 16, backgroundColor: "#FFFFFFF" }}>
+      <View
+        style={{ marginLeft: 16, marginRight: 16, backgroundColor: "#FFFFFFF" }}
+      >
         <ScrollView
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         >
           <View
             style={{
@@ -296,26 +314,25 @@ const PatientHome = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-           
-              <Text style={styles.heading}>Hello, {userInfo.name}</Text>
-              <View
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <TouchableOpacity onPress={getlocationhandler}>
-                  <Ionicons name="location-outline" size={24} color="#74CBD4" />
-                </TouchableOpacity>
-                <Text>
-                  {locationLoading ? (
-                    <ActivityIndicator size="small" color="#bbd0d8" />
-                  ) : (
-                    userLocation
-                  )}
-                </Text>
-              </View>
+            <Text style={styles.heading}>Hello, {userInfo.name}</Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <TouchableOpacity onPress={getlocationhandler}>
+                <Ionicons name="location-outline" size={24} color="#74CBD4" />
+              </TouchableOpacity>
+              <Text>
+                {locationLoading ? (
+                  <ActivityIndicator size="small" color="#bbd0d8" />
+                ) : (
+                  userLocation
+                )}
+              </Text>
+            </View>
           </View>
           <View style={{ marginTop: 50 }}>
             <Text style={styles.heading13}>Not feeling well?</Text>
@@ -326,7 +343,7 @@ const PatientHome = ({ navigation }) => {
               display: "flex",
               alignItems: "center",
               marginBottom: 20,
-              color: "white"
+              color: "white",
             }}
           >
             <TouchableOpacity
@@ -337,14 +354,16 @@ const PatientHome = ({ navigation }) => {
                 height: 45,
                 display: "flex",
                 flexDirection: "row",
-                alignItems: 'center',
+                alignItems: "center",
                 justifyContent: "center",
               }}
               color="white"
               mode="contained"
               onPress={() => navigation.navigate("Patient-question-home")}
             >
-              <Text style={{color: "#fff", fontSize: 16, fontWeight: "bold"}} >Chat with a doctor</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>
+                Chat with a doctor
+              </Text>
             </TouchableOpacity>
           </View>
           <View
@@ -375,7 +394,6 @@ const PatientHome = ({ navigation }) => {
                 navigation.navigate("All-Symptoms");
               }}
               style={{
-                marginRight: 40,
                 fontWeight: "700",
                 textDecorationLine: "underline",
                 textDecorationColor: "#74CBD4",
@@ -398,7 +416,7 @@ const PatientHome = ({ navigation }) => {
           </View>
           <View>
             <FlatList
-              style={{ height: 130}}
+              style={{ height: 130 }}
               horizontal={true}
               data={symptomsData}
               renderItem={renderItem}
@@ -441,7 +459,7 @@ const PatientHome = ({ navigation }) => {
                 fontSize: 18,
                 marginTop: 17,
                 marginBottom: 17,
-                fontWeight:"600"
+                fontWeight: "600",
               }}
             >
               Popular Specialists
@@ -449,7 +467,7 @@ const PatientHome = ({ navigation }) => {
           </View>
           <View>
             <FlatList
-              style={{ height: 210}}
+              style={{ height: 210 }}
               horizontal={true}
               data={nearbyDoctors}
               renderItem={renderItem2}

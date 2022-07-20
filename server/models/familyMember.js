@@ -20,19 +20,8 @@ const FamilyMemberSchema = mongoose.Schema({
     type: Number,
   },
 
-  gender: {
-    type: String,
-  },
-
   relationship: {
     type: String,
-  },
-  
-  creatorPatient: { type: mongoose.Schema.Types.ObjectId, ref: "Patient" },
-
-  roles: {
-    type: [String],
-    required: true,
   },
 
   profilePicture: {

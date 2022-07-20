@@ -18,18 +18,18 @@ const WaitingCard = ({ item, navigation }) => {
         <View style={styles.imageContainer}>
           {
             !item.patient.profilePicture ? <Avatar.Text
-            style={{ backgroundColor: "#74CBD4" }}
-            size={65}
-            label={item.patient.name[0]}
-            color="#fff"
-          /> : <Image
-          style={styles.image}
-          source={
-            item.patient.profilePicture
+              style={{ backgroundColor: "#74CBD4" }}
+              size={65}
+              label={item.patient.name[0]}
+              color="#fff"
+            /> : <Image
+              style={styles.image}
+              source={
+                item.patient.profilePicture
+              }
+            />
           }
-        />
-          } 
-          
+
 
           <Text style={styles.title}>{item.patient.name}</Text>
         </View>
@@ -61,18 +61,18 @@ const WaitingCard = ({ item, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 20,
-    display:"flex",
+    display: "flex",
     flexDirection: "row",
     borderWidth: "1px",
     borderColor: "gainsboro",
     marginHorizontal: 20,
     marginVertical: 20,
-    padding: 10,
+    padding: 30,
     borderRadius: 10,
   },
   imageContainer: {
-    gap: 10,
+    display: "flex",
+    alignItems: "center",
     textAlign: "center",
   },
   image: {
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 8,
+    paddingLeft: 20,
     justifyContent: "space-evenly",
   },
   chip: {
@@ -94,6 +95,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+    paddingTop: 10,
   },
   desc: {
     color: "#718096",

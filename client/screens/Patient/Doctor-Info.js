@@ -6,15 +6,16 @@ import {
   ScrollView,
   TextInput,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { React, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button } from "react-native-paper";
+import { Avatar, Button, Chip } from "react-native-paper";
 import Dialog, {
   DialogContent,
   SlideAnimation,
 } from "react-native-popup-dialog";
-import { Rating } from "react-native-ratings";
+import { AirbnbRating, Rating } from "react-native-ratings";
 import axios from "axios";
 import AppointmentContext from "../../Context/AppointmentContext";
 
@@ -28,7 +29,8 @@ const DoctorInfo = (props) => {
   const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
-  const { appointmentData, setAppointmentData } = useContext(AppointmentContext);
+  const { appointmentData, setAppointmentData } =
+    useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
@@ -39,17 +41,17 @@ const DoctorInfo = (props) => {
     const response = await axios.get(
       `${BASE_URL_DEV}/doctors/${props.route.params.id}`
     );
+    console.log(response.data.data, "response");
     setDoctorInfo(response.data.data);
   };
-
 
   const doctorSelect = () => {
     props.navigation.navigate("Patient-question-home");
     setAppointmentData({
       ...appointmentData,
-      doctor: props.route.params.id
-    })
-  }
+      doctor: props.route.params.id,
+    });
+  };
 
   const specialityRender = (props) => {
     return (
@@ -62,66 +64,71 @@ const DoctorInfo = (props) => {
         <Text style={styles.text1}>{props?.item.name}</Text>
       </View>
     );
-  };  
-
+  };
 
   const submitData = async () => {
-    let data =  {
+    let data = {
       rating: starRating,
       feedback: doctorReviewText,
-      doctor:  props.route.params.id,
-      patient: userInfo.id
-    }
+      doctor: props.route.params.id,
+      patient: userInfo.id,
+    };
 
     console.log(`${BASE_URL_DEV}/review`);
     try {
-      const response = await axios.post(
-        `${BASE_URL_DEV}/review/doc`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
+      const response = await axios.post(`${BASE_URL_DEV}/review/doc`, data, {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
       Alert.alert("Success", "Succesfully reviewed the doctor");
       setDialogbox(false);
-    } catch(error) {
-      Alert.alert("Error", error.message)
+    } catch (error) {
+      Alert.alert("Error", error.message);
       setDialogbox(false);
     }
-    
-  }
-
-
+  };
 
   return (
-    <ScrollView>
       <View
         style={{
           backgroundColor: "#fff",
+          marginTop: 8,
           alignItems: "center",
           height: Screenheight * 1.15,
           display: "flex",
           flex: 1,
         }}
       >
-        <View style={{ marginTop: 50 }}>
-          <Text style={styles.heading}>Doctor Info</Text>
-        </View>
         <View style={styles.imageview}>
-          <Image
-            style={styles.imgstyle}
-            source={require("../../assets/icon.png")}
-            resizeMode="contain"
-          />
+          {!doctorInfo?.profilePicture ? (
+            <View style={styles.defaultImage}>
+              <Text style={styles.defaultImageText}>{doctorInfo?.name[0]}</Text>
+            </View>
+          ) : (
+            <Image
+              style={styles.imgstyle}
+              source={require("../../assets/icon.png")}
+              resizeMode="contain"
+            />
+          )}
         </View>
-        <View style={{ width: 346, height: 100, marginTop: 12 }}>
+        <View style={{ width: 346, marginTop: 12 }}>
           <View style={styles.containerdata15}>
             <View>
               <Text style={styles.heading1}>
                 Dr. {doctorInfo ? doctorInfo.name : ""}
               </Text>
+            </View>
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <Rating
+                type="star"
+                startingValue={doctorInfo?.rating}
+                ratingCount={5}
+                readonly={true}
+                imageSize={15}
+              />
+              <Text style={{ marginLeft: 8 }}>{doctorInfo?.rating}</Text>
             </View>
           </View>
           <View style={styles.containerdata16}>
@@ -132,7 +139,7 @@ const DoctorInfo = (props) => {
                   {doctorInfo.province}
                 </Text>
               ) : (
-                null
+                <Text>Vancouver</Text>
               )}
             </View>
           </View>
@@ -149,22 +156,27 @@ const DoctorInfo = (props) => {
               Introduction
             </Text>
             <Text style={{ fontSize: 16, fontWeight: "400", opacity: 0.6 }}>
-              {doctorInfo?.description}
+              {doctorInfo?.doctorDescription}
             </Text>
           </View>
-          <View style={{ marginTop: 19 }}>
+          <View style={{}}>
             <Text
               style={{
                 fontWeight: "500",
                 fontSize: 15,
-                marginTop: 11,
                 lineHeight: 24,
               }}
             >
               Specialities
             </Text>
-            <View style={styles.twoimages}>
-
+            <View style={styles.chip}>
+              {doctorInfo?.specialities.map((speciality, index) => {
+                return (
+                  <Chip style={styles.chipItem} key={index}>
+                    {speciality.name}
+                  </Chip>
+                );
+              })}
             </View>
           </View>
 
@@ -212,33 +224,38 @@ const DoctorInfo = (props) => {
               height: Screenheight,
             }}
           >
-            <Button
+            <TouchableOpacity
               style={{
-                borderRadius: 10,
-                backgroundColor: "#D9D9D9",
+                borderRadius: 30,
+                backgroundColor: "#74CBD4",
                 width: 282,
                 height: 45,
                 justifyContent: "center",
+                marginTop: 16,
+                alignItems: "center",
               }}
               mode="contained"
               onPress={doctorSelect}
             >
-              Connect
-            </Button>
+                <Text style={{ color: "#fff" }}>Connect</Text>
+            </TouchableOpacity>
 
-            <Button
+            <TouchableOpacity
               onPress={() => setDialogbox(true)}
               style={{
-                borderRadius: 10,
-                backgroundColor: "#D9D9D9",
+                borderRadius: 30,
+                borderColor: "#74CBD4",
+                color: "#74CBD4",
+                borderWidth: "2px",
                 width: 282,
                 height: 45,
                 marginTop: 15,
                 justifyContent: "center",
+                alignItems: "center"
               }}
             >
-              <Text style={styles.textWriteReview}>Write a review</Text>
-            </Button>
+              <Text style={{ color: "#74CBD4"}}>Write a review</Text>
+            </TouchableOpacity>
           </View>
 
           <Dialog
@@ -265,14 +282,24 @@ const DoctorInfo = (props) => {
                   </Text>
 
                   <View style={styles.viewDoctorStarRating}>
-                    <Rating
-                      style={{ marginLeft: 13 }}
+                    {/* <Rating
                       type="star"
                       startingValue={starRating}
                       ratingCount={5}
+                      onSwipeRating={(starRating) => setStarRating(starRating)}
                       onFinishRating={(starRating) => setStarRating(starRating)}
-                      imageSize={15}
-                    />
+                      imageSize={40}
+                      ratingColor="#74CBD4"
+                      ratingBackgroundColor="#74CBD4"
+                    /> */}
+                    <AirbnbRating
+  count={5}
+  reviews={["Terrible", "Bad", "Good", "Very Good", "Amazing"]}
+  defaultRating={starRating}
+  onFinishRating={(starRating) => setStarRating(starRating)}
+  size={30}
+  selectedColor="#74CBD4"
+/>
                   </View>
 
                   <View style={styles.viewTextAreaContainer}>
@@ -297,13 +324,11 @@ const DoctorInfo = (props) => {
                     <Text style={styles.textButton}>Submit</Text>
                   </Button>
                 </View>
-
               </View>
             </DialogContent>
           </Dialog>
         </View>
       </View>
-    </ScrollView>
   );
 };
 
@@ -338,6 +363,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
     borderRadius: 10,
   },
+  chip: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingTop: 4,
+  },
+  chipItem: {
+    fontSize: 8,
+    marginRight: 8
+  },
+  defaultImage: {
+    width: 350,
+    backgroundColor: "#74CBD4",
+    height: 233,
+    borderRadius: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  defaultImageText: {
+    color: "#fff",
+    fontSize: 100,
+  },
 
   imageview: {
     width: 35,
@@ -347,16 +396,15 @@ const styles = StyleSheet.create({
   containerdata1: {},
   containerdata15: {
     width: 346,
-    height: 66,
     display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingBottom: 8,
   },
   heading1: {
     fontSize: 20,
     fontWeight: "600",
-  },
-  containerdata16: {
-    width: 125,
-    height: 39,
   },
   viewTextAreaContainer: {
     paddingTop: 40,

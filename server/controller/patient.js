@@ -6,6 +6,7 @@ const { Symptom } = require("../models/Symptoms");
 
 const upload = require("../utils/upload");
 const ROLE = require("../config/roles");
+const { FamilyMember } = require("../models/familyMember");
 
 /**
  * @description API to register patients to database
@@ -116,6 +117,50 @@ const getPatients = (req, res) => {
       });
     });
 };
+
+
+
+/**
+ * @description API to update a patient by id
+ * @param {*} req
+ * @param {*} res
+ */
+ const addFamilyForPatient = async (req, res) => {
+  const id = req.params.id;
+
+  const uploadProfilePicture = await upload(
+    `${Date.now() + "" + req.body.name}`,
+    req.body.profilePicture,
+    "jpg",
+    "patient",
+    req.body.name
+  );
+
+
+  const familyMember = await FamilyMember.create({
+    profilePicture: uploadProfilePicture,
+    name: req.body.name,
+    email: req.body.email,
+    relationship: req.body.relationship,
+    healthNumber: req.body.healthNumber,
+    dob: req.body.dob
+  })
+
+
+  Patient.findOneAndUpdate({ _id: id }, {
+    familyMember
+  }, {
+    returnOriginal: false,
+  }).then((result) => {
+    res.status(200).json({
+      message: "Succesfully Added Family Member",
+      data: result,
+    });
+  });
+};
+
+
+
 
 /**
  * @description API to update a patient by id
@@ -255,5 +300,6 @@ module.exports = {
   deletePatient,
   getPatientById,
   createSymptom,
-  getSymptoms
+  getSymptoms,
+  addFamilyForPatient
 };

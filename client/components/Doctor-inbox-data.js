@@ -15,7 +15,6 @@ const DoctorCurrentMessages = (props) => {
   useEffect(() => {
     const modifiedData = props?.currentAppointmnents?.map((data) => {
       return {
-        image: "../../assets/icon.png",
         date: `${new Date(data.date).getDate()} / ${new Date(
           data.date
         ).getMonth()} / ${new Date(data.date).getFullYear()}`,
@@ -53,9 +52,9 @@ const DoctorCurrentMessages = (props) => {
                 <Text style={{ textAlign: "center" }}> {item.patient}</Text>
               </View>
               <View style={{ marginLeft: 30 }}>
-                <View style={{ display: "flex", flexDirection: "column" }}>
-                  <Text>Date: {item.date}</Text>
-                  <Text>Symptoms: {item.symptoms}</Text>
+                <View style={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+                  <Text style={{ color: "#718096", fontSize: "14px"}}> {item.date}</Text>
+                  {/* <Text>Symptoms: {item.symptoms}</Text> */}
                   <Text>More Information: {item.qna[0].answer}</Text>
                 </View>
               </View>
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 17,
     marginBottom: 7,
   },
+  
   down: {
     width: 180,
     height: 60,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: 343,
     height: 156,
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#D9D9D9",
     borderRadius: 10,
     padding: 30,
   },
