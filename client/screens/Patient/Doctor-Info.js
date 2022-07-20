@@ -15,7 +15,7 @@ import Dialog, {
   DialogContent,
   SlideAnimation,
 } from "react-native-popup-dialog";
-import { Rating } from "react-native-ratings";
+import { AirbnbRating, Rating } from "react-native-ratings";
 import axios from "axios";
 import AppointmentContext from "../../Context/AppointmentContext";
 
@@ -282,14 +282,24 @@ const DoctorInfo = (props) => {
                   </Text>
 
                   <View style={styles.viewDoctorStarRating}>
-                    <Rating
-                      style={{ marginLeft: 13 }}
+                    {/* <Rating
                       type="star"
                       startingValue={starRating}
                       ratingCount={5}
+                      onSwipeRating={(starRating) => setStarRating(starRating)}
                       onFinishRating={(starRating) => setStarRating(starRating)}
-                      imageSize={15}
-                    />
+                      imageSize={40}
+                      ratingColor="#74CBD4"
+                      ratingBackgroundColor="#74CBD4"
+                    /> */}
+                    <AirbnbRating
+  count={5}
+  reviews={["Terrible", "Bad", "Good", "Very Good", "Amazing"]}
+  defaultRating={starRating}
+  onFinishRating={(starRating) => setStarRating(starRating)}
+  size={30}
+  selectedColor="#74CBD4"
+/>
                   </View>
 
                   <View style={styles.viewTextAreaContainer}>
