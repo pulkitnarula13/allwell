@@ -143,7 +143,8 @@ const getPatients = (req, res) => {
     email: req.body.email,
     relationship: req.body.relationship,
     healthNumber: req.body.healthNumber,
-    dob: req.body.dob
+    dob: req.body.dob,
+    createdBy: req.body.createdBy
   })
 
   console.log(id)
@@ -160,7 +161,25 @@ const getPatients = (req, res) => {
 };
 
 
-
+/**
+ * @description API to fetch all family members of a patient
+ * @param {*} req
+ * @param {*} res
+ */
+ const getMembers = (req, res) => {
+  FamilyMember.find({ createdBy: req.params.id })
+  .then((result) => {
+      return res.status(200).json({
+          message: "Succesfully fetched all family members of given patient",
+          data: result,
+      });
+  })
+  .catch((error) => {
+      return res.status(404).json({
+          message: error.message,
+      });
+  });
+};
 
 /**
  * @description API to update a patient by id
@@ -301,5 +320,6 @@ module.exports = {
   getPatientById,
   createSymptom,
   getSymptoms,
-  addFamilyForPatient
+  addFamilyForPatient,
+  getMembers,
 };

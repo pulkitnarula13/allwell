@@ -12,6 +12,7 @@ const {
   createSymptom,
   getSymptoms,
   addFamilyForPatient,
+  getMembers,
 } = require("../controller/patient");
 
 const validateToken = require("../middleware/auth");
@@ -132,6 +133,24 @@ router.delete("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, dele
   validateToken,
   verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
   createSymptom
+);
+
+
+// Routes
+/**
+ * @swagger
+ * /patient/members/:id:
+ *   post:
+ *     description: Creates symptoms 
+ *     responses:
+ *       201:
+ *         description: return positive response
+ */
+ router.get(
+  "/members/:id",
+  validateToken,
+  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
+  getMembers
 );
 
 

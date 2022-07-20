@@ -15,27 +15,58 @@ import { BASE_URL_DEV } from "@env";
 import AppointmentContext from "../../Context/AppointmentContext";
 import { Ionicons } from "@expo/vector-icons";
 import { SymptomsList } from "../../constants/symptoms";
+import { AuthContext } from "../../Context/AuthContext";
+
 
 let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
-  {
-    name: "Mark",
-    profilePicture: "../../assets/icon1.png",
-  },
-  {
-    name: "Jessica",
-  },
-  {
-    name: "Mark",
-    profilePicture: "../../assets/icon1.png",
-  },
+  // {
+  //   name: "Mark",
+  //   profilePicture: "../../assets/icon1.png",
+  // },
+  // {
+  //   name: "Jessica",
+  // },
+  // {
+  //   name: "Mark",
+  //   profilePicture: "../../assets/icon1.png",
+  // },
 ];
 
 const ConnectPatient = ({ navigation, route }) => {
+  // get the family members
+  useEffect(() => {
+    getFamilyMembers();
+  }, []);
+
+  const { userInfo } = useContext(AuthContext);
   const { appointmentData } = useContext(AppointmentContext);
   const { setAppointmentData } = useContext(AppointmentContext);
   const [selectedItem, setSelectedItems] = useState();
+
+// Get the family members from the API
+  const getFamilyMembers = async () => {
+    const familyData = await axios.get(`${BASE_URL_DEV}/patients/members/${userInfo.id}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
+
+    console.log(familyData);
+
+
+    const modifiedData = familyData.data.data.map((item) => {
+      item.isSelect = false;
+      item.selectedClass = styles.list;
+      item.image = "../../assets/icon1.png";
+      return item;
+    });
+
+    setMembersData(modifiedData);
+  };
+
+
 
   useEffect(() => {
     const filteredArray = route?.params?.symptomsData.filter((value) =>

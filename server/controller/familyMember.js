@@ -129,7 +129,7 @@ const getFamilyMemberById = (req, res) => {
  * @return {*}
  */
 const getMembersByPatient = (req, res) => {
-    FamilyMember.find({ creatorPatient: req.params.id }).populate({
+    FamilyMember.find({ createdBy: req.params.id }).populate({
       path: "patient"
     })
     .then((result) => {

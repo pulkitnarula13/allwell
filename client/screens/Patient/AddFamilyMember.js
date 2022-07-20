@@ -42,6 +42,7 @@ import { BASE_URL_DEV } from "@env";
           dob:  birthdate,
           healthNumber: MSP,
           relationship: relationship,
+          createdBy: userInfo.id
         },
         {
           headers: {
