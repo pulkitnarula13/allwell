@@ -41,25 +41,7 @@ const PatientQuestionHome = ({ navigation }) => {
     useContext(AppointmentContext);
 
   const createAppointment = async () => {
-    // console.log(appointmentData, "appointmentData");
     getDoctorById();
-    // try {
-    //   const response = await axios.post(
-    //     `${BASE_URL_DEV}/appointments`,
-    //     appointmentData,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${userInfo.token}`,
-    //       },
-    //     }
-    //   );
-    //   Alert.alert("Success", response.data.message);
-    // } catch (error) {
-    //   console.log(error);
-    //   Alert.alert("Error", error.message);
-    // }
-
-    // navigation.navigate("Requestwait");
     console.log(doctorInfo, "doc Info");
   };
 
@@ -72,6 +54,24 @@ const PatientQuestionHome = ({ navigation }) => {
         },
       }
     );
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL_DEV}/appointments`,
+        appointmentData,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      Alert.alert("Success", response.data.message);
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Error", error.message);
+    }
+    // navigation.navigate("Requestwait");
+
     console.log(response.data.data, "response");
     setDoctorInfo(response.data.data);
   };
@@ -125,8 +125,8 @@ const PatientQuestionHome = ({ navigation }) => {
     <View>
       {doctorInfo ? (
         <PushNotification
-          title={"Appointment"}
-          body={"Appointment Booked"}
+          title={`Appointment Booking`}
+          body={`You have an appointment booked by ${userInfo.name}`}
           toToken={doctorInfo.expoToken}
         />
       ) : null}
