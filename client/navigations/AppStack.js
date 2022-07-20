@@ -38,10 +38,30 @@ import Managefamilymembers from "../screens/Patient/Managefamilymembers";
 import FAQ from "../screens/Patient/FAQ";
 import Privacypolicy from "../screens/Patient/Privacypolicy";
 import Termsofuse from "../screens/Patient/Termsofuse";
+import PatientChatting from "../screens/Patient/PatientChatting";
+import { initializeApp } from "firebase/app";
 
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
+
+
+    // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDbEOiEO-cw7V-XT_4JmCxhP-uVI11nph4",
+  authDomain: "medicochat-6a577.firebaseapp.com",
+  databaseURL: "https://medicochat-6a577-default-rtdb.firebaseio.com",
+  projectId: "medicochat-6a577",
+  storageBucket: "medicochat-6a577.appspot.com",
+  messagingSenderId: "246219462543",
+  appId: "1:246219462543:web:24f4d595fef6cd77625dfa"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -95,6 +115,9 @@ const AppStack = () => {
         name="Chatting"
         component={Chattingwithdoctor}
       />
+
+<Stack.Screen name="Patient-Chat" component={PatientChatting} />
+
       <Stack.Screen name="Termsofuse-patient" component={Termsofuse} />
       <Stack.Screen name="Privacypolicy-patient" component={Privacypolicy} />
       <Stack.Screen name="FAQ-patient" component={FAQ} />
@@ -103,7 +126,6 @@ const AppStack = () => {
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
       <Stack.Screen name="AcceptPatientSchedule" component={AcceptPatientSchedule} />
       <Stack.Screen name="PatientProfile" component={PatientProfile} />
-      <Stack.Screen name="Patient-Chat" component={PatientChat} />
       <Stack.Screen name="AccountInformation" component={AccountInformation} />
       <Stack.Screen name="Doctor-Home" component={DoctorHome} />
 

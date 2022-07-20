@@ -1,16 +1,19 @@
-import * as firebase from 'firebase';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyAQxZaezkG44MhO-c95_YAZSKb7jorKeiw',
-  authDomain: 'medico-allwell.firebaseapp.com',
-  projectId: 'medico-allwell',
-  storageBucket: 'medico-allwell.appspot.com',
-  messagingSenderId: '901462508905',
-  appId: '1:901462508905:web:087e8b01d945c9b82c29f8',
+  apiKey: "AIzaSyDbEOiEO-cw7V-XT_4JmCxhP-uVI11nph4",
+  authDomain: "medicochat-6a577.firebaseapp.com",
+  databaseURL: "https://medicochat-6a577-default-rtdb.firebaseio.com",
+  projectId: "medicochat-6a577",
+  storageBucket: "medicochat-6a577.appspot.com",
+  messagingSenderId: "246219462543",
+  appId: "1:246219462543:web:24f4d595fef6cd77625dfa"
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-export {firebase};

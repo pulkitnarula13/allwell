@@ -4,13 +4,13 @@ import { Rating } from "react-native-ratings";
 import { FlatList } from "react-native";
 import {DATA} from '../constants/Doctor-inboxvalues'
 
-const Patientinboxdata = () => {
+const Patientinboxdata = ({ navigation }) => {
   
 
   const Item = ({ name,image,date,info }) => (
     <View>
       <TouchableOpacity
-      onPress={() => console.log("pressed")}
+      onPress={() => navigation.navigate('Patient-Chat')}
       >
     <View style={styles.main}>
       <Text style={styles.date1}>{date}</Text>

@@ -38,7 +38,7 @@ const PatientHistory = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <Patientinboxdata />
+              <Patientinboxdata navigation={navigation} />
             </View>
           </View>
         </TabScreen>
@@ -53,7 +53,7 @@ const PatientHistory = ({ navigation }) => {
             }}
           >
             <View>
-              <Patientinboxdata />
+              <Patientinboxdata navigation={navigation} />
             </View>
           </View>
 

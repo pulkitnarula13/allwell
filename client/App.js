@@ -4,12 +4,15 @@ import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
 
-
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
 import AppointmentContext from "./Context/AppointmentContext";
+import { initializeApp } from "firebase/app";
 
 export default function App() {
+
+
+
   const [appointmentData, setAppointmentData] = useState({
     qna: [],
     symptoms: [],
