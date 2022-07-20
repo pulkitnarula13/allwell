@@ -7,37 +7,7 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../Context/AuthContext";
-
-const DATA = [
-  {
-    name: "Headache",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Cough",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Muscle Cramp",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Sore Throad",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Stomach Pain",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Congestion",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Fever",
-    image: "../../assets/icon.png",
-  },
-];
+import PushNotification from "../../components/PushNotification";
 
 const Item = ({ name, image }) => (
   <View style={styles.item}>
@@ -59,6 +29,8 @@ const AcceptPatientSchedule = (props) => {
   const [show, setShow] = useState(true);
   const [appointmentInfo, setAppointmentInfo] = useState(props.route.params);
   const { userInfo } = useContext(AuthContext);
+  console.log(appointmentInfo, "appointmentInfo");
+  const [messageForAppointment, setMessageForAppointment] = useState("");
 
   const confirmAppointment = async () => {
     try {
@@ -73,6 +45,10 @@ const AcceptPatientSchedule = (props) => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         }
+      );
+      const modifiedDate = new Date(date);
+      setMessageForAppointment(
+        `Your appointment is confirmed for ${modifiedDate.toDateString()}`
       );
 
       Alert.alert("Success", response.data.message);
@@ -93,6 +69,9 @@ const AcceptPatientSchedule = (props) => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         }
+      );
+      setMessageForAppointment(
+        `Oops your appointment was cancelled by Dr. ${userInfo.name}`
       );
 
       Alert.alert("Success", response.data.message);
@@ -124,6 +103,13 @@ const AcceptPatientSchedule = (props) => {
 
   return (
     <ScrollView>
+      {messageForAppointment ? (
+        <PushNotification
+          title={`Appointment Booking Update`}
+          body={messageForAppointment}
+          toToken={appointmentInfo.item.patient.expoToken}
+        />
+      ) : null}
       <View style={styles.outerview1}>
         <View style={styles.outerview}>
           <Text style={styles.text1}>Schedule Patient</Text>

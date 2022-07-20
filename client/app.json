@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "notification":{
+      "icon":"./assets/images/medicoLogo.png"
+   },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
