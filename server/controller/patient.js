@@ -146,7 +146,7 @@ const getPatients = (req, res) => {
     dob: req.body.dob
   })
 
-
+  console.log(id)
   Patient.findOneAndUpdate({ _id: id }, {
     familyMember
   }, {

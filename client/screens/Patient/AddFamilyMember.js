@@ -49,6 +49,8 @@ import { BASE_URL_DEV } from "@env";
           },
         }
       );
+
+      clearData();
     }
 
   return (
