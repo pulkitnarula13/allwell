@@ -38,6 +38,7 @@ import Managefamilymembers from "../screens/Patient/Managefamilymembers";
 import FAQ from "../screens/Patient/FAQ";
 import Privacypolicy from "../screens/Patient/Privacypolicy";
 import Termsofuse from "../screens/Patient/Termsofuse";
+import PatientChatting from "../components/Patient-Chatting";
 
 const Stack = createNativeStackNavigator();
 
@@ -114,6 +115,7 @@ const AppStack = () => {
         name="Patient-question-home"
         component={PatientQuestionHome}
       />
+      <Stack.Screen name="PatientChatting" component={PatientChatting} />
       <Stack.Screen name="Requestwait" component={Requestwait} />
       <Stack.Screen name="Patient-Home" component={PatientHome} />
       <Stack.Screen name="PatientQuestion1" component={PatientQuestionOne} />

@@ -15,6 +15,7 @@ import { ScrollView } from "react-native";
 import Patientinboxdata from "../../components/Patient-inbox-data";
 
 const PatientHistory = ({ navigation }) => {
+  console.log(navigation,"navigation")
   useEffect(() => {
     navigation.setOptions({
       title: `Inbox`,
@@ -38,11 +39,11 @@ const PatientHistory = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <Patientinboxdata />
+              <Patientinboxdata navigation = {navigation} />
             </View>
           </View>
         </TabScreen>
-        <TabScreen label="Compeleted">
+        <TabScreen label="Completed">
           <View
             style={{
               padding: 14,

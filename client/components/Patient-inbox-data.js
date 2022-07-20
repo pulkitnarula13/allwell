@@ -3,14 +3,16 @@ import React from "react";
 import { Rating } from "react-native-ratings";
 import { FlatList } from "react-native";
 import {DATA} from '../constants/Doctor-inboxvalues'
+import { Avatar } from "react-native-paper";
 
-const Patientinboxdata = () => {
+const Patientinboxdata = (props) => {
   
-
+console.log(props,"dataa")
   const Item = ({ name,image,date,info }) => (
+    
     <View>
       <TouchableOpacity
-      onPress={() => console.log("pressed")}
+      onPress={() => props.navigation.navigate("PatientChatting")}
       >
     <View style={styles.main}>
       <Text style={styles.date1}>{date}</Text>
@@ -18,12 +20,23 @@ const Patientinboxdata = () => {
     
       <View style={styles.inner}>
         <View>
-          <Image
-            style={styles.image2}
-            source={require("../assets/icon.png")}
-            resizeMode="contain"
-          />
-          <Text style={{textAlign:"center"}}> {name}</Text>
+          <View style={{width:65,height:65,backgroundColor:"gray",borderRadius:100}}>
+        {!image ? (
+            <Avatar.Text
+              style={{ backgroundColor: "#74CBD4" }}
+              size={65}
+              label={name[0]}
+              color="#fff"
+            />
+          ) : (
+            <Image
+              source={image}
+              style={styles.image2}
+              resizeMode="cover"
+            />
+          )}
+          </View>
+          <Text style={{textAlign:"center",fontSize:14,fontWeight:"600",marginTop:4}}> {name}</Text>
         </View>
         <View style={{marginLeft:30}}>
           <View style={{display:"flex",flexDirection:"row"}}>
@@ -31,6 +44,7 @@ const Patientinboxdata = () => {
             <Rating
             style={{marginLeft:13}}
         type='star'
+        ratingColor="#74CBD4"
         ratingCount={5}
         imageSize={15}
       />
@@ -65,7 +79,7 @@ const styles = StyleSheet.create({
     fontSize:16,
     fontWeight:"600",
     lineHeight:24,
-    marginTop:17,
+    marginTop:34,
     marginBottom:7
   },
   down:
@@ -78,8 +92,8 @@ const styles = StyleSheet.create({
     display: "flex",
     width: 343,
     height: 156,
-    borderWidth: 2,
-    borderColor: "black",
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
     borderRadius: 10,
     padding: 30,
   },
@@ -93,8 +107,8 @@ const styles = StyleSheet.create({
     
   },
   image2:{
-    width:62,
-    height:62
+    width:65,
+    height:65
   }
 });
 export default Patientinboxdata;
