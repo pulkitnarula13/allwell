@@ -95,6 +95,7 @@ const PatientHome = ({ navigation }) => {
 
       return val;
     });
+
     setNearByDoctors(modifiedData);
   };
 
