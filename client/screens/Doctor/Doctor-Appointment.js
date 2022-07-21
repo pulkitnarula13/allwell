@@ -9,12 +9,14 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "react-native-paper";
+import { Button, Paragraph, Title } from "react-native-paper";
 import { Tabs, TabScreen } from "react-native-paper-tabs";
 import CalendarStrip from "react-native-calendar-strip";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../Context/AuthContext";
+import AppointmentCard from "../../components/AppointmentCard";
+import DoctorAppointmentCard from "../../components/DoctorAppointmentCard";
 
 const Item = ({ name, image }) => (
   <View style={styles.item}>
@@ -96,10 +98,14 @@ const DoctorAppointment = (props) => {
     );
   };
 
+
+ 
+
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View>
+    
+    
+        <View style={{display:"flex",flexDirection:"column",flex:1}}>
+          
           <View style={styles.viewCalendarStrip}>
             <CalendarStrip
               style={{ height: 161, paddingTop: 20, paddingBottom: 10 }}
@@ -136,80 +142,33 @@ const DoctorAppointment = (props) => {
                 padding: 10,
                 // borderRadius: 20,
               }}
-              // highlightDateNameStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20,width:49}}
+
+              
             ></CalendarStrip>
-          </View>
-          <Tabs style={{ backgroundColor: "white" }}>
-            <TabScreen
-              color="black"
-              backgroundColor="black"
-              style={{ color: "black" }}
-              label="Current"
-            >
-              <View>
-                <View
-                  style={{
-                    padding: 14,
-                    marginBottom: 34,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text>Hello</Text>
-                </View>
-              </View>
-            </TabScreen>
-            <TabScreen label="Compeleted">
-              <View
-                style={{
-                  padding: 14,
-                  marginBottom: 34,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <View>
-                  <Text>Working</Text>
-                </View>
-              </View>
-
-              {/* <ExploreWitHookExamples1 /> */}
-            </TabScreen>
-          </Tabs>
-
-          <View style={styles.viewDataContainer}>
-            {/* Patient Meeting */}
-
-            {/* Available Slots */}
-
-            {/* <View style={styles.viewMeeting}>
-            <Text style={styles.textMeetingTime}>12:00 PM - 1:00 PM</Text>
-            <View style={styles.viewDividerLine} />
-            <View style={styles.viewButtons}>
-              <Text
-                style={styles.textAvailable}
-                onPress={() => console.log("Available Pressed")}
-              >
-                Available
-              </Text>
-              <Button
-                style={styles.btnBookSchedule}
-                mode="contained"
-                onPress={() =>
-                  props.navigation.navigate("AcceptPatientSchedule")
-                }
-              >
-                <Text style={styles.textButton}>Book Schedule</Text>
-              </Button>
             </View>
-          </View> */}
-          </View>
-          {/* End of whole page view */}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+            
+          
+            <Tabs style={{ backgroundColor: "#fff" }}>
+        <TabScreen label="Upcoming">
+        <DoctorAppointmentCard/>
+        </TabScreen>
+        <TabScreen label="Completed">
+        <DoctorAppointmentCard/>
+        </TabScreen>
+        <TabScreen label="Canceled">
+        <DoctorAppointmentCard/>
+        </TabScreen>
+      </Tabs>
+      </View>
+      
+          
+
+         
+        
+       
+        
+      
+    
   );
 };
 
