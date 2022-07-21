@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
 import { Title, Paragraph } from "react-native-paper";
@@ -13,14 +13,38 @@ import {
 import Searchbars from "../../components/searchbar";
 import { ScrollView } from "react-native";
 import Patientinboxdata from "../../components/Patient-inbox-data";
+import { AuthContext } from "../../Context/AuthContext";
+import axios from "axios";
+import { BASE_URL_DEV } from "@env";
 
 const PatientHistory = ({ navigation }) => {
-  console.log(navigation,"navigation")
+
+  const { userInfo } = useContext(AuthContext);
+  const [currentAppointments, setCurrentAppointments] = useState([]);
+  const [completedAppointments, setCompletedAppointments] = useState([]);
+
   useEffect(() => {
+    getAppointmentData();
     navigation.setOptions({
       title: `Inbox`,
     });
   }, []);
+
+  const getAppointmentData = async () => {
+    const response = await axios.get(
+      `${BASE_URL_DEV}/appointments/patient/${userInfo.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+    console.log(response.data.data);
+    const confirmedAppointments = response.data.data.filter(data => data.confirmed && !data.completed && !data.cancelled);
+    const completedAppointments = response.data.data.filter(data => data.confirmed && data.completed && !data.cancelled);
+    setCurrentAppointments(confirmedAppointments);
+    setCompletedAppointments(completedAppointments);
+  }
 
   return (
     <View style={styles.main}>
@@ -39,7 +63,7 @@ const PatientHistory = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <Patientinboxdata navigation = {navigation} />
+              <Patientinboxdata navigation = {navigation} appointments={currentAppointments} />
             </View>
           </View>
         </TabScreen>
@@ -54,7 +78,7 @@ const PatientHistory = ({ navigation }) => {
             }}
           >
             <View>
-              <Patientinboxdata />
+              <Patientinboxdata appointments={completedAppointments} />
             </View>
           </View>
 

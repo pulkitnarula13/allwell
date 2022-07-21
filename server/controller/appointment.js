@@ -149,7 +149,13 @@ const getAllAppointments = (req, res) => {
 const getAppointmentByPatientId = (req, res) => {
   Appointment.find({ patient: req.params.id })
     .populate({
-      path: "qnas",
+      path: "qna",
+    })
+    .populate({
+      path: "patient"
+    })
+    .populate({
+      path: "doctor"
     })
     .then((result) => {
       return res.status(200).json({
@@ -158,6 +164,7 @@ const getAppointmentByPatientId = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log(error);
       return res.status(500).json({
         message: error.message,
       });
