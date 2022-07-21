@@ -50,7 +50,7 @@ const PatientQuestionImage = (props) => {
       <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>Add Photos/Videos</Text>
       <View style={{ display: "flex", flexDirection: "row", height: 130 }}>
         <TouchableOpacity onPress={openimagelib}>
-          <View style={{ width: 130, height: 130, borderWidth: 1, borderColor: "#A0AEC0", justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
+          <View style={{ marginRight:17,width: 130, height: 130, borderWidth: 1, borderColor: "#A0AEC0", justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
             <Image
               style={styles.image3}
               source={require("../../../assets/camera.jpg")}
@@ -59,7 +59,7 @@ const PatientQuestionImage = (props) => {
           </View>
         </TouchableOpacity>
         <FlatList
-          style={{ marginBottom: 40 }}
+          style={{ height:130,marginBottom: 40 }}
           horizontal={true}
           data={totalImages}
           renderItem={Item}
@@ -72,9 +72,10 @@ const PatientQuestionImage = (props) => {
 const styles = StyleSheet.create({
   item: {
     display: "flex",
-    flexDirection: "column",
+    // flexDirection: "column",
+    borderRadius: 10,
     marginRight: 21,
-    marginTop: 24,
+    
   },
   image2: {
     width: 130,
@@ -82,8 +83,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   image3: {
-    width: 82,
-    height: 82,
+    width: 130,
+    height: 130,
     borderRadius: 10,
     justifyContent: "center", alignItems: "center",
   },
