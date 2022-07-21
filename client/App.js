@@ -1,9 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
-
 
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
@@ -14,7 +13,6 @@ export default function App() {
     qna: [],
     symptoms: [],
   });
-
 
   return (
     <AuthProvider>

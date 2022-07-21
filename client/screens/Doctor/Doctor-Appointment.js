@@ -30,16 +30,17 @@ const datenow = Date.now();
 
 const DoctorAppointment = (props) => {
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
-    getPatientAppointments();
+    getPatientAppointmentsByDate();
   }, []);
 
-  const getPatientAppointments = async () => {
+  const getPatientAppointmentsByDate = async () => {
     try {
       const data = await axios.get(
-        `${BASE_URL_DEV}/appointments/doctor/${userInfo.id}`,
+        `${BASE_URL_DEV}/appointments/doctor/date?id=${userInfo.id}&date=${selectedDate}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -125,6 +126,7 @@ const DoctorAppointment = (props) => {
               dateNameStyle={{ color: "white" }}
               startingDate={datenow}
               selectedDate={{ color: "red" }}
+              onDateSelected={(date) => setSelectedDate(date)}
               highlightDateNumberStyle={{
                 backgroundColor: "white",
                 borderRadius: 20,
@@ -137,40 +139,45 @@ const DoctorAppointment = (props) => {
               // highlightDateNameStyle={{backgroundColor:"white",borderWidth:1,borderColor:"white",padding:10,borderRadius:20,width:49}}
             ></CalendarStrip>
           </View>
-          <Tabs style={{backgroundColor:"white"}}>
-        <TabScreen color="black" backgroundColor="black" style={{color:"black"}}  label="Current">
-          <View>
-            <View
-              style={{
-                padding: 14,
-                marginBottom: 34,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+          <Tabs style={{ backgroundColor: "white" }}>
+            <TabScreen
+              color="black"
+              backgroundColor="black"
+              style={{ color: "black" }}
+              label="Current"
             >
-             <Text>Hello</Text>
-            </View>
-          </View>
-        </TabScreen>
-        <TabScreen label="Compeleted">
-          <View
-            style={{
-              padding: 14,
-              marginBottom: 34,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <View>
-            <Text>Working</Text>
-            </View>
-          </View>
+              <View>
+                <View
+                  style={{
+                    padding: 14,
+                    marginBottom: 34,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text>Hello</Text>
+                </View>
+              </View>
+            </TabScreen>
+            <TabScreen label="Compeleted">
+              <View
+                style={{
+                  padding: 14,
+                  marginBottom: 34,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <View>
+                  <Text>Working</Text>
+                </View>
+              </View>
 
-          {/* <ExploreWitHookExamples1 /> */}
-        </TabScreen>
-      </Tabs>
+              {/* <ExploreWitHookExamples1 /> */}
+            </TabScreen>
+          </Tabs>
 
           <View style={styles.viewDataContainer}>
             {/* Patient Meeting */}
@@ -209,7 +216,6 @@ const DoctorAppointment = (props) => {
 const styles = StyleSheet.create({
   viewPage: {
     backgroundColor: "#FCFCFC",
-  
   },
   time: {
     fontSize: 12,

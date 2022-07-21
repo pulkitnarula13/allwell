@@ -200,6 +200,36 @@ const getAppointmentByDoctorId = (req, res) => {
     });
 };
 
+
+/**
+ * @description API to fetch appointments from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getAppointmentBasedOnDate = (req, res) => {
+  Appointment.find({ doctor: req.query.id, date: req.query.date })
+    .populate({
+      path: "patient",
+    })
+    .populate({
+      path: "symptoms",
+    })
+    .populate({
+      path: "qna"
+    })
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched  Appointment for given patient",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
 /**
  * @description API to fetch all appointments from database
  * @param {*} req
@@ -284,5 +314,6 @@ module.exports = {
   confirmAppointment,
   cancelAppointment,
   getAppointmentById,
-  completeAppointment
+  completeAppointment,
+  getAppointmentBasedOnDate
 };

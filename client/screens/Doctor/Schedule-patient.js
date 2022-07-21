@@ -11,36 +11,6 @@ import { Button } from "react-native-paper";
 import { ScrollView } from "react-native";
 
 import CalendarStrip from "react-native-calendar-strip";
-const DATA = [
-  {
-    name: "Headache",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Cough",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Muscle Cramp",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Sore Throad",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Stomach Pain",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Congestion",
-    image: "../../assets/icon.png",
-  },
-  {
-    name: "Fever",
-    image: "../../assets/icon.png",
-  },
-];
 
 const Item = ({ name, image }) => (
   <View style={styles.item}>
@@ -58,7 +28,7 @@ const SchedulePatient = (props) => {
   console.log(props.navigation);
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
       <View style={styles.viewPage}>
         <View style={styles.viewPageName}>
           <Text style={styles.textPageName}>Schedule</Text>

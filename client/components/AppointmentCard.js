@@ -4,7 +4,8 @@ import { Avatar, Button } from "react-native-paper";
 
 
 const AppointmentCard = ({ item, navigation }) => {
-  var newdate = new Date(item.date);
+  var newdate = new Date(item.time);
+  console.log(item, "item");
 
   const selectItem = () => {
     navigation.navigate("Chatting", {
@@ -58,7 +59,7 @@ const AppointmentCard = ({ item, navigation }) => {
             )}
 
             <Text style={styles.name}>{item.patient.name}</Text>
-            <Text style={styles.symptomName}>{item.symptoms[0].name}</Text>
+            <Text style={styles.symptomName}>{item.symptoms[0]?.name}</Text>
           </View>
         </View>
       </View>

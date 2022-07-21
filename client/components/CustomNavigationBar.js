@@ -29,6 +29,7 @@ const CustomNavigationBar = (props) => {
       {props.route.name === "Home" ? (
         <Appbar.Action
           icon="bell-badge-outline"
+          color="#74CBD4"
           onPress={() => props.navigation.navigate("Notfication")}
         />
       ) : null}

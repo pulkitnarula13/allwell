@@ -3,11 +3,19 @@ const ROLE = require("../config/roles");
 const router = express.Router();
 
 const {
-  createAppointment, getAllAppointments, getAppointmentByPatientId, getAppointmentByDoctorId, confirmAppointment, cancelAppointment, updateAppointment, getAppointmentById, completeAppointment,
+  createAppointment,
+  getAllAppointments,
+  getAppointmentByPatientId,
+  getAppointmentByDoctorId,
+  confirmAppointment,
+  cancelAppointment,
+  updateAppointment,
+  getAppointmentById,
+  completeAppointment,
+  getAppointmentBasedOnDate,
 } = require("../controller/appointment");
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
-
 
 // Routes
 /**
@@ -19,7 +27,12 @@ const verifyRoles = require("../middleware/roleVerification");
  *       200:
  *         description: return positive response
  */
-router.post("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),  createAppointment);
+router.post(
+  "/",
+  validateToken,
+  verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),
+  createAppointment
+);
 
 // Routes
 /**
@@ -31,7 +44,29 @@ router.post("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMI
  *       200:
  *         description: return positive response
  */
-router.get("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN), getAllAppointments);
+router.get(
+  "/",
+  validateToken,
+  verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),
+  getAllAppointments
+);
+
+// Routes
+/**
+ * @swagger
+ * /appointments:
+ *   get:
+ *     description: Get all the appointments
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+router.get(
+  "/doctor/date/",
+  validateToken,
+  verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),
+  getAppointmentBasedOnDate
+);
 
 // // Routes
 // /**
@@ -43,7 +78,12 @@ router.get("/", validateToken, verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN
 //  *       200:
 //  *         description: return positive response
 //  */
-router.get("/patient/:id",validateToken, verifyRoles(ROLE.PATIENT, ROLE.ADMIN), getAppointmentByPatientId);
+router.get(
+  "/patient/:id",
+  validateToken,
+  verifyRoles(ROLE.PATIENT, ROLE.ADMIN),
+  getAppointmentByPatientId
+);
 
 // // Routes
 // /**
@@ -55,7 +95,12 @@ router.get("/patient/:id",validateToken, verifyRoles(ROLE.PATIENT, ROLE.ADMIN), 
 //  *       200:
 //  *         description: return positive response
 //  */
-router.get("/doctor/:id",validateToken, verifyRoles( ROLE.DOCTOR, ROLE.ADMIN), getAppointmentByDoctorId);
+router.get(
+  "/doctor/:id",
+  validateToken,
+  verifyRoles(ROLE.DOCTOR, ROLE.ADMIN),
+  getAppointmentByDoctorId
+);
 
 // // Routes
 // /**
@@ -67,7 +112,12 @@ router.get("/doctor/:id",validateToken, verifyRoles( ROLE.DOCTOR, ROLE.ADMIN), g
 //  *       200:
 //  *         description: return positive response
 //  */
-router.get("/:id",validateToken, verifyRoles( ROLE.DOCTOR, ROLE.ADMIN), getAppointmentById);
+router.get(
+  "/:id",
+  validateToken,
+  verifyRoles(ROLE.DOCTOR, ROLE.ADMIN),
+  getAppointmentById
+);
 
 // Routes
 /**
@@ -79,10 +129,14 @@ router.get("/:id",validateToken, verifyRoles( ROLE.DOCTOR, ROLE.ADMIN), getAppoi
  *       200:
  *         description: return positive response
  */
-router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateAppointment);
+router.put(
+  "/:id",
+  validateToken,
+  verifyRoles(ROLE.DOCTOR, ROLE.ADMIN),
+  updateAppointment
+);
 
 // Routes
-
 
 /**
  * @swagger
@@ -93,9 +147,14 @@ router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateApp
  *       200:
  *         description: return positive response
  */
- router.put("/confirm/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT), confirmAppointment);
+router.put(
+  "/confirm/:id",
+  validateToken,
+  verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT),
+  confirmAppointment
+);
 
- /**
+/**
  * @swagger
  * /complete/:id:
  *   put:
@@ -104,10 +163,14 @@ router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateApp
  *       200:
  *         description: return positive response
  */
-  router.put("/complete/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT), completeAppointment);
+router.put(
+  "/complete/:id",
+  validateToken,
+  verifyRoles(ROLE.DOCTOR, ROLE.ADMIN, ROLE.PATIENT),
+  completeAppointment
+);
 
-
- // Routes
+// Routes
 /**
  * @swagger
  * /cancel/:id:
@@ -117,6 +180,11 @@ router.put("/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), updateApp
  *       200:
  *         description: return positive response
  */
- router.put("/cancel/:id",validateToken, verifyRoles(ROLE.DOCTOR, ROLE.ADMIN), cancelAppointment);
+router.put(
+  "/cancel/:id",
+  validateToken,
+  verifyRoles(ROLE.DOCTOR, ROLE.ADMIN),
+  cancelAppointment
+);
 
 module.exports = router;

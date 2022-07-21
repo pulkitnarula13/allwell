@@ -26,7 +26,6 @@ const  PatientProfile = (props)=> {
     }
   );
 
-  console.log(userdata.data.data, "userData")
 
   setPatientProfileData(userdata.data.data);
     
@@ -36,7 +35,6 @@ const  PatientProfile = (props)=> {
   console.log(props)
 };
   const dateformatted = new Date(PatientProfileData?.dob)
-  console.log(dateformatted.toDateString(),"dateformated");
   let defaultphonenumber = "00000";
 
   return (

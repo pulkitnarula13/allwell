@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  RefreshControl,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Chip } from "react-native-paper";
@@ -24,13 +30,23 @@ const DoctorHome = ({ navigation }) => {
   const [patientAppointments, setPatientAppointments] = useState([]);
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
   const [urgentAppointments, setUrgentAppointments] = useState([]);
-
+  const [refreshing, setRefreshing] = React.useState(false);
   const [waitingList, setWaitingList] = useState([]);
 
   function changeDoctorStatus(e) {
     setActiveDoctorStatus(e);
     setDialogbox(false);
   }
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+    getPatientAppointments();
+  }, []);
+
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
 
   const getPatientAppointments = async () => {
     try {
@@ -45,16 +61,16 @@ const DoctorHome = ({ navigation }) => {
       setPatientAppointments(data.data.data);
 
       const confirmedAppointments = data.data.data.filter(
-        (data) => data.confirmed && !data.cancelled
+        (data) => data.confirmed && !data.cancelled && !data.completed
       );
-    setConfirmedAppointments(confirmedAppointments);
+      console.log(confirmedAppointments, "confiremd Appoe");
+      setConfirmedAppointments(confirmedAppointments);
 
       const urgentAppointments = data.data.data.filter(
         (data) =>
           data.urgent && !data.completed && !data.confirmed && !data.cancelled
       );
       setUrgentAppointments(urgentAppointments);
-
 
       const waitingList = data.data.data.filter(
         (data) => !data.confirmed && !data.cancelled && !data.urgent
@@ -70,7 +86,13 @@ const DoctorHome = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView   showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.container}>
         <View style={styles.nameContainer}>
           <PushNotification />
@@ -87,71 +109,94 @@ const DoctorHome = ({ navigation }) => {
           <FlatList
             horizontal={true}
             data={confirmedAppointments}
-            renderItem={(item) => <AppointmentCard item={item.item} navigation={navigation} />}
+            renderItem={(item) => (
+              <AppointmentCard item={item.item} navigation={navigation} />
+            )}
             keyExtractor={(item) => item.createdAt}
           />
         </View>
         <View style={styles.inboxContainer}>
           <View
-            style={{width:360, display: "flex",  flexDirection: "column", marginBottom: 11,justifyContent:"center" }}
+            style={{
+              width: 360,
+              display: "flex",
+              flexDirection: "column",
+              marginBottom: 11,
+              justifyContent: "center",
+            }}
           >
-            <View style={{width:360, display: "flex", flexDirection: "row", marginBottom: 11,justifyContent:"center",alignItems:"center" }}>
-            <View style={{flex:1}}>
-            <TouchableOpacity
-              style={{ width: 170 }}
-              onPress={() => navigation.navigate("Doctor-Inbox")}
+            <View
+              style={{
+                width: 360,
+                display: "flex",
+                flexDirection: "row",
+                marginBottom: 11,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <DetailCardHome
-                item={confirmedAppointments}
-                config={{
-                  icon: "message",
-                  title: "Inbox",
-                  type: "solid",
-                }}
-              />
-            </TouchableOpacity>
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  style={{ width: 170 }}
+                  onPress={() => navigation.navigate("Doctor-Inbox")}
+                >
+                  <DetailCardHome
+                    item={confirmedAppointments}
+                    config={{
+                      icon: "message",
+                      title: "Inbox",
+                      type: "solid",
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Doctor-Waiting-List", {
+                      waitingList,
+                    })
+                  }
+                >
+                  <DetailCardHome
+                    config={{
+                      icon: "message-text-clock",
+                      title: "Waiting For You",
+                      type: "outline",
+                    }}
+                    item={waitingList}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={{flex:1}}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Doctor-Waiting-List", {
-                  waitingList,
-                })
-              }
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <DetailCardHome
-                config={{
-                  icon: "message-text-clock",
-                  title: "Waiting For You",
-                  type: "outline",
-                }}
-                item={waitingList}
-              />
-            </TouchableOpacity>
-            </View>
-            </View>
-            <View style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-            <View style={{flex:1}}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Doctor-Urgent", {
-                  urgentAppointments,
-                })
-              }
-            >
-              <DetailCardHome
-                item={urgentAppointments}
-                config={{
-                  icon: "message-text-clock",
-                  title: "Urgent",
-                  type: "solid",
-                }}
-              />
-            </TouchableOpacity>
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Doctor-Urgent", {
+                      urgentAppointments,
+                    })
+                  }
+                >
+                  <DetailCardHome
+                    item={urgentAppointments}
+                    config={{
+                      icon: "message-text-clock",
+                      title: "Urgent",
+                      type: "solid",
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          </View>
-          
 
           <Dialog
             visible={dialogbox}
@@ -209,14 +254,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor:"white",
+    backgroundColor: "white",
   },
   inboxContainer: {
     display: "flex",
-    width:360,
+    width: 360,
     gap: 16,
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
   },
   reviewButton: {
     borderColor: "#74CBD4",
@@ -249,7 +294,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 55,
-    marginLeft:16,
+    marginLeft: 16,
     marginBottom: 41,
   },
   viewDoctorStatusModal: {

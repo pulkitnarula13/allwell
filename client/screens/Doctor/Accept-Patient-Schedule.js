@@ -85,6 +85,7 @@ const AcceptPatientSchedule = (props) => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     // setShow(false);
+    console.log(currentDate, "current Time");
     setTime(currentDate);
   };
 

@@ -6,19 +6,19 @@ import { DATA } from "../constants/Doctor-inboxvalues";
 import { AuthContext } from "../Context/AuthContext";
 
 const DoctorCompletedMessages = (props) => {
-
   const [currentData, setCurrentData] = useState();
   const [dialogbox, setDialogbox] = useState(false);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
+    console.log(props, "inside doctor completed");
     const modifiedData = props?.completedAppointments?.map((data) => {
       return {
         image: "../../assets/icon.png",
         date: `${new Date(data.date).getDate()} / ${new Date(
           data.date
         ).getMonth()} / ${new Date(data.date).getFullYear()}`,
-        symptoms: data.symptoms[0].name,
+        symptoms: data.symptoms[0]?.name,
         info: data.qna[0].answer,
         patient: data.patient.name,
         qna: data.qna,
@@ -27,7 +27,7 @@ const DoctorCompletedMessages = (props) => {
       };
     });
 
-    console.log(modifiedData, "modifiedData");
+    console.log(modifiedData, "modifiedData inside completed");
     setCurrentData(modifiedData);
   }, [props.currentAppointmnents]);
 
