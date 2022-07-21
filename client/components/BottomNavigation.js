@@ -10,25 +10,26 @@ import ConnectPatient from "../screens/Patient/Connect-Doctor";
 import PatientHome from "../screens/Patient/Patient-Home";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
+import { Image } from "react-native";
 
 
 const Bottomnavigation = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
 
   const [routes, setRoutes] = React.useState([
-    { key: "home", title: "Home", icon: "home" },
-    { key: "connect", title: "Connect", icon: "account-plus" },
-    { key: "history", title: "History", icon: "briefcase" },
-    { key: "profile", title: "Profile", icon: "account" },
+    { key: "home", title: "Home", /*icon: "home"*/ },
+    { key: "connect", title: "Connect", /*icon: "account-plus"*/ },
+    { key: "history", title: "History", /*icon: "briefcase"*/ },
+    { key: "profile", title: "Profile", /*icon: "account"*/ },
   ]);
 
   useEffect(() => {
     if (userInfo.roles === "doctor") {
       setRoutes([
-        { key: "home", title: "Home", icon: "home" },
-        { key: "schedule", title: "Schedule", icon: "calendar" },
-        { key: "inbox", title: "Inbox", icon: "message" },
-        { key: "docprofile", title: "Profile", icon: "account" },
+        { key: "home", title: "Home", /*icon: "home"*/ },
+        { key: "schedule", title: "Schedule", /*icon: "calendar"*/ },
+        { key: "inbox", title: "Inbox", /*icon: "message"*/ },
+        { key: "docprofile", title: "Profile", /*icon: "account"*/ },
       ]);
     }
   }, []);
@@ -59,6 +60,67 @@ const Bottomnavigation = ({ navigation }) => {
     }
   };
 
+
+  renderIconPatient = ({ route}) => {
+    switch (route.key) {
+      case 'home':
+        return  <Image
+        
+        
+        style={{ width: 27, height: 22.74 }}
+        source={require("../assets/icons/medico_icon_home.png")}
+      />;
+      case 'connect':
+        return <Image
+        
+        style={{ width: 27, height: 22.74 }}
+        source={require("../assets/icons/medico_icon_connect.png")}
+      />;
+        case 'history':
+        return <Image
+        
+        style={{ width: 27, height: 22.74 }}
+        source={require("../assets/icons/medico_icon_history.png")}
+      />;
+        case 'profile':
+        return <Image
+       
+        style={{ width: 27, height: 22.74 }}
+        source={require("../assets/icons/medico_icon_profile.png")}
+      />;
+    }
+  }
+
+  renderIconDoctor = ({ route }) => {
+    switch (route.key) {
+      case 'home':
+        return  <Image
+        
+        style={{ width: 27, height: 22 }}
+        source={require("../assets/icons/medico_icon_home.png")}
+      />;
+      case 'schedule':
+        return <Image
+        
+        style={{ width: 27, height: 22 }}
+        source={require("../assets/icons/medico_icon_calander.png")}
+      />;
+        case 'inbox':
+        return <Image
+       
+        style={{ width: 27, height: 22 }}
+        source={require("../assets/icons/medico_icon_inbox.png")}
+      />;
+        case 'docprofile':
+        return <Image
+       
+        style={{ width: 27, height: 22 }}
+        source={require("../assets/icons/medico_icon_profile.png")}
+      />;
+    }
+  }
+
+
   const [index, setIndex] = React.useState(0);
 
   // const renderState = BottomNavigation.SceneMap(renderValDoctor);
@@ -73,7 +135,11 @@ const Bottomnavigation = ({ navigation }) => {
       renderScene={
         userInfo.roles === "doctor" ? renderValDoctor : renderValPatient
       }
+      renderIcon={
+        userInfo.roles === "doctor" ? renderIconDoctor : renderIconPatient
+      }
     />
+
   );
 };
 
