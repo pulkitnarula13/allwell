@@ -232,7 +232,7 @@ const createAppointment = async (req, res) => {
           for (let i =  0 ; i < val.images.length;i++) {
             const uploadedImage = await upload(
               `${Date.now() + "" + req.body.patient}`,
-              val.images[i],
+              val.images[i].base64,
               "jpg",
               "patient",
               req.body.patient
