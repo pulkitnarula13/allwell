@@ -44,7 +44,7 @@ const  PatientProfile = (props)=> {
         <View style={styles.profileheading}>
           <View style={{display:"flex",flexDirection:"row"}}>
       <Text style={styles.profiletext}>Profile</Text>
-      <Button  style={styles.btnsetting1} onPress={() => props.navigation.navigate("AccountInformation", {
+      <Button  style={styles.btnsetting1} onPress={() => props.navigation.navigate("PatientInformation", {
         data: PatientProfileData
       })}>
         <Feather name="edit-3" size={24} color="black" />
