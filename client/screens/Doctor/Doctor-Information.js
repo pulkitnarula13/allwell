@@ -25,7 +25,7 @@ const DoctorInformation = (props) => {
     setName(userData.data.data.name);
     setemail(userData.data.data.email);
     setProfilePicture(userData.data.data.profilePicture);
-    setPhoneNumber(userData.data.data.phoneNumber);
+    setPhoneNumber(userData.data.data.phoneNumber.toString());
     setDoctorDescription(userData.data.data.doctorDescription);
     setDataLoading(false);
   };
