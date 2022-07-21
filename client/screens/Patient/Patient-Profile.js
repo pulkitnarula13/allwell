@@ -35,6 +35,9 @@ const  PatientProfile = (props)=> {
   }
   console.log(props)
 };
+  const dateformatted = new Date(PatientProfileData?.dob)
+  console.log(dateformatted.toDateString(),"dateformated");
+  let defaultphonenumber = "00000";
 
   return (
       <ScrollView>
@@ -54,9 +57,7 @@ const  PatientProfile = (props)=> {
         <Feather name="settings" size={24} color="black" />
         </Button>
         </View>
-    
       </View>
-      
       </View>
       <View style={styles.imagecenter}>
       <Image
@@ -74,7 +75,7 @@ const  PatientProfile = (props)=> {
       <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>Mobile Number</Text>
-      <Text style={styles.infotext11}>{PatientProfileData?.phoneNumber}</Text>
+      <Text style={styles.infotext11}>{!PatientProfileData?.phoneNumber ? defaultphonenumber : PatientProfileData?.phoneNumber}</Text>
       </View>
       <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
@@ -89,13 +90,10 @@ const  PatientProfile = (props)=> {
       <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>Date of birth</Text>
-      <Text style={styles.infotext11}>{PatientProfileData?.dob}</Text>
+      <Text style={styles.infotext11}>{dateformatted.toDateString()}</Text>
       </View>
-      <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
-      <View style={styles.info3}>
-      <Text style={styles.infotext13}>Short Bio</Text>
-      <Text style={styles.infotext12}>Viverra orci ut in quis est pretium id. Cursus purus ut fames feugiat feugiat neque sed eu ridiculus.</Text>
-      </View>
+     
+      
     </View>
     </ScrollView>
     
