@@ -127,7 +127,7 @@ const AccountInformation = (props) => {
             }}
             labelStyle={{ color: "#74CBD4", fontSize: 16, fontWeight: "600" }}
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={() => props.navigation.navigate("PatientProfile")}
           >
             Cancel
           </Button>
