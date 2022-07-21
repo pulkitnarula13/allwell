@@ -43,7 +43,7 @@ const Doctorprofile = (props) => {
           source={require("../../assets/icon.png")}
           resizeMode="contain"
         /> */}
-        {!userInfo.profilePicture ? (
+        {!docProfileData.profilePicture ? (
               <Avatar.Text
                 style={{ backgroundColor: "#74CBD4" }}
                 size={140}
@@ -54,9 +54,9 @@ const Doctorprofile = (props) => {
               <Image
                 style={styles.image2}
                 source={
-                  userInfo.profilePicture
-                    ? userInfo.profilePicture
-                    : require("../assets/icon.png")
+                {
+                  uri: `${docProfileData.profilePicture}`
+                }
                 }
               />
             )}
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
   editicon: {
     position: "absolute",
-    top: 130,
+    top: 150,
     left: 60,
   },
   infotext11: {
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   image2: {
     width: 159,
     height: 159,
-    marginBottom: 39,
+    borderRadius: 100
   },
   info1: {
     display: "flex",

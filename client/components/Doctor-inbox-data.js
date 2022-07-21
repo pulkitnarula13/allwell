@@ -7,7 +7,6 @@ import { AuthContext } from "../Context/AuthContext";
 import { Avatar } from "react-native-paper";
 
 const DoctorCurrentMessages = (props) => {
-  console.log(props, "props");
 
   const [currentData, setCurrentData] = useState();
   // const [dialogbox, setDialogbox] = useState(false);

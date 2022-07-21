@@ -5,7 +5,6 @@ import { Avatar, Button } from "react-native-paper";
 
 const AppointmentCard = ({ item, navigation }) => {
   var newdate = new Date(item.time);
-  console.log(item, "item");
 
   const selectItem = () => {
     navigation.navigate("Chatting", {

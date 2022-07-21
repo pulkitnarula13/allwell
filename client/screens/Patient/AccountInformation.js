@@ -10,7 +10,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import { BASE_URL_DEV } from "@env";
 
 const AccountInformation = (props) => {
-  console.log(props, "props");
 
   const [name, setName] = useState(props.route.params.data.name);
   const [email, setemail] = useState(props.route.params.data.email);
