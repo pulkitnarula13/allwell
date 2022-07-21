@@ -4,7 +4,6 @@ import Questions from "../../../components/questions";
 
 const PatientQuestionTwo = (props) => {
   
-
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>

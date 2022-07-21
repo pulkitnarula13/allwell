@@ -118,7 +118,7 @@ const ConnectPatient = ({ navigation, route }) => {
             >
               <Image
                 style={{ width: 74, height: 74 }}
-                source={require("../../assets/icons/medico_icon_alert.png")}
+              //  source={require("../../assets/icons/medico_icon_alert.png")}//
               />
             </TouchableOpacity>
             <Text>Add Patient</Text>

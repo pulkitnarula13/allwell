@@ -2,6 +2,7 @@ import { View, Image, StyleSheet } from "react-native";
 import React from "react";
 import Questions from "../../../components/questions";
 
+
 const PatientQuestionOne = (props) => {
 
   return (
