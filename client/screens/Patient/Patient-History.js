@@ -78,7 +78,7 @@ const PatientHistory = ({ navigation }) => {
             }}
           >
             <View>
-              <Patientinboxdata appointments={completedAppointments} />
+              <Patientinboxdata  navigation = {navigation} appointments={completedAppointments} />
             </View>
           </View>
 

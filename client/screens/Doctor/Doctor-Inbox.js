@@ -39,6 +39,7 @@ const DoctorInbox = ({ navigation }) => {
         (data) => data.completed && !data.cancelled
       );
 
+      console.log(completedAppointments, "completed");
       setCompletedAppointments(completedAppointments);
 
       const currentAppointmnents = data.data.data.filter(

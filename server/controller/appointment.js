@@ -80,11 +80,11 @@ const confirmAppointment = (req, res) => {
  const completeAppointment = (req, res) => {
   const id = req.params.id;
 
+  console.log(req.body);
   Appointment.findOneAndUpdate(
     { _id: id },
-    {
-      completed: true,
-    },
+      req.body
+    ,
     {
       returnOrignal: false,
     }
