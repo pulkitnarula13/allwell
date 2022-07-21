@@ -10,7 +10,7 @@ const DoctorProfileSettings = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
 
   const patientLogout = () => {
-    logout();
+    logout(navigation);
     navigation.navigate("greeting");
   };
 

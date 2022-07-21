@@ -136,7 +136,6 @@ const getPatients = (req, res) => {
   //   req.body.name
   // );
 
-
   const familyMember = await FamilyMember.create({
     profilePicture: '',
     name: req.body.name,
@@ -186,7 +185,7 @@ const getPatients = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const updatePatient = (req, res) => {
+const updatePatient = async (req, res) => {
   const id = req.params.id;
 
 
@@ -214,7 +213,20 @@ const updatePatient = (req, res) => {
     //   req.body.name
     // );
 
-  Patient.findOneAndUpdate({ _id: id }, req.body, {
+
+    let uploadProfilePicture;
+
+    if (req.body.profilePicture) {
+      uploadProfilePicture = await upload(
+        `${Date.now() + "" + req.body.name}`,
+        req.body.profilePicture,
+        "jpg",
+        "patient",
+        req.body.name
+      );
+    }
+
+  Patient.findOneAndUpdate({ _id: id }, {...req.body, profilePicture: uploadProfilePicture }, {
     returnOriginal: false,
   }).then((result) => {
     res.status(200).json({

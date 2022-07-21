@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Chip } from "react-native-paper";
+import { Avatar, Chip } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 import moment from "moment";
 
@@ -16,14 +16,20 @@ const WaitingCard = ({ item, navigation }) => {
     >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={
-              item.patient.profilePicture
-                ? item.patient.profilePicture
-                : require("../assets/icon.png")
-            }
-          />
+          {
+            !item.patient.profilePicture ? <Avatar.Text
+              style={{ backgroundColor: "#74CBD4" }}
+              size={65}
+              label={item.patient.name[0]}
+              color="#fff"
+            /> : <Image
+              style={styles.image}
+              source={
+                item.patient.profilePicture
+              }
+            />
+          }
+
 
           <Text style={styles.title}>{item.patient.name}</Text>
         </View>
@@ -55,17 +61,18 @@ const WaitingCard = ({ item, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 20,
-    // flex: 1,
+    display: "flex",
+    flexDirection: "row",
     borderWidth: "1px",
     borderColor: "gainsboro",
     marginHorizontal: 20,
     marginVertical: 20,
-    padding: 10,
+    padding: 30,
     borderRadius: 10,
   },
   imageContainer: {
-    gap: 10,
+    display: "flex",
+    alignItems: "center",
     textAlign: "center",
   },
   image: {
@@ -77,6 +84,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 8,
+    paddingLeft: 20,
     justifyContent: "space-evenly",
   },
   chip: {
@@ -87,6 +95,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+    paddingTop: 10,
   },
   desc: {
     color: "#718096",

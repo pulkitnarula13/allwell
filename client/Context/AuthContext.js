@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
+        userInfo.role = "Patient";
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
@@ -50,6 +51,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
+        userInfo.role = "Patient";
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
@@ -73,6 +75,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
+        userInfo.role = "Doctor";
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
@@ -86,7 +89,7 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const logout = () => {
+  const logout = (navigation) => {
     // setIsLoading(true);
 
     // axios
@@ -109,6 +112,7 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.removeItem("userInfo");
     setUserInfo({});
     setIsLoading(false);
+    navigation.navigate("greeting");
   };
 
   const isLoggedIn = async () => {

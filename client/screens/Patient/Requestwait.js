@@ -5,21 +5,21 @@ import { Button } from "react-native-paper";
 const Requestwait = (props) => {
   return (
     <View style={styles.outer}>
-      <Text style={styles.textone}>You are in a queue!</Text>
+      <Text style={styles.textone}>Appointment Booked!!</Text>
       <Image
         style={styles.image2}
-        source={require("../../assets/Clock.jpeg")}
+        source={require("../../assets/clockAni_Sketch.png")}
         resizeMode="center"
       />
-      <Text style={{ width: 170, height: 57 }}>
+      {/* <Text style={{ width: 170, height: 57 }}>
         Please wait until doctor accept your request.
-      </Text>
+      </Text> */}
       <View style={styles.btn1}>
         <Button
           title="Go to Home"
           color="white"
           onPress={() => props.navigation.navigate("Home")}
-        ></Button>
+        > Go To Home</Button>
       </View>
     </View>
   );
@@ -45,10 +45,9 @@ const styles = StyleSheet.create({
     lineHeight: 24.2,
   },
   image2: {
-    width: 190,
-    height: 190,
-    marginTop: 48,
-    marginBottom: 20,
+    width: 250,
+    height: 250,
+    marginBottom: 10,
   },
 });
 

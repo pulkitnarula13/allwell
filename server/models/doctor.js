@@ -60,6 +60,10 @@ const doctorSchema = new Schema({
     required: true,
   },
 
+  expoToken: {
+    type: String
+  },
+
   workingDays: {
     type: [{ type: String }],
     enum: [

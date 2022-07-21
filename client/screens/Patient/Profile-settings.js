@@ -7,7 +7,7 @@ import { StackActions } from "@react-navigation/native";
 
 
 const PatientProfileSettings = ({ navigation }) => {
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const [isSwitchOn, setIsSwitchOn] = useState(true);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const { logout } = useContext(AuthContext);
 

@@ -19,7 +19,7 @@ const registerDoctor = async (req, res) => {
       {
         name: req.body.name,
         email: req.body.email,
-        roles: [ROLE.DOCTOR]
+        roles: [ROLE.DOCTOR],
       },
       process.env.JWT_SECRET
     );
@@ -50,13 +50,9 @@ const registerDoctor = async (req, res) => {
       certifications: req.body.certifications,
       licenseImage: uploadLicenseImage,
       location: {
-        coordinates: [
-          req.body.location.longitude,
-          req.body.location.latitude,
-        ]
-      }
+        coordinates: [req.body.location.longitude, req.body.location.latitude],
+      },
     });
-    
 
     return res.status(200).json({
       message: "Doctor Registered Succesfully",
@@ -93,7 +89,7 @@ const loginDoctor = async (req, res) => {
         {
           name: req.body.name,
           email: req.body.email,
-          roles: [ROLE.DOCTOR]
+          roles: [ROLE.DOCTOR],
         },
         process.env.JWT_SECRET
       );
@@ -117,35 +113,33 @@ const loginDoctor = async (req, res) => {
   }
 };
 
-
-
 /**
  * @description API to fetch all doctors based on location
  * @param {*} req
  * @param {*} res
  */
- const getDoctorsByLocation = (req, res) => {
+const getDoctorsByLocation = (req, res) => {
   const longitude = Number(req.query.longitude);
   const latitude = Number(req.query.latitude);
 
   const options = {
     location: {
       $near: {
-          $geometry: {
-            type: "Point",
-            coordinates: 
-              [longitude, latitude],
-          },
-          $maxDistance: 1000 * 1000
-      }
-  }
-   
-  }
-  Doctor.find(options).populate({
-    path: "specialities"
-  }).populate({
-    path: "rating"
-  })
+        $geometry: {
+          type: "Point",
+          coordinates: [longitude, latitude],
+        },
+        $maxDistance: 1000 * 1000,
+      },
+    },
+  };
+  Doctor.find(options)
+    .populate({
+      path: "specialities",
+    })
+    .populate({
+      path: "rating",
+    })
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched all doctors",
@@ -182,25 +176,27 @@ const getDoctors = (req, res) => {
     });
 };
 
-
 /**
  * @description API to update doctors
  * @param {*} req
  * @param {*} res
  */
-const updateDoctor = (req, res) => {
+const updateDoctor = async (req, res) => {
   const id = req.params.id;
 
+  let uploadProfilePicture;
 
-  // const savedAddress = await Address.create({
-  //   houseNumber: req.body.houseNumber,
-  //   city: req.body.city,
-  //   province: req.body.province,
-  //   postalCode: req.body.postalCode,
-  //   country: req.body.country,
-  // });
+  if (req.body.profilePicture) {
+    uploadProfilePicture = await upload(
+      `${Date.now() + "" + req.body.name}`,
+      req.body.profilePicture,
+      "jpg",
+      "doctor",
+      req.body.name
+    );
+  }
 
-  Doctor.findOneAndUpdate({ _id: id }, req.body, {
+  Doctor.findOneAndUpdate({ _id: id },  {...req.body, profilePicture: uploadProfilePicture }, {
     returnOrignal: false,
   }).then((result) => {
     res.status(200).json({
@@ -239,6 +235,9 @@ const getDoctorById = (req, res) => {
   const id = req.params.id;
 
   Doctor.findById(id)
+    .populate({
+      path: "specialities",
+    })
     .then((result) => {
       return res.status(200).json({
         message: `Doctor found succesfully`,
@@ -252,13 +251,12 @@ const getDoctorById = (req, res) => {
     });
 };
 
-
 /**
  * @description API to fetch all specialities of doctor from DB
  * @param {*} req
  * @param {*} res
  */
- const getDoctorSpecialities = (req, res) => {
+const getDoctorSpecialities = (req, res) => {
   Specialization.find()
     .then((result) => {
       return res.status(200).json({
@@ -278,8 +276,7 @@ const getDoctorById = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const createSpecialization = (req, res) => {
-  
+const createSpecialization = (req, res) => {
   Specialization.create(req.body)
     .then((result) => {
       return res.status(201).json({
@@ -303,5 +300,5 @@ module.exports = {
   loginDoctor,
   getDoctorSpecialities,
   createSpecialization,
-  getDoctorsByLocation
+  getDoctorsByLocation,
 };

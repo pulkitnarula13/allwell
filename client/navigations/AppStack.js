@@ -18,7 +18,6 @@ import SchedulePatient from "../screens/Doctor/Schedule-patient";
 import AcceptPatientSchedule from "../screens/Doctor/Accept-Patient-Schedule";
 import InfoPatient from "../screens/Doctor/Info-Patient";
 import DoctorAppointment from "../screens/Doctor/Doctor-Appointment";
-import PatientChat from "../screens/Doctor/Patient-Chat";
 import ForgotPassword from "../screens/Common/ForgotPassword";
 import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 import Greeting from "../screens/Common/Greeting";
@@ -38,6 +37,8 @@ import Managefamilymembers from "../screens/Patient/Managefamilymembers";
 import FAQ from "../screens/Patient/FAQ";
 import Privacypolicy from "../screens/Patient/Privacypolicy";
 import Termsofuse from "../screens/Patient/Termsofuse";
+import PatientChatting from "../components/Patient-Chatting";
+import Requestwaitgif from "../screens/Patient/Requestwaitgif";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +52,7 @@ const AppStack = () => {
       {/* COMMON NAVIGATIONS STARTED */}
       <Stack.Screen name="Home" component={Bottomnavigation} />
 
-      
+
       <Stack.Screen name="greeting" component={Greeting} />
       <Stack.Screen
         name="Doctor-Patient-Selection-Signup"
@@ -63,16 +64,17 @@ const AppStack = () => {
         name="Doctor-Patient-Selection-Login"
         component={DoctorPatientSelectionLogin}
       />
-       <Stack.Screen name="Patient-Questiontwo" component={PatientQuestionTwo} />
+      <Stack.Screen name="Patient-Questiontwo" component={PatientQuestionTwo} />
       <Stack.Screen
         name="Patient-QuestionSummary"
         component={PatientQuestionSummary}
       />
+
       {/* COMMON NAVIGATIONS ENDED */}
 
       {/* DOCTOR NAVIGATIONS STARTED*/}
       <Stack.Screen name="Doctor-Inbox" component={DoctorInbox} />
-     
+
       <Stack.Screen name="Doctor-Waiting-List" component={DoctorWaitingList} />
       <Stack.Screen name="Doctor-Urgent" component={DoctorUrgent} />
       <Stack.Screen
@@ -91,7 +93,7 @@ const AppStack = () => {
         component={Notification}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="Chatting"
         component={Chattingwithdoctor}
       />
@@ -103,7 +105,6 @@ const AppStack = () => {
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
       <Stack.Screen name="AcceptPatientSchedule" component={AcceptPatientSchedule} />
       <Stack.Screen name="PatientProfile" component={PatientProfile} />
-      <Stack.Screen name="Patient-Chat" component={PatientChat} />
       <Stack.Screen name="AccountInformation" component={AccountInformation} />
       <Stack.Screen name="Doctor-Home" component={DoctorHome} />
 
@@ -114,6 +115,8 @@ const AppStack = () => {
         name="Patient-question-home"
         component={PatientQuestionHome}
       />
+      <Stack.Screen name="Requestwaitgif" component={Requestwaitgif} />
+      <Stack.Screen name="PatientChatting" component={PatientChatting} />
       <Stack.Screen name="Requestwait" component={Requestwait} />
       <Stack.Screen name="Patient-Home" component={PatientHome} />
       <Stack.Screen name="PatientQuestion1" component={PatientQuestionOne} />

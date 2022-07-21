@@ -1,6 +1,11 @@
 import { View, Text, Alert, FlatList, Image } from "react-native";
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import { Bubble, GiftedChat, Composer, InputToolbar } from "react-native-gifted-chat";
+import {
+  Bubble,
+  GiftedChat,
+  Composer,
+  InputToolbar,
+} from "react-native-gifted-chat";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
@@ -21,7 +26,13 @@ export default function Chattingwithdoctor(props) {
         {...props}
         wrapperStyle={{
           left: {
-            backgroundColor: "#79bdcc",
+            borderColor: "#79bdcc",
+            borderWidth: props.currentMessage._id.length > 0 ? 1 : 0,
+            padding: 4,
+            margin: 4,
+            borderBottomLeftRadius: 10,
+            borderTopLeftRadius: 10,
+            backgroundColor: "transparent",
           },
         }}
       />
@@ -40,10 +51,7 @@ export default function Chattingwithdoctor(props) {
   };
 
   const RenderSend = (props) => {
-    return (
-        <Button icon="send">
-        </Button>
-    );
+    return <Button icon="send"></Button>;
   };
 
   const modifyChat = () => {
@@ -53,9 +61,24 @@ export default function Chattingwithdoctor(props) {
         _id: qna.question,
         text: (
           <View>
-            <Text>{qna.question}</Text>
+            {
+              qna.question ? <Text style={{ fontWeight: "bold"}}>Question: {qna.question}</Text> : <Text></Text>
+            }
             <Divider />
-            <Text style={{ backgroundColor: "#fff" }}>{qna.answer}</Text>
+            <Text
+              style={{
+                backgroundColor: "#79bdcc",
+                color: "#fff",
+                padding: 4,
+                borderRadius: 10,
+                borderWidth: 1,
+                fontWeight: "bold",
+                borderColor: "#fff",
+                display: qna.answer ? "block" : "none"
+              }}
+            >
+              {` ${qna.answer ? "Answer :" : "" } ${qna.answer}`}
+            </Text>
           </View>
         ),
         image: qna?.images[0],
@@ -68,7 +91,6 @@ export default function Chattingwithdoctor(props) {
       });
     });
 
-    console.log(modifiedData, "modified");
     setMessages(modifiedData.reverse());
   };
 
@@ -77,14 +99,16 @@ export default function Chattingwithdoctor(props) {
     try {
       const response = await axios.put(
         `${BASE_URL_DEV}/appointments/complete/${props.route.params.appointmentInfo}`,
-        {},
+        {
+          completed: true,
+          reply: messages
+        },
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
-      console.log("response", response);
 
       Alert.alert("Success", response.data.message);
       props.navigation.navigate("Doctor-Inbox");
@@ -94,9 +118,22 @@ export default function Chattingwithdoctor(props) {
     }
   };
   const onSend = useCallback((messages = []) => {
-    setMessages(
-      (previousMessages) => GiftedChat.append(previousMessages, messages)
+    const modifiedMessage = messages.map((data) => {
+      data.quickReplies = {
+        type: "radio",
+        values: [
+          {
+            title: "Mark Complete",
+            value: "yes",
+          },
+        ],
+      };
+    });
+    // const newMessa
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
     );
+    console.log();
   }, []);
 
   return (
@@ -105,6 +142,11 @@ export default function Chattingwithdoctor(props) {
       renderBubble={renderBubble}
       onSend={(messages) => onSend(messages)}
       alwaysShowSend={true}
+      quickReplyStyle={{
+        minHeight: 30,
+        marginTop: 12
+      }}
+      onQuickReply={(quck) => completeAppointment()}
       user={{
         _id: 1,
       }}

@@ -89,7 +89,7 @@ router.get("/",validateToken, verifyRoles(ROLE.ADMIN, ROLE.PATIENT), getPatients
  *       200:
  *         description: return positive response
  */
-router.put("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, updatePatient);
+router.put("/:id",updatePatient);
 
 
 // Routes

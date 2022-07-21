@@ -21,6 +21,7 @@ import axios from "axios";
 import { SymptomsList } from "../../constants/symptoms";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDistance, getPreciseDistance } from "geolib";
+import PushNotification from "../../components/PushNotification";
 
 const PatientHome = ({ navigation }) => {
   const [nearbyDoctors, setNearByDoctors] = useState([]);
@@ -95,6 +96,7 @@ const PatientHome = ({ navigation }) => {
 
       return val;
     });
+
     setNearByDoctors(modifiedData);
   };
 
@@ -294,6 +296,7 @@ const PatientHome = ({ navigation }) => {
         alignItems: "center",
       }}
     >
+      
       <View
         style={{ marginLeft: 16, marginRight: 16, backgroundColor: "#FFFFFFF" }}
       >
@@ -313,6 +316,7 @@ const PatientHome = ({ navigation }) => {
               alignItems: "center",
             }}
           >
+            <PushNotification />
             <Text style={styles.heading}>Hello, {userInfo.name}</Text>
             <View
               style={{

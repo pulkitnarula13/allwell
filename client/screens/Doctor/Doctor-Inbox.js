@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "react-native-paper";
+import { Avatar, Button } from "react-native-paper";
 import Dialog, {
   DialogContent,
   SlideAnimation,
@@ -13,6 +13,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import DoctorCompletedMessages from "../../components/DoctorInboxCompletedMessages";
+import moment from "moment";
 
 const DoctorInbox = ({ navigation }) => {
   const [dialogbox, setDialogbox] = useState(false);
@@ -38,6 +39,7 @@ const DoctorInbox = ({ navigation }) => {
         (data) => data.completed && !data.cancelled
       );
 
+      console.log(completedAppointments, "completed");
       setCompletedAppointments(completedAppointments);
 
       const currentAppointmnents = data.data.data.filter(
@@ -60,7 +62,9 @@ const DoctorInbox = ({ navigation }) => {
     });
   }, []);
   const windowWidth = Dimensions.get("window").width;
+ 
 
+                
   return (
     <View style={styles.main}>
       <View style={styles.search}>
@@ -101,6 +105,7 @@ const DoctorInbox = ({ navigation }) => {
             <View>
               <DoctorCompletedMessages
                 currentPatient={(val) => setCurrentPatient(val)}
+                
                 setDialogbox={(val) => setDialogbox(val)}
                 completedAppointments={completedAppointments}
               />
@@ -126,14 +131,27 @@ const DoctorInbox = ({ navigation }) => {
       >
         <DialogContent>
           <View style={styles.viewPatientDataModal}>
+          
             <Text style={styles.modalDate}>{currentPatient?.date}</Text>
             {/* <View style={styles.viewDividerLine}></View> */}
-
-            <Image
-              style={styles.image1}
-              source={require("../../assets/icon.png")}
-              resizeMode="center"
-            />
+            
+            {!currentPatient?.profilePicture ? (
+              <Avatar.Text
+                style={{ backgroundColor: "#74CBD4" }}
+                size={98}
+                label={currentPatient?.patient[0]}
+                color="#fff"
+              />
+            ) : (
+              <Image
+                style={styles.image2}
+                source={
+                  item.profilePicture
+                    ? item.profilePicture
+                    : require("../assets/icon.png")
+                }
+              />
+            )}
             <Text style={styles.modalName}> {currentPatient?.patient}</Text>
             <Text style={styles.modalSymptoms}>Symptoms : {currentPatient?.symptoms}</Text>
 
@@ -160,6 +178,12 @@ const DoctorInbox = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  image2: {
+    width: 98,
+    height: 98,
+    borderRadius:100,
+    
+  },
   viewPatientDataModal: {
     display: "flex",
     flexDirection: "column",
@@ -173,11 +197,13 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 20,
     textAlign: "center",
+   
   },
   image1: {
     width: 98,
     height: 98,
     borderRadius: 49,
+
   },
 
   main: {
@@ -243,17 +269,18 @@ const styles = StyleSheet.create({
   },
 
   modalDate: {
-    paddingRight: '60%',
-    paddingBottom: 40,
-    fontSize: '15%',
-    fontWeight: 'bold'
+    left:-100,
+    paddingBottom: 51,
+    fontSize: 20,
+    width:129,
+    fontWeight: '600'
   },
 
   modalName: {
-    fontSize: '15%',
-    fontWeight: 'bold',
-    paddingTop: 10,
-    paddingBottom: 20,
+    fontSize: 16,
+    fontWeight: '500',
+    paddingTop: 14,
+    paddingBottom: 3,
   },
 
   modalSymptoms: {
@@ -274,7 +301,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 70,
+    marginTop: 20,
     backgroundColor: "#74CBD4",
     textAlign: "center",
     justifyContent: "center",

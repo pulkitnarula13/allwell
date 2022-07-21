@@ -1,4 +1,4 @@
-import { View, Text ,StyleSheet, Image,Dimensions} from 'react-native'
+import { View, Text ,StyleSheet, Image,Dimensions, ScrollView} from 'react-native'
 import React,{useState,useEffect,useContext} from 'react'
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
@@ -11,7 +11,6 @@ const  PatientProfile = (props)=> {
   const { userInfo } = useContext(AuthContext);
 
   const [PatientProfileData, setPatientProfileData] = useState();
-
   useEffect(() => {
     getdata();
   }, [])
@@ -27,22 +26,29 @@ const  PatientProfile = (props)=> {
     }
   );
 
-  console.log(userdata.data.data)
+  console.log(userdata.data.data, "userData")
+
   setPatientProfileData(userdata.data.data);
     
   }catch (error) {
     console.log(error);
   }
+  console.log(props)
 };
+  const dateformatted = new Date(PatientProfileData?.dob)
+  console.log(dateformatted.toDateString(),"dateformated");
+  let defaultphonenumber = "00000";
 
   return (
-
+      <ScrollView>
     <View style={styles.allview}>
         <View style={styles.main}>
         <View style={styles.profileheading}>
           <View style={{display:"flex",flexDirection:"row"}}>
       <Text style={styles.profiletext}>Profile</Text>
-      <Button  style={styles.btnsetting1} onPress={() => props.navigation.navigate("AccountInformation")}>
+      <Button  style={styles.btnsetting1} onPress={() => props.navigation.navigate("AccountInformation", {
+        data: PatientProfileData
+      })}>
         <Feather name="edit-3" size={24} color="black" />
         </Button>
         </View>
@@ -51,42 +57,45 @@ const  PatientProfile = (props)=> {
         <Feather name="settings" size={24} color="black" />
         </Button>
         </View>
-    
       </View>
-      
       </View>
       <View style={styles.imagecenter}>
       <Image
       style={styles.image2}
-      source={require("../../assets/icon.png")}
-      resizeMode="contain"
+      source={{
+        uri: `${PatientProfileData?.profilePicture}`
+      }}
+      resizeMode="cover"
     />
       </View>
       <View style={styles.info1}>
       <Text style={styles.infotext1}>Email</Text>
       <Text style={styles.infotext11}>{PatientProfileData?.email}</Text>
       </View>
+      <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>Mobile Number</Text>
-      <Text style={styles.infotext11}>+1 123 456 7890</Text>
+      <Text style={styles.infotext11}>{!PatientProfileData?.phoneNumber ? defaultphonenumber : PatientProfileData?.phoneNumber}</Text>
       </View>
+      <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>MSP Number</Text>
       <Text style={styles.infotext11}>{PatientProfileData?.healthNumber}</Text>
       </View>
+      <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
       <Text style={styles.infotext2}>Address</Text>
       <Text style={styles.infotext11}>100 W 49th Ave, Vancouver, BC V5Y 2Z6</Text>
       </View>
+      <View style={{width:310,height:0,borderWidth:0.75,borderColor:"#CBD5E0",marginLeft:-9,marginBottom:15}}></View>
       <View style={styles.info2}>
       <Text style={styles.infotext1}>Date of birth</Text>
-      <Text style={styles.infotext11}>{PatientProfileData?.dob}</Text>
+      <Text style={styles.infotext11}>{dateformatted.toDateString()}</Text>
       </View>
-      <View style={styles.info3}>
-      <Text style={styles.infotext13}>Short Bio</Text>
-      <Text style={styles.infotext12}>Viverra orci ut in quis est pretium id. Cursus purus ut fames feugiat feugiat neque sed eu ridiculus.</Text>
-      </View>
+     
+      
     </View>
+    </ScrollView>
     
   )
 }
@@ -119,7 +128,9 @@ const styles = StyleSheet.create({
         fontWeight:"700",
         fontSize:16,
         lineHeight:22,
-        marginBottom:20
+        marginBottom:20,
+        textAlign:"left",
+        left:-10
 
     },
     infotext2:{
@@ -133,14 +144,17 @@ const styles = StyleSheet.create({
         width:199,
         fontWeight:"400",
         fontSize:16,
+        textAlign:"right",
         lineHeight:22
     },
     infotext12:{
-        width:302,
+        width:317,
         height:111,
         fontWeight:"400",
         fontSize:16,
-        lineHeight:22
+        textAlign:"left",
+        lineHeight:22,
+        left:-10
     },
     profileheading:{
       
@@ -167,25 +181,31 @@ const styles = StyleSheet.create({
        
     },
     image2: {
-        width: 159,
-        height: 159,
-        marginBottom:39
+        width: 130,
+        height: 130,
+        marginBottom:62,
+        borderRadius:100
       },
       info1:{
         display:"flex",
+        width:302,
         flexDirection:"row",
+        marginBottom:12,
+        left:-10,
         justifyContent:"space-between"
       },
       info2:{
+        marginBottom:12,
+        left:-10,
         display:"flex",
         flexDirection:"row",
         justifyContent:"space-between",
-        marginTop:26
+        
       },
       info3:{
         display:"flex",
         flexDirection:"column",
-        marginTop:26,
+        
       },
     
 })

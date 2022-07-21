@@ -52,6 +52,10 @@ const Appointment = new Schema(
 
     urgent: {
       type: Boolean
+    },
+
+    reply: {
+      type: [Object]
     }
   },
   {

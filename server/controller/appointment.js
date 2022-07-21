@@ -80,11 +80,11 @@ const confirmAppointment = (req, res) => {
  const completeAppointment = (req, res) => {
   const id = req.params.id;
 
+  console.log(req.body);
   Appointment.findOneAndUpdate(
     { _id: id },
-    {
-      completed: true,
-    },
+      req.body
+    ,
     {
       returnOrignal: false,
     }
@@ -149,7 +149,13 @@ const getAllAppointments = (req, res) => {
 const getAppointmentByPatientId = (req, res) => {
   Appointment.find({ patient: req.params.id })
     .populate({
-      path: "qnas",
+      path: "qna",
+    })
+    .populate({
+      path: "patient"
+    })
+    .populate({
+      path: "doctor"
     })
     .then((result) => {
       return res.status(200).json({
@@ -158,6 +164,7 @@ const getAppointmentByPatientId = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log(error);
       return res.status(500).json({
         message: error.message,
       });
@@ -232,7 +239,7 @@ const createAppointment = async (req, res) => {
           for (let i =  0 ; i < val.images.length;i++) {
             const uploadedImage = await upload(
               `${Date.now() + "" + req.body.patient}`,
-              val.images[i],
+              val.images[i].base64,
               "jpg",
               "patient",
               req.body.patient

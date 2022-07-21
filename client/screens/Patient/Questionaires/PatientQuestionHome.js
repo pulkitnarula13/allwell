@@ -13,7 +13,7 @@ import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../../Context/AuthContext";
 import Bottomnavigation from "../../../components/BottomNavigation";
-
+import PushNotification from "../../../components/PushNotification";
 
 const PatientQuestionHome = ({ navigation }) => {
   const [active, setActive] = useState(0);
@@ -36,13 +36,27 @@ const PatientQuestionHome = ({ navigation }) => {
   const [sixthStepperData, setSixthStepperData] = useState();
 
   const [patientSummary, setPatientSummary] = useState([]);
-
+  const [doctorInfo, setDoctorInfo] = useState();
   const { appointmentData, setAppointmentData } =
     useContext(AppointmentContext);
 
   const createAppointment = async () => {
+    navigation.navigate("Requestwaitgif");
+    getDoctorById();
+    console.log(doctorInfo, "doc Info");
+    
+  };
 
-    console.log(appointmentData, "appointmentData");
+  const getDoctorById = async () => {
+    const response = await axios.get(
+      `${BASE_URL_DEV}/doctors/${appointmentData.doctor}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+
     try {
       const response = await axios.post(
         `${BASE_URL_DEV}/appointments`,
@@ -53,13 +67,16 @@ const PatientQuestionHome = ({ navigation }) => {
           },
         }
       );
+      !response ? navigation.navigate("Requestwaitgif") : navigation.navigate("Requestwait");
       Alert.alert("Success", response.data.message);
     } catch (error) {
       console.log(error);
       Alert.alert("Error", error.message);
     }
     
-    navigation.navigate("Requestwait");
+
+    console.log(response.data.data, "response");
+    setDoctorInfo(response.data.data);
   };
 
   useEffect(() => {
@@ -109,17 +126,32 @@ const PatientQuestionHome = ({ navigation }) => {
 
   return (
     <View>
+      {doctorInfo ? (
+        <PushNotification
+          title={`Appointment Booking`}
+          body={`You have an appointment booked by ${userInfo.name}`}
+          toToken={doctorInfo.expoToken}
+        />
+      ) : null}
       <Stepper
-  
         active={active}
         content={content}
-        buttonStyle={{width:150,height:49,backgroundColor:"#74CBD4",justifyContent:"center",alignItems:"center",borderRadius:100}}
+        buttonStyle={{
+          width: 120,
+          height: 49,
+          backgroundColor: "#74CBD4",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 100,
+          marginLeft: active === 0 ? "auto" : "auto",
+          marginRight: active === 0 ? 30 : "auto"
+        }}
         onBack={() => setActive((p) => p - 1)}
         onFinish={() => createAppointment()}
         onNext={() => setActive((p) => p + 1)}
-        stepStyle={{ display: "none",width:330 }}
+        stepStyle={{ display: "none" }}
       />
-      <Bottomnavigation/>
+      <Bottomnavigation />
     </View>
   );
 };
