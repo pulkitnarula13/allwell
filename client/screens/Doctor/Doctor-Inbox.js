@@ -39,6 +39,7 @@ const DoctorInbox = ({ navigation }) => {
         (data) => data.completed && !data.cancelled
       );
 
+      console.log(completedAppointments, "completed");
       setCompletedAppointments(completedAppointments);
 
       const currentAppointmnents = data.data.data.filter(
@@ -196,11 +197,13 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 20,
     textAlign: "center",
+   
   },
   image1: {
     width: 98,
     height: 98,
     borderRadius: 49,
+
   },
 
   main: {

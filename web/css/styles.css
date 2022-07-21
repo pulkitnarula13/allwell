@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #fcfcfc;
   font-family: "poppins";
@@ -23,7 +27,7 @@ body {
 }
 
 .highLight {
-  color:#74CBD4;
+  color: #74CBD4;
   text-transform: uppercase;
 }
 
@@ -60,18 +64,22 @@ body {
 .logoName {
   padding-top: 0px;
   font-size: 14pt;
- display: flex;
- justify-content:center;
- align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 700;
   text-align: center;
 }
+
+
 nav.topNav {
-    background-color: #74cbd4;
+  background-color: #74cbd4;
 }
+
 ul {
   background-color: #74cbd4;
 }
+
 nav ul {
   display: flex;
   justify-content: center;
@@ -93,6 +101,7 @@ nav li a {
 
 nav {
   font-size: larger;
+
 }
 
 li a {
@@ -118,6 +127,7 @@ li a:hover:after {
   transform: scaleX(0.7);
   transform-origin: center;
   color: #74cbd4;
+
 }
 
 .sitesInfo-text {
@@ -202,7 +212,8 @@ li a:hover:after {
 }
 
 .btn-primary {
-  background: #f15a22; /* Langara Orange */
+  background: #f15a22;
+  /* Langara Orange */
   color: white;
 }
 
@@ -300,12 +311,14 @@ li a:hover:after {
 .teamcontainer {
   display: flex;
 }
+
 /*************************************************/
 /*********** Program Section Formatting **********/
 /*************************************************/
 .programs {
   padding-top: 2.5rem;
 }
+
 /* .outercontainer{
   width: 100vw;
   background-color: #732a10; */
@@ -328,21 +341,27 @@ li a:hover:after {
 .card1 {
   grid-column: 2/3;
 }
+
 .card2 {
   grid-column: 4/5;
 }
+
 .card3 {
   grid-column: 6/7;
 }
+
 .card4 {
   grid-column: 2/3;
 }
+
 .card5 {
   grid-column: 4/5;
 }
+
 .card6 {
   grid-column: 6/7;
 }
+
 /***************** Format Cards*******************/
 .cards {
   position: relative;
@@ -355,38 +374,38 @@ li a:hover:after {
   top: 0;
   left: 0;
   width: 100%;
-  height:100%;
+  height: 100%;
   backface-visibility: hidden;
   transition: all 0.9s ease;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.4);
 }
 
-.cards-side img{
+.cards-side img {
   height: 15rem;
   width: 19rem;
 }
 
 .cards-side1 {
-  
+
   color: white;
 }
 
 .cards-side2 {
   text-align: center;
   padding-top: 5rem;
-  background-color:#fcfcfc;
+  background-color: #fcfcfc;
   border-style: solid;
   border-width: 4px;
   border-color: #74CBD4;
   transform: rotateY(180deg);
 }
 
-.cards-side2 h3{
+.cards-side2 h3 {
   color: #74CBD4;
 }
 
-.cards-side2 p{
+.cards-side2 p {
   padding-top: 2rem;
 }
 
@@ -399,12 +418,7 @@ li a:hover:after {
   transform: rotateY(360deg);
 }
 
-.teamMembers {
-  text-align: center;
-  margin-bottom: 5rem;
-  padding-top: 5rem;
-}
-
+/**************** Team Members ****************/
 .teamHeading {
   padding-bottom: 5rem;
   display: inline-block;
@@ -415,52 +429,125 @@ li a:hover:after {
   color: #74cbd4;
 }
 
-
-.team-container1 {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr repeat(3, 300px 0.2fr) 300px 1fr;
+.teamMembers {
+  text-align: center;
+  margin-bottom: 5rem;
+  padding-top: 5rem;
+}
+@font-face {
+  font-family: Exo;
+  src: url(./fonts/Exo2.0-Medium.otf);
+}
+.members{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
 }
-
-.team-container2 {
-  padding-top: 40px;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr repeat(2, 300px 0.2fr) 300px 1fr;
+.profile-card{
+  position: relative;
+  width: 220px;
+  height: 220px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 22px #3336;
+  transition: .6s;
+  margin: 0 25px;
+}
+.profile-card:hover{
+  border-radius: 10px;
+  height: 260px;
+}
+.profile-card .img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: .6s;
+  z-index: 99;
+}
+.profile-card:hover .img{
+  transform: translateY(-60px);
+}
+.img img{
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 22px #3336;
+  transition: .6s;
+}
+.profile-card:hover img{
+  border-radius: 10px;
+}
+.caption{
+  text-align: center;
+  transform: translateY(-80px);
+  opacity: 0;
+  transition: .6s;
+}
+.profile-card:hover .caption{
+  opacity: 1;
+}
+.caption h3{
+  font-size: 21px;
+}
+.caption p{
+  font-size: 16px;
+  color: #0c52a1;
+  margin: 2px 0 9px 0;
+}
+.caption .social-links a{
+  color: #333;
+  margin-right: 8px;
+  font-size: 21px;
+  transition: .6s;
+}
+.social-links a:hover{
+  color: #0c52a1;
 }
 
-.member1 {
+/* 
+/* .member1 {
   grid-column: 2/3;
 }
+
 .member2 {
   grid-column: 4/5;
 }
+
 .member3 {
   grid-column: 6/7;
 }
+
 .member4 {
   grid-column: 8/9;
 }
+
 .member5 {
   grid-column: 2/3;
-}
+} */
+
 .member6 {
   grid-column: 4/5;
 }
+
 .member7 {
   grid-column: 6/7;
 }
 
-.memberInfo{
+.memberInfo {
   padding-top: 20px;
 }
 
-.memberInfo h3, .memberInfo h4, .memberInfo p {
+.memberInfo h3,
+.memberInfo h4,
+.memberInfo p {
   padding-top: 8px;
 }
+
 .memberInfo h3 {
-  color:#74CBD4;
+  color: #74CBD4;
 }
 
 
@@ -468,7 +555,111 @@ li a:hover:after {
   width: 15vh;
   height: 15vh;
   align-items: center;
+} 
+
+/******************* Footer Annimation *****************************/
+
+
+.section-footer ul {
+  list-style: none;
+
 }
+
+.footercontainer {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+
+.section-footer {
+  background-color: #74cbd4;
+  color: #fff;
+  padding: 4rem 0;
+}
+
+.section-footer .footercontainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.section-footer h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section-footer h3 {
+  margin-bottom: 0.7rem;
+}
+
+.section-footer a {
+  line-height: 1.9;
+  color: #ccc;
+}
+
+.section-footer a > i {
+  color: #555;
+  margin-right: 0.5rem;
+}
+
+.email-form {
+  width: 100%;
+  display: inline-block;
+  background-color: #555;
+  position: relative;
+  border-radius: 20px;
+  line-height: 0;
+  margin-top: 1rem;
+}
+
+.email-form .form-control {
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+  color: #ddd;
+  background-color: transparent;
+  font-family: inherit;
+  margin: 0;
+  padding: 0 3rem 0 1.5rem;
+  width: 100%;
+  height: 45px;
+  border-radius: 20px;
+}
+
+.email-form .submit {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  background-color: #eee;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  color: #333;
+  cursor: pointer;
+  border-radius: 0 20px 20px 0;
+}
+
+@media (max-width: 700px) {
+  .section-a .footercontainer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .section-a .footercontainer div:first-child {
+    order: 2;
+  }
+
+}
+
 /*************************************************/
 /*********** Keyframe Animation Coding ***********/
 /*************************************************/

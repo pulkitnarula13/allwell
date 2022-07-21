@@ -2,14 +2,11 @@ import { View, Image, StyleSheet,Text } from "react-native";
 import React from "react";
 import Questions from "../../../components/questions";
 
+
 const PatientQuestionOne = (props) => {
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
-        <Text>
-          You will be asked few questions which will be sent to the doctor, so
-          that they can analyze
-        </Text>
         <Image
           style={styles.image1}
           source={require("../../../assets/images/doctorAni.gif")}
@@ -19,7 +16,7 @@ const PatientQuestionOne = (props) => {
       <View>
         <Questions
           data={props.mainData.question}
-          setAnswer={(val) => {
+          setAnswer={(val) => { 
             props.stepperData({
               ...props.mainData,
               answer: val,
@@ -74,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    flex: 1,
+    // flex: 1,
     padding: 30,
   },
 });

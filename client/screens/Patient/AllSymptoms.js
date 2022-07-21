@@ -13,7 +13,7 @@ export default function AllSymptoms(props) {
     getSymptoms();
   }, []);
 
-  const [symptomsData, setSymptomsData] = useState([]);
+  const [ symptomsData, setSymptomsData ] = useState([]);
   const { setAppointmentData } = useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
 
@@ -90,7 +90,7 @@ export default function AllSymptoms(props) {
     <View style={styles.mainscroll}>
       <View style={styles.mainflat}>
         <FlatList
-          style={{ height: 500, marginRight: 36, marginLeft: 36 }}
+          // style={{ height: 500, marginRight: 36, marginLeft: 36 }}
           horizontal={false}
           data={symptomsData}
           renderItem={renderItem}
@@ -108,11 +108,13 @@ export default function AllSymptoms(props) {
           alignItems: "center",
         }}
       >
+        <TouchableOpacity  onPress={getSelectedSymptoms}>
         <View style={styles.btn}>
-          <Button color="white" style={{fontSize:16,font:"600"}} onPress={getSelectedSymptoms}>
+          <Button color="white" style={{fontSize:16,font:"600"}}>
             Continue
           </Button>
         </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

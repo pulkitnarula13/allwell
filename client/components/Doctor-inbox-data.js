@@ -16,7 +16,6 @@ const DoctorCurrentMessages = (props) => {
   useEffect(() => {
     const modifiedData = props?.currentAppointmnents?.map((data) => {
       return {
-        image: "../../assets/icon.png",
         date: `${new Date(data.date).getDate()} / ${new Date(
           data.date
         ).getMonth()} / ${new Date(data.date).getFullYear()}`,
@@ -97,6 +96,7 @@ const styles = StyleSheet.create({
     marginBottom: 7,
 
   },
+  
   down: {
     width: 180,
     height: 60,

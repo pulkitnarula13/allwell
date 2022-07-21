@@ -12,6 +12,7 @@ const {
   createSymptom,
   getSymptoms,
   addFamilyForPatient,
+  getMembers,
 } = require("../controller/patient");
 
 const validateToken = require("../middleware/auth");
@@ -94,14 +95,14 @@ router.put("/:id",updatePatient);
 // Routes
 /**
  * @swagger
- * /patient/:id:
+ * /patient/family/:id:
  *   put:
- *     description: Update information of a patient in the database
+ *     description: Add family member of a patient
  *     responses:
  *       200:
  *         description: return positive response
  */
- router.put("/family/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, addFamilyForPatient);
+ router.put("/family/:id", addFamilyForPatient);
 
 
 // Routes
@@ -132,6 +133,24 @@ router.delete("/:id", verifyRoles(ROLE.ADMIN, ROLE.PATIENT), validateToken, dele
   validateToken,
   verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
   createSymptom
+);
+
+
+// Routes
+/**
+ * @swagger
+ * /patient/members/:id:
+ *   post:
+ *     description: Creates symptoms 
+ *     responses:
+ *       201:
+ *         description: return positive response
+ */
+ router.get(
+  "/members/:id",
+  validateToken,
+  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
+  getMembers
 );
 
 

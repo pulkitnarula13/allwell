@@ -15,6 +15,10 @@ const AvailableDoctorCard = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
+      style={{
+        display: "flex",
+        alignItems: "center"
+      }}
         onPress={() =>
           props.navigation.navigate("Doctor-Info", {
             id: props.item._id,
@@ -55,7 +59,7 @@ const AvailableDoctorCard = (props) => {
             />
           )}
         </View>
-      </TouchableOpacity>
+     
       <Text
         style={{
           marginBottom: 5,
@@ -82,6 +86,7 @@ const AvailableDoctorCard = (props) => {
           {(props.item.distance / 10000000).toFixed(1)} km
         </Text>
       </View>
+      </TouchableOpacity>
     </View>
   );
 };

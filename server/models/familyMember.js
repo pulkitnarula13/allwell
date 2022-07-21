@@ -28,6 +28,11 @@ const FamilyMemberSchema = mongoose.Schema({
     type: String,
   },
 
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Patient",
+  }
+
 });
 
 const FamilyMember = mongoose.model("FamilyMember", FamilyMemberSchema);

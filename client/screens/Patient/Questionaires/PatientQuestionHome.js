@@ -137,17 +137,19 @@ const PatientQuestionHome = ({ navigation }) => {
         active={active}
         content={content}
         buttonStyle={{
-          width: 150,
+          width: 120,
           height: 49,
           backgroundColor: "#74CBD4",
           justifyContent: "center",
           alignItems: "center",
           borderRadius: 100,
+          marginLeft: active === 0 ? "auto" : "auto",
+          marginRight: active === 0 ? 30 : "auto"
         }}
         onBack={() => setActive((p) => p - 1)}
         onFinish={() => createAppointment()}
         onNext={() => setActive((p) => p + 1)}
-        stepStyle={{ display: "none", width: 330 }}
+        stepStyle={{ display: "none" }}
       />
       <Bottomnavigation />
     </View>

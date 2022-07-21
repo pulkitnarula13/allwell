@@ -15,27 +15,92 @@ import { BASE_URL_DEV } from "@env";
 import AppointmentContext from "../../Context/AppointmentContext";
 import { Ionicons } from "@expo/vector-icons";
 import { SymptomsList } from "../../constants/symptoms";
+import { AuthContext } from "../../Context/AuthContext";
+
 
 let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
-  {
-    name: "Mark",
-    profilePicture: "../../assets/icon1.png",
-  },
-  {
-    name: "Jessica",
-  },
-  {
-    name: "Mark",
-    profilePicture: "../../assets/icon1.png",
-  },
+  // {
+  //   name: "Mark",
+  //   profilePicture: "../../assets/icon1.png",
+  // },
+  // {
+  //   name: "Jessica",
+  // },
+  // {
+  //   name: "Mark",
+  //   profilePicture: "../../assets/icon1.png",
+  // },
 ];
 
 const ConnectPatient = ({ navigation, route }) => {
+  // get the family members
+  useEffect(() => {
+    getFamilyMembers();
+  }, []);
+
+  const { userInfo } = useContext(AuthContext);
   const { appointmentData } = useContext(AppointmentContext);
   const { setAppointmentData } = useContext(AppointmentContext);
+  const [ membersData, setMembersData ] = useState([]);
   const [selectedItem, setSelectedItems] = useState();
+
+// Get the family members from the API
+  const getFamilyMembers = async () => {
+    const familyData = await axios.get(`${BASE_URL_DEV}/patients/members/${userInfo.id}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    });
+
+    console.log(familyData);
+
+
+    const modifiedData = familyData.data.data.map((item) => {
+      item.isSelect = false;
+      item.selectedClass = styles.list;
+      item.image = "../../assets/icon1.png";
+      return item;
+    });
+
+    setMembersData(modifiedData);
+  };
+
+  const selectItem = (data) => {
+    data.item.isSelect = !data.item.isSelect;
+    data.item.selectedClass = data.item.isSelect
+      ? styles.selected
+      : styles.list;
+
+    const index = membersData.findIndex((item) => data.item._id === item._id);
+
+    let tempdata = membersData;
+    tempdata[index] = data.item;
+
+    setMembersData(tempdata);
+  };
+
+  const renderItem = (item, image) => {
+    return (
+      <TouchableOpacity
+        style={[styles.list, item.selectedClass]}
+        onPress={() => selectItem(item)}
+      >
+        <View style={styles.item}>
+        <Image
+            style={{ width: 74, height: 70 }}
+            source={item.item.profilePicture}
+            resizeMode="cover"
+          />
+          
+        </View>
+        <Text style={{marginBottom:39,fontSize:14,fontWeight:"400"}}>{item.item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+
 
   useEffect(() => {
     const filteredArray = route?.params?.symptomsData.filter((value) =>
@@ -65,7 +130,7 @@ const ConnectPatient = ({ navigation, route }) => {
     </View>
   );
 
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  // const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
 
   const renderSymptoms = ({ item, image }) => {
     return (
@@ -117,8 +182,8 @@ const ConnectPatient = ({ navigation, route }) => {
               onPress={() => navigation.navigate("Add-Family-Member")}
             >
               <Image
-                style={{ width: 74, height: 74 }}
-                source={require("../../assets/icons/medico_icon_alert.png")}
+                style={{ width: 70, height: 70 }}
+                source={require("../../assets/icons/medico_icon_plus.png")}
               />
             </TouchableOpacity>
             <Text>Add Patient</Text>
