@@ -42,6 +42,10 @@ import Privacypolicy from "../screens/Patient/Privacypolicy";
 import Termsofuse from "../screens/Patient/Termsofuse";
 import PatientChatting from "../components/Patient-Chatting";
 import Requestwaitgif from "../screens/Patient/Requestwaitgif";
+import FAQDoctors from "../screens/Doctor/FAQ-Doctors";
+import TermsDoctors from "../screens/Doctor/Terms-Doctors"
+import PrivacyPolicyDoctors from "../screens/Doctor/PrivacyPolicyDoctors"
+
 
 const Stack = createNativeStackNavigator();
 
@@ -88,10 +92,7 @@ const AppStack = () => {
       <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
       <Stack.Screen name="Doctorprofile" component={Doctorprofile} />
       <Stack.Screen name="DoctorInformation" component={DoctorInformation} />
-      <Stack.Screen
-        name="Accept-Patient-Schedule"
-        component={AcceptPatientSchedule}
-      />
+      <Stack.Screen name="Accept-Patient-Schedule" component={AcceptPatientSchedule} />
       <Stack.Screen
         name="Notfication"
         component={Notification}
@@ -101,9 +102,6 @@ const AppStack = () => {
         name="Chatting"
         component={Chattingwithdoctor}
       />
-      <Stack.Screen name="Termsofuse-patient" component={Termsofuse} />
-      <Stack.Screen name="Privacypolicy-patient" component={Privacypolicy} />
-      <Stack.Screen name="FAQ-patient" component={FAQ} />
       <Stack.Screen name="Managefamilymembers" component={Managefamilymembers} />
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
@@ -112,6 +110,10 @@ const AppStack = () => {
       <Stack.Screen name="Patient-Chat" component={PatientChat} />
       <Stack.Screen name="AccountInformation" component={AccountInformation} />
       <Stack.Screen name="Doctor-Home" component={DoctorHome} />
+
+      <Stack.Screen name="TermsDoctors" component={TermsDoctors} />
+      <Stack.Screen name="PrivacyPolicyDoctors" component={PrivacyPolicyDoctors} />
+      <Stack.Screen name="FAQDoctors" component={FAQDoctors} />
 
       {/* DOCTOR NAVIGATIONS ENDED*/}
 
@@ -140,6 +142,10 @@ const AppStack = () => {
         name="Doctor-Connect"
         component={ConnectPatient}
       />
+
+      <Stack.Screen name="Termsofuse-patient" component={Termsofuse} />
+      <Stack.Screen name="Privacypolicy-patient" component={Privacypolicy} />
+      <Stack.Screen name="FAQ-patient" component={FAQ} />
       {/* PATIENT NAVIGATIONS ENDED */}
     </Stack.Navigator>
   );
