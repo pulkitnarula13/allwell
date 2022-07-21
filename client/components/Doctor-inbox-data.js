@@ -10,7 +10,7 @@ const DoctorCurrentMessages = (props) => {
   console.log(props, "props");
 
   const [currentData, setCurrentData] = useState();
-  const [dialogbox, setDialogbox] = useState(false);
+  // const [dialogbox, setDialogbox] = useState(false);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const DoctorCurrentMessages = (props) => {
                 <View style={{ left:-19,display: "flex", flexDirection: "column" }}>
                   <Text style={{marginBottom:18,marginTop:10,fontSize:14,fontWeight:"400",color:"#718096"}}>Date: {item.date}</Text>
                   <Text >Symptoms: {item.symptoms}</Text>
-                  <Text style={{fontSize:16,fontWeight:"400",height:44}}>More Information: {item.qna[0].answer}</Text>
+                  {/* <Text style={{fontSize:16,fontWeight:"400",height:44}}>More Information: {item.qna[0].answer}</Text> */}
                 </View>
               </View>
             </View>
@@ -104,10 +104,11 @@ const styles = StyleSheet.create({
   },
   mainouter: {
     display: "flex",
-    width: 343,
+    width: 350,
     height: 150,
     borderWidth: 0.7,
     borderColor: "gray",
+    padding: 10,
     
     borderRadius: 10,
     justifyContent:"center",
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
   inner: {
     display: "flex",
     flexDirection: "row",
+    width: 320,
   },
   image2: {
     width: 86,
