@@ -17,21 +17,24 @@ const PatientQuestionImage = (props) => {
 
     if (!result.cancelled) {
       const data = totalImages;
-      data.push(result.base64);
+      data.push({
+        uri: result.uri,
+        base64: result.base64
+      });
       setTotalImages(data);
       props.setSixthStepperData({
         ...props.mainData,
         images: data,
       });
     }
-
-    console.log(totalImages, "totalImages");
   };
 
   const Item = ({ item }) => {
     return (
       <View style={styles.item}>
-        <Image style={styles.image2} source={item} resizeMode="cover" />
+        <Image style={styles.image2} source={{
+          uri: item.uri
+        }} resizeMode="contain" />
       </View>
     );
   };
@@ -44,15 +47,15 @@ const PatientQuestionImage = (props) => {
           resizeMode="center"
         />
       </View>
-      <Text style={{fontSize:14,fontWeight:"600",marginBottom:5}}>Add Photos/Videos</Text>
-      <View style={{ display: "flex", flexDirection: "row",height:130 }}>
+      <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>Add Photos/Videos</Text>
+      <View style={{ display: "flex", flexDirection: "row", height: 130 }}>
         <TouchableOpacity onPress={openimagelib}>
-         <View style={{width:130,height:130,borderWidth:1,borderColor:"#A0AEC0",justifyContent:"center",alignItems:"center",borderRadius:10}}>
-          <Image
-            style={styles.image3}
-            source={require("../../../assets/camera.jpg")}
-            resizeMode="cover"
-          />
+          <View style={{ width: 130, height: 130, borderWidth: 1, borderColor: "#A0AEC0", justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
+            <Image
+              style={styles.image3}
+              source={require("../../../assets/camera.jpg")}
+              resizeMode="cover"
+            />
           </View>
         </TouchableOpacity>
         <FlatList
@@ -82,6 +85,7 @@ const styles = StyleSheet.create({
     width: 82,
     height: 82,
     borderRadius: 10,
+    justifyContent: "center", alignItems: "center",
   },
   image1: {
     height: 284,
@@ -114,18 +118,13 @@ const styles = StyleSheet.create({
     width: 150,
     height: 45,
     justifyContent: "center",
-
     fontWeight: "500",
-
     fontSize: 17,
   },
-
   imageview: {
     display: "flex",
     justifyContent: "center",
-    marginTop:40,
     alignItems: "center",
-    marginBottom: 38,
   },
   outer: {
     display: "flex",

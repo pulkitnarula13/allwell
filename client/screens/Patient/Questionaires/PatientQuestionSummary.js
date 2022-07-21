@@ -54,12 +54,11 @@ const PatientQuestionSummary = ({ data }) => {
     <View style={styles.outer}>
       <View>
         <List.Section title="Questions">
-          <FlatList
-        
-            data={data}
-            renderItem={Item}
-            keyExtractor={(item) => item.question}
-          />
+          {
+            data.map((val, index) => {
+              return <Item key={index} item={val} />
+            })
+          }
         </List.Section>
       </View>
     </View>
