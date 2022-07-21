@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
+import { Avatar } from "react-native-paper";
 
 const Doctorprofile = (props) => {
   const { userInfo } = useContext(AuthContext);
@@ -37,16 +38,39 @@ const Doctorprofile = (props) => {
         </View>
       </View>
       <View style={styles.imagecenter}>
-        <Image
+        {/* <Image
           style={styles.image2}
           source={require("../../assets/icon.png")}
           resizeMode="contain"
-        />
-        <Button style={styles.editicon}>
+        /> */}
+        {!userInfo.profilePicture ? (
+              <Avatar.Text
+                style={{ backgroundColor: "#74CBD4" }}
+                size={140}
+                label={userInfo.name[0]}
+                color="#fff"
+              />
+            ) : (
+              <Image
+                style={styles.image2}
+                source={
+                  userInfo.profilePicture
+                    ? userInfo.profilePicture
+                    : require("../assets/icon.png")
+                }
+              />
+            )}
+        <Button style={styles.editicon}
+          onPress={() => props.navigation.navigate("DoctorInformation")}>
           <Feather name="edit-3" size={24} color="black" />
         </Button>
       </View>
+
       <View style={styles.info1}>
+        <Text style={styles.infotext1}>Name</Text>
+        <Text style={styles.infotext11}>{docProfileData.name}</Text>
+      </View>
+      <View style={styles.info2}>
         <Text style={styles.infotext1}>Email</Text>
         <Text style={styles.infotext11}>{docProfileData.email}</Text>
       </View>
@@ -58,7 +82,9 @@ const Doctorprofile = (props) => {
         <Text style={styles.infotext1}>License Number</Text>
         <Text style={styles.infotext11}>{docProfileData.licenseNumber}</Text>
       </View>
-      <View style={styles.info2}>
+
+      {/* Address */}
+      {/* <View style={styles.info2}>
         <Text style={styles.infotext2}>Address</Text>
         {docProfileData.address ? (
           <View>
@@ -78,9 +104,12 @@ const Doctorprofile = (props) => {
             <Text>Please update address</Text>
           </View>
         )}
+
         <Text style={styles.infotext11}></Text>
-      </View>
-      <View style={styles.info2}>
+      </View> */}
+
+      {/* Date of Birth (DOB) of doctors */}
+      {/* <View style={styles.info2}>
         <Text style={styles.infotext1}>Date of birth</Text>
         <Text style={styles.infotext11}>
           {docProfileData.dob ? (
@@ -93,7 +122,9 @@ const Doctorprofile = (props) => {
             </View>
           )}
         </Text>
-      </View>
+      </View> */}
+
+
       <View style={styles.info3}>
         <Text style={styles.infotext13}>Short Bio</Text>
         <Text style={styles.infotext12}>
@@ -191,6 +222,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 60,
   },
   info2: {
     display: "flex",

@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 
 const DoctorProfileSettings = ({ navigation }) => {
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const [isSwitchOn, setIsSwitchOn] = useState(true);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const { logout } = useContext(AuthContext);
 
@@ -19,6 +19,8 @@ const DoctorProfileSettings = ({ navigation }) => {
       <View style={styles.outerview}>
         <Text style={styles.profiletext}>Profile</Text>
       </View>
+
+      {/* Push notification toggle */}
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Push notifications</Text>
         <Switch
@@ -27,22 +29,38 @@ const DoctorProfileSettings = ({ navigation }) => {
           onValueChange={onToggleSwitch}
         />
       </View>
-      <View style={styles.info1}>
+
+      {/* Touch Id */}
+      {/* <View style={styles.info1}>
         <Text style={styles.infotext1}>Touch ID</Text>
         <AntDesign name="right" size={24} color="black" />
-      </View>
-      <View style={styles.info1}>
-        <Text style={styles.infotext1}>FAQ</Text>
-        <AntDesign name="right" size={24} color="black" />
-      </View>
-      <View style={styles.info1}>
-        <Text style={styles.infotext1}>Privacy Policy</Text>
-        <AntDesign name="right" size={24} color="black" />
-      </View>
-      <View style={styles.info2}>
-        <Text style={styles.infotext1}>Term of Use</Text>
-        <AntDesign name="right" size={24} color="black" />
-      </View>
+      </View> */}
+
+      {/* FAQ button */}
+      <TouchableOpacity onPress={()=>{navigation.navigate("FAQDoctors")}}>
+        <View style={styles.info1}>
+          <Text style={styles.infotext1}>FAQ</Text>
+          <AntDesign name="right" size={24} color="black" />
+        </View>
+      </TouchableOpacity>
+
+      {/* Privacy Policy button */}
+      <TouchableOpacity onPress={()=>{navigation.navigate("PrivacyPolicyDoctors")}}>
+        <View style={styles.info1}>
+          <Text style={styles.infotext1}>Privacy Policy</Text>
+          <AntDesign name="right" size={24} color="black" />
+        </View>
+      </TouchableOpacity>
+
+      {/* Terms of Use button */}
+      <TouchableOpacity onPress={()=>{navigation.navigate("TermsDoctors")}}>
+        <View style={styles.info2}>
+          <Text style={styles.infotext1}>Terms of Use</Text>
+          <AntDesign name="right" size={24} color="black" />
+        </View>
+      </TouchableOpacity>
+
+
       <View style={styles.buttonarea}>
         <Button
           style={styles.availablebtn}

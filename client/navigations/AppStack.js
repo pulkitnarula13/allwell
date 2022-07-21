@@ -13,6 +13,7 @@ import AddFamilyMember from "../screens/Patient/AddFamilyMember";
 import PatientProfileSettings from "../screens/Patient/Profile-settings";
 import PatientLogin from "../screens/Common/Patient-Login";
 import DoctorProfileSettings from "../screens/Doctor/Doctor-Profile-Settings";
+import Doctorprofile from "../screens/Doctor/Doctor-Profile";
 import DoctorLogin from "../screens/Common/Doctor-Login";
 import SchedulePatient from "../screens/Doctor/Schedule-patient";
 import AcceptPatientSchedule from "../screens/Doctor/Accept-Patient-Schedule";
@@ -23,6 +24,7 @@ import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 import Greeting from "../screens/Common/Greeting";
 import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
 import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
+import DoctorInformation from "../screens/Doctor/Doctor-Information";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import AccountInformation from "../screens/Patient/AccountInformation";
 import PatientQuestionTwo from "../screens/Patient/Questionaires/PatientQuestionTwo";
@@ -39,6 +41,10 @@ import Privacypolicy from "../screens/Patient/Privacypolicy";
 import Termsofuse from "../screens/Patient/Termsofuse";
 import PatientChatting from "../components/Patient-Chatting";
 import Requestwaitgif from "../screens/Patient/Requestwaitgif";
+import FAQDoctors from "../screens/Doctor/FAQ-Doctors";
+import TermsDoctors from "../screens/Doctor/Terms-Doctors"
+import PrivacyPolicyDoctors from "../screens/Doctor/PrivacyPolicyDoctors"
+
 
 const Stack = createNativeStackNavigator();
 
@@ -84,10 +90,9 @@ const AppStack = () => {
       <Stack.Screen name="Chattingwithdoctor" component={Chattingwithdoctor} />
       <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
       <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
-      <Stack.Screen
-        name="Accept-Patient-Schedule"
-        component={AcceptPatientSchedule}
-      />
+      <Stack.Screen name="Doctorprofile" component={Doctorprofile} />
+      <Stack.Screen name="DoctorInformation" component={DoctorInformation} />
+      <Stack.Screen name="Accept-Patient-Schedule" component={AcceptPatientSchedule} />
       <Stack.Screen
         name="Notfication"
         component={Notification}
@@ -97,9 +102,6 @@ const AppStack = () => {
         name="Chatting"
         component={Chattingwithdoctor}
       />
-      <Stack.Screen name="Termsofuse-patient" component={Termsofuse} />
-      <Stack.Screen name="Privacypolicy-patient" component={Privacypolicy} />
-      <Stack.Screen name="FAQ-patient" component={FAQ} />
       <Stack.Screen name="Managefamilymembers" component={Managefamilymembers} />
       <Stack.Screen name="Info-Patient" component={InfoPatient} />
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
@@ -108,7 +110,14 @@ const AppStack = () => {
       <Stack.Screen name="AccountInformation" component={AccountInformation} />
       <Stack.Screen name="Doctor-Home" component={DoctorHome} />
 
+      <Stack.Screen name="TermsDoctors" component={TermsDoctors} />
+      <Stack.Screen name="PrivacyPolicyDoctors" component={PrivacyPolicyDoctors} />
+      <Stack.Screen name="FAQDoctors" component={FAQDoctors} />
+
       {/* DOCTOR NAVIGATIONS ENDED*/}
+
+
+
 
       {/* PATIENT NAVIGATIONS STARTED */}
       <Stack.Screen
@@ -128,7 +137,14 @@ const AppStack = () => {
       />
       <Stack.Screen name="Patient-Login" component={PatientLogin} />
       <Stack.Screen name="All-Symptoms" component={AllSymptoms} />
-      <Stack.Screen name="Doctor-Connect" component={ConnectPatient}/>
+      <Stack.Screen
+        name="Doctor-Connect"
+        component={ConnectPatient}
+      />
+
+      <Stack.Screen name="Termsofuse-patient" component={Termsofuse} />
+      <Stack.Screen name="Privacypolicy-patient" component={Privacypolicy} />
+      <Stack.Screen name="FAQ-patient" component={FAQ} />
       {/* PATIENT NAVIGATIONS ENDED */}
     </Stack.Navigator>
   );
