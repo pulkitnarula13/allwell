@@ -15,13 +15,21 @@ export default function Chattingwithdoctor(props) {
     modifyChat();
   }, []);
 
+  
   function renderBubble(props) {
     return (
       <Bubble
         {...props}
         wrapperStyle={{
           left: {
-            backgroundColor: "#79bdcc",
+            backgroundColor: "white",
+            borderWidth:1,
+            borderColor:"#74CBD4",
+            borderTopRightRadius:100,
+            borderBottomRightRadius:100,
+            borderTopLeftRadius:100,
+            borderBottomLeftRadius:100,
+            padding:10
           },
         }}
       />
@@ -41,7 +49,8 @@ export default function Chattingwithdoctor(props) {
 
   const RenderSend = (props) => {
     return (
-        <Button icon="send">
+        <Button color="white"  style={{width:80,height:39,borderWidth:1,borderColor:"#74CBD4",backgroundColor:"#74CBD4",borderRadius:"100"}} >
+        Send
         </Button>
     );
   };
@@ -104,6 +113,7 @@ export default function Chattingwithdoctor(props) {
       messages={messages}
       renderBubble={renderBubble}
       onSend={(messages) => onSend(messages)}
+      renderSend={()=>RenderSend()}
       alwaysShowSend={true}
       user={{
         _id: 1,
