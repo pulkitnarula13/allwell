@@ -18,6 +18,11 @@ const Searchbars = () => {
 };
 const styles = StyleSheet.create({
     bar:{
+        borderWidth:4,
+        fontSize:14,
+        fontWeight:"600",
+        borderColor:"#A0AEC0",
+        borderRadius:100,
         width:321,
         height:44
     }

@@ -2,34 +2,33 @@ import { List, Text, TextInput } from "react-native-paper";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-export default function questions(props) {
+export default function Questions(props) {
   const [answer, setAnswer] = useState();
 
   return (
     <View>
       <Text style={styles.textstyle}>{props.data}</Text>
       <TextInput
-      style={{borderWidth:1,borderColor:"#74CBD4",borderRadius:10,backgroundColor:"white"}}
+        mode="outlined"
         value={answer}
         onChangeText={(value) => {
-          console.log(value, "target Value");
-          setAnswer(value);
+        setAnswer(value);
           props.setAnswer(value);
-      }}
+        }}
         placeholder="Write your answer here"
         multiline={true}
-        height={130}
-        width={330}
+        style={{
+          width: 320,
+          height: 150,
+          backgroundColor: "#fff"
+        }}
       />
     </View>
   );
 }
 const styles = StyleSheet.create({
   textstyle: {
-    fontWeight: "600",
-    width:370,
-    marginBottom:10,
-    fontSize: 14,
-  
+    fontSize: 17,
+    marginBottom: 4,
   },
 });

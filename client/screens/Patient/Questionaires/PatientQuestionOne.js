@@ -1,24 +1,22 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet,Text } from "react-native";
 import React from "react";
 import Questions from "../../../components/questions";
 
 
 const PatientQuestionOne = (props) => {
-
   return (
     <View style={styles.outer}>
       <View style={styles.imageview}>
         <Image
           style={styles.image1}
-          source={require("../../assets/icon.png")}
+          source={require("../../../assets/images/doctorAni.gif")}
           resizeMode="center"
         />
       </View>
-      <View >
+      <View>
         <Questions
           data={props.mainData.question}
-          setAnswer={(val) => {
-            console.log(val, "inside patientQuestioOne");
+          setAnswer={(val) => { 
             props.stepperData({
               ...props.mainData,
               answer: val,
@@ -31,7 +29,7 @@ const PatientQuestionOne = (props) => {
 };
 const styles = StyleSheet.create({
   image1: {
-    width: 235,
+    // width: 235,
     height: 284,
   },
   textheight: {
@@ -67,16 +65,14 @@ const styles = StyleSheet.create({
 
   imageview: {
     display: "flex",
-    marginTop:400,
-    marginBottom:40,
+    marginBottom: 40,
   },
   outer: {
-    justifyContent:"center",
-alignItems:"center",    display: "flex",
-    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    // flex: 1,
     padding: 30,
-    marginBottom:-380,
-    width:435
   },
 });
 export default PatientQuestionOne;

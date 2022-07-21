@@ -8,7 +8,7 @@ const PatientQuestionFour = (props) => {
       <View style={styles.imageview}>
         <Image
           style={styles.image1}
-          source={require("../../assets/icon.png")}
+          source={require("../../../assets/images/doctorAni.gif")}
           resizeMode="center"
         />
       </View>
@@ -38,7 +38,6 @@ const PatientQuestionFour = (props) => {
 };
 const styles = StyleSheet.create({
   image1: {
-    width: 235,
     height: 284,
   },
   textheight: {

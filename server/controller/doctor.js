@@ -181,18 +181,22 @@ const getDoctors = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const updateDoctor = (req, res) => {
+const updateDoctor = async (req, res) => {
   const id = req.params.id;
 
-  // const savedAddress = await Address.create({
-  //   houseNumber: req.body.houseNumber,
-  //   city: req.body.city,
-  //   province: req.body.province,
-  //   postalCode: req.body.postalCode,
-  //   country: req.body.country,
-  // });
+  let uploadProfilePicture;
 
-  Doctor.findOneAndUpdate({ _id: id }, req.body, {
+  if (req.body.profilePicture) {
+    uploadProfilePicture = await upload(
+      `${Date.now() + "" + req.body.name}`,
+      req.body.profilePicture,
+      "jpg",
+      "doctor",
+      req.body.name
+    );
+  }
+
+  Doctor.findOneAndUpdate({ _id: id },  {...req.body, profilePicture: uploadProfilePicture }, {
     returnOrignal: false,
   }).then((result) => {
     res.status(200).json({
