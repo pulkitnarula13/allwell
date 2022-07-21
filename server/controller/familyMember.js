@@ -15,13 +15,6 @@ const addFamilyMember = async (req, res) => {
     try {
         const data = req.body;
   
-        // const findPatient = await Patient.findById(data.patient);
-        // if (!findPatient) {
-        //     return res.status(404).json({
-        //     message: "Patient not found",
-        //     });
-        // }
-
         // const uploadMemberImage = await upload(
         //     `${Date.now() + "" + data.name}`,
         //     data.familyMemberImage,
@@ -35,10 +28,7 @@ const addFamilyMember = async (req, res) => {
             email: data.email.toLowerCase(),
             dob: data.dob,
             healthNumber: data.msp,
-            gender: data.gender,
             relationship: data.relationship,
-            creatorPatient: data.patient,
-            roles: [ROLE.PATIENT],
             profilePicture: ''
 
         });
@@ -139,7 +129,7 @@ const getFamilyMemberById = (req, res) => {
  * @return {*}
  */
 const getMembersByPatient = (req, res) => {
-    FamilyMember.find({ creatorPatient: req.params.id }).populate({
+    FamilyMember.find({ createdBy: req.params.id }).populate({
       path: "patient"
     })
     .then((result) => {

@@ -128,10 +128,7 @@ const AppStack = () => {
       />
       <Stack.Screen name="Patient-Login" component={PatientLogin} />
       <Stack.Screen name="All-Symptoms" component={AllSymptoms} />
-      <Stack.Screen
-        name="Doctor-Connect"
-        component={ConnectPatient}
-      />
+      <Stack.Screen name="Doctor-Connect" component={ConnectPatient}/>
       {/* PATIENT NAVIGATIONS ENDED */}
     </Stack.Navigator>
   );
