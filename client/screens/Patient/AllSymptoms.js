@@ -13,7 +13,7 @@ export default function AllSymptoms(props) {
     getSymptoms();
   }, []);
 
-  const [symptomsData, setSymptomsData] = useState([]);
+  const [ symptomsData, setSymptomsData ] = useState([]);
   const { setAppointmentData } = useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
 
