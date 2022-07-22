@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
