@@ -4,7 +4,6 @@ import {
   Bubble,
   GiftedChat,
   Composer,
-  InputToolbar,
 } from "react-native-gifted-chat";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
@@ -95,7 +94,6 @@ export default function Chattingwithdoctor(props) {
   };
 
   const completeAppointment = async () => {
-    console.log("Completed function", props);
     try {
       const response = await axios.put(
         `${BASE_URL_DEV}/appointments/complete/${props.route.params.appointmentInfo}`,
@@ -109,6 +107,8 @@ export default function Chattingwithdoctor(props) {
           },
         }
       );
+
+
 
       Alert.alert("Success", response.data.message);
       props.navigation.navigate("Doctor-Inbox");
@@ -137,19 +137,21 @@ export default function Chattingwithdoctor(props) {
   }, []);
 
   return (
-    <GiftedChat
-      messages={messages}
-      renderBubble={renderBubble}
-      onSend={(messages) => onSend(messages)}
-      alwaysShowSend={true}
-      quickReplyStyle={{
-        minHeight: 30,
-        marginTop: 12
-      }}
-      onQuickReply={(quck) => completeAppointment()}
-      user={{
-        _id: 1,
-      }}
-    />
+    <View>
+      <GiftedChat
+        messages={messages}
+        renderBubble={renderBubble}
+        onSend={(messages) => onSend(messages)}
+        alwaysShowSend={true}
+        quickReplyStyle={{
+          minHeight: 30,
+          marginTop: 12,
+        }}
+        onQuickReply={(quck) => completeAppointment()}
+        user={{
+          _id: 1,
+        }}
+      />
+    </View>
   );
 }

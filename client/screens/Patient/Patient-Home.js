@@ -86,7 +86,7 @@ const PatientHome = ({ navigation }) => {
       }
     );
     const modifiedData = response.data.data.map((val) => {
-      val.distance = getDistance(
+      val.distance = getPreciseDistance(
         { latitude: latitude, longitude: longitude },
         {
           latitude: val.location.coordinates[1],

@@ -16,7 +16,8 @@ const specializationSchema = new Schema({
     },
 
     symptoms: {
-        type: [mongoose.Schema.Types.ObjectId,]
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Symptom'
     }
 })
 

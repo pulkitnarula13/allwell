@@ -12,6 +12,7 @@ import { Avatar, Button, Chip } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 const AvailableDoctorCard = (props) => {
 
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -70,13 +71,13 @@ const AvailableDoctorCard = (props) => {
           fontWeight: "400",
         }}
       >
-        {props.item.name}
+        Dr. {props.item.name}
       </Text>
 
       <Text style={{ marginBottom: 5, fontWeight: "100" }}>
         <View style={styles.chip}>
           <Text style={{ fontSize: 10, color: "#718096" }}>
-            {props.item.specialities[0].name}
+            {props.item.specialities[0]?.name}
           </Text>
         </View>
       </Text>
