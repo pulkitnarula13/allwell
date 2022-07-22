@@ -249,7 +249,9 @@ export default function PatientChatting(props) {
     try {
       const response = await axios.put(
         `${BASE_URL_DEV}/appointments/complete/${props.route.params.appointmentInfo}`,
-        {},
+        {
+          completed: true,
+        },
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
