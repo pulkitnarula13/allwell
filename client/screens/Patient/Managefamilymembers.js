@@ -41,7 +41,6 @@ const Managefamilymembers = ({ navigation, route }) => {
     );
 
     const data = familyData.data.data;
-    data.unshift(userInfo);
 
     setMembersData(data);
   };
@@ -138,7 +137,7 @@ const Managefamilymembers = ({ navigation, route }) => {
                 source={require("../../assets/icons/medico_icon_plus.png")}
               />
             </TouchableOpacity>
-            <Text>Add Patient</Text>
+            <Text>Add Member</Text>
           </View>
         </View>
 
