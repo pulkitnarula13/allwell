@@ -17,6 +17,7 @@ const PatientInformation = (props) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [MSP, setMSP] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const [dataLoading, setDataLoading] = useState(false);
 
   const getPatientProfile = async () => {
@@ -33,6 +34,7 @@ const PatientInformation = (props) => {
     setName(userData.data.data.name);
     setemail(userData.data.data.email);
     setProfilePicture(userData.data.data.profilePicture);
+    setProfilePhoto(userData.data.data.profilePicture);
     setPhoneNumber(userData.data.data.phoneNumber.toString());
     setMSP(userData.data.data.healthNumber.toString());
     setDataLoading(false);
@@ -53,6 +55,7 @@ const PatientInformation = (props) => {
 
     if (!result.cancelled) {
       setProfilePicture({ base64: result.base64, uri: result.uri });
+      setProfilePhoto(result.uri);
       console.log(profilePicture, "selected Profile Picture");
     }
   };
@@ -101,13 +104,13 @@ const PatientInformation = (props) => {
               ) : (
                 <Image
                   style={styles.imgstyle}
-                  source={{ uri: `${profilePicture.uri}` }}
+                  source={{ uri: `${profilePhoto}` }}
                 />
               )} */}
                 <Image
                     style={styles.imgstyle}
-                    source={{ uri: profilePicture }}
-                    resizeMode="cover"
+                    source={{ uri: `${profilePhoto}` }}
+                    // resizeMode="cover"
                 />
             </TouchableOpacity>
           </View>

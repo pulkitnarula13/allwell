@@ -21,17 +21,17 @@ import { AuthContext } from "../../Context/AuthContext";
 let Screenheight = Dimensions.get("window").height;
 
 const DATA = [
-  // {
-  //   name: "Mark",
-  //   profilePicture: "../../assets/icon1.png",
-  // },
-  // {
-  //   name: "Jessica",
-  // },
-  // {
-  //   name: "Mark",
-  //   profilePicture: "../../assets/icon1.png",
-  // },
+  {
+    name: "Mark",
+    profilePicture: "../../assets/icon1.png",
+  },
+  {
+    name: "Jessica",
+  },
+  {
+    name: "Mark",
+    profilePicture: "../../assets/icon1.png",
+  },
 ];
 
 const ConnectPatient = ({ navigation, route }) => {
