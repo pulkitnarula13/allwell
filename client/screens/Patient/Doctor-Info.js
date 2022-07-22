@@ -27,7 +27,7 @@ const DoctorInfo = (props) => {
 
   const [dialogbox, setDialogbox] = useState(false);
   const [starRating, setStarRating] = useState(0);
-  const [doctorReviewText, setDoctorReviewTextf] = useState();
+  const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
   const { appointmentData, setAppointmentData } =
     useContext(AppointmentContext);
