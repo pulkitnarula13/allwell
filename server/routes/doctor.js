@@ -129,7 +129,7 @@ router.get("/:id", getDoctorById);
 router.post(
   "/specialities",
   validateToken,
-  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR),
+  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
   createSpecialization
 );
 
