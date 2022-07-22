@@ -80,12 +80,13 @@ const PatientProfile = (props) => {
              uri: `${PatientProfileData?.profilePicture}`,
            }}
            resizeMode="cover"
-         /> :               <Avatar.Text
-         style={{ backgroundColor: "#74CBD4" }}
-         size={98}
-         label={PatientProfileData?.name[0]}
-         color="#fff"
-       />
+         /> :               
+         <Avatar.Text
+          style={{ backgroundColor: "#74CBD4" }}
+          size={98}
+          label={PatientProfileData?.name[0]}
+          color="#fff"
+        />
          }
         </View>
         <View style={styles.info1}>
