@@ -42,7 +42,6 @@ const CreatingAccount3 = (props) => {
       };
     });
 
-    console.log(manipulatedData, "data");
     setSpecialities(manipulatedData);
   };
 

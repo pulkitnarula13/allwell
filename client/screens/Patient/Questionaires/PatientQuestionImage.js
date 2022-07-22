@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
 
     fontWeight: "500",
     fontSize: 17,
-    marginRight: 30,
   },
   availablebtn1: {
     backgroundColor: "#ffff",

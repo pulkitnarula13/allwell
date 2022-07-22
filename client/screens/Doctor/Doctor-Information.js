@@ -85,7 +85,7 @@ const DoctorInformation = (props) => {
                 <Avatar.Text
                   style={{ backgroundColor: "#74CBD4" }}
                   size={140}
-                  label={userInfo.name[0]}
+                  label={userInfo?.name[0]}
                   color="#fff"
                 />
               ) : (
