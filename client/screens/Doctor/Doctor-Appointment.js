@@ -89,7 +89,7 @@ const DoctorAppointment = (props) => {
             <Image
               style={styles.imagePatient}
               source={require("../../assets/icon.png")}
-              resizeMode="contain"
+              resizeMode="cover"
             />
             <Text style={styles.textPatientName}>{item.patient.name}</Text>
           </View>

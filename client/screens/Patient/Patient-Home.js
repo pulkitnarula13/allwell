@@ -253,6 +253,9 @@ const PatientHome = ({ navigation }) => {
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   const renderItem1 = ({ item }) => {
+
+
+    if(item){
     return (
       <TouchableOpacity
         onPress={() =>
@@ -270,6 +273,14 @@ const PatientHome = ({ navigation }) => {
         />
       </TouchableOpacity>
     );
+      }
+      else{
+        <Image
+              style={{ width: 20, height: 20 }}
+              source={require("../../assets/icons/loading.gif")}
+            />
+      }
+    
   };
 
   const renderItem2 = ({ item }) => (
@@ -422,7 +433,7 @@ const PatientHome = ({ navigation }) => {
               style={{ height: 130 }}
               horizontal={true}
               data={symptomsData}
-              renderItem={renderItem}
+              renderItem={renderItem} 
               keyExtractor={(item, index) => index}
               showsHorizontalScrollIndicator={false}
             />

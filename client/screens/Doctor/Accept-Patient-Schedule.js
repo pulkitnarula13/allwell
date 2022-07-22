@@ -10,7 +10,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import PushNotification from "../../components/PushNotification";
 
 const Item = ({ name, image }) => (
-  <View style={styles.item}>
+  <View style={{marginRight:50}}>
     <Image
       style={styles.image1}
       source={require("../../assets/icon.png")}
@@ -24,6 +24,7 @@ const AcceptPatientSchedule = (props) => {
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
 
   const [date, setDate] = useState(new Date());
+  const [mydate, setMyDate] = useState();
   const [time, setTime] = useState(date);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(true);
@@ -32,6 +33,7 @@ const AcceptPatientSchedule = (props) => {
   console.log(appointmentInfo, "appointmentInfo");
   const [messageForAppointment, setMessageForAppointment] = useState("");
 
+  console.log('Date: ', date);
   const confirmAppointment = async () => {
     try {
       const response = await axios.put(
@@ -101,7 +103,8 @@ const AcceptPatientSchedule = (props) => {
   const showTimepicker = () => {
     showMode("time");
   };
-
+  var newdate = new Date(appointmentInfo.item.createdAt);
+  
   return (
     <ScrollView>
       {messageForAppointment ? (
@@ -112,17 +115,20 @@ const AcceptPatientSchedule = (props) => {
         />
       ) : null}
       <View style={styles.outerview1}>
-        <View style={styles.outerview}>
-          <Text style={styles.text1}>Schedule Patient</Text>
-        </View>
+       
 
         <View style={styles.innerview}>
           <Text style={styles.text2}>{appointmentInfo.item.patient.name}</Text>
 
           <View style={styles.text3}>
-            <Text>Request Time: {appointmentInfo.item.createdAt}</Text>
+          <Text style={{fontSize:16,fontWeight:"400",color:"#718096"}}>{`${newdate.toDateString()}    ` }</Text>
+          
+          <Text style={{textAlign:"center",fontSize:16,fontWeight:"400",color:"#718096"}}>{`${newdate.getHours()}: ${newdate.getMinutes()}`}</Text>
+          
+            </View >
+            
           </View>
-
+            <View style={styles.innerview1}>
           <Text style={styles.datandtime1}>Symptoms</Text>
 
           <View style={styles.flatlistView}>
@@ -134,43 +140,50 @@ const AcceptPatientSchedule = (props) => {
             />
           </View>
 
-          <Text style={styles.description}>More Description</Text>
+          <Text style={styles.description}>Description</Text>
           <Text style={styles.lorem1}>
             {appointmentInfo.item?.qna[0]?.answer}
           </Text>
         </View>
-
+          <View>
+            <Text style={{fontSize:16,fontWeight:"600",paddingLeft: 19,}}>Date and Time Slot</Text>
+          </View>
         <View style={styles.viewDateTimeContainer}>
-          <Text style={styles.txtDate}>Date</Text>
+          
+          <Text style={styles.txtDate1}>Date:</Text>
+          <Text style={{marginBottom:10,marginLeft:10,fontSize: 12,fontWeight:"400"}}>{mydate ?  mydate : date.toDateString()}</Text>   
+          
           <Calendar
             style={{
+              marginLeft:33,
               // marginLeft: 40,
-              borderWidth: 1,
-              borderColor: "gray",
+              borderWidth: 0.5,
+              borderColor: "#CBD5E0",
+
               // height: 350,
               // width: '80%',
             }}
-            selected={date}
+            selected={mydate}
             onDayPress={(day) => {
-              setDate(day.dateString);
+              setMyDate(day.dateString);
             }}
             enableSwipeMonths={true}
             theme={{
-              backgroundColor: "#ffffff",
+              backgroundColor: "#74CBD4",
               calendarBackground: "#ffffff",
               textSectionTitleColor: "#b6c1cd",
               textSectionTitleDisabledColor: "#d9e1e8",
-              selectedDayBackgroundColor: "#00adf5",
+              selectedDayBackgroundColor: "#74CBD4",
               selectedDayTextColor: "#ffffff",
               todayTextColor: "#00adf5",
-              dayTextColor: "#2d4150",
+              dayTextColor: "black",
               textDisabledColor: "#d9e1e8",
-              dotColor: "#00adf5",
-              selectedDotColor: "#ffffff",
+              dotColor: "#74CBD4",
+              selectedDotColor: "#74CBD4",
               arrowColor: "orange",
               disabledArrowColor: "#d9e1e8",
-              monthTextColor: "blue",
-              indicatorColor: "blue",
+              monthTextColor: "black",
+              indicatorColor: "black",
               textDayFontWeight: "300",
               textMonthFontWeight: "bold",
               textDayHeaderFontWeight: "300",
@@ -179,6 +192,7 @@ const AcceptPatientSchedule = (props) => {
               textDayHeaderFontSize: 16,
             }}
           />
+         
 
           <View style={styles.viewDividerLine} />
 
@@ -186,6 +200,7 @@ const AcceptPatientSchedule = (props) => {
             <Text style={styles.txtSelectedDate}>Select Time:</Text>
             {show && (
               <DateTimePicker
+                style={{marginLeft:10,width:90}}
                 value={time}
                 mode={"time"}
                 is24Hour={true}
@@ -195,12 +210,13 @@ const AcceptPatientSchedule = (props) => {
           </View>
         </View>
 
-        <View></View>
+        
 
         <View style={styles.buttons}>
           <Button
             style={styles.availablebtn1}
             mode="contained"
+            labelStyle={{color:"#74CBD4",fontWeight:"800"}}
             onPress={cancelAppointment}
           >
             Decline
@@ -208,11 +224,13 @@ const AcceptPatientSchedule = (props) => {
           <Button
             style={styles.availablebtn2}
             mode="contained"
+            labelStyle={{fontWeight:"800"}}
             onPress={confirmAppointment}
           >
             Accept
           </Button>
         </View>
+      
       </View>
     </ScrollView>
   );
@@ -228,6 +246,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+    alignItems:"center",
+    marginBottom:50
   },
   TimeSlot: {
     fontWeight: "600",
@@ -236,15 +256,26 @@ const styles = StyleSheet.create({
     marginBottom: 270,
   },
   availablebtn1: {
-    width: 160,
-    height: 40,
+    width: 150,
+    height: 49,
     marginRight: 29,
-    backgroundColor: "#E2E8F0",
+    borderRadius:100,
+    textAlign:"center",
+    backgroundColor: "white",
+    borderWidth:2,
+    justifyContent:"center",
+    alignItems:"center",
+    borderColor:"#74CBD4",
+    
   },
   availablebtn2: {
-    width: 160,
-    height: 40,
-    backgroundColor: "#E2E8F0",
+    width: 150,
+    height: 49,
+    justifyContent:"center",
+    alignItems:"center",
+    textAlign:"center",
+    backgroundColor: "#74CBD4",
+    borderRadius:100
   },
   lorem1: {
     width: 349,
@@ -256,18 +287,26 @@ const styles = StyleSheet.create({
 
   description: {
     fontWeight: "600",
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
-    marginBottom: 11,
+    marginBottom: 21,
   },
   datandtime1: {
     fontWeight: "600",
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
   },
   innerview: {
     paddingLeft: 19,
-    marginTop: 44.66,
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    marginTop: 43,
+  },
+  innerview1  : {
+    paddingLeft: 19,
+    marginTop: 19,
+    
   },
   outerview1: {
     display: "flex",
@@ -275,7 +314,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   flatlistView: {
-    marginTop: 9,
+    marginTop: 20,
   },
   text1: {
     fontWeight: "700",
@@ -295,11 +334,15 @@ const styles = StyleSheet.create({
   image1: {
     width: 50,
     height: 50,
+    marginBottom:14,
+    borderRadius:10,
     marginRight: 28,
   },
   name1: {
     width: 67,
     textAlign: "center",
+    justifyContent:"center",
+    alignItems:"center",
     marginBottom: 10,
   },
   MainContainer: {
@@ -328,19 +371,18 @@ const styles = StyleSheet.create({
 
   viewSchedulerContainer: {
     paddingBottom: 20,
-    borderColor: "#D9D9D9",
-    borderWidth: 2,
+    borderColor: "#CBD5E0",
+    borderWidth: 0.5,
   },
 
   viewDateTimeContainer: {
     display: "flex",
     flexDirection: "coloumn",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-around",
-    // padding: 20,
     margin: 30,
-    borderWidth: 2,
-    borderColor: "D9D9D9",
+    borderWidth: 0.5,
+    borderColor: "#CBD5E0",
     borderRadius: 10,
   },
 
@@ -353,15 +395,18 @@ const styles = StyleSheet.create({
     display: "block",
   },
   viewDividerLine: {
-    borderBottomColor: "black",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "#CBD5E0",
+    borderBottomWidth: 0.5,
     paddingTop: 10,
     paddingBottom: 10,
   },
-  txtDate: {
+  txtDate1: {
     textAlign: "left",
-    fontSize: 18,
+    display:"flex",justifyContent:"flex-start",alignItems:"flex-start",
+    fontSize: 12,
     padding: 10,
+    marginBottom:5,
+    fontWeight:"400"
   },
 
   txtTime: {
@@ -372,7 +417,8 @@ const styles = StyleSheet.create({
 
   txtSelectedDate: {
     textAlign: "left",
-    fontSize: 18,
+    fontSize: 12,
+    fontWeight:"400",
     padding: 10,
   },
 
