@@ -13,6 +13,7 @@ const PatientProfileSettings = ({ navigation }) => {
 
   const patientLogout = () => {
     logout(navigation);
+    navigation.navigate("GreetingPage");
   };
 
   return (
@@ -95,7 +96,7 @@ const PatientProfileSettings = ({ navigation }) => {
                 {
                   text: "Yes",
                   onPress: () => {Alert.alert("Account Deleted")
-                  navigation.navigate("greeting");
+                  navigation.navigate("GreetingPage");
                 },
                   style: "cancel",
                 },

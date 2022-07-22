@@ -59,7 +59,7 @@ const AppStack = () => {
       <Stack.Screen name="Home" component={Bottomnavigation} />
 
 
-      <Stack.Screen name="greeting" component={Greeting} />
+      <Stack.Screen name="GreetingPage" component={Greeting} />
       <Stack.Screen
         name="Doctor-Patient-Selection-Signup"
         component={DoctorPatientSelectionSignup}

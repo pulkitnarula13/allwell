@@ -11,7 +11,7 @@ const DoctorProfileSettings = ({ navigation }) => {
 
   const doctorLogout = () => {
     logout(navigation);
-    navigation.navigate("greeting");
+    navigation.navigate("GreetingPage");
   };
 
   return (
@@ -100,7 +100,7 @@ const DoctorProfileSettings = ({ navigation }) => {
                 {
                   text: "Yes",
                   onPress: () => {Alert.alert("Account Deleted")
-                  navigation.navigate("greeting");
+                  navigation.navigate("GreetingPage");
                 },
                   style: "cancel",
                 },
