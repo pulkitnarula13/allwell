@@ -87,6 +87,7 @@ const DoctorCurrentMessages = (props) => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
+                    maxWidth: 200
                   }}
                 >
                   <Text
