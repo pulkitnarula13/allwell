@@ -18,10 +18,10 @@ export default function PatientSignup({ navigation }) {
 
 
   const submitData = async () => {
-    let data =  {
+    let data = {
       rating: starRating,
       feedback: doctorReviewText,
-      doctor:  props.route.params.id
+      doctor: props.route.params.id
     }
 
     const response = axios.post(
@@ -48,8 +48,8 @@ export default function PatientSignup({ navigation }) {
         <KeyboardAvoidingView enabled>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle} 
-              outlineColor="black" activeOutlineColor="#74CBD4"
+              style={styles.inputStyle}
+              outlineColor="gray" activeOutlineColor="#74CBD4"
               label={'Name'}
               value={name}
               mode={'outlined'}
@@ -61,8 +61,8 @@ export default function PatientSignup({ navigation }) {
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle} 
-              outlineColor="black" activeOutlineColor="#74CBD4"
+              style={styles.inputStyle}
+              outlineColor="gray" activeOutlineColor="#74CBD4"
               mode={'outlined'}
               label={'Email'}
               value={email}
@@ -75,8 +75,8 @@ export default function PatientSignup({ navigation }) {
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle} 
-              outlineColor="black" activeOutlineColor="#74CBD4"
+              style={styles.inputStyle}
+              outlineColor="gray" activeOutlineColor="#74CBD4"
               mode={'outlined'}
               label='Health Number'
               value={healthNumber}
@@ -87,20 +87,22 @@ export default function PatientSignup({ navigation }) {
             />
           </View>
           <View style={styles.SectionDateStyle}>
-            <DatePickerInput
-              locale="en"
-              label="Date of Birth"
-              outlineColor="black" activeOutlineColor="#74CBD4"
-              mode={'outlined'}
-              value={dob}
-              onChange={(d) => setDOB(d)}
-              inputMode="start"
-              style={styles.inputDateStyle}
-            />
+            <View style={{ width: '100%' }}>
+              <DatePickerInput
+                locale="en"
+                label="Date of Birth"
+                outlineColor="black" activeOutlineColor="#74CBD4"
+                mode={'outlined'}
+                value={dob}
+                onChange={(d) => setDOB(d)}
+                inputMode="start"
+                style={styles.inputDateStyle}
+              />
+            </View>
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle} 
+              style={styles.inputStyle}
               label={'Password'}
               outlineColor="black" activeOutlineColor="#74CBD4"
               mode={'outlined'}
@@ -113,8 +115,8 @@ export default function PatientSignup({ navigation }) {
           </View>
           <View style={styles.SectionStyle}>
             <TextInput
-              style={styles.inputStyle} 
-              outlineColor="black" activeOutlineColor="#74CBD4"
+              style={styles.inputStyle}
+              outlineColor="gray" activeOutlineColor="#74CBD4"
               mode={'outlined'}
               label={'Confirm Password'}
               value={confirmPassword}
@@ -130,9 +132,9 @@ export default function PatientSignup({ navigation }) {
             <TextInput
               value={phone}
               label={'Phone'}
-              outlineColor="black" activeOutlineColor="#74CBD4"
+              outlineColor="gray" activeOutlineColor="#74CBD4"
               mode={'outlined'}
-              style={styles.inputStyle} 
+              style={styles.inputStyle}
               onChangeText={(phone) => setPhone(phone)}
               underlineColorAndroid="#f000"
               placeholder="Contact Number"
@@ -140,7 +142,8 @@ export default function PatientSignup({ navigation }) {
             />
           </View>
 
-          <View>
+          <View style={styles.SectionCheckBoxStyle}>
+            Gender:
             <RadioButton
               value="Male"
               status={gender === "Male" ? "checked" : "unchecked"}
@@ -174,7 +177,7 @@ export default function PatientSignup({ navigation }) {
             <Text style={styles.buttonTextStyle}>Sign Up</Text>
           </Button>
           <Text style={styles.txt}>
-            By signing up, you agree to Medico’s privacy policy
+            By signing up, you agree to <span style={{ color: "#74CBD4" }}>Medico’s privacy policy</span>
           </Text>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -203,13 +206,20 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
-    width: 345,
+    //width: 345,
+  },
+  SectionCheckBoxStyle: {
+    flexDirection: "row",
+    height: 50,
+    marginLeft: 35,
+    marginRight: 35,
+    alignItems: 'center'
   },
   txt: {
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: "#d4d8db",
+    backgroundColor: "#74CBD4",
     borderWidth: 0,
     color: "#FFFFFF",
     borderColor: "#7DE24E",
