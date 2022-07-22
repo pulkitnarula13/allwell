@@ -7,7 +7,6 @@ import { AuthContext } from "../Context/AuthContext";
 import { Avatar } from "react-native-paper";
 
 const DoctorCurrentMessages = (props) => {
-  console.log(props, "props");
 
   const [currentData, setCurrentData] = useState();
   // const [dialogbox, setDialogbox] = useState(false);
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
   inner: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     borderWidth: 0.7,
     borderColor: "gray",
     width: 343,

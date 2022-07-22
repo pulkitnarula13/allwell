@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
@@ -9,7 +9,7 @@ const DoctorProfileSettings = ({ navigation }) => {
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const { logout } = useContext(AuthContext);
 
-  const patientLogout = () => {
+  const doctorLogout = () => {
     logout(navigation);
     navigation.navigate("greeting");
   };
@@ -60,26 +60,69 @@ const DoctorProfileSettings = ({ navigation }) => {
         </View>
       </TouchableOpacity>
 
+      <View style={styles.buttonView}>
 
-      <View style={styles.buttonarea}>
-        <Button
-          style={styles.availablebtn}
-          mode="contained"
-          onPress={patientLogout}
-          color="#FCFCFC"
-        >
-          Log Out
-        </Button>
-      </View>
-      <View style={styles.buttonarea}>
+        <View style={styles.buttonarea}>
+          <Button
+            style={styles.availablebtn}
+            mode="contained"
+            onPress={doctorLogout}
+            color="#FCFCFC"
+          >
+            <Image
+                  style={styles.image2}
+                  source={require("../../assets/images/medico_icon-logIn.svg")}
+                  resizeMode="cover"
+                />
+          <Text style={{color:"white",fontSize:16,fontWeight:"600"}}>Log Out</Text>
+          </Button>
+        </View>
+
+        <View style={styles.buttonarea} onPress={() => console.log("Pressed")}>
         <Button
           style={styles.availablebtn1}
           mode="contained"
-          onPress={() => console.log("Pressed")}
-          color="#FCFCFC"
+          
+          
         >
-          Delete Account
+          
+          <Image
+                  style={styles.image2}
+                  source={require("../../assets/images/medico_icon-delete.svg")}
+                  resizeMode="cover"
+                />
+            
+          <Text style={{color:"#74CBD4",fontSize:16,fontWeight:"600"}} onPress={()=>{
+            Alert.alert(
+              "Delete Account",
+              "Do you want to delete your account?",
+              [
+                {
+                  text: "Yes",
+                  onPress: () => {Alert.alert("Account Deleted")
+                  navigation.navigate("greeting");
+                },
+                  style: "cancel",
+                },
+                {
+                  text: "No",
+                  onPress: () => console.log("Cancel Pressed"),
+                  style: "cancel",
+                },
+              ],
+              {
+                cancelable: true,
+                onDismiss: () =>
+                  Alert.alert(
+                    "This alert was dismissed by tapping outside of the alert dialog."
+                  ),
+              }
+            );
+
+          }}>Delete Account</Text>
         </Button>
+      </View>
+
       </View>
     </View>
   );
@@ -97,6 +140,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 16,
+  },
+  buttonView: {
+    marginTop: 50,
   },
   profiletext: {
     fontSize: 24,
@@ -140,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginRight: 33,
     marginLeft: 33,
-    marginBottom: 63,
+    marginBottom: 13,
     justifyContent: "space-between",
   },
   infotext11: {
@@ -155,6 +201,10 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 17,
     lineHeight: 24,
+  },
+  image2:{
+    width:20,
+    height:22
   },
 });
 export default DoctorProfileSettings;

@@ -7,7 +7,6 @@ import moment from "moment";
 
 const WaitingCard = ({ item, navigation }) => {
 
-
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Accept-Patient-Schedule", {
@@ -25,7 +24,9 @@ const WaitingCard = ({ item, navigation }) => {
             /> : <Image
               style={styles.image}
               source={
-                item.patient.profilePicture
+                {
+                  uri: `${item.patient.profilePicture}`
+                }
               }
             />
           }
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
   },
   chipItem: {
     fontSize: 10,
+    marginRight: 4
   },
 });
 

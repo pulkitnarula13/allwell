@@ -32,17 +32,19 @@ const datenow = Date.now();
 
 const DoctorAppointment = (props) => {
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [completedAppointments, setCompletedAppointments] = useState([]);
+  const [cancelledAppointments, setCancelledAppointments] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date().getDate());
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
     getPatientAppointmentsByDate();
-  }, []);
+  }, [selectedDate]);
 
   const getPatientAppointmentsByDate = async () => {
     try {
       const data = await axios.get(
-        `${BASE_URL_DEV}/appointments/doctor/date?id=${userInfo.id}&date=${selectedDate}`,
+        `${BASE_URL_DEV}/appointments/doctor/date?id=${userInfo.id}&dateVal=${selectedDate}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -50,12 +52,23 @@ const DoctorAppointment = (props) => {
         }
       );
 
+      console.log(data.data.data, "all");
+
       const confirmedAppointments = data.data.data.filter(
-        (data) => data.confirmed && !data.cancelled
+        (data) => data.confirmed && !data.cancelled && !data.completed
       );
 
-      console.log(confirmedAppointments, "confired");
       setConfirmedAppointments(confirmedAppointments);
+
+      const completedAppointments = data.data.data.filter(
+        (data) => data.completed && data.confirmed && !data.cancelled
+      );
+      setCompletedAppointments(completedAppointments);
+
+      const cancelledAppointments = data.data.data.filter(
+        (data) => !data.completed && !data.confirmed && data.cancelled
+      );
+      setCancelledAppointments(cancelledAppointments);
     } catch (error) {
       console.log(error);
     }
@@ -98,77 +111,71 @@ const DoctorAppointment = (props) => {
     );
   };
 
-
- 
-
   return (
-    
-    
-        <View style={{display:"flex",flexDirection:"column",flex:1}}>
-          
-          <View style={styles.viewCalendarStrip}>
-            <CalendarStrip
-              style={{ height: 161, paddingTop: 20, paddingBottom: 10 }}
-              calendarHeaderStyle={{ color: "#fff" }}
-              daySelectionAnimation={{
-                type: "background",
-                duration: 200,
-                borderWidth: 1,
-                borderHighlightColor: "white",
-              }}
-              scrollToOnSetSelectedDate={true}
-              calendarAnimation={{ type: "sequence", duration: 30 }}
-              dateNumberStyle={{
-                color: "white",
-                borderWidth: 1,
-                borderColor: "white",
-                padding: 10,
-                justifyContent: "center",
-                alignItems: "center",
-                display: "flex",
-                borderRadius: 10,
-                marginRight: 8,
-              }}
-              dateNameStyle={{ color: "white" }}
-              startingDate={datenow}
-              selectedDate={{ color: "red" }}
-              onDateSelected={(date) => setSelectedDate(date)}
-              highlightDateNumberStyle={{
-                backgroundColor: "white",
-                borderRadius: 20,
-                color: "#74CBD4",
-                // borderWidth: 1,
-                // borderColor: "white",
-                padding: 10,
-                // borderRadius: 20,
-              }}
+    <View style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+      <View style={styles.viewCalendarStrip}>
+        <CalendarStrip
+          style={{ height: 161, paddingTop: 20, paddingBottom: 10 }}
+          calendarHeaderStyle={{ color: "#fff" }}
+          daySelectionAnimation={{
+            type: "background",
+            duration: 200,
+            borderWidth: 1,
+            borderHighlightColor: "white",
+          }}
+          scrollToOnSetSelectedDate={true}
+          calendarAnimation={{ type: "sequence", duration: 30 }}
+          dateNumberStyle={{
+            color: "white",
+            borderWidth: 1,
+            borderColor: "white",
+            padding: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            borderRadius: 10,
+            marginRight: 8,
+          }}
+          dateNameStyle={{ color: "white" }}
+          startingDate={datenow}
+          selectedDate={{ color: "red" }}
+          onDateSelected={(date) => {
+            const updated = new Date(date).getDate();
+            setSelectedDate(updated);
+          }}
+          highlightDateNumberStyle={{
+            backgroundColor: "white",
+            // borderRadius: 20,
+            color: "#74CBD4",
+            // borderWidth: 1,
+            // borderColor: "white",
+            padding: 10,
+            // borderRadius: 20,
+          }}
+        ></CalendarStrip>
+      </View>
 
-              
-            ></CalendarStrip>
-            </View>
-            
-          
-            <Tabs style={{ backgroundColor: "#fff" }}>
+      <Tabs style={{ backgroundColor: "#fff" }}>
         <TabScreen label="Upcoming">
-        <DoctorAppointmentCard/>
+          <DoctorAppointmentCard
+            appointments={confirmedAppointments}
+            navigation={props.navigation}
+          />
         </TabScreen>
         <TabScreen label="Completed">
-        <DoctorAppointmentCard/>
+          <DoctorAppointmentCard
+            appointments={completedAppointments}
+            navigation={props.navigation}
+          />
         </TabScreen>
         <TabScreen label="Canceled">
-        <DoctorAppointmentCard/>
+          <DoctorAppointmentCard
+            appointments={cancelledAppointments}
+            navigation={props.navigation}
+          />
         </TabScreen>
       </Tabs>
-      </View>
-      
-          
-
-         
-        
-       
-        
-      
-    
+    </View>
   );
 };
 

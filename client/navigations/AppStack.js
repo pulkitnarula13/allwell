@@ -26,7 +26,7 @@ import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selec
 import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
 import DoctorInformation from "../screens/Doctor/Doctor-Information";
 import PatientProfile from "../screens/Patient/Patient-Profile";
-import AccountInformation from "../screens/Patient/AccountInformation";
+import PatientInformation from "../screens/Patient/Patient-Information";
 import PatientQuestionTwo from "../screens/Patient/Questionaires/PatientQuestionTwo";
 import PatientQuestionOne from "../screens/Patient/Questionaires/PatientQuestionOne";
 import PatientQuestionHome from "../screens/Patient/Questionaires/PatientQuestionHome";
@@ -107,7 +107,7 @@ const AppStack = () => {
       <Stack.Screen name="Doctor-Appointment" component={DoctorAppointment} />
       <Stack.Screen name="AcceptPatientSchedule" component={AcceptPatientSchedule} />
       <Stack.Screen name="PatientProfile" component={PatientProfile} />
-      <Stack.Screen name="AccountInformation" component={AccountInformation} />
+      <Stack.Screen name="PatientInformation" component={PatientInformation} />
       <Stack.Screen name="Doctor-Home" component={DoctorHome} />
 
       <Stack.Screen name="TermsDoctors" component={TermsDoctors} />

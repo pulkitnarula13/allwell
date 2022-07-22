@@ -1,7 +1,7 @@
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Text, View, Button, Platform } from "react-native";
+import { Text, View, Button, Platform, Alert } from "react-native";
 import { AuthContext } from "../Context/AuthContext";
 import { BASE_URL_DEV } from "@env";
 import axios from "axios";
@@ -58,13 +58,13 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!");
+       Alert.alert("Error", "Failed to get push token for push notification!");
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     console.log(token, "printed");
   } else {
-    alert("Must use physical device for Push Notifications");
+    Alert.alert("NOTE", "Must use physical device for Push Notifications");
   }
 
   if (Platform.OS === "ios") {

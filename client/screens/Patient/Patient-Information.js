@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, ScrollView, Alert } from "react-native";
+import React, { useState, useEffect } from "react";
 import { TextInput, Button } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
@@ -8,22 +8,41 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { BASE_URL_DEV } from "@env";
+import { Avatar } from "react-native-paper";
 
-const AccountInformation = (props) => {
-  console.log(props, "props");
-
-  const [name, setName] = useState(props.route.params.data.name);
-  const [email, setemail] = useState(props.route.params.data.email);
-  const [phonenumber, setphonenumber] = useState(
-    props.route.params.data.phoneNumber
-  );
-  const [MSP, setMSP] = useState(props.route.params.data.healthNumber);
-  const [birthdate, setbirthdate] = useState(props.route.params.data.dob);
-  const [gender, setGender] = useState("");
-  const [Pincode, setPincode] = useState("");
-  const [shortbio, setshortbio] = useState("");
-  const [image1, setimage1] = useState(props.route.params.data.profilePicture);
+const PatientInformation = (props) => {
   const { userInfo } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setemail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [MSP, setMSP] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [dataLoading, setDataLoading] = useState(false);
+
+  const getPatientProfile = async () => {
+    setDataLoading(true);
+    const userData = await axios.get(
+        `${BASE_URL_DEV}/patients/${userInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+    console.log(userData);
+    setName(userData.data.data.name);
+    setemail(userData.data.data.email);
+    setProfilePicture(userData.data.data.profilePicture);
+    setProfilePhoto(userData.data.data.profilePicture);
+    setPhoneNumber(userData.data.data.phoneNumber.toString());
+    setMSP(userData.data.data.healthNumber.toString());
+    setDataLoading(false);
+  };
+
+  useEffect(() => {
+    getPatientProfile();
+  }, []);
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,23 +54,24 @@ const AccountInformation = (props) => {
     });
 
     if (!result.cancelled) {
-      setimage1(result.base64);
-      console.log(image1);
-      props.setFirstStepperData(result);
+      setProfilePicture({ base64: result.base64, uri: result.uri });
+      setProfilePhoto(result.uri);
+      console.log(profilePicture, "selected Profile Picture");
     }
   };
 
   function updatedata() {
-    // navigation.navigate("PatientProfile")
+    // navigation.navigate("Patientprofile");
+    console.log(name, email, phoneNumber, profilePicture, "all val");
     axios
       .put(
         `${BASE_URL_DEV}/patients/${userInfo.id}`,
         {
           name: name,
           email: email,
+          phoneNumber: phoneNumber,
           healthNumber: MSP,
-          dob: birthdate,
-          profilePicture: image1,
+          profilePicture: profilePicture.base64,
         },
         {
           headers: {
@@ -60,25 +80,38 @@ const AccountInformation = (props) => {
         }
       )
       .then((response) => {
-        console.log(response);
-        alert(`Value has changed to ${response.data.name}`);
+        Alert.alert("Success", "Updated Profile Succesfully");
+        props.navigation.navigate("PatientProfile")
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  return (
+  return  (
     <View style={styles.maxview}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.overall}>
           <View style={styles.imageview}>
             <TouchableOpacity onPress={openimagelib}>
-              <Image
-                style={styles.imgstyle}
-                source={{ uri: image1 }}
-                resizeMode="cover"
-              />
+              {/* {!userInfo.profilePicture && !profilePicture ? (
+                <Avatar.Text
+                  style={{ backgroundColor: "#74CBD4" }}
+                  size={140}
+                  label={userInfo.name[0]}
+                  color="#fff"
+                />
+              ) : (
+                <Image
+                  style={styles.imgstyle}
+                  source={{ uri: `${profilePhoto}` }}
+                />
+              )} */}
+                <Image
+                    style={styles.imgstyle}
+                    source={{ uri: `${profilePhoto}` }}
+                    // resizeMode="cover"
+                />
             </TouchableOpacity>
           </View>
 
@@ -101,16 +134,17 @@ const AccountInformation = (props) => {
           <TextInput
             style={styles.inputbox}
             mode="outlined"
-            label="Add MSP Number"
-            value={MSP}
-            onChangeText={(text) => setMSP(text)}
+            label="Phone"
+            value={phoneNumber}
+            onChangeText={(text) => setPhoneNumber(text)}
           />
+
           <TextInput
             style={styles.inputbox}
             mode="outlined"
-            label="Birth Date"
-            value={birthdate}
-            onChangeText={(text) => setbirthdate(text)}
+            label="MSP Number"
+            value={MSP}
+            onChangeText={(text) => setMSP(text)}
           />
         </View>
         <View style={styles.btnview}>
@@ -150,7 +184,7 @@ const AccountInformation = (props) => {
         </View>
       </ScrollView>
     </View>
-  );
+  )
 };
 const styles = StyleSheet.create({
   overall: {
@@ -209,12 +243,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   imgstyle: {
-    width: 95,
-    height: 95,
+    width: 150,
+    height: 150,
     backgroundColor: "white",
     borderWidth: 2,
     borderColor: "#D9D9D9",
-    borderRadius: 10,
+    borderRadius: 100,
   },
 });
-export default AccountInformation;
+export default PatientInformation;

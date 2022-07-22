@@ -61,7 +61,7 @@ const Bottomnavigation = ({ navigation }) => {
   };
 
 
-  renderIconPatient = ({ route}) => {
+  const renderIconPatient = ({ route}) => {
     switch (route.key) {
       case 'home':
         return  <Image
@@ -91,7 +91,7 @@ const Bottomnavigation = ({ navigation }) => {
     }
   }
 
-  renderIconDoctor = ({ route }) => {
+  const renderIconDoctor = ({ route }) => {
     switch (route.key) {
       case 'home':
         return  <Image

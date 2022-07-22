@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, Alert } from "react-native";
 import React, { useState, useEffect } from "react";
 import { TextInput, Button } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
@@ -10,28 +10,29 @@ import { AuthContext } from "../../Context/AuthContext";
 import { BASE_URL_DEV } from "@env";
 import { Avatar } from "react-native-paper";
 
-
 const DoctorInformation = (props) => {
-  console.log(props, "props");
-
   const { userInfo } = useContext(AuthContext);
-  const [docProfileData, setDocProfileData] = useState();
+  const [name, setName] = useState("");
+  const [email, setemail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [doctorDescription, setDoctorDescription] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [dataLoading, setDataLoading] = useState(false);
+
+  const getDoctorProfile = async () => {
+    setDataLoading(true);
+    const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
+    setName(userData.data.data.name);
+    setemail(userData.data.data.email);
+    setProfilePicture(userData.data.data.profilePicture);
+    setPhoneNumber(userData.data.data.phoneNumber.toString());
+    setDoctorDescription(userData.data.data.doctorDescription);
+    setDataLoading(false);
+  };
 
   useEffect(() => {
     getDoctorProfile();
   }, []);
-
-  const getDoctorProfile = async () => {
-    const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
-    setDocProfileData(userData.data.data);
-  };
-
-  const [name, setName] = useState('');
-  const [email, setemail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [doctorDescription, setDoctorDescription] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
-
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -43,15 +44,12 @@ const DoctorInformation = (props) => {
     });
 
     if (!result.cancelled) {
-    setProfilePicture(result.base64);
-      console.log(profilePicture);
+      setProfilePicture({ base64: result.base64, uri: result.uri });
+      console.log(profilePicture, "selected Profile Picture");
     }
   };
 
   function updatedata() {
-
-    navigation.navigate("Doctorprofile")
-
     axios
       .put(
         `${BASE_URL_DEV}/doctors/${userInfo.id}`,
@@ -60,7 +58,7 @@ const DoctorInformation = (props) => {
           email: email,
           phoneNumber: phoneNumber,
           doctorDescription: doctorDescription,
-          profilePicture: profilePicture,
+          profilePicture: profilePicture.base64,
         },
         {
           headers: {
@@ -69,38 +67,33 @@ const DoctorInformation = (props) => {
         }
       )
       .then((response) => {
-        console.log(response);
-        alert(`Value has changed to ${response.data.name}`);
+        Alert.alert("Success", "Updated Profile Succesfully");
+        props.navigation.navigate("Doctorprofile")
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  return docProfileData ? (
+  return  (
     <View style={styles.maxview}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.overall}>
           <View style={styles.imageview}>
             <TouchableOpacity onPress={openimagelib}>
-              {/* <Image
-                style={styles.imgstyle}
-                source={{ uri: profilePicture }}
-                resizeMode="cover"
-              /> */}
-              {!userInfo.profilePicture ? (
-              <Avatar.Text
-                style={{ backgroundColor: "#74CBD4" }}
-                size={140}
-                label={userInfo.name[0]}
-                color="#fff"
-              />
-            ) : (
-              <Image
-                style={styles.imgstyle}
-                source = {{ uri: profilePicture }}
-              />
-            )}
+              {!userInfo.profilePicture && !profilePicture ? (
+                <Avatar.Text
+                  style={{ backgroundColor: "#74CBD4" }}
+                  size={140}
+                  label={userInfo.name[0]}
+                  color="#fff"
+                />
+              ) : (
+                <Image
+                  style={styles.imgstyle}
+                  source={{ uri: `${profilePicture.uri}` }}
+                />
+              )}
             </TouchableOpacity>
           </View>
 
@@ -108,7 +101,7 @@ const DoctorInformation = (props) => {
             style={styles.inputbox1}
             mode="outlined"
             label="Name"
-            value={docProfileData.name}
+            value={name}
             onChangeText={(text) => setName(text)}
           />
 
@@ -116,28 +109,27 @@ const DoctorInformation = (props) => {
             style={styles.inputbox}
             mode="outlined"
             label="Email"
-            value={docProfileData.email}
+            value={email}
             onChangeText={(text) => setemail(text)}
           />
 
-        <TextInput
+          <TextInput
             style={styles.inputbox}
             mode="outlined"
             label="Phone"
-            value={docProfileData.phoneNumber.toString()}
+            value={phoneNumber}
             onChangeText={(text) => setPhoneNumber(text)}
           />
 
-        <TextInput
+          <TextInput
             multiline={true}
             numberOfLines={4}
             style={styles.inputbox3}
             mode="outlined"
             label="Doctor Description"
-            value={docProfileData.doctorDescription}
+            value={doctorDescription}
             onChangeText={(text) => setDoctorDescription(text)}
           />
-          
         </View>
         <View style={styles.btnview}>
           <Button
@@ -176,7 +168,7 @@ const DoctorInformation = (props) => {
         </View>
       </ScrollView>
     </View>
-  ): null;
+  )
 };
 const styles = StyleSheet.create({
   overall: {
@@ -207,7 +199,7 @@ const styles = StyleSheet.create({
     width: 287,
     height: 40,
     marginBottom: 19,
-  },  
+  },
   inputbox3: {
     width: 287,
     height: 90,
@@ -240,12 +232,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   imgstyle: {
-    width: 95,
-    height: 95,
+    width: 150,
+    height: 150,
     backgroundColor: "white",
     borderWidth: 2,
     borderColor: "#D9D9D9",
-    borderRadius: 10,
+    borderRadius: 100,
   },
 });
 export default DoctorInformation;
