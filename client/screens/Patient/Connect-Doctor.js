@@ -20,20 +20,6 @@ import { AuthContext } from "../../Context/AuthContext";
 
 let Screenheight = Dimensions.get("window").height;
 
-const DATA = [
-  {
-    name: "Mark",
-    profilePicture: "../../assets/icon1.png",
-  },
-  {
-    name: "Jessica",
-  },
-  {
-    name: "Mark",
-    profilePicture: "../../assets/icon1.png",
-  },
-];
-
 const ConnectPatient = ({ navigation, route }) => {
   // get the family members
   useEffect(() => {
@@ -67,7 +53,7 @@ const ConnectPatient = ({ navigation, route }) => {
     setMembersData(modifiedData);
   };
 
-  const selectItem = (data) => {
+  const selectMember = (data) => {
     data.item.isSelect = !data.item.isSelect;
     data.item.selectedClass = data.item.isSelect
       ? styles.selected
@@ -81,21 +67,30 @@ const ConnectPatient = ({ navigation, route }) => {
     setMembersData(tempdata);
   };
 
-  const renderItem = (item, image) => {
+  const renderMember = (item) => {
     return (
       <TouchableOpacity
         style={[styles.list, item.selectedClass]}
-        onPress={() => selectItem(item)}
+        onPress={() => selectMember(item)}
       >
         <View style={styles.item}>
+        {!item.item.profilePicture ? (
+        <Avatar.Text
+          style={{ backgroundColor: "#74CBD4" }}
+          size={65}
+          label={item.item.name[0]}
+          color="#fff"
+        />
+      ) : (
         <Image
-            style={{ width: 74, height: 70 }}
-            source={item.item.profilePicture}
-            resizeMode="cover"
-          />
+          style={styles.image1}
+          source={item.item.profilePicture}
+          resizeMode="center"
+        />
+      )}
           
         </View>
-        <Text style={{marginBottom:39,fontSize:14,fontWeight:"400"}}>{item.item.name}</Text>
+        <Text style={{marginBottom:39,fontSize:14,fontWeight:"400", paddingLeft: 15}}>{item.item.name.split(' ')[0]}</Text>
       </TouchableOpacity>
     );
   };
@@ -171,9 +166,9 @@ const ConnectPatient = ({ navigation, route }) => {
         <View style={styles.familyContainer}>
           <FlatList
             horizontal={true}
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index}
+            data={membersData}
+            renderItem={renderMember}
+            keyExtractor={(item) => item.name}
           />
           <View
             style={{ display: "flex", justifyContent: "center", marginTop: 8 }}
