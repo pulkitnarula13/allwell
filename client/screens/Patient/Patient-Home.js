@@ -187,8 +187,11 @@ const PatientHome = ({ navigation }) => {
                 style={{
                   width: 65,
                   height: 65,
+                  borderRadius: 100
                 }}
-                source={profilePicture}
+                source={{
+                  uri: `${profilePicture}`
+                }}
                 resizeMode="cover"
               />
             )}

@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   inner: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     borderWidth: 0.7,
     borderColor: "gray",
     width: 343,

@@ -54,6 +54,8 @@ const registerDoctor = async (req, res) => {
       },
     });
 
+
+
     return res.status(200).json({
       message: "Doctor Registered Succesfully",
       data: {

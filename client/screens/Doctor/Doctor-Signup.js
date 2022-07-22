@@ -31,7 +31,6 @@ const DoctorSignup = ({ navigation }) => {
 
   useEffect(() => {
     setThirdData({...thirData, thirdStepperData})
-
   }, [thirdStepperData])
 
   const submitData = () => {

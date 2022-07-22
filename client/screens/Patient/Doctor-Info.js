@@ -27,7 +27,7 @@ const DoctorInfo = (props) => {
 
   const [dialogbox, setDialogbox] = useState(false);
   const [starRating, setStarRating] = useState(0);
-  const [doctorReviewText, setDoctorReviewText] = useState();
+  const [doctorReviewText, setDoctorReviewTextf] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
   const { appointmentData, setAppointmentData } =
     useContext(AppointmentContext);
@@ -108,7 +108,9 @@ const DoctorInfo = (props) => {
           ) : (
             <Image
               style={styles.imgstyle}
-              source={require("../../assets/icon.png")}
+              source={{
+                uri: `${doctorInfo.profilePicture}`
+              }}
               resizeMode="contain"
             />
           )}
@@ -282,16 +284,6 @@ const DoctorInfo = (props) => {
                   </Text>
 
                   <View style={styles.viewDoctorStarRating}>
-                    {/* <Rating
-                      type="star"
-                      startingValue={starRating}
-                      ratingCount={5}
-                      onSwipeRating={(starRating) => setStarRating(starRating)}
-                      onFinishRating={(starRating) => setStarRating(starRating)}
-                      imageSize={40}
-                      ratingColor="#74CBD4"
-                      ratingBackgroundColor="#74CBD4"
-                    /> */}
                     <AirbnbRating
   count={5}
   reviews={["Terrible", "Bad", "Good", "Very Good", "Amazing"]}

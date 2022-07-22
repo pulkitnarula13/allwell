@@ -55,7 +55,7 @@ const DoctorAppointment = (props) => {
       console.log(data.data.data, "all");
 
       const confirmedAppointments = data.data.data.filter(
-        (data) => data.confirmed && !data.cancelled
+        (data) => data.confirmed && !data.cancelled && !data.completed
       );
 
       setConfirmedAppointments(confirmedAppointments);
@@ -157,13 +157,22 @@ const DoctorAppointment = (props) => {
 
       <Tabs style={{ backgroundColor: "#fff" }}>
         <TabScreen label="Upcoming">
-          <DoctorAppointmentCard appointments={confirmedAppointments} navigation={props.navigation} />
+          <DoctorAppointmentCard
+            appointments={confirmedAppointments}
+            navigation={props.navigation}
+          />
         </TabScreen>
         <TabScreen label="Completed">
-          <DoctorAppointmentCard appointments={completedAppointments} navigation={props.navigation} />
+          <DoctorAppointmentCard
+            appointments={completedAppointments}
+            navigation={props.navigation}
+          />
         </TabScreen>
         <TabScreen label="Canceled">
-          <DoctorAppointmentCard appointments={cancelledAppointments} navigation={props.navigation} />
+          <DoctorAppointmentCard
+            appointments={cancelledAppointments}
+            navigation={props.navigation}
+          />
         </TabScreen>
       </Tabs>
     </View>

@@ -1,33 +1,39 @@
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import AppointmentContext from "../../Context/AppointmentContext";
-import { StyleSheet, TouchableOpacity, View, Text, Image, FlatList } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  Image,
+  FlatList,
+} from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import { SymptomsList } from "../../constants/symptoms";
-
 
 export default function AllSymptoms(props) {
   useEffect(() => {
     getSymptoms();
   }, []);
 
-  const [ symptomsData, setSymptomsData ] = useState([]);
+  const [symptomsData, setSymptomsData] = useState([]);
   const { setAppointmentData } = useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
 
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`
-      }
+        Authorization: `Bearer ${userInfo.token}`,
+      },
     });
 
     const modifiedData = data.data.data.map((item) => {
       item.isSelect = false;
       item.selectedClass = styles.list;
-      item.image = "../../assets/icon1.png";
+      // item.image = "../../assets/icon1.png";
       return item;
     });
 
@@ -39,6 +45,8 @@ export default function AllSymptoms(props) {
     data.item.selectedClass = data.item.isSelect
       ? styles.selected
       : styles.list;
+
+    console.log(data.item.selectedClass, "selected");
 
     const index = symptomsData.findIndex((item) => data.item._id === item._id);
 
@@ -55,14 +63,15 @@ export default function AllSymptoms(props) {
         onPress={() => selectItem(item)}
       >
         <View style={styles.item}>
-        <Image
+          <Image
             style={{ width: 74, height: 70 }}
             source={SymptomsList[item.item.name]}
             resizeMode="cover"
           />
-          
         </View>
-        <Text style={{marginBottom:39,fontSize:14,fontWeight:"400"}}>{item.item.name}</Text>
+        <Text style={{ marginBottom: 39, fontSize: 14, fontWeight: "400" }}>
+          {item.item.name}
+        </Text>
       </TouchableOpacity>
     );
   };
@@ -108,12 +117,12 @@ export default function AllSymptoms(props) {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity  onPress={getSelectedSymptoms}>
-        <View style={styles.btn}>
-          <Button color="white" style={{fontSize:16,font:"600"}}>
-            Continue
-          </Button>
-        </View>
+        <TouchableOpacity onPress={getSelectedSymptoms}>
+          <View style={styles.btn}>
+            <Button color="white" style={{ fontSize: 16, font: "600" }}>
+              Continue
+            </Button>
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -129,21 +138,20 @@ const styles = StyleSheet.create({
     height: 49,
     backgroundColor: "#74CBD4",
     borderRadius: 100,
-    textAlign:"center",
-    justifyContent:"center",
-    alignItems:"center"
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   item: {
     marginRight: 10,
-    width:100,
-    height:100,
+    width: 100,
+    height: 100,
     marginBottom: 15,
-    borderWidth:1,
-    borderColor:"#74CBD4",
-    justifyContent:"center",
-    alignItems:"center",
-    borderRadius:100,
-    
+    borderWidth: 1,
+    borderColor: "#74CBD4",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
   },
   mainflat: {
     marginTop: 38,
@@ -156,9 +164,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
   },
-  selected: { backgroundColor: "#74CBD4" },
+  selected: { backgroundColor: "#74CBD4", borderColor: "red" },
   list: {
-    
     margin: 3,
     flexDirection: "column",
     justifyContent: "flex-start",

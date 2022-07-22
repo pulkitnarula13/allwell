@@ -17,7 +17,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { SymptomsList } from "../../constants/symptoms";
 import { AuthContext } from "../../Context/AuthContext";
 
-
 let Screenheight = Dimensions.get("window").height;
 
 const ConnectPatient = ({ navigation, route }) => {
@@ -27,44 +26,33 @@ const ConnectPatient = ({ navigation, route }) => {
   }, []);
 
   const { userInfo } = useContext(AuthContext);
-  const { appointmentData } = useContext(AppointmentContext);
-  const { setAppointmentData } = useContext(AppointmentContext);
-  const [ membersData, setMembersData ] = useState([]);
+  const { appointmentData, setAppointmentData } =
+    useContext(AppointmentContext);
+  const [membersData, setMembersData] = useState([]);
   const [selectedItem, setSelectedItems] = useState();
 
-// Get the family members from the API
+  // Get the family members from the API
   const getFamilyMembers = async () => {
-    const familyData = await axios.get(`${BASE_URL_DEV}/patients/members/${userInfo.id}`, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`
+    const familyData = await axios.get(
+      `${BASE_URL_DEV}/patients/members/${userInfo.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
       }
-    });
+    );
 
-    console.log(familyData);
+    const data = familyData.data.data;
+    data.unshift(userInfo);
 
-
-    const modifiedData = familyData.data.data.map((item) => {
-      item.isSelect = false;
-      item.selectedClass = styles.list;
-      item.image = "../../assets/icon1.png";
-      return item;
-    });
-
-    setMembersData(modifiedData);
+    setMembersData(data);
   };
 
-  const selectMember = (data) => {
-    data.item.isSelect = !data.item.isSelect;
-    data.item.selectedClass = data.item.isSelect
-      ? styles.selected
-      : styles.list;
-
-    const index = membersData.findIndex((item) => data.item._id === item._id);
-
-    let tempdata = membersData;
-    tempdata[index] = data.item;
-
-    setMembersData(tempdata);
+  const selectMember = ({ item }) => {
+    setAppointmentData({
+      ...appointmentData,
+      patient: item.id ? item.id : item._id,
+    });
   };
 
   const renderMember = (item) => {
@@ -74,28 +62,33 @@ const ConnectPatient = ({ navigation, route }) => {
         onPress={() => selectMember(item)}
       >
         <View style={styles.item}>
-        {!item.item.profilePicture ? (
-        <Avatar.Text
-          style={{ backgroundColor: "#74CBD4" }}
-          size={65}
-          label={item.item.name[0]}
-          color="#fff"
-        />
-      ) : (
-        <Image
-          style={styles.image1}
-          source={item.item.profilePicture}
-          resizeMode="center"
-        />
-      )}
-          
+          {!item.item.profilePicture ? (
+            <Avatar.Text
+              style={{ backgroundColor: "#74CBD4" }}
+              size={65}
+              label={item.item.name[0]}
+              color="#fff"
+            />
+          ) : (
+            <Image
+              style={styles.image1}
+              source={item.item.profilePicture}
+              resizeMode="center"
+            />
+          )}
         </View>
-        <Text style={{marginBottom:39,fontSize:14,fontWeight:"400", paddingLeft: 15}}>{item.item.name.split(' ')[0]}</Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "400",
+            paddingLeft: 15,
+          }}
+        >
+          {item.item.name.split(" ")[0]}
+        </Text>
       </TouchableOpacity>
     );
   };
-
-
 
   useEffect(() => {
     const filteredArray = route?.params?.symptomsData.filter((value) =>
@@ -170,14 +163,17 @@ const ConnectPatient = ({ navigation, route }) => {
             renderItem={renderMember}
             keyExtractor={(item) => item.name}
           />
-          <View
-            style={{ display: "flex", justifyContent: "center", marginTop: 8 }}
-          >
+          <View>
             <TouchableOpacity
+            style={{
+              borderWidth: 1, borderColor: "#74CBD4", borderRadius: 100, 
+              display: "flex", justifyContent: "center", alignItems: "center",
+              padding: 8
+            }}
               onPress={() => navigation.navigate("Add-Family-Member")}
             >
               <Image
-                style={{ width: 70, height: 70 }}
+                style={{ width: 50, height: 50 }}
                 source={require("../../assets/icons/medico_icon_plus.png")}
               />
             </TouchableOpacity>
@@ -185,9 +181,13 @@ const ConnectPatient = ({ navigation, route }) => {
           </View>
         </View>
 
-        <View style={styles.symptoms}>
-          <Text style={styles.subheadingtextview}>Selected Symptoms</Text>
-        </View>
+        {selectedItem ? (
+          <View style={styles.symptoms}>
+            <Text style={styles.subheadingtextview}>Selected Symptoms</Text>
+          </View>
+        ) : (
+          <Text></Text>
+        )}
         <View>
           <FlatList
             horizontal={true}
@@ -233,7 +233,9 @@ const styles = StyleSheet.create({
   },
   familyContainer: {
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: 20
   },
   viewDoctorsBtn: {
     backgroundColor: "#74CBD4",
@@ -310,8 +312,8 @@ const styles = StyleSheet.create({
   item: {
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     marginRight: 16,
-    marginTop: 24,
   },
   symptopmsImgView: {
     borderWidth: 3,

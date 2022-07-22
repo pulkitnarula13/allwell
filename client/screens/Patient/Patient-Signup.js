@@ -17,24 +17,6 @@ export default function PatientSignup({ navigation }) {
   const [gender, setGender] = useState();
 
 
-  const submitData = async () => {
-    let data = {
-      rating: starRating,
-      feedback: doctorReviewText,
-      doctor: props.route.params.id
-    }
-
-    const response = axios.post(
-      `${BASE_URL_DEV}/doctorReview`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-    );
-  }
-
   return (
     <View style={{ flex: 1, backgroundColor: "#ebf0f3" }}>
       <ScrollView
@@ -44,7 +26,6 @@ export default function PatientSignup({ navigation }) {
           alignContent: "center",
         }}
       >
-        {/* <Text style={styles.textHeading}>Sign up with email</Text> */}
         <KeyboardAvoidingView enabled>
           <View style={styles.SectionStyle}>
             <TextInput
@@ -142,23 +123,6 @@ export default function PatientSignup({ navigation }) {
             />
           </View>
 
-          <View style={styles.SectionCheckBoxStyle}>
-            Gender:
-            <RadioButton
-              value="Male"
-              status={gender === "Male" ? "checked" : "unchecked"}
-              onPress={() => setGender("Male")}
-              color="red"
-            />
-            <Text>Male</Text>
-            <RadioButton
-              value="Female"
-              status={gender === "Female" ? "checked" : "unchecked"}
-              onPress={() => setGender("Female")}
-              color="red"
-            />
-            <Text>Female</Text>
-          </View>
 
           <Button
             style={styles.buttonStyle}
@@ -177,7 +141,7 @@ export default function PatientSignup({ navigation }) {
             <Text style={styles.buttonTextStyle}>Sign Up</Text>
           </Button>
           <Text style={styles.txt}>
-            By signing up, you agree to <span style={{ color: "#74CBD4" }}>Medico’s privacy policy</span>
+            By signing up, you agree to <Text style={{ color: "#74CBD4" }}>Medico’s privacy policy</Text>
           </Text>
         </KeyboardAvoidingView>
       </ScrollView>
