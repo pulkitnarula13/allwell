@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, FlatList, Image, Alert } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { ScrollView } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -8,13 +8,19 @@ import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../Context/AuthContext";
 import PushNotification from "../../components/PushNotification";
+import { SymptomsList } from "../../constants/symptoms";
 
 const Item = ({ name, image }) => (
-  <View style={{marginRight:50}}>
+  <View
+    style={{
+      display: "flex",
+      alignItems: "center",
+    }}
+  >
     <Image
-      style={styles.image1}
-      source={require("../../assets/icon.png")}
-      resizeMode="center"
+      style={{ width: 40, height: 40 }}
+      source={SymptomsList[name]}
+      resizeMode="cover"
     />
     <Text style={styles.name1}>{name}</Text>
   </View>
@@ -32,6 +38,8 @@ const AcceptPatientSchedule = (props) => {
   const [dateVal, setDateVal] = useState(new Date().getDate());
   const { userInfo } = useContext(AuthContext);
   const [messageForAppointment, setMessageForAppointment] = useState("");
+  const [allAppointments, setAllAppointments ] = useState([]);
+  const [datesMarked, setDatesMarked] = useState();
 
   console.log('Date: ', date);
   const confirmAppointment = async () => {
@@ -80,7 +88,7 @@ const AcceptPatientSchedule = (props) => {
       Alert.alert("Success", response.data.message);
       props.navigation.navigate("Doctor-Home");
     } catch (error) {
-      Alert.alert("Error", response.data.message);
+      Alert.alert("Error", error.message);
     }
   };
   console.log(appointmentInfo, "appointmentInfo");
@@ -97,15 +105,48 @@ const AcceptPatientSchedule = (props) => {
     setMode(currentMode);
   };
 
-  const showDatepicker = () => {
-    showMode("date");
-  };
+  useEffect(() => {
+    getAllAppointments();
+  }, [])
 
-  const showTimepicker = () => {
-    showMode("time");
-  };
+ const getAllAppointments = async() => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL_DEV}/appointments/doctor/${userInfo.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+
+    setAllAppointments(response.data.data);
+    const dates = response.data.data.filter((data) => data.confirmed && !data.cancelled && !data.completed).map((val) => {
+      return new Date(val.date).toISOString().split('T')[0];
+    }).filter((val) => val);
+
+    console.log(dates, "dates");
+
+    let obj  = {};
+    for (let item of dates) {
+      obj[item] = {
+        marked :true,
+        dotColor: '#74CBD4'
+      }
+    }
+
+    setDatesMarked(obj);
+    
+
+    console.log(obj, "Dates");
+
+  } catch (error) {
+    Alert.alert("Error", error.message);
+  }
+ }
+
   var newdate = new Date(appointmentInfo.item.createdAt);
-  
+  console.log(appointmentInfo, "appointmentInfo");
   return (
     <ScrollView>
       {messageForAppointment ? (
@@ -164,9 +205,12 @@ const AcceptPatientSchedule = (props) => {
               // height: 350,
               // width: '80%',
             }}
+            markingType={'period'}
+            markedDates={datesMarked}
             selected={mydate}
             onDayPress={(day) => {
-              setDate(day.dateString);
+              console.log(day, "day");
+              setMyDate(day.dateString);
               setDateVal(day.day);
             }}
             enableSwipeMonths={true}
@@ -176,8 +220,8 @@ const AcceptPatientSchedule = (props) => {
               textSectionTitleColor: "#b6c1cd",
               textSectionTitleDisabledColor: "#d9e1e8",
               selectedDayBackgroundColor: "#74CBD4",
-              selectedDayTextColor: "#ffffff",
-              todayTextColor: "#00adf5",
+              selectedDayTextColor: "#74CBD4",
+              todayTextColor: "#74CBD4",
               dayTextColor: "black",
               textDisabledColor: "#d9e1e8",
               dotColor: "#74CBD4",
@@ -202,7 +246,7 @@ const AcceptPatientSchedule = (props) => {
             <Text style={styles.txtSelectedDate}>Select Time:</Text>
             {show && (
               <DateTimePicker
-                style={{marginLeft:10,width:90}}
+                style={{marginLeft:10,width:90, borderRadius: 20}}
                 value={time}
                 mode={"time"}
                 is24Hour={true}
@@ -218,7 +262,7 @@ const AcceptPatientSchedule = (props) => {
           <Button
             style={styles.availablebtn1}
             mode="contained"
-            labelStyle={{color:"#74CBD4",fontWeight:"800"}}
+            labelStyle={{color:"#74CBD4"}}
             onPress={cancelAppointment}
           >
             Decline
@@ -226,10 +270,9 @@ const AcceptPatientSchedule = (props) => {
           <Button
             style={styles.availablebtn2}
             mode="contained"
-            labelStyle={{fontWeight:"800"}}
             onPress={confirmAppointment}
           >
-            Accept
+            <Text style={{ color: "#fff"}}>Accept</Text>
           </Button>
         </View>
       
@@ -277,11 +320,10 @@ const styles = StyleSheet.create({
     alignItems:"center",
     textAlign:"center",
     backgroundColor: "#74CBD4",
-    borderRadius:100
+    borderRadius:100,
   },
   lorem1: {
     width: 349,
-    height: 60,
     fontSize: 16,
     lineHeight: 18,
     marginBottom: 17,
@@ -291,7 +333,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 16,
     lineHeight: 24,
-    marginBottom: 21,
+    marginBottom: 8
   },
   datandtime1: {
     fontWeight: "600",
@@ -338,7 +380,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginBottom:14,
     borderRadius:10,
-    marginRight: 28,
   },
   name1: {
     width: 67,

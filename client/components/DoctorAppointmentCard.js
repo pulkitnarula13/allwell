@@ -32,8 +32,11 @@ const DoctorAppointmentCard = ({ appointments, navigation }) => {
                 <View style={styles.viewPatientData}>
                   {!data.patient.profilePicture ? (
                     <Avatar.Text
-                      style={{ backgroundColor: "#74CBD4" }}
-                      size={65}
+                      style={{ backgroundColor: "#74CBD4",    width: 48,
+                      borderRadius: 50,
+                      height: 48,
+                      marginTop: -10, }}
+                      size={40}
                       label={data.patient.name[0]}
                       color="#fff"
                     />
@@ -129,8 +132,6 @@ const styles = StyleSheet.create({
   viewDividerLine: {
     borderBottomColor: "black",
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingTop: 7,
-    paddingBottom: 7,
   },
   viewPatientMeeting: {
     width: 343,

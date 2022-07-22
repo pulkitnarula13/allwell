@@ -5,7 +5,6 @@ import { Avatar, Button } from "react-native-paper";
 
 const AppointmentCard = ({ item, navigation }) => {
   var newdate = new Date(item.time);
-
   const selectItem = () => {
     navigation.navigate("Chatting", {
       qna: item.qna,
@@ -50,9 +49,9 @@ const AppointmentCard = ({ item, navigation }) => {
               <Image
                 style={styles.image}
                 source={
-                  item.profilePicture
-                    ? item.profilePicture
-                    : require("../assets/icon.png")
+                 {
+                  uri : `${item.profilePicture}`
+                 }
                 }
               />
             )}

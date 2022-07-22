@@ -53,9 +53,11 @@ const AvailableDoctorCard = (props) => {
             />
           ) : (
             <Image
-              source={props.item.profilePicture}
+              source={{
+                uri: `${props.item.profilePicture}`
+              }}
               style={styles.image}
-              resizeMode="contain"
+              resizeMode="cover"
             />
           )}
         </View>
