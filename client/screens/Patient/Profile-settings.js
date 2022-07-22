@@ -31,7 +31,7 @@ const PatientProfileSettings = ({ navigation }) => {
       <TouchableOpacity onPress={()=>{navigation.navigate("Managefamilymembers")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Manage Family Member</Text>
-        <AntDesign  onPress={()=>{navigation.navigate("Add-Family-Member")}} name="right" size={24} color="black" />
+        <AntDesign  onPress={()=>{navigation.navigate("Managefamilymembers")}} name="right" size={24} color="black" />
       </View>
       </TouchableOpacity>
       <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
