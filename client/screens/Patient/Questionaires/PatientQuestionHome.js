@@ -43,10 +43,10 @@ const PatientQuestionHome = ({ navigation }) => {
   const createAppointment = async () => {
     navigation.navigate("Requestwaitgif");
     getDoctorById();
-    console.log(doctorInfo, "doc Info");
     
   };
 
+  
   const getDoctorById = async () => {
     const response = await axios.get(
       `${BASE_URL_DEV}/doctors/${appointmentData.doctor}`,
@@ -88,7 +88,6 @@ const PatientQuestionHome = ({ navigation }) => {
       fifthStepperData,
       sixthStepperData,
     ];
-    console.log(data, "patientHome");
     setPatientSummary(data);
   }, [sixthStepperData]);
 

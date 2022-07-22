@@ -145,9 +145,23 @@ const ConnectPatient = ({ navigation, route }) => {
   };
 
   async function asapButtonClick() {
+    const response = await axios.get(
+      `${BASE_URL_DEV}/doctors`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+
+    const item = response.data.data.filter((data) => data.email === "knowprabhjyot@gmail.com" );
+    
+
+
     setAppointmentData({
       ...appointmentData,
       urgent: true,
+      doctor: item[0]._id
     });
     navigation.navigate("Patient-question-home");
   }

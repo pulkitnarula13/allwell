@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native";
 
 const PatientQuestionSummary = ({navigation}) => {
 
+
   const DATA = [
     {
       name: 'Kapil',
