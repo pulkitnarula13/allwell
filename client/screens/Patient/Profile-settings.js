@@ -67,7 +67,7 @@ const PatientProfileSettings = ({ navigation }) => {
         >
           <Image
                   style={styles.image2}
-                  source={require("../../assets/images/medico_icon-logIn.svg")}
+                  source={require("../../assets/icons/medico_icon-logIn.svg")}
                   resizeMode="cover"
                 />
           <Text style={{color:"white",fontSize:16,fontWeight:"600"}}>Log Out</Text>
@@ -83,7 +83,7 @@ const PatientProfileSettings = ({ navigation }) => {
           
           <Image
                   style={styles.image2}
-                  source={require("../../assets/images/medico_icon-delete.svg")}
+                  source={require("../../assets/icons/medico_icon-delete.svg")}
                   resizeMode="cover"
                 />
             

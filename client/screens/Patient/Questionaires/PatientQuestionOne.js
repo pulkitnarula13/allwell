@@ -9,7 +9,7 @@ const PatientQuestionOne = (props) => {
       <View style={styles.imageview}>
         <Image
           style={styles.image1}
-          source={require("../../../assets/images/doctorAni.gif")}
+          source={require("../../../assets/icons/doctorAni.gif")}
           resizeMode="center"
         />
       </View>

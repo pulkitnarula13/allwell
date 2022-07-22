@@ -19,7 +19,7 @@ const DoctorPatientSelectionSignup = ({ navigation }) => {
         >
           <Image
             style={{ width: 186, height: 186  }}
-            source={require("../../assets/images/patientsignup.png")}
+            source={require("../../assets/icons/patientsignup.png")}
           />
 
         </TouchableOpacity>
@@ -42,7 +42,7 @@ const DoctorPatientSelectionSignup = ({ navigation }) => {
           <Image
             style={{ width: 234, height: 160, borderRadius: 4 }}
             resizeMode="cover"
-            source={require("../../assets/images/doctorsignup.png")}
+            source={require("../../assets/icons/doctorsignup.png")}
           />       
         </TouchableOpacity>
       </View>
