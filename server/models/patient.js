@@ -44,7 +44,7 @@ const PatientSchema = mongoose.Schema({
   expoToken: {
     type: String
   },
-  address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
+  address: { type: String },
 });
 
 const Patient = mongoose.model("Patient", PatientSchema);

@@ -16,6 +16,7 @@ const PatientInformation = (props) => {
   const [email, setemail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [MSP, setMSP] = useState("");
+  const [address, setAddress] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [dataLoading, setDataLoading] = useState(false);
@@ -35,6 +36,7 @@ const PatientInformation = (props) => {
     setemail(userData.data.data.email);
     setProfilePicture(userData.data.data.profilePicture);
     setProfilePhoto(userData.data.data.profilePicture);
+    setAddress(userData.data.data.address);
     setPhoneNumber(userData.data.data.phoneNumber.toString());
     setMSP(userData.data.data.healthNumber.toString());
     setDataLoading(false);
@@ -71,6 +73,7 @@ const PatientInformation = (props) => {
           email: email,
           phoneNumber: phoneNumber,
           healthNumber: MSP,
+          address: address,
           profilePicture: profilePicture.base64,
         },
         {
@@ -146,6 +149,16 @@ const PatientInformation = (props) => {
             value={MSP}
             onChangeText={(text) => setMSP(text)}
           />
+
+          <TextInput
+            style={styles.inputbox}
+            mode="outlined"
+            label="Address"
+            value={address}
+            onChangeText={(text) => setAddress(text)}
+          />
+
+
         </View>
         <View style={styles.btnview}>
           <Button

@@ -93,16 +93,9 @@ const PatientProfile = (props) => {
           <Text style={styles.infotext1}>Email</Text>
           <Text style={styles.infotext11}>{PatientProfileData?.email}</Text>
         </View>
-        <View
-          style={{
-            width: 310,
-            height: 0,
-            borderWidth: 0.75,
-            borderColor: "#CBD5E0",
-            marginLeft: -9,
-            marginBottom: 15,
-          }}
-        ></View>
+
+        <View style={styles.dividerLine} />
+
         <View style={styles.info2}>
           <Text style={styles.infotext1}>Mobile Number</Text>
           <Text style={styles.infotext11}>
@@ -111,52 +104,33 @@ const PatientProfile = (props) => {
               : PatientProfileData?.phoneNumber}
           </Text>
         </View>
-        <View
-          style={{
-            width: 310,
-            height: 0,
-            borderWidth: 0.75,
-            borderColor: "#CBD5E0",
-            marginLeft: -9,
-            marginBottom: 15,
-          }}
-        ></View>
+
+        <View style={styles.dividerLine} />
+
         <View style={styles.info2}>
           <Text style={styles.infotext1}>MSP Number</Text>
           <Text style={styles.infotext11}>
             {PatientProfileData?.healthNumber}
           </Text>
         </View>
-        <View
-          style={{
-            width: 310,
-            height: 0,
-            borderWidth: 0.75,
-            borderColor: "#CBD5E0",
-            marginLeft: -9,
-            marginBottom: 15,
-          }}
-        ></View>
-        <View style={styles.info2}>
-          <Text style={styles.infotext2}>Address</Text>
-          <Text style={styles.infotext11}>
-            100 W 49th Ave, Vancouver, BC V5Y 2Z6
-          </Text>
-        </View>
-        <View
-          style={{
-            width: 310,
-            height: 0,
-            borderWidth: 0.75,
-            borderColor: "#CBD5E0",
-            marginLeft: -9,
-            marginBottom: 15,
-          }}
-        ></View>
+
+        <View style={styles.dividerLine} />
+
         <View style={styles.info2}>
           <Text style={styles.infotext1}>Date of birth</Text>
           <Text style={styles.infotext11}>{dateformatted.toDateString()}</Text>
         </View>
+
+        <View style={styles.dividerLine} />
+
+        <View style={styles.info2}>
+          <Text style={styles.infotext2}>Address</Text>
+          <Text style={styles.infotext11}>
+          {PatientProfileData?.address}
+          </Text>
+        </View>
+
+
       </View>
     </ScrollView>
   );
@@ -178,6 +152,15 @@ const styles = StyleSheet.create({
     // position: "absolute",
     // top: 120,
     // left: 60,
+  },
+
+  dividerLine: {
+    width: 310,
+    height: 0,
+    borderWidth: 0.75,
+    borderColor: "#CBD5E0",
+    marginLeft: -9,
+    marginBottom: 15,
   },
 
   infotext1: {
