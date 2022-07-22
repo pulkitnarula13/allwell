@@ -28,6 +28,7 @@ const AcceptPatientSchedule = (props) => {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(true);
   const [appointmentInfo, setAppointmentInfo] = useState(props.route.params);
+  const [dateVal, setDateVal] = useState(new Date().getDate());
   const { userInfo } = useContext(AuthContext);
   console.log(appointmentInfo, "appointmentInfo");
   const [messageForAppointment, setMessageForAppointment] = useState("");
@@ -39,6 +40,7 @@ const AcceptPatientSchedule = (props) => {
         {
           date,
           time,
+          dateVal
         },
         {
           headers: {
@@ -52,7 +54,7 @@ const AcceptPatientSchedule = (props) => {
       );
 
       Alert.alert("Success", response.data.message);
-      props.navigation.navigate("Doctor-Home");
+      props.navigation.navigate("Home");
     } catch (error) {
       console.log(error, "error");
       Alert.alert("Error", error.message);
@@ -152,7 +154,9 @@ const AcceptPatientSchedule = (props) => {
             }}
             selected={date}
             onDayPress={(day) => {
+              console.log(day, "sleected day");
               setDate(day.dateString);
+              setDateVal(day.day);
             }}
             enableSwipeMonths={true}
             theme={{

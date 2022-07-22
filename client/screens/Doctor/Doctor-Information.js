@@ -50,8 +50,6 @@ const DoctorInformation = (props) => {
   };
 
   function updatedata() {
-    // navigation.navigate("Doctorprofile");
-    console.log(name, email, phoneNumber, profilePicture, "all val");
     axios
       .put(
         `${BASE_URL_DEV}/doctors/${userInfo.id}`,

@@ -59,7 +59,8 @@ const confirmAppointment = (req, res) => {
     {
       confirmed: true,
       date: req.body.date,
-      time: req.body.time
+      time: req.body.time,
+      dateVal: req.body.dateVal
     },
     {
       returnOrignal: false,
@@ -81,6 +82,7 @@ const confirmAppointment = (req, res) => {
   const id = req.params.id;
 
   console.log(req.body);
+  console.log(req.params.id, 'id');
   Appointment.findOneAndUpdate(
     { _id: id },
       req.body
@@ -207,7 +209,7 @@ const getAppointmentByDoctorId = (req, res) => {
  * @param {*} res
  */
  const getAppointmentBasedOnDate = (req, res) => {
-  Appointment.find({ doctor: req.query.id, date: req.query.date })
+  Appointment.find({ doctor: req.query.id, dateVal: `${req.query.dateVal}` })
     .populate({
       path: "patient",
     })
@@ -217,6 +219,7 @@ const getAppointmentByDoctorId = (req, res) => {
     .populate({
       path: "qna"
     })
+    .sort({ 'time': 'asc'})
     .then((result) => {
       return res.status(200).json({
         message: "Succesfully fetched  Appointment for given patient",

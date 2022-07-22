@@ -56,6 +56,10 @@ const Appointment = new Schema(
 
     reply: {
       type: [Object]
+    },
+
+    dateVal: {
+      type: Number
     }
   },
   {
