@@ -20,6 +20,7 @@ import { AuthContext } from "../../Context/AuthContext";
 let Screenheight = Dimensions.get("window").height;
 
 const ConnectPatient = ({ navigation, route }) => {
+
   // get the family members
   useEffect(() => {
     getFamilyMembers();
@@ -94,6 +95,7 @@ const ConnectPatient = ({ navigation, route }) => {
     const filteredArray = route?.params?.symptomsData.filter((value) =>
       appointmentData.symptoms.includes(value._id)
     );
+
     setSelectedItems(filteredArray);
   }, [route]);
 
@@ -205,7 +207,9 @@ const ConnectPatient = ({ navigation, route }) => {
           <Button
             style={styles.viewDoctorsBtn}
             mode="contained"
-            onPress={() => navigation.navigate("AvailableDoctor")}
+            onPress={() => navigation.navigate("AvailableDoctor", {
+              symptoms: route?.params?.symptomsData
+            })}
           >
             <Text style={styles.viewDoctorsTxt}>View Doctors</Text>
           </Button>
