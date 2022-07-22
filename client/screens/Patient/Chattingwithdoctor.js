@@ -259,7 +259,7 @@ export default function PatientChatting(props) {
       console.log("response", response);
 
       Alert.alert("Success", response.data.message);
-      props.navigation.navigate("Doctor-Inbox");
+      props.navigation.navigate("Home");
     } catch (error) {
       console.log(error, "error");
       Alert.alert("Error", error.message);
