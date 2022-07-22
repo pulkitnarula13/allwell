@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { Avatar, Button } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
