@@ -6,6 +6,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { Avatar } from "react-native-paper";
+import ExpoFastImage from 'expo-fast-image';
 
 const Doctorprofile = (props) => {
   const { userInfo } = useContext(AuthContext);
@@ -43,24 +44,32 @@ const Doctorprofile = (props) => {
           resizeMode="contain"
         /> */}
         {!docProfileData.profilePicture ? (
-              <Avatar.Text
-                style={{ backgroundColor: "#74CBD4" }}
-                size={140}
-                label={userInfo.name[0]}
-                color="#fff"
-              />
-            ) : (
-              <Image
-                style={styles.image2}
-                source={
-                {
-                  uri: `${docProfileData.profilePicture}`
-                }
-                }
-              />
-            )}
-        <Button style={styles.editicon}
-          onPress={() => props.navigation.navigate("DoctorInformation")}>
+          <Avatar.Text
+            style={{ backgroundColor: "#74CBD4" }}
+            size={140}
+            label={userInfo.name[0]}
+            color="#fff"
+          />
+        ) : (
+          // <Image
+          //   style={styles.image2}
+          //   source={
+          //   {
+          //     uri: `${docProfileData.profilePicture}`
+          //   }
+          //   }
+          // />
+
+          <ExpoFastImage
+            uri={docProfileData.profilePicture} // image address
+            cacheKey={docProfileData.email} // could be a unque id
+            style={styles.image2} // your custom style object
+          />
+        )}
+        <Button
+          style={styles.editicon}
+          onPress={() => props.navigation.navigate("DoctorInformation")}
+        >
           <Feather name="edit-3" size={24} color="black" />
         </Button>
       </View>
@@ -122,7 +131,6 @@ const Doctorprofile = (props) => {
           )}
         </Text>
       </View> */}
-
 
       <View style={styles.info3}>
         <Text style={styles.infotext13}>Short Bio</Text>
