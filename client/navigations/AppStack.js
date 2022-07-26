@@ -11,19 +11,14 @@ import Requestwait from "../screens/Patient/Requestwait";
 import DoctorInfo from "../screens/Patient/Doctor-Info";
 import AddFamilyMember from "../screens/Patient/AddFamilyMember";
 import PatientProfileSettings from "../screens/Patient/Profile-settings";
-import PatientLogin from "../screens/Common/Patient-Login";
 import DoctorProfileSettings from "../screens/Doctor/Doctor-Profile-Settings";
 import Doctorprofile from "../screens/Doctor/Doctor-Profile";
-import DoctorLogin from "../screens/Common/Doctor-Login";
 import SchedulePatient from "../screens/Doctor/Schedule-patient";
 import AcceptPatientSchedule from "../screens/Doctor/Accept-Patient-Schedule";
 import InfoPatient from "../screens/Doctor/Info-Patient";
 import DoctorAppointment from "../screens/Doctor/Doctor-Appointment";
-import ForgotPassword from "../screens/Common/ForgotPassword";
 import Chattingwithdoctor from "../screens/Patient/Chattingwithdoctor";
 import Greeting from "../screens/Common/Greeting";
-import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
-import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
 import DoctorInformation from "../screens/Doctor/Doctor-Information";
 import PatientProfile from "../screens/Patient/Patient-Profile";
 import PatientInformation from "../screens/Patient/Patient-Information";
@@ -45,6 +40,15 @@ import FAQDoctors from "../screens/Doctor/FAQ-Doctors";
 import TermsDoctors from "../screens/Doctor/Terms-Doctors"
 import PrivacyPolicyDoctors from "../screens/Doctor/PrivacyPolicyDoctors"
 
+import DoctorPatientSelectionSignup from "../screens/Common/Doctor-Patient-Selection-Signup";
+import DoctorPatientSelectionLogin from "../screens/Common/Doctor-Patient-Selection-Login";
+import ForgotPassword from "../screens/Common/ForgotPassword";
+import DoctorSignup from "../screens/Doctor/Doctor-Signup";
+import PatientSignup from "../screens/Patient/Patient-Signup";
+import DoctorLogin from "../screens/Common/Doctor-Login";
+import PatientLogin from "../screens/Common/Patient-Login";
+import DoctorSignupScreenLast from "../screens/Doctor/DoctorSignupScreenLast";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -55,21 +59,34 @@ const AppStack = () => {
         header: (props) => <CustomNavigationBar {...props} />,
       }}
     >
+
+      {/* Auth Stack */}
+
+      <Stack.Screen name="Greeting" component={Greeting} />
+
+      <Stack.Screen name="Doctor-Patient-Selection-Signup" component={DoctorPatientSelectionSignup} />
+      <Stack.Screen name="Doctor-Patient-Selection-Login" component={DoctorPatientSelectionLogin} />
+      <Stack.Screen name="forgot-password" component={ForgotPassword} />
+
+      <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
+      <Stack.Screen name="Patient-Signup" component={PatientSignup} />
+      <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
+      <Stack.Screen name="Patient-Login" component={PatientLogin} />
+      <Stack.Screen name="DoctorSignupScreenLast" component={DoctorSignupScreenLast} />
+
+
+
+
+      {/* Auth Stack ends */}
+
+
+
       {/* COMMON NAVIGATIONS STARTED */}
       <Stack.Screen name="Home" component={Bottomnavigation} />
 
 
       <Stack.Screen name="GreetingPage" component={Greeting} />
-      <Stack.Screen
-        name="Doctor-Patient-Selection-Signup"
-        component={DoctorPatientSelectionSignup}
-      />
       <Stack.Screen name="AvailableDoctor" component={AvailableDoctor} />
-      <Stack.Screen name="forgot-password" component={ForgotPassword} />
-      <Stack.Screen
-        name="Doctor-Patient-Selection-Login"
-        component={DoctorPatientSelectionLogin}
-      />
       <Stack.Screen name="Patient-Questiontwo" component={PatientQuestionTwo} />
       <Stack.Screen
         name="Patient-QuestionSummary"
@@ -88,7 +105,6 @@ const AppStack = () => {
         component={DoctorProfileSettings}
       />
       <Stack.Screen name="Chattingwithdoctor" component={Chattingwithdoctor} />
-      <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
       <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
       <Stack.Screen name="Doctorprofile" component={Doctorprofile} />
       <Stack.Screen name="DoctorInformation" component={DoctorInformation} />
@@ -135,7 +151,6 @@ const AppStack = () => {
         name="Patient-Profile-Settings"
         component={PatientProfileSettings}
       />
-      <Stack.Screen name="Patient-Login" component={PatientLogin} />
       <Stack.Screen name="All-Symptoms" component={AllSymptoms} />
       <Stack.Screen
         name="Doctor-Connect"
