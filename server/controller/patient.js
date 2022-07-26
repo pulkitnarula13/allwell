@@ -304,7 +304,7 @@ const getPatientById = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const createSymptom = (req, res) => {
+ const createSymptom = async (req, res) => {
 
 
   let uploadSymtpomImage = await upload(
