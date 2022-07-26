@@ -305,10 +305,20 @@ const getPatientById = (req, res) => {
  * @param {*} res
  */
  const createSymptom = (req, res) => {
+
+
+  let uploadSymtpomImage = await upload(
+    `${Date.now() + "" + req.body.name}`,
+    req.body.image,
+    "jpg",
+    "symptom",
+    req.body.name
+  );
   
   Symptom.create({
     name: req.body.name,
-    description: req.body.description
+    description: req.body.description,
+    image: uploadSymtpomImage
   })
     .then((result) => {
       return res.status(201).json({
