@@ -81,7 +81,7 @@ const DoctorInformation = (props) => {
         <View style={styles.overall}>
           <View style={styles.imageview}>
             <TouchableOpacity onPress={openimagelib}>
-              {!userInfo.profilePicture && !profilePicture.uri ? (
+              {!userInfo.profilePicture && !profilePicture ? (
                 <Avatar.Text
                   style={{ backgroundColor: "#74CBD4" }}
                   size={140}
