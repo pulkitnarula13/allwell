@@ -24,7 +24,7 @@ const DoctorInformation = (props) => {
     const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
     setName(userData.data.data.name);
     setemail(userData.data.data.email);
-    setProfilePicture(userData.data.data.profilePicture);
+    setProfilePicture({uri: userData.data.data.profilePicture});
     setPhoneNumber(userData.data.data.phoneNumber.toString());
     setDoctorDescription(userData.data.data.doctorDescription);
     setDataLoading(false);
@@ -81,7 +81,7 @@ const DoctorInformation = (props) => {
         <View style={styles.overall}>
           <View style={styles.imageview}>
             <TouchableOpacity onPress={openimagelib}>
-              {!userInfo.profilePicture && !profilePicture ? (
+              {!userInfo.profilePicture && !profilePicture.uri ? (
                 <Avatar.Text
                   style={{ backgroundColor: "#74CBD4" }}
                   size={140}
