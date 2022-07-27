@@ -51,20 +51,20 @@ const Doctorprofile = (props) => {
             color="#fff"
           />
         ) : (
-          // <Image
-          //   style={styles.image2}
-          //   source={
-          //   {
-          //     uri: `${docProfileData.profilePicture}`
-          //   }
-          //   }
-          // />
-
-          <ExpoFastImage
-            uri={docProfileData.profilePicture} // image address
-            cacheKey={docProfileData.email} // could be a unque id
-            style={styles.image2} // your custom style object
+          <Image
+            style={styles.image2}
+            source={
+            {
+              uri: `${docProfileData.profilePicture}`
+            }
+            }
           />
+
+          // <ExpoFastImage
+          //   uri={docProfileData.profilePicture} // image address
+          //   cacheKey={docProfileData.email} // could be a unque id
+          //   style={styles.image2} // your custom style object
+          // />
         )}
         <Button
           style={styles.editicon}
