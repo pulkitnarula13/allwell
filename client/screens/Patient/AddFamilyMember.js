@@ -11,25 +11,6 @@ import { BASE_URL_DEV } from "@env";
 
 
 
-
-// open image gallery
-const openimagelib = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    allowsEditing: true,
-    base64: true,
-    aspect: [4, 3],
-    quality: 1,
-  });
-
-  if (!result.cancelled) {
-    setProfilePicture({ base64: result.base64, uri: result.uri });
-    console.log(profilePicture, "selected Profile Picture");
-  }
-};
-
-
-
  const AddFamilyMember = (props)=> {
   console.log(props);
     const [ name, setName ] = useState("");
@@ -40,9 +21,25 @@ const openimagelib = async () => {
     const [ profilePicture, setProfilePicture ] = useState("");
     const { userInfo } = useContext(AuthContext);
 
+    // open image gallery
+    const openimagelib = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        base64: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        setProfilePicture({ base64: result.base64, uri: result.uri });
+        console.log(profilePicture, "selected Family Member Profile Picture");
+      }
+    };
 
 
 
+    // function for cancel Button
     const clearData = () => {
       setName('');
       setEmail('');
@@ -248,10 +245,12 @@ const styles = StyleSheet.create({
         textAlign:"center"
      },
      imgstyle: {
-        width: 159,
-        height: 159,
-        backgroundColor: "#D9D9D9",
-        borderRadius: 10,
+        width: 150,
+        height: 150,
+        backgroundColor: "white",
+        borderWidth: 2,
+        borderColor: "#D9D9D9",
+        borderRadius: 100,
       },
       cancelBtn: {
           borderRadius: 100,

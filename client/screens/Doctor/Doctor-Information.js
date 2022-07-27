@@ -45,7 +45,7 @@ const DoctorInformation = (props) => {
 
     if (!result.cancelled) {
       setProfilePicture({ base64: result.base64, uri: result.uri });
-      console.log(profilePicture, "selected Profile Picture");
+      console.log(profilePicture, "Selected Doctor Profile Picture");
     }
   };
 
