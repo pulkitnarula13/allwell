@@ -2,6 +2,9 @@ import { View, Text, StyleSheet, Image, ScrollView, KeyboardAvoidingView, Keyboa
 import React, { useState, useContext } from 'react'
 import { TextInput, Button } from 'react-native-paper';
 import { DatePickerInput } from "react-native-paper-dates";
+import * as ImagePicker from "expo-image-picker";
+import { Feather } from "@expo/vector-icons";
+import { Avatar } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
@@ -9,13 +12,32 @@ import { BASE_URL_DEV } from "@env";
 
 
 
+// open image gallery
+const openimagelib = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    allowsEditing: true,
+    base64: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  if (!result.cancelled) {
+    setProfilePicture({ base64: result.base64, uri: result.uri });
+    console.log(profilePicture, "selected Profile Picture");
+  }
+};
+
+
+
  const AddFamilyMember = (props)=> {
   console.log(props);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [relationship, setRelationship] = useState("");
-    const [MSP, setMSP] = useState("");
-    const [birthdate, setbirthdate] = useState(undefined);
+    const [ name, setName ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ relationship, setRelationship ] = useState("");
+    const [ MSP, setMSP ] = useState("");
+    const [ birthdate, setbirthdate ] = useState(undefined);
+    const [ profilePicture, setProfilePicture ] = useState("");
     const { userInfo } = useContext(AuthContext);
 
 
@@ -27,6 +49,7 @@ import { BASE_URL_DEV } from "@env";
       setRelationship('');
       setMSP('');
       setbirthdate(undefined);
+      setProfilePicture('');
       props.navigation.navigate("Doctor-Connect");
     }
 
@@ -42,6 +65,7 @@ import { BASE_URL_DEV } from "@env";
           dob:  birthdate,
           healthNumber: MSP,
           relationship: relationship,
+          profilePicture: profilePicture.base64,
           createdBy: userInfo.id
         },
         {
@@ -62,17 +86,38 @@ import { BASE_URL_DEV } from "@env";
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
     <View style={styles.maxview}>
-        <ScrollView >
+        <ScrollView   showsVerticalScrollIndicator={false}>
         <View style={styles.overall}>
        <View style={styles.outerview}>
       <Text style={styles.profiletext}>Add  Family Member</Text>
       </View>
-      <View style={styles.imageview}>
-      <Image
+      <View style={styles.profileImageView}>
+      {/* <Image
             style={styles.imgstyle}
             source={require("../../assets/icon.png")}
             resizeMode="contain"
-          />
+          /> */}
+
+              {!profilePicture ? (
+                <Avatar.Text
+                  style={{ backgroundColor: "#74CBD4" }}
+                  size={140}
+                  label={name[0]}
+                  color="#fff"
+                />
+              ) : (
+                <Image
+                  style={styles.imgstyle}
+                  source={{ uri: `${profilePicture.uri}` }}
+                />
+              )}
+
+        <Button
+          style={styles.editicon}
+          onPress={openimagelib}
+        >
+          <Feather name="edit-3" size={24} color="black" />
+        </Button>
 
       </View>
       <TextInput
@@ -106,13 +151,7 @@ import { BASE_URL_DEV } from "@env";
             value={MSP}
             onChangeText={(text) => setMSP(text)}
           />
-           {/* <TextInput
-            style={styles.inputbox}
-            mode="outlined"
-            label="Birth Date"
-            value={birthdate}
-            onChangeText={(text) => setbirthdate(text)}
-          /> */}
+
           <View style={styles.datePickerView}>
             <DatePickerInput
               locale = 'en'
@@ -196,11 +235,11 @@ const styles = StyleSheet.create({
         height: 40,
         marginBottom: 40,
       },
-    imageview:{
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-        marginBottom:11
+    profileImageView:{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 40
     },
     profiletext:{
         fontSize:24,
@@ -243,6 +282,12 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         textTransform: 'capitalize',
         fontWeight: 'bold',
-      }
+      },
+
+      editicon: {
+      position: "absolute",
+      top: 120,
+      left: -20,
+    },
 });
 export default AddFamilyMember
