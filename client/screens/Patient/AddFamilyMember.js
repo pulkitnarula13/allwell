@@ -95,26 +95,26 @@ import { BASE_URL_DEV } from "@env";
             resizeMode="contain"
           /> */}
 
-              {!profilePicture ? (
+              {/* {!profilePicture ? ( */}
                 <Avatar.Text
                   style={{ backgroundColor: "#74CBD4" }}
                   size={140}
                   label={name[0]}
                   color="#fff"
                 />
-              ) : (
-                <Image
+              {/* ) : ( */}
+                {/* <Image
                   style={styles.imgstyle}
                   source={{ uri: `${profilePicture.uri}` }}
-                />
-              )}
+                /> */}
+              {/* )} */}
 
-        <Button
+        {/* <Button
           style={styles.editicon}
           onPress={openimagelib}
         >
           <Feather name="edit-3" size={24} color="black" />
-        </Button>
+        </Button> */}
 
       </View>
       <TextInput
