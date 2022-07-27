@@ -165,7 +165,7 @@ import { BASE_URL_DEV } from "@env";
 
           </View>
           
-          <View style={styles.btnview}>
+          <View style={styles.btnView}>
           <Button
               style={styles.cancelBtn}
               mode="contained"
@@ -201,9 +201,11 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center"
     },
-    btnview:{
+    btnView:{
         display:"flex",
-        flexDirection:"row"
+        flexDirection:"row",
+        paddingTop: 20,
+        marginBottom: 20
     },
     maxview:{
         display:"flex",
@@ -211,11 +213,11 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     outerview:{
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-        marginTop:38,
-        marginBottom:46
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 0,
+        marginBottom: 20
     },
     inputbox: {
         width: 256,
