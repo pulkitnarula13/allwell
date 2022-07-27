@@ -2,9 +2,11 @@ import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
+import { Alert } from "react-native";
 
 const PatientQuestionImage = (props) => {
   const [totalImages, setTotalImages] = useState([]);
+  
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -29,6 +31,46 @@ const PatientQuestionImage = (props) => {
     }
   };
 
+const Runalert = ()=> { 
+  Alert.alert("Medico","Do you want to open camera?", [
+    {
+      text: "No",
+      onPress: openimagelib,
+      
+    },
+    { text: "Yes", onPress: openCamera }
+  ])
+}
+
+  const openCamera = async () => {
+    
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("You've refused to allow this appp to access your camera!");
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync();
+
+    
+    console.log(result);
+
+    if (!result.cancelled) {
+          const data = totalImages;
+          data.push({
+            uri: result.uri,
+            base64: result.base64
+          });
+          setTotalImages(data);
+          props.setSixthStepperData({
+            ...props.mainData,
+            images: data,
+          });
+  }
+  }
+
+
   const Item = ({ item }) => {
     return (
       <View style={styles.item}>
@@ -49,7 +91,7 @@ const PatientQuestionImage = (props) => {
       </View>
       <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>Add Photos/Videos</Text>
       <View style={{ display: "flex", flexDirection: "row", height: 130 }}>
-        <TouchableOpacity onPress={openimagelib}>
+        <TouchableOpacity onPress={Runalert}>
           <View style={{ marginRight:17,width: 130, height: 130, borderWidth: 1, borderColor: "#A0AEC0", justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
             <Image
               style={styles.image3}
