@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import React, { useState, useContext } from 'react'
 import { TextInput, Button } from 'react-native-paper';
 import { DatePickerInput } from "react-native-paper-dates";
@@ -55,9 +55,14 @@ import { BASE_URL_DEV } from "@env";
     }
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "100"}
+      enabled={true}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
     <View style={styles.maxview}>
-        
-        <ScrollView>
+        <ScrollView >
         <View style={styles.overall}>
        <View style={styles.outerview}>
       <Text style={styles.profiletext}>Add  Family Member</Text>
@@ -108,6 +113,7 @@ import { BASE_URL_DEV } from "@env";
             value={birthdate}
             onChangeText={(text) => setbirthdate(text)}
           /> */}
+          <View style={styles.datePickerView}>
             <DatePickerInput
               locale = 'en'
               label="Date of Birth"
@@ -118,6 +124,9 @@ import { BASE_URL_DEV } from "@env";
               inputMode="start"
               style={styles.inputDateStyle}
             />
+            </View>
+
+
           </View>
           
           <View style={styles.btnview}>
@@ -139,12 +148,18 @@ import { BASE_URL_DEV } from "@env";
             </Button>
           </View>
           </ScrollView>
-          
 
     </View>
+    </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
   )
 }
 const styles = StyleSheet.create({
+
+    container: {
+      flex: 1
+    },
+
     overall:{
         display:"flex",
         justifyContent:"center",
@@ -175,6 +190,11 @@ const styles = StyleSheet.create({
         width: 256,
         height: 40,
         marginBottom: 19,
+      },
+      datePickerView: {
+        width: 256,
+        height: 40,
+        marginBottom: 40,
       },
     imageview:{
         display:"flex",
