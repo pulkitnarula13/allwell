@@ -24,7 +24,7 @@ const DoctorInformation = (props) => {
     const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
     setName(userData.data.data.name);
     setemail(userData.data.data.email);
-    setProfilePicture(userData.data.data.profilePicture);
+    setProfilePicture({uri: userData.data.data.profilePicture});
     setPhoneNumber(userData.data.data.phoneNumber.toString());
     setDoctorDescription(userData.data.data.doctorDescription);
     setDataLoading(false);
@@ -45,7 +45,7 @@ const DoctorInformation = (props) => {
 
     if (!result.cancelled) {
       setProfilePicture({ base64: result.base64, uri: result.uri });
-      console.log(profilePicture, "selected Profile Picture");
+      console.log(profilePicture, "Selected Doctor Profile Picture");
     }
   };
 

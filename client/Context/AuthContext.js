@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.removeItem("userInfo");
     setUserInfo({});
     setIsLoading(false);
-    navigation.navigate("greeting");
+    navigation.navigate("Greeting");
   };
 
   const isLoggedIn = async () => {
