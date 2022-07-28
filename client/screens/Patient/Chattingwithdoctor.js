@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Bubble, GiftedChat, Composer } from "react-native-gifted-chat";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
-import { Button } from "react-native-paper";
+import { Button, Divider } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import PushNotification from "../../components/PushNotification";
 
@@ -24,13 +24,15 @@ export default function PatientChatting(props) {
         {...props}
         wrapperStyle={{
         left: {
-            backgroundColor: "#79bdcc",
-            borderColor: "#79bdcc",
-            borderWidth: 1,
-            borderBottomLeftRadius: 10,
-            borderTopLeftRadius: 10,
-            padding: 6,
-            marginTop: 8,
+          backgroundColor: "transparent",
+          borderColor: "#79bdcc",
+          borderWidth: !props.currentMessage.image  ? 1  : 0, 
+          borderBottomLeftRadius: 10,
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+          borderBottomRightRadius: 10,
+          padding: 6,
+          marginTop: 8,
           },
         }}
       />
@@ -50,6 +52,7 @@ export default function PatientChatting(props) {
 
   const modifyChat = () => {
     const modifiedData = [];
+    console.log(props.route.params, "qna");
     props.route.params.qna.forEach((qna) => {
       modifiedData.push({
         _id: qna.question,
@@ -60,22 +63,21 @@ export default function PatientChatting(props) {
             }}
           >
             {qna.question ? (
-              <Text style={{ fontWeight: "bold" }}>
+              <Text style={{  backgroundColor: "white", color: "black", padding: 8,borderRadius: 10, borderWidth: 1, borderColor: "#fff", overflow: "hidden" }}>
                 Question: {qna.question}
               </Text>
             ) : (
               <Text></Text>
             )}
+            <Divider />
             <Text
               style={{
-                backgroundColor: "#79bdcc",
-                color: "#fff",
-                borderColor: "#fff",
-                padding: 4,
-                borderWidth: 1,
-                borderBottomLeftRadius: 10,
-                borderTopLeftRadius: 10,
-                marginTop: 4,
+                color: "#a09e9e",
+              padding: 4,
+              borderRadius: 10,
+              borderWidth:
+                qna.answer ? 1 : 0,
+              borderColor: qna.answer ? "#fff" : "transparent",
               }}
             >
               {` ${qna.answer ? "Answer :" : ""} ${qna.answer}`}
