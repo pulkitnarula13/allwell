@@ -170,7 +170,10 @@ export default function PatientChatting(props) {
       renderBubble={renderBubble}
       onSend={(messages) => onSend(messages)}
       alwaysShowSend={true}
-      user={{
+      minComposerHeight={0}
+      maxComposerHeight={0}
+      minInputToolbarHeight={0}
+      renderInputToolbar={() => null}            user={{
         _id: 1,
       }}
     />
