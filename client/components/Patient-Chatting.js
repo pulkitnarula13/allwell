@@ -96,7 +96,7 @@ export default function PatientChatting(props) {
         modifiedData.push({
           _id: item.question,
           text: renderUI(item),
-          // image: qna?.images[0],
+          image: item?.image,
           createdAt: new Date(),
           sent: true,
           user: {
