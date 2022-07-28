@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
 import { Alert } from "react-native";
+import * as FileSystem from 'expo-file-system';
 
 const PatientQuestionImage = (props) => {
   const [totalImages, setTotalImages] = useState([]);
@@ -52,15 +53,14 @@ const Runalert = ()=> {
     }
 
     const result = await ImagePicker.launchCameraAsync();
+    const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
 
     
-    console.log(result);
-
     if (!result.cancelled) {
           const data = totalImages;
           data.push({
             uri: result.uri,
-            base64: result.base64
+            base64: base64
           });
           setTotalImages(data);
           props.setSixthStepperData({

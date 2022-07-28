@@ -11,6 +11,7 @@ export default function PatientChatting(props) {
 
   console.log(props.route.params, 'chtting doc');
   const [messages, setMessages] = useState([]);
+  const [completed, setCompleted] = useState(false);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
@@ -109,6 +110,8 @@ export default function PatientChatting(props) {
         }
       );
 
+      setCompleted(true);
+
       Alert.alert("Success", response.data.message);
       props.navigation.navigate("Home");
     } catch (error) {
@@ -136,11 +139,13 @@ export default function PatientChatting(props) {
   }, []);
   return (
     <>
-      <PushNotification
-        title={`Message Recieved`}
-        body={`You have a new message from the doctor`}
-        toToken={props.route.params.patient.expoToken}
-      />
+    {
+      completed ?   <PushNotification
+      title={`Message Recieved`}
+      body={`You have a new message from the doctor`}
+      toToken={props.route.params.patient.expoToken}
+    /> : null
+    }
       <GiftedChat
         messages={messages}
         renderBubble={renderBubble}
