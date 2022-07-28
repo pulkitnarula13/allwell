@@ -1,21 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Paragraph, Title } from "react-native-paper";
 import { Tabs, TabScreen } from "react-native-paper-tabs";
 import CalendarStrip from "react-native-calendar-strip";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../Context/AuthContext";
-import AppointmentCard from "../../components/AppointmentCard";
 import DoctorAppointmentCard from "../../components/DoctorAppointmentCard";
 
 const Item = ({ name, image }) => (
@@ -51,8 +40,6 @@ const DoctorAppointment = (props) => {
           },
         }
       );
-
-      console.log(data.data.data, "all");
 
       const confirmedAppointments = data.data.data.filter(
         (data) => data.confirmed && !data.cancelled && !data.completed
@@ -145,12 +132,8 @@ const DoctorAppointment = (props) => {
           }}
           highlightDateNumberStyle={{
             backgroundColor: "white",
-            // borderRadius: 20,
             color: "#74CBD4",
-            // borderWidth: 1,
-            // borderColor: "white",
             padding: 10,
-            // borderRadius: 20,
           }}
         ></CalendarStrip>
       </View>

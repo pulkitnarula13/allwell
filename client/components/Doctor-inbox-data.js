@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Rating } from "react-native-ratings";
 import { FlatList } from "react-native";
-import { DATA } from "../constants/Doctor-inboxvalues";
 import { AuthContext } from "../Context/AuthContext";
 import { Avatar } from "react-native-paper";
 
@@ -20,14 +18,13 @@ const DoctorCurrentMessages = (props) => {
         ).getMonth()} / ${new Date(data.date).getFullYear()}`,
         symptoms: data.symptoms[0]?.name,
         info: data.qna[0].answer,
-        patient: data.patient.name,
+      patient: data.patient,
         qna: data.qna,
         appointmentInfo: data._id,
         doctor: userInfo,
       };
     });
 
-    console.log(modifiedData, "modifiedData");
     setCurrentData(modifiedData);
   }, [props.currentAppointmnents]);
 
@@ -54,7 +51,7 @@ const DoctorCurrentMessages = (props) => {
                   <Avatar.Text
                     style={{ backgroundColor: "#74CBD4" }}
                     size={65}
-                    label={item.patient[0]}
+                    label={item.patient.name[0]}
                     color="#fff"
                   />
                 ) : (
@@ -77,7 +74,7 @@ const DoctorCurrentMessages = (props) => {
                     marginTop: 8,
                   }}
                 >
-                  {item.patient}
+                  {item.patient.name}
                 </Text>
               </View>
               <View style={{ marginLeft: 30, display: "flex", justifyContent: "center", alignItems: "center" }}>

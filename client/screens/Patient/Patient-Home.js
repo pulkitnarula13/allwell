@@ -136,7 +136,6 @@ const PatientHome = ({ navigation }) => {
         );
 
         setUserLocation(address);
-        console.log(userLocation);
         setlongitude(longitude);
         setlatitude(latitude);
         setLocationLoading(false);

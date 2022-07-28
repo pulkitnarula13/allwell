@@ -54,7 +54,7 @@ const Appointment = new Schema(
       type: Boolean
     },
 
-    reply: {
+    history: {
       type: [Object]
     },
 

@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, LogBox } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
 
@@ -9,6 +9,7 @@ import AppNav from "./navigations/AppNav";
 import AppointmentContext from "./Context/AppointmentContext";
 
 export default function App() {
+  LogBox.ignoreAllLogs();//Ignore all log notifications
   const [appointmentData, setAppointmentData] = useState({
     qna: [],
     symptoms: [],

@@ -6,12 +6,15 @@ import { DATA } from "../constants/Doctor-inboxvalues";
 import { Avatar } from "react-native-paper";
 
 const Patientinboxdata = (props) => {
-  const Item = ({ name, image, date, info, rating, qna, confirmed }) => (
+  const Item = ({ name, image, date, info, rating,qna, confirmed, doctor, patient, history }) => (
     <View>
       <TouchableOpacity
         onPress={() => props.navigation.navigate("PatientChatting", {
-          qna,
-          confirmed
+          confirmed,
+          doctor,
+          patient,
+          history,
+          qna
         })}
       >
         <View style={styles.main}>
@@ -89,6 +92,9 @@ const Patientinboxdata = (props) => {
         rating={item.doctor?.rating}
         qna={item.qna}
         confirmed={item.confirmed}
+        patient={item.patient}
+        doctor={item.doctor}
+        history={item.history}
       />
     );
   };

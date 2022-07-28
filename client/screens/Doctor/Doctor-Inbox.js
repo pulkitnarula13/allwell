@@ -13,7 +13,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import DoctorCompletedMessages from "../../components/DoctorInboxCompletedMessages";
-import moment from "moment";
 
 const DoctorInbox = ({ navigation }) => {
   const [dialogbox, setDialogbox] = useState(false);
@@ -39,7 +38,6 @@ const DoctorInbox = ({ navigation }) => {
         (data) => data.completed && !data.cancelled
       );
 
-      console.log(completedAppointments, "completed");
       setCompletedAppointments(completedAppointments);
 
       const currentAppointmnents = data.data.data.filter(
@@ -62,16 +60,19 @@ const DoctorInbox = ({ navigation }) => {
     });
   }, []);
   const windowWidth = Dimensions.get("window").width;
- 
 
-                
   return (
     <View style={styles.main}>
       <View style={styles.search}>
         <Searchbars />
       </View>
-      <Tabs style={{backgroundColor:"white"}}>
-        <TabScreen color="black" backgroundColor="black" style={{color:"black"}}  label="Current">
+      <Tabs style={{ backgroundColor: "white" }}>
+        <TabScreen
+          color="black"
+          backgroundColor="black"
+          style={{ color: "black" }}
+          label="Current"
+        >
           <View>
             <View
               style={{
@@ -84,7 +85,7 @@ const DoctorInbox = ({ navigation }) => {
             >
               <DoctorCurrentMessages
                 currentPatient={(val) => {
-                  setCurrentPatient(val)
+                  setCurrentPatient(val);
                 }}
                 setDialogbox={(val) => setDialogbox(val)}
                 currentAppointmnents={currentAppointmnents}
@@ -105,7 +106,6 @@ const DoctorInbox = ({ navigation }) => {
             <View>
               <DoctorCompletedMessages
                 currentPatient={(val) => setCurrentPatient(val)}
-                
                 setDialogbox={(val) => setDialogbox(val)}
                 completedAppointments={completedAppointments}
               />
@@ -131,15 +131,14 @@ const DoctorInbox = ({ navigation }) => {
       >
         <DialogContent>
           <View style={styles.viewPatientDataModal}>
-          
             <Text style={styles.modalDate}>{currentPatient?.date}</Text>
             {/* <View style={styles.viewDividerLine}></View> */}
-            
+
             {!currentPatient?.profilePicture ? (
               <Avatar.Text
                 style={{ backgroundColor: "#74CBD4" }}
                 size={98}
-                label={currentPatient?.patient[0]}
+                label={currentPatient?.patient.name[0]}
                 color="#fff"
               />
             ) : (
@@ -152,24 +151,27 @@ const DoctorInbox = ({ navigation }) => {
                 }
               />
             )}
-            <Text style={styles.modalName}> {currentPatient?.patient}</Text>
-            <Text style={styles.modalSymptoms}>Symptoms : {currentPatient?.symptoms}</Text>
-
+            <Text style={styles.modalName}> {currentPatient?.patient.name}</Text>
+            <Text style={styles.modalSymptoms}>
+              Symptoms : {currentPatient?.symptoms}
+            </Text>
           </View>
-          <View style={styles.modalButtonView} >
+          <View style={styles.modalButtonView}>
             <Button
-              style={{ fontSize: 14, lineHeight: 33}}
+              style={{ fontSize: 14, lineHeight: 33 }}
               color="white"
               onPress={() => {
                 console.log(currentPatient, "currentPatient");
                 navigation.navigate("Chatting", {
                   qna: currentPatient.qna,
                   patient: currentPatient.patient,
-                  appointmentInfo: currentPatient.appointmentInfo
+                  appointmentInfo: currentPatient.appointmentInfo,
                 });
-                setDialogbox(false)
+                setDialogbox(false);
               }}
-            >View the chat</Button>
+            >
+              View the chat
+            </Button>
           </View>
         </DialogContent>
       </Dialog>
@@ -181,8 +183,7 @@ const styles = StyleSheet.create({
   image2: {
     width: 98,
     height: 98,
-    borderRadius:100,
-    
+    borderRadius: 100,
   },
   viewPatientDataModal: {
     display: "flex",
@@ -197,13 +198,11 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 20,
     textAlign: "center",
-   
   },
   image1: {
     width: 98,
     height: 98,
     borderRadius: 49,
-
   },
 
   main: {
@@ -260,7 +259,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
 
-  dialogStyles:  {
+  dialogStyles: {
     bottom: 0,
     marginBottom: 0,
     marginTop: "110%",
@@ -269,22 +268,22 @@ const styles = StyleSheet.create({
   },
 
   modalDate: {
-    left:-100,
+    left: -100,
     paddingBottom: 51,
     fontSize: 20,
-    width:129,
-    fontWeight: '600'
+    width: 129,
+    fontWeight: "600",
   },
 
   modalName: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     paddingTop: 14,
     paddingBottom: 3,
   },
 
   modalSymptoms: {
-    fontSize: '13%',
+    fontSize: "13%",
   },
 
   viewDividerLine: {
@@ -299,16 +298,16 @@ const styles = StyleSheet.create({
     height: 49,
     display: "flex",
     flexDirection: "column",
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginLeft: "auto",
+    marginRight: "auto",
     marginTop: 20,
     backgroundColor: "#74CBD4",
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 100,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });
 
 export default DoctorInbox;

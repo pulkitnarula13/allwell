@@ -20,7 +20,7 @@ const DoctorCompletedMessages = (props) => {
         ).getMonth()} / ${new Date(data.date).getFullYear()}`,
         symptoms: data.symptoms[0]?.name,
         info: data.qna[0].answer,
-        patient: data.patient.name,
+        patient: data.patient,
         qna: data.qna,
         appointmentInfo: data._id,
         doctor: userInfo,
@@ -49,7 +49,7 @@ const DoctorCompletedMessages = (props) => {
                   source={require("../assets/icon.png")}
                   resizeMode="contain"
                 />
-                <Text style={{ textAlign: "center" }}> {item.patient}</Text>
+                <Text style={{ textAlign: "center" }}> {item.patient.name}</Text>
               </View>
               <View style={{ marginLeft: 30 }}>
                 <View style={{ display: "flex", flexDirection: "column" }}>

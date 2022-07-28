@@ -1,12 +1,18 @@
 import { View, Text, Alert } from "react-native";
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import { Bubble, GiftedChat, Composer, InputToolbar } from "react-native-gifted-chat";
+import {
+  Bubble,
+  GiftedChat,
+  Composer,
+  InputToolbar,
+} from "react-native-gifted-chat";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { Button, Divider } from "react-native-paper";
 import { AuthContext } from "../Context/AuthContext";
 
 export default function PatientChatting(props) {
+  console.log(props, "props");
   const [messages, setMessages] = useState([]);
   const { userInfo } = useContext(AuthContext);
 
@@ -21,6 +27,15 @@ export default function PatientChatting(props) {
         wrapperStyle={{
           left: {
             backgroundColor: "#79bdcc",
+          },
+          right: {
+            backgroundColor: "#79bdcc",
+            borderColor: "#79bdcc",
+            borderWidth: 1,
+            borderBottomLeftRadius: 10,
+            borderTopLeftRadius: 10,
+            padding: 6,
+            marginTop: 8,
           },
         }}
       />
@@ -38,52 +53,89 @@ export default function PatientChatting(props) {
     );
   };
 
-  const RenderSend = (props) => {
-    return (
-        <Button icon="send">
-        </Button>
-    );
-  };
 
+  const renderUI = (item) => {
+
+    let UI;
+    if (item.text.props?.children[1].props.children.trim().length > 0) {
+      UI =       <View>
+      {typeof item.text !== "string" ? (
+        <Text style={{ fontWeight: "bold" }}>Question: {item._id}</Text>
+      ) : null}
+      <Divider />
+      <Text
+        style={{
+          backgroundColor: "#79bdcc",
+          color: "#fff",
+          padding: 4,
+          borderRadius: 10,
+          borderWidth:
+            item.text.props?.children[1].props.children.length > 0
+              ? 1
+              : 0,
+          fontWeight: "bold",
+          borderColor: item.text.props?.children
+            ? "#fff"
+            : "transparent",
+        }}
+      >
+        {item.text.props?.children[1]?.props?.children}
+      </Text>
+    </View>
+    } 
+
+    return UI;
+
+  }
 
   const modifyChat = () => {
     const modifiedData = [];
-    props.route.params.qna.forEach((qna) => {
-      modifiedData.push({
-        _id: qna.question,
-        text: (
-          <View>
-            {
-              qna.question ? <Text style={{ fontWeight: "bold"}}>Question: {qna.question}</Text> : <Text></Text>
-            }
-            <Divider />
-            <Text
-              style={{
-                backgroundColor: "#79bdcc",
-                color: "#fff",
-                padding: 4,
-                borderRadius: 10,
-                borderWidth: 1,
-                fontWeight: "bold",
-                borderColor: "#fff",
-                display: qna.answer ? "block" : "none"
-              }}
-            >
-              {` ${qna.answer ? "Answer :" : "" } ${qna.answer}`}
-            </Text>
-          </View>
-        ),
-        image: qna?.images[0],
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: props.route.params.patient,
-          avatar: "https://placeimg.com/140/140/any",
-        },
+    props.route.params.history
+      .filter((item) => typeof item.text !== "string")
+      .forEach((item) => {
+        modifiedData.push({
+          _id: item.question,
+          text: renderUI(item),
+          // image: qna?.images[0],
+          createdAt: new Date(),
+          sent: true,
+          user: {
+            _id: 1,
+            name: props.route.params.patient.name,
+            avatar: "https://placeimg.com/140/140/any",
+          },
+        });
       });
-    });
 
-    setMessages(modifiedData.reverse());
+    modifiedData.reverse();
+
+    props.route.params.history
+      .filter((item) => typeof item.text === "string")
+      .forEach((item) => {
+        modifiedData.push({
+          _id: item.question,
+          text: (
+            <View>
+              {typeof item.text === "string" ? (
+                <Text style={{ fontWeight: "bold" }}>{item.text}</Text>
+              ) : null}
+            </View>
+          ),
+          createdAt: new Date(),
+          sent: true,
+          user: {
+            _id: 2,
+            name: props.route.params.doctor.name,
+            avatar: props.route.params.doctor.profilePicture
+              ? props.route.params.doctor.profilePicture
+              : "https://placeimg.com/140/140/any",
+          },
+        });
+      });
+
+    modifiedData.reverse();
+
+    setMessages(modifiedData);
   };
 
   const completeAppointment = async () => {
@@ -107,8 +159,8 @@ export default function PatientChatting(props) {
     }
   };
   const onSend = useCallback((messages = []) => {
-    setMessages(
-      (previousMessages) => GiftedChat.append(previousMessages, messages)
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
     );
   }, []);
 

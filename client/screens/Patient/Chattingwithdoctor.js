@@ -1,12 +1,15 @@
 import { View, Text, Alert } from "react-native";
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import { Bubble, GiftedChat, Composer, InputToolbar } from "react-native-gifted-chat";
+import { Bubble, GiftedChat, Composer } from "react-native-gifted-chat";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
-import { Button, Divider } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
+import PushNotification from "../../components/PushNotification";
 
 export default function PatientChatting(props) {
+
+  console.log(props.route.params, 'chtting doc');
   const [messages, setMessages] = useState([]);
   const { userInfo } = useContext(AuthContext);
 
@@ -19,8 +22,14 @@ export default function PatientChatting(props) {
       <Bubble
         {...props}
         wrapperStyle={{
-          left: {
+        left: {
             backgroundColor: "#79bdcc",
+            borderColor: "#79bdcc",
+            borderWidth: 1,
+            borderBottomLeftRadius: 10,
+            borderTopLeftRadius: 10,
+            padding: 6,
+            marginTop: 8,
           },
         }}
       />
@@ -44,17 +53,31 @@ export default function PatientChatting(props) {
       modifiedData.push({
         _id: qna.question,
         text: (
-          <View>
-            {
-              qna.question ? <Text style={{ fontWeight: "bold"}}>Question: {qna.question}</Text> : <Text></Text>
-            }
-            <Text
+          <View
             style={{
-              borderColor: "#79bdcc",
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
             }}
+          >
+            {qna.question ? (
+              <Text style={{ fontWeight: "bold" }}>
+                Question: {qna.question}
+              </Text>
+            ) : (
+              <Text></Text>
+            )}
+            <Text
+              style={{
+                backgroundColor: "#79bdcc",
+                color: "#fff",
+                borderColor: "#fff",
+                padding: 4,
+                borderWidth: 1,
+                borderBottomLeftRadius: 10,
+                borderTopLeftRadius: 10,
+                marginTop: 4,
+              }}
             >
-              {` ${qna.answer ? "Answer :" : "" } ${qna.answer}`}
+              {` ${qna.answer ? "Answer :" : ""} ${qna.answer}`}
             </Text>
           </View>
         ),
@@ -62,8 +85,8 @@ export default function PatientChatting(props) {
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: props.route.params.patient,
-          avatar: "https://placeimg.com/140/140/any",
+          name: props.route.params.patient.name,
+          avatar: props.route.params.patient.profilePicture ? props.route.params.patient.profilePicture : "https://placeimg.com/140/140/any",
         },
       });
     });
@@ -77,6 +100,7 @@ export default function PatientChatting(props) {
         `${BASE_URL_DEV}/appointments/complete/${props.route.params.appointmentInfo}`,
         {
           completed: true,
+          history: messages,
         },
         {
           headers: {
@@ -84,7 +108,6 @@ export default function PatientChatting(props) {
           },
         }
       );
-      console.log("response", response);
 
       Alert.alert("Success", response.data.message);
       props.navigation.navigate("Home");
@@ -112,16 +135,22 @@ export default function PatientChatting(props) {
     console.log();
   }, []);
   return (
-    <GiftedChat
-      messages={messages}
-      renderBubble={renderBubble}
-      onSend={(messages) => onSend(messages)}
-      alwaysShowSend={true}
-      onQuickReply={(quck) => completeAppointment()}
-      user={{
-        _id: 1,
-      }}
-    />
+    <>
+      <PushNotification
+        title={`Message Recieved`}
+        body={`You have a new message from the doctor`}
+        toToken={props.route.params.patient.expoToken}
+      />
+      <GiftedChat
+        messages={messages}
+        renderBubble={renderBubble}
+        onSend={(messages) => onSend(messages)}
+        alwaysShowSend={true}
+        onQuickReply={(quck) => completeAppointment()}
+        user={{
+          _id: 1,
+        }}
+      />
+    </>
   );
 }
-
