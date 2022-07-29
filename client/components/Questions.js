@@ -12,7 +12,7 @@ export default function Questions(props) {
         mode="outlined"
         value={answer}
         onChangeText={(value) => {
-        setAnswer(value);
+          setAnswer(value);
           props.setAnswer(value);
         }}
         placeholder="Write your answer here"
@@ -20,7 +20,7 @@ export default function Questions(props) {
         style={{
           width: 320,
           height: 150,
-          backgroundColor: "#fff"
+          backgroundColor: "#fff",
         }}
       />
     </View>
