@@ -63,7 +63,7 @@ export default function PatientChatting(props) {
             }}
           >
             {qna.question ? (
-              <Text style={{  backgroundColor: "white", color: "black", padding: 8,borderRadius: 10, borderWidth: 1, borderColor: "#fff", overflow: "hidden" }}>
+              <Text style={{  backgroundColor: "white", color: "#a0aec0", padding: 8,borderRadius: 10, borderWidth: 1, borderColor: "#fff", overflow: "hidden" }}>
                 Question: {qna.question}
               </Text>
             ) : (
@@ -72,7 +72,8 @@ export default function PatientChatting(props) {
             <Divider />
             <Text
               style={{
-                color: "#a09e9e",
+                // color: "#a09e9e",
+                color:"black",
               padding: 4,
               borderRadius: 10,
               borderWidth:
