@@ -186,10 +186,10 @@ const PatientHome = ({ navigation }) => {
                 style={{
                   width: 65,
                   height: 65,
-                  borderRadius: 100
+                  borderRadius: 100,
                 }}
                 source={{
-                  uri: `${profilePicture}`
+                  uri: `${profilePicture}`,
                 }}
                 resizeMode="cover"
               />
@@ -255,34 +255,30 @@ const PatientHome = ({ navigation }) => {
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   const renderItem1 = ({ item }) => {
-
-
-    if(item){
-    return (
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("Doctor-Info", {
-            id: item._id,
-          })
-        }
-      >
-        <Item1
-          name={item.name}
-          image={item.image}
-          distance={item.distance}
-          specialities={item.specialities}
-          profilePicture={item.profilePicture}
-        />
-      </TouchableOpacity>
-    );
-      }
-      else{
-        <Image
-              style={{ width: 20, height: 20 }}
-              source={require("../../assets/icons/loading.gif")}
-            />
-      }
-    
+    if (item) {
+      return (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Doctor-Info", {
+              id: item._id,
+            })
+          }
+        >
+          <Item1
+            name={item.name}
+            image={item.image}
+            distance={item.distance}
+            specialities={item.specialities}
+            profilePicture={item.profilePicture}
+          />
+        </TouchableOpacity>
+      );
+    } else {
+      <Image
+        style={{ width: 20, height: 20 }}
+        source={require("../../assets/icons/loading.gif")}
+      />;
+    }
   };
 
   const renderItem2 = ({ item }) => (
@@ -309,7 +305,6 @@ const PatientHome = ({ navigation }) => {
         alignItems: "center",
       }}
     >
-      
       <View
         style={{ marginLeft: 16, marginRight: 16, backgroundColor: "#FFFFFFF" }}
       >
@@ -435,7 +430,7 @@ const PatientHome = ({ navigation }) => {
               style={{ height: 130 }}
               horizontal={true}
               data={symptomsData}
-              renderItem={renderItem} 
+              renderItem={renderItem}
               keyExtractor={(item, index) => index}
               showsHorizontalScrollIndicator={false}
             />
@@ -458,14 +453,18 @@ const PatientHome = ({ navigation }) => {
             </Text>
           </View>
           <View>
-            <FlatList
-              style={{ height: 210 }}
-              horizontal={true}
-              data={nearbyDoctors}
-              renderItem={renderItem1}
-              keyExtractor={(item) => item.name}
-              showsHorizontalScrollIndicator={false}
-            />
+            {userLocation ? (
+              <FlatList
+                style={{ height: 210 }}
+                horizontal={true}
+                data={nearbyDoctors}
+                renderItem={renderItem1}
+                keyExtractor={(item) => item.name}
+                showsHorizontalScrollIndicator={false}
+              />
+            ) : (
+              <ActivityIndicator color={"#74CBD4"} />
+            )}
           </View>
 
           <View>
@@ -482,14 +481,18 @@ const PatientHome = ({ navigation }) => {
             </Text>
           </View>
           <View>
-            <FlatList
-              style={{ height: 210 }}
-              horizontal={true}
-              data={nearbyDoctors}
-              renderItem={renderItem2}
-              keyExtractor={(item) => item.name}
-              showsHorizontalScrollIndicator={false}
-            />
+            {userLocation ? (
+              <FlatList
+                style={{ height: 210 }}
+                horizontal={true}
+                data={nearbyDoctors}
+                renderItem={renderItem2}
+                keyExtractor={(item) => item.name}
+                showsHorizontalScrollIndicator={false}
+              />
+            ) : (
+              <ActivityIndicator color={"#74CBD4"} />
+            )}
           </View>
         </ScrollView>
       </View>
