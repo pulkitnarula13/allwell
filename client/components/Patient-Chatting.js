@@ -62,12 +62,13 @@ export default function PatientChatting(props) {
       UI = (
         <View>
           {typeof item.text !== "string" ? (
-            <Text style={{  backgroundColor: "white", color: "black", padding: 8,borderRadius: 10, borderWidth: 1, borderColor: "#fff", overflow: "hidden" }}>Question: {item._id}</Text>
+            <Text style={{  backgroundColor: "white", color: "#a0aec0", padding: 8,borderRadius: 10, borderWidth: 1, borderColor: "#fff", overflow: "hidden" }}>Question: {item._id}</Text>
           ) : null}
           <Divider />
           <Text
             style={{
-              color: "#a09e9e",
+              // color: "#a09e9e",
+              color: "black",
               padding: 4,
               borderRadius: 10,
               borderWidth:
