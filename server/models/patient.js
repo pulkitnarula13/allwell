@@ -26,7 +26,6 @@ const PatientSchema = mongoose.Schema({
   },
   healthDocument: {
     type: String,
-    required: true,
   },
   gender: {
     type: String,
@@ -35,7 +34,17 @@ const PatientSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
+  roles: {
+    type: [String],
+    required: true,
+  },
+  familyMember: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "FamilyMember" }
+  ],
+  expoToken: {
+    type: String
+  },
+  address: { type: String },
 });
 
 const Patient = mongoose.model("Patient", PatientSchema);

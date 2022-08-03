@@ -1,3 +1,16 @@
 client/node_modules
 server/node_modules
 .env
+client/ios
+client/package-lock.json
+node_modules
+yarn.lock
+package-lock.json
+client/.expo/packager-info.json
+client/.expo/packager-info.json
+client/.expo/packager-info.json
+client/yarn.lock
+client/.expo
+
+.vscode
+

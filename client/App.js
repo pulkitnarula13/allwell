@@ -1,22 +1,35 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
-import doctorLogin from "./screens/Doctor-Login";
-import doctorSignup from "./screens/Doctor-Signup";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text, LogBox } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
+import { theme } from "./constants/theme";
 
-const Stack = createNativeStackNavigator();
+import { AuthProvider } from "./Context/AuthContext";
+import AppNav from "./navigations/AppNav";
+import AppointmentContext from "./Context/AppointmentContext";
+
 export default function App() {
+  LogBox.ignoreAllLogs();//Ignore all log notifications
+  const [appointmentData, setAppointmentData] = useState({
+    qna: [],
+    symptoms: [],
+  });
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="doctor-login"
+    <AuthProvider>
+      <AppointmentContext.Provider
+        value={{
+          appointmentData,
+          setAppointmentData,
+        }}
       >
-        <Stack.Screen name="Doctor-Login" component={doctorLogin} />
-        <Stack.Screen name="Doctor-Signup" component={doctorSignup} />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <PaperProvider theme={theme}>
+          <NavigationContainer theme={theme}>
+            <AppNav />
+          </NavigationContainer>
+        </PaperProvider>
+      </AppointmentContext.Provider>
+    </AuthProvider>
   );
 }
 
