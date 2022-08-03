@@ -50,6 +50,8 @@
     "react-native-dotenv": "^3.3.1",
     "react-native-floating-action": "^1.22.0",
     "react-native-gifted-chat": "^1.0.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-keyboard-aware-scrollview": "^2.1.0",
     "react-native-pager-view": "^5.4.24",
     "react-native-paper": "^4.12.1",
     "react-native-paper-dates": "^0.8.7",
