@@ -19,19 +19,19 @@ const PatientQuestionHome = ({ navigation }) => {
   const [active, setActive] = useState(0);
   const { userInfo } = useContext(AuthContext);
   const [firstStepData, setFirstStepperData] = useState({
-    question: "What is the issue you are facing ?",
+    question: "What is your medical issue?",
   });
   const [secondStepperData, setSecondStepperData] = useState({
-    question: "How long the issue has been there ?",
+    question: "How long have you had symptoms?",
   });
   const [thirdStepperData, setThirdStepperData] = useState({
-    question: "Do you have any other symptoms ?",
+    question: "Do you have any other symptoms?",
   });
   const [fourthStepperData, setFourthStepperData] = useState({
-    question: "Are you on any medications ?",
+    question: "Are you taking any medications?",
   });
   const [fifthStepperData, setFifthStepperData] = useState({
-    question: "Do you have any family history in this ?",
+    question: "Do you have a medical family history related to this issue?",
   });
   const [sixthStepperData, setSixthStepperData] = useState();
 

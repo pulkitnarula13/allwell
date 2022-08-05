@@ -161,7 +161,7 @@ const DoctorHome = ({ navigation }) => {
                   <DetailCardHome
                     config={{
                       icon: "message-text-clock",
-                      title: "Waiting For You",
+                      title: "Waiting Patients",
                       type: "outline",
                     }}
                     item={waitingList}
@@ -189,7 +189,7 @@ const DoctorHome = ({ navigation }) => {
                     item={urgentAppointments}
                     config={{
                       icon: "message-text-clock",
-                      title: "Urgent",
+                      title: "Priority Patients",
                       type: "solid",
                     }}
                   />
