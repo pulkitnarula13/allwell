@@ -7,6 +7,7 @@ import {
   TextInput,
   Alert,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import { React, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -98,6 +99,27 @@ const DoctorInfo = (props) => {
       setDialogbox(false);
     }
   };
+
+
+  const renderCertifications = ({ item }) => {
+    if (item) {
+      return (
+          <Item1
+            certification={item.certification}
+            image={item.image}
+            distance={item.distance}
+            specialities={item.specialities}
+            profilePicture={item.profilePicture}
+          />
+      );
+    } else {
+      <Image
+        style={{ width: 20, height: 20 }}
+        source={require("../../assets/icons/loading.gif")}
+      />;
+    }
+  };
+
 
   return (
       <View
@@ -203,12 +225,22 @@ const DoctorInfo = (props) => {
             >
               Certifications
             </Text>
-            <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
+            {/* <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
               {"\u2022"} Patient Care Technician
             </Text>
             <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
               {"\u2022"} Certified Clinical Medical Assistant (CCMA)
-            </Text>
+            </Text> */}
+              <View>
+                <FlatList
+                  style={{ height: 130, paddingTop: 10 }}
+                  horizontal={true}
+                  data={doctorInfo?.certifications}
+                  renderItem={renderCertifications}
+                  keyExtractor={(item, index) => index}
+                  showsHorizontalScrollIndicator={false}
+                />
+            </View>
           </View>
 
           <View>
@@ -222,12 +254,22 @@ const DoctorInfo = (props) => {
             >
               Languages
             </Text>
-            <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
+            {/* <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
               {"\u2022"} English
             </Text>
             <Text style={{ opacity: 0.6, fontSize: 16, lineHeight: 18 }}>
               {"\u2022"} French
-            </Text>
+            </Text> */}
+              <View>
+                <FlatList
+                  style={{ height: 130, paddingTop: 10 }}
+                  horizontal={true}
+                  data={doctorInfo?.languages}
+                  renderItem={renderLanguages}
+                  keyExtractor={(item, index) => index}
+                  showsHorizontalScrollIndicator={false}
+                />
+            </View>
           </View>
           <View
             style={{
