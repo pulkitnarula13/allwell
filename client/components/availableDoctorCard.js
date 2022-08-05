@@ -84,7 +84,14 @@ const AvailableDoctorCard = (props) => {
       <View
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
-        <Ionicons name="location-outline" size={24} color="#74CBD4" />
+        {/* <Ionicons name="location-outline" size={24} color="#74CBD4" /> */}
+        <Image
+              style={{
+                width: 24,
+                height: 24,
+              }}
+              source={require("../assets/icons/medico_icon_location.png")}
+            />
         <Text style={{ color: "black" }}>
           {(props.item.distance / 10000000).toFixed(1)} km
         </Text>
@@ -95,6 +102,10 @@ const AvailableDoctorCard = (props) => {
 };
 
 const styles = StyleSheet.create({
+  image: {
+    height: 20,
+    width: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
