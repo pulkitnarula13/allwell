@@ -29,12 +29,14 @@ const DoctorInfo = (props) => {
   const [starRating, setStarRating] = useState(0);
   const [doctorReviewText, setDoctorReviewText] = useState();
   const [doctorInfo, setDoctorInfo] = useState();
+  const [doctorStar, setDoctorStar] = useState(5);
   const { appointmentData, setAppointmentData } =
     useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
     getDoctorInfoById();
+    getDoctorStarById();
   }, []);
 
   const getDoctorInfoById = async () => {
@@ -44,6 +46,14 @@ const DoctorInfo = (props) => {
     console.log(response.data.data, "response");
     setDoctorInfo(response.data.data);
   };
+
+  const getDoctorStarById = async () => {
+    const response = await axios.get(
+      `${BASE_URL_DEV}/review/rating/${props.route.params.id}`
+    );
+    console.log(response.data.data, "response");
+    setDoctorStar(response.data.data);
+  }
 
   const doctorSelect = () => {
     props.navigation.navigate("Patient-question-home");
@@ -125,12 +135,12 @@ const DoctorInfo = (props) => {
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Rating
                 type="star"
-                startingValue={doctorInfo?.rating}
+                startingValue={Number(doctorStar)}
                 ratingCount={5}
                 readonly={true}
                 imageSize={15}
               />
-              <Text style={{ marginLeft: 8 }}>{doctorInfo?.rating}</Text>
+              <Text style={{ marginLeft: 8 }}>{doctorStar}</Text>
             </View>
           </View>
           <View style={styles.containerdata16}>
