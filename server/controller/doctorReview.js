@@ -82,8 +82,31 @@ const getReviewsByDocId = (req, res) => {
   })
     .then((result) => {
       return res.status(200).json({
-        message: "Succesfully fetched  Appointment for given patient",
+        message: "Succesfully fetched Reviews of a given doctor",
         data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
+/**
+ * @description API to fetch doctor ratings of a particular doctor from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getRatingByDocId = (req, res) => {
+  DoctorReview.find({ doctor: req.params.id })
+    .select("rating")
+    .then((result) => {
+      let rating = result.map(ra => ra.rating).reduce((rat, ra) => ra + rat) / Object.keys(result).length;
+      console.log(rating)
+      return res.status(200).json({
+        message: "Succesfully fetched Ratings of a given doctor",
+        data: rating,
       });
     })
     .catch((error) => {
@@ -97,5 +120,6 @@ const getReviewsByDocId = (req, res) => {
 module.exports = {
   addDoctorReview,
   getDoctorReviews,
-  getReviewsByDocId
+  getReviewsByDocId,
+  getRatingByDocId
 };

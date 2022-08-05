@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, Image, KeyboardAvoidingView, Keyboard, Touchabl
 import { Button, TextInput, RadioButton } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import { DatePickerInput } from "react-native-paper-dates";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 export default function PatientSignup({ navigation }) {
   const { isLoading, registerPatient } = useContext(AuthContext);
@@ -18,6 +20,8 @@ export default function PatientSignup({ navigation }) {
 
 
   return (
+    <KeyboardAwareScrollView style={StyleSheet.container} extraHeight={120}>
+
     <View style={{ flex: 1, backgroundColor: "#ebf0f3" }}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -146,10 +150,17 @@ export default function PatientSignup({ navigation }) {
         </KeyboardAvoidingView>
       </ScrollView>
     </View>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
   textHeading: {
     fontSize: 18,
     fontWeight: '500',

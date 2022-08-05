@@ -295,6 +295,7 @@ const PatientHome = ({ navigation }) => {
         image={item.image}
         distance={item.distance}
         specialities={item.specialities}
+        profilePicture={item.profilePicture}
       />
     </TouchableOpacity>
   );
@@ -421,7 +422,7 @@ const PatientHome = ({ navigation }) => {
               View all
             </Text>
           </View>
-          <View
+          {/* <View
             style={{
               display: "block",
               alignItems: "flex-start",
@@ -431,10 +432,10 @@ const PatientHome = ({ navigation }) => {
             <Text style={{ fontSize: 14, fontWeight: "600", color: "#A0AEC0" }}>
               To connect with specialist
             </Text>
-          </View>
+          </View> */}
           <View>
             <FlatList
-              style={{ height: 130 }}
+              style={{ height: 130, paddingTop: 10 }}
               horizontal={true}
               data={symptomsData}
               renderItem={renderItem}
@@ -474,7 +475,8 @@ const PatientHome = ({ navigation }) => {
             )}
           </View>
 
-          <View>
+{/* Popular SPecialist View */}
+          {/* <View>
             <Text
               style={{
                 marginTop: 20,
@@ -493,14 +495,16 @@ const PatientHome = ({ navigation }) => {
                 style={{ height: 210 }}
                 horizontal={true}
                 data={nearbyDoctors}
-                renderItem={renderItem2}
+                renderItem={renderItem1}
                 keyExtractor={(item) => item.name}
                 showsHorizontalScrollIndicator={false}
               />
             ) : (
               <ActivityIndicator color={"#74CBD4"} />
             )}
-          </View>
+          </View> */}
+
+
         </ScrollView>
       </View>
     </View>
