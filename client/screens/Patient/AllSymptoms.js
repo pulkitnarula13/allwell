@@ -66,7 +66,7 @@ export default function AllSymptoms(props) {
           <Image
             style={{ width: 74, height: 70 }}
             source={SymptomsList[item.item.name]}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
         <Text style={{ marginBottom: 39, fontSize: 14, fontWeight: "400" }}>

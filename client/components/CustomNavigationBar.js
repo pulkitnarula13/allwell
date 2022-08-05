@@ -1,5 +1,6 @@
 import { Appbar } from "react-native-paper";
 import App from "../App";
+import { Image } from "react-native";
 
 const CustomNavigationBar = (props) => {
   return (
@@ -27,12 +28,14 @@ const CustomNavigationBar = (props) => {
       /> */}
 
       {props.route.name === "Home" ? (
-        <Appbar.Action
-          icon="bell-badge-outline"
-          color="#74CBD4"
-          onPress={() => props.navigation.navigate("Notfication")}
-        />
-      ) : null}
+        
+        <Image 
+        style={{
+          width: 24,
+          height: 24
+        }} 
+        source={require("../assets/icons/medico_icon_location.png")}  />
+      ) : null }
     </Appbar.Header>
   );
 };

@@ -1,15 +1,17 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useState } from "react";
-import { StyleSheet, View, Text, LogBox } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { StyleSheet, View, Text, LogBox, Image } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
 
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
 import AppointmentContext from "./Context/AppointmentContext";
+import { Video, AVPlaybackStatus } from 'expo-av';
 
 export default function App() {
-  LogBox.ignoreAllLogs();//Ignore all log notifications
+  LogBox.ignoreAllLogs(); //Ignore all log notifications
+
   const [appointmentData, setAppointmentData] = useState({
     qna: [],
     symptoms: [],
@@ -39,5 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    fontFamily: "Poppins_400Regular",
   },
 });

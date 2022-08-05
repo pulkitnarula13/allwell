@@ -58,7 +58,8 @@ export default function PatientChatting(props) {
 
   const renderUI = (item) => {
     let UI;
-    if (item.text.props?.children[1].props.children.trim().length > 0) {
+    console.log(item, "item inside render UI");
+    if (item.text.props?.children[2].props?.children.trim().length > 0) {
       UI = (
         <View>
           {typeof item.text !== "string" ? (
@@ -72,11 +73,11 @@ export default function PatientChatting(props) {
               padding: 4,
               borderRadius: 10,
               borderWidth:
-                item.text.props?.children[1].props.children.length > 0 ? 1 : 0,
+                item.text.props?.children[2].props.children.length > 0 ? 1 : 0,
               borderColor: item.text.props?.children ? "#fff" : "transparent",
             }}
           >
-            {item.text.props?.children[1]?.props?.children}
+            {item.text.props?.children[2]?.props?.children}
           </Text>
         </View>
       );
@@ -90,6 +91,7 @@ export default function PatientChatting(props) {
     props.route.params.history
       ?.filter((item) => typeof item.text !== "string")
       .forEach((item) => {
+        console.log(item, "inside modify chat");
         modifiedData.push({
           _id: item.question,
           text: renderUI(item),

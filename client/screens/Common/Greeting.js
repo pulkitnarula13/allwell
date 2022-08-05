@@ -1,15 +1,25 @@
-import { View, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet, Image } from "react-native";
 import React from "react";
 import GoogleSignup from "../../components/GoogleSignup";
 import { Divider } from "react-native-paper";
-import { Text } from "react-native-paper";
+import { Text} from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Greeting = ({ navigation }) => {
   return (
     <View style={style.container}>
+      <View style={{
+                 display: "flex",
+                 justifyContent: "center",
+                 alignItems: "center"
+      }}>
+      <Image source={require("../../assets/medicoLogo.png")} style={{
+          width: 200,
+          height: 200,
+        }} />  
+      </View>
       <View style={style.titleContainer}>
-        <Text style={style.greetme} variant="displayLarge">Greeting! <MaterialCommunityIcons name="hand-wave"color="#FFD700" size={25}/></Text>
+        <Text style={style.greetme} variant="displayLarge">Greeting! </Text>
         <Text style={style.info1} variant="displaySmall">
           With Medico, you can connect to the doctor anytime you want 24/7.
         </Text>
@@ -64,7 +74,6 @@ const style = StyleSheet.create({
   },
   greetme:{
     fontWeight:"700",
-    marginTop:122,
     fontSize:24,
     lineHeight:36,
     marginLeft:51,

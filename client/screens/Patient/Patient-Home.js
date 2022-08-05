@@ -11,7 +11,6 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { Avatar, Button } from "react-native-paper";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -214,11 +213,12 @@ const PatientHome = ({ navigation }) => {
               marginRight: 8,
             }}
           >
-            <Ionicons
-              style={{ marginRight: 4 }}
-              name="location-outline"
-              size={16}
-              color="#74CBD4"
+            <Image
+              style={{
+                width: 24,
+                height: 24,
+              }}
+              source={require("../../assets/icons/medico_icon_location.png")}
             />
             <Text style={{ color: "black" }}>
               {(distance / 10000000).toFixed(1)} km
@@ -237,13 +237,14 @@ const PatientHome = ({ navigation }) => {
             borderWidth: 3,
             borderColor: "#74CBD4",
             borderRadius: 100,
-            marginRight: 14,
+            marginRight: 8,
+            padding: 8,
           }}
         >
           <Image
-            style={{ width: 76, height: 76 }}
+            style={{ width: 60, height: 60 }}
             source={SymptomsList[name]}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
         <Text style={styles.symptomsName}>{name}</Text>
@@ -334,7 +335,13 @@ const PatientHome = ({ navigation }) => {
               }}
             >
               <TouchableOpacity onPress={getlocationhandler}>
-                <Ionicons name="location-outline" size={24} color="#74CBD4" />
+                <Image
+                  style={{
+                    width: 24,
+                    height: 24,
+                  }}
+                  source={require("../../assets/icons/medico_icon_location.png")}
+                />
               </TouchableOpacity>
               <Text>
                 {locationLoading ? (
