@@ -6,6 +6,7 @@ const {
   addDoctorReview,
   getDoctorReviews,
   getReviewsByDocId,
+  getRatingByDocId
 } = require("../controller/doctorReview");
 
 const validateToken = require("../middleware/auth");
@@ -48,6 +49,19 @@ const verifyRoles = require("../middleware/roleVerification");
  *         description: return positive response
  */
 router.get("/doctor/:id", validateToken, verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT), getReviewsByDocId);
+
+
+// Routes
+/**
+ * @swagger
+ * /doctorReviews:
+ *   get:
+ *     description: Get Ratings of a particular doctor
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get("/rating/:id", getRatingByDocId);
 
 
 

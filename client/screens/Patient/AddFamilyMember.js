@@ -79,16 +79,18 @@ import { BASE_URL_DEV } from "@env";
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "100"}
       enabled={true}
+      keyboardVerticalOffset={10}
       style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
-    <View style={styles.maxview}>
-        <ScrollView   showsVerticalScrollIndicator={false}>
-        <View style={styles.overall}>
-       <View style={styles.outerview}>
-      <Text style={styles.profiletext}>Add  Family Member</Text>
-      </View>
-      <View style={styles.profileImageView}>
+        <View style={styles.maxview}>
+          <ScrollView   showsVerticalScrollIndicator={false}>
+            <View style={styles.overall}>
+              <View style={styles.outerview}>
+                <Text style={styles.profiletext}>Add Family Member</Text>
+              </View>
+              
+              <View style={styles.profileImageView}>
       {/* <Image
             style={styles.imgstyle}
             source={require("../../assets/icon.png")}
