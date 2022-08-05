@@ -14,16 +14,16 @@ import { Avatar, Button } from "react-native-paper";
 import * as Location from "expo-location";
 import { AuthContext } from "../../Context/AuthContext";
 
-import { FloatingAction } from "react-native-floating-action";
 import { BASE_URL_DEV } from "@env";
 import axios from "axios";
 import { SymptomsList } from "../../constants/symptoms";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getDistance, getPreciseDistance } from "geolib";
+import { getPreciseDistance } from "geolib";
 import PushNotification from "../../components/PushNotification";
 
 const PatientHome = ({ navigation }) => {
   const [nearbyDoctors, setNearByDoctors] = useState([]);
+  const [doctorsByRating, setDoctorsByRating] = useState([]);
 
   const [latitude, setlatitude] = useState(0);
   const [userLocation, setUserLocation] = useState("");
@@ -75,6 +75,17 @@ const PatientHome = ({ navigation }) => {
     setSymptomsData(modifiedData);
   };
 
+  const compareByRating = ( a, b ) => {
+    if ( a.rating > b.rating ){
+      return -1;
+    }
+    if ( a.rating < b.rating ){
+      return 1;
+    }
+    return 0;
+  }
+  
+
   const getNearbyDoctorList = async (latitude, longitude) => {
     const response = await axios.get(
       `${BASE_URL_DEV}/doctors/location?longitude=${longitude}&latitude=${latitude}`,
@@ -92,9 +103,13 @@ const PatientHome = ({ navigation }) => {
           longitude: val.location.coordinates[1],
         }
       );
-
       return val;
     });
+
+    console.log(modifiedData, "modified");
+    const ratingDoctors = JSON.parse(JSON.stringify(modifiedData)).sort(compareByRating);
+    console.log(ratingDoctors, "done");
+    setDoctorsByRating(ratingDoctors);
 
     setNearByDoctors(modifiedData);
   };
@@ -252,7 +267,6 @@ const PatientHome = ({ navigation }) => {
     );
   };
 
-  let Screenheight = Dimensions.get("window").height;
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   const renderItem1 = ({ item }) => {
@@ -476,7 +490,7 @@ const PatientHome = ({ navigation }) => {
           </View>
 
 {/* Popular SPecialist View */}
-          {/* <View>
+          <View>
             <Text
               style={{
                 marginTop: 20,
@@ -494,7 +508,7 @@ const PatientHome = ({ navigation }) => {
               <FlatList
                 style={{ height: 210 }}
                 horizontal={true}
-                data={nearbyDoctors}
+                data={doctorsByRating}
                 renderItem={renderItem1}
                 keyExtractor={(item) => item.name}
                 showsHorizontalScrollIndicator={false}
@@ -502,7 +516,7 @@ const PatientHome = ({ navigation }) => {
             ) : (
               <ActivityIndicator color={"#74CBD4"} />
             )}
-          </View> */}
+          </View>
 
 
         </ScrollView>

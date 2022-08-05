@@ -34,7 +34,7 @@ const CustomNavigationBar = (props) => {
           width: 24,
           height: 24
         }} 
-        source={require("../assets/icons/medico_icon_location.png")}  />
+        source={require("../assets/icons/medico_icon_noti.png")}  />
       ) : null }
     </Appbar.Header>
   );
