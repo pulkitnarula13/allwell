@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, TouchableHighlight } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
-import { Feather } from "@expo/vector-icons";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
@@ -31,9 +30,13 @@ const Doctorprofile = (props) => {
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Doctor-Profile-Settings")}
           >
-            <Button style={styles.btnsetting}>
-              <Feather name="settings" size={24} color="black" />
-            </Button>
+            <Image
+              style={{
+                width: 24,
+                height: 24,
+              }}
+              source={require("../../assets/new_icons/setting.png")}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -66,12 +69,12 @@ const Doctorprofile = (props) => {
           //   style={styles.image2} // your custom style object
           // />
         )}
-        <Button
-          style={styles.editicon}
-          onPress={() => props.navigation.navigate("DoctorInformation")}
-        >
-          <Feather name="edit-3" size={24} color="black" />
-        </Button>
+        <TouchableHighlight onPress={() => props.navigation.navigate("DoctorInformation")}>
+              <Image
+                style={styles.profilePhotoEdit}
+                source={require("../../assets/new_icons/plus.png")}
+              />
+        </TouchableHighlight>
       </View>
 
       <View style={styles.info1}>
@@ -151,6 +154,13 @@ const Doctorprofile = (props) => {
 };
 
 const styles = StyleSheet.create({
+  profilePhotoEdit: {
+    width: 24,
+    height: 24,
+    position: "absolute",
+    top: -10,
+    right: 50,
+  },
   main: { display: "flex", flexDirection: "row", justifyContent: "center" },
   btnsetting: {
     marginLeft: 44,

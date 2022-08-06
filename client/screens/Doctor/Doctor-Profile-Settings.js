@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
 import React, { useContext, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -40,15 +39,15 @@ const DoctorProfileSettings = ({ navigation }) => {
       <TouchableOpacity onPress={()=>{navigation.navigate("FAQDoctors")}}>
         <View style={styles.info1}>
           <Text style={styles.infotext1}>FAQ</Text>
-          <AntDesign name="right" size={24} color="black" />
+            <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
         </View>
       </TouchableOpacity>
 
       {/* Privacy Policy button */}
       <TouchableOpacity onPress={()=>{navigation.navigate("PrivacyPolicyDoctors")}}>
         <View style={styles.info1}>
-          <Text style={styles.infotext1}>Privacy Policy</Text>
-          <AntDesign name="right" size={24} color="black" />
+            <Text style={styles.infotext1}>Privacy Policy</Text>
+            <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
         </View>
       </TouchableOpacity>
 
@@ -56,7 +55,7 @@ const DoctorProfileSettings = ({ navigation }) => {
       <TouchableOpacity onPress={()=>{navigation.navigate("TermsDoctors")}}>
         <View style={styles.info2}>
           <Text style={styles.infotext1}>Terms of Use</Text>
-          <AntDesign name="right" size={24} color="black" />
+          <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
         </View>
       </TouchableOpacity>
 
@@ -128,6 +127,10 @@ const DoctorProfileSettings = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
+  rightArrow: {
+    width: 24,
+    height: 24,
+  },
   outerview: {
     display: "flex",
     justifyContent: "center",

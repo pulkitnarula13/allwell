@@ -77,14 +77,12 @@ const PatientProfile = (props) => {
                 }
               />
             )}
-            <TouchableHighlight
-          onPress={() => props.navigation.navigate("PatientInformation")}
-        >
-            <Image
-              style={styles.profilePhotoEdit}
-              source={require("../../assets/new_icons/plus.png")}
-            />
-          </TouchableHighlight>
+            <TouchableHighlight onPress={() => props.navigation.navigate("PatientInformation")}>
+              <Image
+                style={styles.profilePhotoEdit}
+                source={require("../../assets/new_icons/plus.png")}
+              />
+            </TouchableHighlight>
       </View>
 
       <View style={styles.info1}>
