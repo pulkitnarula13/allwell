@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet,Image, TouchableOpacity, Alert } from "react-native";
 import React, { useContext, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
 import { Switch, Button } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
 import { StackActions } from "@react-navigation/native";
@@ -32,14 +31,14 @@ const PatientProfileSettings = ({ navigation }) => {
       <TouchableOpacity onPress={()=>{navigation.navigate("Managefamilymembers")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Manage Family Member</Text>
-        <AntDesign  onPress={()=>{navigation.navigate("Managefamilymembers")}} name="right" size={24} color="black" />
+         <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
       </View>
       </TouchableOpacity>
       <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
       <TouchableOpacity onPress={()=>{navigation.navigate("FAQ-patient")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>FAQ</Text>
-        <AntDesign  name="right" size={24} color="black" />
+          <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
       </View>
       </TouchableOpacity>
 
@@ -48,14 +47,14 @@ const PatientProfileSettings = ({ navigation }) => {
       <TouchableOpacity onPress={()=>{navigation.navigate("Privacypolicy-patient")}}>
       <View style={styles.info1}>
         <Text style={styles.infotext1}>Privacy Policy</Text>
-        <AntDesign   name="right" size={24} color="black" />
+          <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
       </View>
       </TouchableOpacity>
       <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:18}}></View>
       <TouchableOpacity onPress={()=>{navigation.navigate("Termsofuse-patient")}}>
       <View style={styles.info2}>
         <Text style={styles.infotext1}>Term of Use</Text>
-        <AntDesign  name="right" size={24} color="black" />
+          <Image style={styles.rightArrow} source={require("../../assets/new_icons/right.png")} />
       </View>
       </TouchableOpacity>
       <View style={{width:340,height:0,borderWidth:0.5,borderColor:"black",marginLeft:30,marginBottom:68}}></View>
@@ -122,6 +121,10 @@ const PatientProfileSettings = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
+  rightArrow: {
+    width: 24,
+    height: 24,
+  },
   outerview: {
     display: "flex",
     justifyContent: "center",

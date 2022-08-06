@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, TouchableHighlight } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Button } from "react-native-paper";
-import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../Context/AuthContext";
@@ -42,9 +41,16 @@ const PatientProfile = (props) => {
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Patient-Profile-Settings")}
           >
-            <Button style={styles.btnsetting}>
+            {/* <Button style={styles.btnsetting}>
               <Feather name="settings" size={24} color="black" />
-            </Button>
+            </Button> */}
+            <Image
+              style={{
+                width: 24,
+                height: 24,
+              }}
+              source={require("../../assets/new_icons/setting.png")}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -71,10 +77,14 @@ const PatientProfile = (props) => {
                 }
               />
             )}
-        <Button style={styles.editicon}
-          onPress={() => props.navigation.navigate("PatientInformation")}>
-          <Feather name="edit-3" size={24} color="black" />
-        </Button>
+            <TouchableHighlight
+          onPress={() => props.navigation.navigate("PatientInformation")}
+        >
+            <Image
+              style={styles.profilePhotoEdit}
+              source={require("../../assets/new_icons/plus.png")}
+            />
+          </TouchableHighlight>
       </View>
 
       <View style={styles.info1}>
@@ -126,6 +136,13 @@ const PatientProfile = (props) => {
 };
 
 const styles = StyleSheet.create({
+  profilePhotoEdit: {
+    width: 24,
+    height: 24,
+    position: "absolute",
+    top: -10,
+    right: 50,
+  },
   main: { display: "flex", flexDirection: "row", justifyContent: "center" },
   btnsetting: {
     marginLeft: 44,
