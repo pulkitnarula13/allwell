@@ -49,7 +49,8 @@ const AcceptPatientSchedule = (props) => {
         {
           date,
           time,
-          dateVal
+          dateVal,
+          doctor: userInfo.id,
         },
         {
           headers: {
