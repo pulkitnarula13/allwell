@@ -146,6 +146,7 @@ const DoctorHome = ({ navigation }) => {
                       icon: "message",
                       title: "Inbox",
                       type: "solid",
+                      image: require("../../assets/new_icons/inbox-new.png"),
                     }}
                   />
                 </TouchableOpacity>
@@ -163,6 +164,7 @@ const DoctorHome = ({ navigation }) => {
                       icon: "message-text-clock",
                       title: "Waiting Patients",
                       type: "outline",
+                      image: require("../../assets/new_icons/inbox-new.png"),
                     }}
                     item={waitingList}
                   />
@@ -191,6 +193,7 @@ const DoctorHome = ({ navigation }) => {
                       icon: "message-text-clock",
                       title: "Priority Patients",
                       type: "solid",
+                      image: require("../../assets/new_icons/inbox-new.png"),
                     }}
                   />
                 </TouchableOpacity>

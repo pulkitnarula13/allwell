@@ -1,9 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import React, {useState} from "react";
 import { Button } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const DetailCardHome = ({ config, item }) => {
+
+  const [image, setImage] = useState({ image: require("../assets/new_icons/inbox-new.png") });
+
+  // setImage(config);
   return (
     <View
       style={
@@ -14,11 +17,18 @@ const DetailCardHome = ({ config, item }) => {
     >
       <View style={styles.buttonContainer}>
         <Button>
-          <MaterialCommunityIcons
+          {/* <MaterialCommunityIcons
             name="message-text-clock-outline"
             size={24}
             color="white"
-          />
+          /> */}
+          <Image
+              style={{
+                width: 24,
+                height: 24,
+              }}
+              source={image.image}
+            />
         </Button>
       </View>
       <View style={styles.textContainer}>
