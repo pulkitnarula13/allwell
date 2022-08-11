@@ -13,6 +13,7 @@ const {
   getAppointmentById,
   completeAppointment,
   getAppointmentBasedOnDate,
+  getUrgentAppointment,
 } = require("../controller/appointment");
 const validateToken = require("../middleware/auth");
 const verifyRoles = require("../middleware/roleVerification");
@@ -49,6 +50,24 @@ router.get(
   validateToken,
   verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),
   getAllAppointments
+);
+
+
+// Routes
+/**
+ * @swagger
+ * /appointments:
+ *   get:
+ *     description: Get urgent appointments
+ *     responses:
+ *       200:
+ *         description: return positive response
+ */
+ router.get(
+  "/urgent",
+  validateToken,
+  verifyRoles(ROLE.PATIENT, ROLE.DOCTOR, ROLE.ADMIN),
+  getUrgentAppointment
 );
 
 // Routes

@@ -60,7 +60,8 @@ const confirmAppointment = (req, res) => {
       confirmed: true,
       date: req.body.date,
       time: req.body.time,
-      dateVal: req.body.dateVal
+      dateVal: req.body.dateVal,
+      doctor: req.body.doctor,
     },
     {
       returnOrignal: false,
@@ -202,6 +203,35 @@ const getAppointmentByDoctorId = (req, res) => {
     });
 };
 
+/**
+ * @description API to fetch urgent appointments from DB
+ * @param {*} req
+ * @param {*} res
+ */
+ const getUrgentAppointment = (req, res) => {
+  Appointment.find({ doctor: '62de91778786ecfbb91551f4' })
+    .populate({
+      path: "patient",
+    })
+    .populate({
+      path: "symptoms",
+    })
+    .populate({
+      path: "qna"
+    })
+    .then((result) => {
+      return res.status(200).json({
+        message: "Succesfully fetched Urgent Appointments",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        message: error.message,
+      });
+    });
+};
+
 
 /**
  * @description API to fetch appointments from DB
@@ -318,5 +348,6 @@ module.exports = {
   cancelAppointment,
   getAppointmentById,
   completeAppointment,
-  getAppointmentBasedOnDate
+  getAppointmentBasedOnDate,
+  getUrgentAppointment,
 };

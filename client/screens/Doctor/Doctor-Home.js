@@ -21,7 +21,6 @@ import * as moment from "moment";
 import axios from "axios";
 import { BASE_URL_DEV } from "@env";
 import PushNotification from "../../components/PushNotification";
-
 const DoctorHome = ({ navigation }) => {
   const { userInfo } = useContext(AuthContext);
 
@@ -42,6 +41,7 @@ const DoctorHome = ({ navigation }) => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
     getPatientAppointments();
+    getUrgentAppointments();
   }, []);
 
   const wait = (timeout) => {
@@ -66,11 +66,11 @@ const DoctorHome = ({ navigation }) => {
       console.log(confirmedAppointments, "confiremd Appoe");
       setConfirmedAppointments(confirmedAppointments);
 
-      const urgentAppointments = data.data.data.filter(
-        (data) =>
-          data.urgent && !data.completed && !data.confirmed && !data.cancelled
-      );
-      setUrgentAppointments(urgentAppointments);
+      // const urgentAppointments = data.data.data.filter(
+      //   (data) =>
+      //     data.urgent && !data.completed && !data.confirmed && !data.cancelled
+      // );
+      // setUrgentAppointments(urgentAppointments);
 
       const waitingList = data.data.data.filter(
         (data) => !data.confirmed && !data.cancelled && !data.urgent
@@ -81,8 +81,27 @@ const DoctorHome = ({ navigation }) => {
     }
   };
 
+
+  const getUrgentAppointments = async () => {
+    try {
+      const data = await axios.get(
+        `${BASE_URL_DEV}/appointments/urgent`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      setUrgentAppointments(data.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getPatientAppointments();
+    getUrgentAppointments();
   }, []);
 
   return (
