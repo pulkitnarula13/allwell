@@ -329,6 +329,9 @@ const PatientHome = ({ navigation }) => {
         style={{ marginLeft: 16, marginRight: 16, backgroundColor: "#FFFFFFF" }}
       >
         <ScrollView
+        style={{ 
+          width: "100%"
+        }}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           refreshControl={

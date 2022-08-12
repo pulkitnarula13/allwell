@@ -7,7 +7,6 @@ import { theme } from "./constants/theme";
 import { AuthProvider } from "./Context/AuthContext";
 import AppNav from "./navigations/AppNav";
 import AppointmentContext from "./Context/AppointmentContext";
-import { Asset } from "expo-asset";
 
 export default function App() {
   LogBox.ignoreAllLogs();
@@ -16,20 +15,6 @@ export default function App() {
     qna: [],
     symptoms: [],
   });
-
-  const loadAssets = async () => {
-    await Asset.loadAsync([
-      require("./assets/icons/patientsignup.png"),
-      require("./assets/icons/doctorsignup.png"),
-      require("./assets/icons/Allergies.png"),
-      require("./assets/icons/Diarrhea.png"),
-      require("./assets/icons/Eyeproblem.png"),
-    ]); 
-  }
-
-  useEffect(() => {
-    loadAssets();
-  }, []);
 
   return (
     <AuthProvider>
