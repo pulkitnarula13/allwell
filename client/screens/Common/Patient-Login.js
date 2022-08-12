@@ -7,6 +7,7 @@ import {
   Image,
   Button,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { TextInput } from "react-native-paper";
@@ -19,6 +20,7 @@ export default function PatientLogin({ navigation }) {
   const {isLoading, patientLogin} = useContext(AuthContext);
 
   return (
+    <KeyboardAvoidingView behavior="position" style={{flex:1,alignItems:"center"}}>
     <View style={styles.container}>
       <Text style={styles.welcometext}>Welcome Back</Text>
       <StatusBar style="auto" />
@@ -34,6 +36,7 @@ export default function PatientLogin({ navigation }) {
         />
       </View>
       </View>
+
       <View style={styles.idcontainer}>
       <Text style={styles.ids}>PASSWORD</Text>
       <View style={styles.inputView}>
@@ -48,8 +51,8 @@ export default function PatientLogin({ navigation }) {
       </View>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate("forgot-password")}>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
+      <TouchableOpacity style={{ marginBottom: 48,}}>
+        <Text onPress={() => navigation.navigate("forgot-password")} style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 
       <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
@@ -61,6 +64,7 @@ export default function PatientLogin({ navigation }) {
       </View>
       </View>
     </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -123,9 +127,10 @@ const styles = StyleSheet.create({
     fontWeight:"600"
   },
   forgot_button: {
+    width:127,
     height: 30,
-    marginBottom: 48,
-    marginLeft:65,
+   
+    marginLeft:0,
     fontWeight:"700",
     fontSize:14
   },

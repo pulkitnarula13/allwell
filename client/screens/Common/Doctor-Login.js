@@ -7,6 +7,7 @@ import {
   Image,
   Button,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { TextInput } from "react-native-paper";
@@ -19,6 +20,7 @@ export default function DoctorLogin({ navigation }) {
   const {isLoading, doctorLogin} = useContext(AuthContext);
 
   return (
+    <KeyboardAvoidingView behavior="position" style={{flex:1,alignItems:"center"}}>
     <View style={styles.container}>
       <Text style={styles.welcometext}>Welcome Back, Doctor</Text>
       <StatusBar style="auto" />
@@ -48,8 +50,8 @@ export default function DoctorLogin({ navigation }) {
        </View>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate("forgot-password")}>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
+      <TouchableOpacity style={{marginBottom: 48,}} >
+        <Text onPress={() => navigation.navigate("forgot-password")} style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
       <View style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <View style={styles.btn1} >
@@ -60,6 +62,7 @@ export default function DoctorLogin({ navigation }) {
       </View>
       </View>
     </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -123,8 +126,8 @@ const styles = StyleSheet.create({
   },
   forgot_button: {
     height: 30,
-    marginBottom: 48,
-    marginLeft:65,
+    width:127,
+    marginLeft:0,
     fontWeight:"700",
     fontSize:14
   },
