@@ -39,7 +39,9 @@ const Patientinboxdata = (props) => {
                     />
                   ) : (
                     <Image
-                      source={image}
+                    source={{
+                      uri: `${image}`,
+                    }}
                       style={styles.image2}
                       resizeMode="cover"
                     />
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
   image2: {
     width: 65,
     height: 65,
+    borderRadius: 100,
   },
 });
 export default Patientinboxdata;

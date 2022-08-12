@@ -17,16 +17,6 @@ const CustomNavigationBar = (props) => {
             : "Medico"
         }
       />
-      {/* <Appbar.Action
-        icon="bookmark"
-        onPress={() => console.log("Pressed mail")}
-      />
-
-      <Appbar.Action
-        icon="calendar"
-        onPress={() => console.log("Pressed label")}
-      /> */}
-
       {props.route.name === "Home" ? (
         
         <Image 

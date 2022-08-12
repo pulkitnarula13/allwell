@@ -39,7 +39,7 @@ const PatientHistory = ({ navigation }) => {
         },
       }
     );
-    console.log(response.data.data);
+
     const confirmedAppointments = response.data.data.filter(data => data.confirmed && !data.completed && !data.cancelled);
     const completedAppointments = response.data.data.filter(data => data.confirmed && data.completed && !data.cancelled);
     setCurrentAppointments(confirmedAppointments);
@@ -50,6 +50,7 @@ const PatientHistory = ({ navigation }) => {
     <View style={styles.main}>
       <View style={styles.search}>
         <Searchbars />
+        
       </View>
       <Tabs style={{backgroundColor:"white"}}>
         <TabScreen label="Current">

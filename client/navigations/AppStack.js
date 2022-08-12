@@ -63,7 +63,8 @@ const AppStack = () => {
       {/* Auth Stack */}
 
       <Stack.Screen name="Greeting" component={Greeting} />
-
+      {/* COMMON NAVIGATIONS STARTED */}
+      <Stack.Screen name="Home" component={Bottomnavigation} />
       <Stack.Screen name="Doctor-Patient-Selection-Signup" component={DoctorPatientSelectionSignup} />
       <Stack.Screen name="Doctor-Patient-Selection-Login" component={DoctorPatientSelectionLogin} />
       <Stack.Screen name="forgot-password" component={ForgotPassword} />
@@ -81,8 +82,7 @@ const AppStack = () => {
 
 
 
-      {/* COMMON NAVIGATIONS STARTED */}
-      <Stack.Screen name="Home" component={Bottomnavigation} />
+
 
 
       <Stack.Screen name="GreetingPage" component={Greeting} />
