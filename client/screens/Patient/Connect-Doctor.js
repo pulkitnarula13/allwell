@@ -134,9 +134,9 @@ const ConnectPatient = ({ navigation, route }) => {
       >
         <View style={styles.symptopmsImgView}>
           <Image
-            style={{ width: 74, height: 74 }}
+            style={{ width: 70, height: 70 }}
             source={SymptomsList[item.name]}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
         <Text style={styles.symptomName}>{item.name}</Text>
@@ -182,15 +182,16 @@ const ConnectPatient = ({ navigation, route }) => {
           <View>
             <TouchableOpacity
             style={{
-              borderWidth: 1, borderColor: "#74CBD4", borderRadius: 100, 
+              borderWidth: 3, borderColor: "#74CBD4", borderRadius: 100, 
               display: "flex", justifyContent: "center", alignItems: "center",
-              padding: 8
+              padding: 8, width: 70, height: 70
             }}
               onPress={() => navigation.navigate("Add-Family-Member")}
             >
               <Image
                 style={{ width: 50, height: 50 }}
                 source={require("../../assets/icons/medico_icon_plus.png")}
+                resizeMode="contain"
               />
             </TouchableOpacity>
             <Text>Add Patient</Text>
