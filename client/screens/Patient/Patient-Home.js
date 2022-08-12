@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
   RefreshControl,
+  Animated,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
@@ -24,7 +25,8 @@ import PushNotification from "../../components/PushNotification";
 const PatientHome = ({ navigation }) => {
   const [nearbyDoctors, setNearByDoctors] = useState([]);
   const [doctorsByRating, setDoctorsByRating] = useState([]);
-
+  const [symptomsData, setSymptomsData] = useState([]);
+  const { userInfo } = useContext(AuthContext);
   const [latitude, setlatitude] = useState(0);
   const [userLocation, setUserLocation] = useState("");
   const [longitude, setlongitude] = useState(0);
@@ -32,7 +34,6 @@ const PatientHome = ({ navigation }) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
-    getSymptoms();
     getlocationhandler();
   }, []);
 
@@ -58,9 +59,6 @@ const PatientHome = ({ navigation }) => {
     }
   };
 
-  const [symptomsData, setSymptomsData] = useState([]);
-  const { userInfo } = useContext(AuthContext);
-
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
       headers: {
@@ -75,16 +73,15 @@ const PatientHome = ({ navigation }) => {
     setSymptomsData(modifiedData);
   };
 
-  const compareByRating = ( a, b ) => {
-    if ( a.rating > b.rating ){
+  const compareByRating = (a, b) => {
+    if (a.rating > b.rating) {
       return -1;
     }
-    if ( a.rating < b.rating ){
+    if (a.rating < b.rating) {
       return 1;
     }
     return 0;
-  }
-  
+  };
 
   const getNearbyDoctorList = async (latitude, longitude) => {
     const response = await axios.get(
@@ -106,12 +103,14 @@ const PatientHome = ({ navigation }) => {
       return val;
     });
 
-    console.log(modifiedData, "modified");
-    const ratingDoctors = JSON.parse(JSON.stringify(modifiedData)).sort(compareByRating);
-    console.log(ratingDoctors, "done");
+    const ratingDoctors = JSON.parse(JSON.stringify(modifiedData)).sort(
+      compareByRating
+    );
+    console.log("done");
     setDoctorsByRating(ratingDoctors);
 
     setNearByDoctors(modifiedData);
+    getSymptoms();
   };
 
   async function getlocationhandler() {
@@ -246,7 +245,13 @@ const PatientHome = ({ navigation }) => {
 
   const Item = ({ name, image }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("All-Symptoms")}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("All-Symptoms", {
+            symptoms: symptomsData,
+          })
+        }
+      >
         <View
           style={{
             borderWidth: 3,
@@ -266,7 +271,6 @@ const PatientHome = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
-
 
   const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
   const renderItem1 = ({ item }) => {
@@ -360,7 +364,7 @@ const PatientHome = ({ navigation }) => {
               </TouchableOpacity>
               <Text>
                 {locationLoading ? (
-                  <ActivityIndicator size="small" color="#bbd0d8" />
+                      <ActivityIndicator color="#74CBD4" />
                 ) : (
                   userLocation
                 )}
@@ -448,14 +452,22 @@ const PatientHome = ({ navigation }) => {
             </Text>
           </View> */}
           <View>
-            <FlatList
-              style={{ height: 130, paddingTop: 10 }}
-              horizontal={true}
-              data={symptomsData}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => index}
-              showsHorizontalScrollIndicator={false}
-            />
+            {locationLoading ? (
+              <View style={{ display: "flex", alignItems: "flex-start", marginTop: 10, marginBottom:20 }}>
+                <Text>
+                  <ActivityIndicator color="#74CBD4" />
+                </Text>
+              </View>
+            ) : (
+              <FlatList
+                style={{ height: 130, paddingTop: 10 }}
+                horizontal={true}
+                data={symptomsData}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => index}
+                showsHorizontalScrollIndicator={false}
+              />
+            )}
           </View>
           <View
             style={{
@@ -485,11 +497,19 @@ const PatientHome = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}
               />
             ) : (
-              <ActivityIndicator color={"#74CBD4"} />
+              <View style={{ display: "flex", alignItems: "flex-start", marginTop: 10, marginBottom:20 }}>
+                <Text>
+                  <View style={{ display: "flex", alignItems: "flex-start", marginTop: 10, marginBottom:20 }}>
+                    <Text>
+                      <ActivityIndicator color="#74CBD4" />
+                    </Text>
+                  </View>
+                </Text>
+              </View>
             )}
           </View>
 
-{/* Popular SPecialist View */}
+          {/* Popular SPecialist View */}
           <View>
             <Text
               style={{
@@ -514,11 +534,13 @@ const PatientHome = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}
               />
             ) : (
-              <ActivityIndicator color={"#74CBD4"} />
+              <View style={{ display: "flex", alignItems: "flex-start", marginTop: 10, marginBottom:20 }}>
+                <Text>
+                  <ActivityIndicator color="#74CBD4" />
+                </Text>
+              </View>
             )}
           </View>
-
-
         </ScrollView>
       </View>
     </View>

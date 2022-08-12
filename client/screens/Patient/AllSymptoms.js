@@ -8,6 +8,7 @@ import {
   Text,
   Image,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "react-native-paper";
@@ -22,6 +23,7 @@ export default function AllSymptoms(props) {
   const [symptomsData, setSymptomsData] = useState([]);
   const { setAppointmentData } = useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
+  const [symtpomsLoading, setSymptomsLoading] = useState(true);
 
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
@@ -33,11 +35,12 @@ export default function AllSymptoms(props) {
     const modifiedData = data.data.data.map((item) => {
       item.isSelect = false;
       item.selectedClass = styles.list;
-      // item.image = "../../assets/icon1.png";
       return item;
     });
 
     setSymptomsData(modifiedData);
+
+    setSymptomsLoading(false);
   };
 
   const selectItem = (data) => {
@@ -45,8 +48,6 @@ export default function AllSymptoms(props) {
     data.item.selectedClass = data.item.isSelect
       ? styles.selected
       : styles.list;
-
-    console.log(data.item.selectedClass, "selected");
 
     const index = symptomsData.findIndex((item) => data.item._id === item._id);
 
@@ -98,17 +99,21 @@ export default function AllSymptoms(props) {
   return (
     <View style={styles.mainscroll}>
       <View style={styles.mainflat}>
-        <FlatList
-          // style={{ height: 500, marginRight: 36, marginLeft: 36 }}
-          horizontal={false}
-          data={symptomsData}
-          renderItem={renderItem}
-          numColumns={3}
-          keyExtractor={(item) => item.name}
-          extraData={symptomsData}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-        />
+        {symtpomsLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            // style={{ height: 500, marginRight: 36, marginLeft: 36 }}
+            horizontal={false}
+            data={symptomsData}
+            renderItem={renderItem}
+            numColumns={3}
+            keyExtractor={(item) => item.name}
+            extraData={symptomsData}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
       </View>
       <View
         style={{

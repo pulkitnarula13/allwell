@@ -5,6 +5,8 @@ import {
   StatusBar,
   SafeAreaView,
   FlatList,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import { BASE_URL_DEV } from "@env";
 import axios from "axios";
@@ -15,14 +17,37 @@ import { AuthContext } from "../../Context/AuthContext";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDistance } from "geolib";
+import { Button, Divider, Menu } from "react-native-paper";
 
 const AvailableDoctor = (props) => {
   const { userInfo } = useContext(AuthContext);
   const [allDoctorsData, setAllDoctorsData] = useState();
+  const [visible, setVisible] = React.useState(false);
 
   useEffect(() => {
     getNearbyDoctorList();
   }, []);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
+  const sortDataByRating = ( a, b ) => {
+    if ( a.rating > b.rating ){
+      return -1;
+    }
+    if ( a.rating < b.rating ){
+      return 1;
+    }
+    return 0;
+  }
+
+
+  const updateDataByRating = () => {
+    const updatedData = JSON.parse(JSON.stringify(allDoctorsData)).sort(sortDataByRating);
+    setAllDoctorsData(updatedData);
+    closeMenu();
+  }
 
   const getNearbyDoctorList = async () => {
     const mainLocation = JSON.parse(
@@ -53,6 +78,30 @@ const AvailableDoctor = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{
+        display: "flex",
+        alignItems: "flex-end",
+        paddingRight: 20
+      }}>
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={
+            <TouchableOpacity onPress={openMenu}>
+              <Image
+                style={{
+                  width: 30,
+                  height: 30,
+                }}
+                source={require("../../assets/icons/medico_icon_sortOff.png")}
+              />
+            </TouchableOpacity>
+          }
+        >
+          <Menu.Item  title="Sort by Language" />
+          <Menu.Item onPress={updateDataByRating}title="Sort by Rating" />
+        </Menu>
+      </View>
       <View style={styles.flatlistContainer}>
         <FlatList
           style={styles.flatlist}
