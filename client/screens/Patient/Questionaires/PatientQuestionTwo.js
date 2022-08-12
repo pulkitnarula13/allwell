@@ -10,7 +10,7 @@ const PatientQuestionTwo = (props) => {
         <Image
           style={styles.image1}
           source={require("../../../assets/icons/doctorAni.gif")}
-          resizeMode="center"
+          resizeMode="contain"
         />
       </View>
       <View>
@@ -38,11 +38,11 @@ const PatientQuestionTwo = (props) => {
 };
 const styles = StyleSheet.create({
   image1: {
-    height: 248,
+    height: 200,
   },
   textheight: {
     width: 320,
-    height: 130,
+    // height: 130,
     backgroundColor: "#D9D9D9",
     borderRadius: 10,
     marginTop: 11,
@@ -75,12 +75,14 @@ const styles = StyleSheet.create({
 
   imageview: {
     display: "flex",
-    justifyContent: "center",
+    // justifyContent: "center",
     marginTop:40,
-    alignItems: "center",
-    marginBottom: 38,
+    // alignItems: "center",
+    // marginBottom: 38,
   },
   outer: {
+    justifyContent: "center",
+    alignItems: "center",
     display: "flex",
     flex: 1,
     padding: 30,

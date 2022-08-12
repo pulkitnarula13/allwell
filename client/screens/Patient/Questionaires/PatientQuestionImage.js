@@ -76,7 +76,7 @@ const Runalert = ()=> {
       <View style={styles.item}>
         <Image style={styles.image2} source={{
           uri: item.uri
-        }} resizeMode="contain" />
+        }} resizeMode="cover" />
       </View>
     );
   };
@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
   item: {
     display: "flex",
     // flexDirection: "column",
-    borderRadius: 10,
-    marginRight: 21,
+    // borderRadius: 10,
+    marginRight: 12,
     
   },
   image2: {
-    width: 130,
+    width: 130, 
     height: 130,
     borderRadius: 10,
   },

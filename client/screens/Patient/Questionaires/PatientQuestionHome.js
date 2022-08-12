@@ -1,4 +1,13 @@
-import { View, Text, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Alert,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Keyboard,
+  ScrollView,
+} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import Stepper from "react-native-stepper-ui";
 import PatientQuestionSummary from "./PatientQuestionSummary";
@@ -14,6 +23,8 @@ import { BASE_URL_DEV } from "@env";
 import { AuthContext } from "../../../Context/AuthContext";
 import Bottomnavigation from "../../../components/BottomNavigation";
 import PushNotification from "../../../components/PushNotification";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const PatientQuestionHome = ({ navigation }) => {
   const [active, setActive] = useState(0);
@@ -43,10 +54,8 @@ const PatientQuestionHome = ({ navigation }) => {
   const createAppointment = async () => {
     navigation.navigate("Requestwaitgif");
     getDoctorById();
-    
   };
 
-  
   const getDoctorById = async () => {
     const response = await axios.get(
       `${BASE_URL_DEV}/doctors/${appointmentData.doctor}`,
@@ -67,13 +76,14 @@ const PatientQuestionHome = ({ navigation }) => {
           },
         }
       );
-      !response ? navigation.navigate("Requestwaitgif") : navigation.navigate("Requestwait");
+      !response
+        ? navigation.navigate("Requestwaitgif")
+        : navigation.navigate("Requestwait");
       Alert.alert("Success", response.data.message);
     } catch (error) {
       console.log(error);
       Alert.alert("Error", error.message);
     }
-    
 
     console.log(response.data.data, "response");
     setDoctorInfo(response.data.data);
@@ -124,35 +134,53 @@ const PatientQuestionHome = ({ navigation }) => {
   ];
 
   return (
-    <View>
-      {doctorInfo ? (
-        <PushNotification
-          title={`Appointment Booking`}
-          body={`You have an appointment booked by ${userInfo.name}`}
-          toToken={doctorInfo.expoToken}
-        />
-      ) : null}
-      <Stepper
-        active={active}
-        content={content}
-        buttonStyle={{
-          width: 120,
-          height: 49,
-          backgroundColor: "#74CBD4",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 100,
-          marginLeft: active === 0 ? "auto" : "auto",
-          marginRight: active === 0 ? 30 : "auto"
-        }}
-        onBack={() => setActive((p) => p - 1)}
-        onFinish={() => createAppointment()}
-        onNext={() => setActive((p) => p + 1)}
-        stepStyle={{ display: "none" }}
-      />
-      <Bottomnavigation />
-    </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}
+    >
+      <KeyboardAwareScrollView
+        behavior="position"
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView
+            bounces={false}
+            contentInsetAdjustmentBehavior="always"
+            overScrollMode="always"
+            showsVerticalScrollIndicator={true}
+          >
+            {doctorInfo ? (
+              <PushNotification
+                title={`Appointment Booking`}
+                body={`You have an appointment booked by ${userInfo.name}`}
+                toToken={doctorInfo.expoToken}
+              />
+            ) : null}
+            <Stepper
+              active={active}
+              content={content}
+              buttonStyle={{
+                width: 120,
+                height: 49,
+                backgroundColor: "#74CBD4",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 100,
+                marginLeft: active === 0 ? "auto" : "auto",
+                marginRight: active === 0 ? 30 : "auto",
+              }}
+              onBack={() => setActive((p) => p - 1)}
+              onFinish={() => createAppointment()}
+              onNext={() => setActive((p) => p + 1)}
+              stepStyle={{ display: "none" }}
+            />
+            {/* <Bottomnavigation /> */}
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
+
 
 export default PatientQuestionHome;
