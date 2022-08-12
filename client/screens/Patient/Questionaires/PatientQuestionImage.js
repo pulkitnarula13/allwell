@@ -95,7 +95,7 @@ const Runalert = ()=> {
           <View style={{ marginRight:17,width: 130, height: 130, borderWidth: 1, borderColor: "#A0AEC0", justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
             <Image
               style={styles.image3}
-              source={require("../../../assets/camera-icon.png")}
+              source={require("../../../assets/new_icons/camera.png")}
               resizeMode="cover"
             />
           </View>
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   image3: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 205,
     borderRadius: 10,
     justifyContent: "center", alignItems: "center",
   },

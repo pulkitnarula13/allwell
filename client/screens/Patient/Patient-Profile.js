@@ -80,7 +80,7 @@ const PatientProfile = (props) => {
             <TouchableHighlight onPress={() => props.navigation.navigate("PatientInformation")}>
               <Image
                 style={styles.profilePhotoEdit}
-                source={require("../../assets/new_icons/plus.png")}
+                source={require("../../assets/new_icons/pencil.png")}
               />
             </TouchableHighlight>
       </View>
@@ -135,11 +135,11 @@ const PatientProfile = (props) => {
 
 const styles = StyleSheet.create({
   profilePhotoEdit: {
-    width: 24,
-    height: 24,
+    width: 44,
+    height: 44,
     position: "absolute",
-    top: -10,
-    right: 50,
+    top: -20,
+    right: 40,
   },
   main: { display: "flex", flexDirection: "row", justifyContent: "center" },
   btnsetting: {
