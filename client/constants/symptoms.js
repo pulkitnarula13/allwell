@@ -11,4 +11,5 @@ export const SymptomsList = {
     'Eye Problem': require('../assets/icons/Eyeproblem.png'),
     'Joint Problem' :require('../assets/icons/jointProblem.png'),
     'Skin Problem': require('../assets/icons/Skinproblem.png'),
+    'Uterus Problem': require('../assets/icons/UterusPain.png'),
 }       
