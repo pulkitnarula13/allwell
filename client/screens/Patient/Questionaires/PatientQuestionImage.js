@@ -86,7 +86,7 @@ const Runalert = ()=> {
         <Image
           style={styles.image1}
           source={require("../../../assets/icons/doctorAni.gif")}
-          resizeMode="center"
+          resizeMode="contain"
         />
       </View>
       <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>Add Photos/Videos</Text>
@@ -131,12 +131,11 @@ const styles = StyleSheet.create({
     justifyContent: "center", alignItems: "center",
   },
   image1: {
-    height: 284,
-    marginRight: 20,
+    height: 200,
   },
   textheight: {
     width: 320,
-    height: 130,
+    // height: 130,
     backgroundColor: "#D9D9D9",
     borderRadius: 10,
     marginTop: 11,
@@ -164,9 +163,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   imageview: {
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    display: "flex",
+    flex: 1,
+    padding: 30,
   },
   outer: {
     display: "flex",

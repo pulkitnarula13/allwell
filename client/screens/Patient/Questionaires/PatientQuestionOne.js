@@ -1,11 +1,9 @@
 import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
 import React from "react";
 import Questions from "../../../components/questions";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const PatientQuestionOne = (props) => {
   return (
-    <ScrollView>
 
         <View style={styles.outer}>
           <View style={styles.imageview}>
@@ -27,7 +25,6 @@ const PatientQuestionOne = (props) => {
             />
           </View>
         </View>
-        </ScrollView>
   );
 };
 const styles = StyleSheet.create({

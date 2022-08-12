@@ -172,7 +172,7 @@ const PatientQuestionHome = ({ navigation }) => {
               onBack={() => setActive((p) => p - 1)}
               onFinish={() => createAppointment()}
               onNext={() => setActive((p) => p + 1)}
-              stepStyle={{ display: "none" }}
+              stepStyle={{ display: "none", height: 0 }}
             />
             {/* <Bottomnavigation /> */}
           </ScrollView>
