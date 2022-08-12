@@ -134,9 +134,9 @@ const ConnectPatient = ({ navigation, route }) => {
       >
         <View style={styles.symptopmsImgView}>
           <Image
-            style={{ width: 74, height: 74 }}
+            style={{ width: 70, height: 70 }}
             source={SymptomsList[item.name]}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
         <Text style={styles.symptomName}>{item.name}</Text>
