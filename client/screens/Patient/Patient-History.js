@@ -25,9 +25,6 @@ const PatientHistory = ({ navigation }) => {
 
   useEffect(() => {
     getAppointmentData();
-    navigation.setOptions({
-      title: `Inbox`,
-    });
   }, []);
 
   const getAppointmentData = async () => {
