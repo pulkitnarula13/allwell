@@ -54,11 +54,7 @@ const DoctorInbox = ({ navigation }) => {
     getPatientAppointments();
   }, []);
 
-  useEffect(() => {
-    navigation.setOptions({
-      title: `Inbox`,
-    });
-  }, []);
+
   const windowWidth = Dimensions.get("window").width;
 
   return (

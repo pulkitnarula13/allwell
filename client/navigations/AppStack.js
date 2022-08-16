@@ -118,7 +118,18 @@ const AppStack = () => {
 
       <Stack.Screen name="Doctor-Signup" component={DoctorSignup} />
       <Stack.Screen name="Patient-Signup" component={PatientSignup} />
-      <Stack.Screen name="Doctor-Login" component={DoctorLogin} />
+      <Stack.Screen name="Doctor-Login" component={DoctorLogin} 
+       options={{
+        title: 'Login here',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }}
+      />
       <Stack.Screen name="Patient-Login" component={PatientLogin}   options={{
           title: 'Login here',
           headerStyle: {
@@ -136,7 +147,17 @@ const AppStack = () => {
 
       {/* Auth Stack ends */}
 
-      <Stack.Screen name="GreetingPage" component={Greeting} />
+      <Stack.Screen name="GreetingPage" component={Greeting}         options={{
+        title: 'Greeting',
+        headerBackVisible: false,
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }}/>
       <Stack.Screen name="AvailableDoctor" component={AvailableDoctor}
        options={{
         title: 'Available Doctors',
@@ -164,18 +185,58 @@ const AppStack = () => {
       <Stack.Screen
         name="Doctor-Profile-Settings"
         component={DoctorProfileSettings}
+        options={{
+          title: 'Settings',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: "#000",
+          },
+        }}
       />
-      <Stack.Screen name="Chattingwithdoctor" component={Chattingwithdoctor} />
       <Stack.Screen name="Schedule-Patient" component={SchedulePatient} />
-      <Stack.Screen name="Doctorprofile" component={Doctorprofile} />
-      <Stack.Screen name="DoctorInformation" component={DoctorInformation} />
+      <Stack.Screen name="Doctorprofile" component={Doctorprofile} 
+       options={{
+        title: 'My Profile',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }}
+      />
+      <Stack.Screen name="DoctorInformation" component={DoctorInformation}
+       options={{
+        title: 'My Information',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }}
+      />
       <Stack.Screen
         name="Accept-Patient-Schedule"
         component={AcceptPatientSchedule}
       />
       <Stack.Screen name="Notfication" component={Notification} />
 
-      <Stack.Screen name="Chatting" component={Chattingwithdoctor} />
+      <Stack.Screen name="Chatting" component={Chattingwithdoctor}        options={{
+        title: 'Patient Request',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }} />
       <Stack.Screen
         name="Managefamilymembers"
         component={Managefamilymembers}
@@ -205,7 +266,16 @@ const AppStack = () => {
         name="PrivacyPolicyDoctors"
         component={PrivacyPolicyDoctors}
       />
-      <Stack.Screen name="FAQDoctors" component={FAQDoctors} />
+      <Stack.Screen name="FAQDoctors" component={FAQDoctors}  options={{
+          title: 'Questions for Doctor',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: "#000",
+          },
+        }} />
 
       {/* DOCTOR NAVIGATIONS ENDED*/}
 
@@ -225,7 +295,18 @@ const AppStack = () => {
         }}
       />
       <Stack.Screen name="Requestwaitgif" component={Requestwaitgif} />
-      <Stack.Screen name="PatientChatting" component={PatientChatting} />
+      <Stack.Screen name="PatientChatting" component={PatientChatting}
+       options={{
+        title: 'My Chat History',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }}
+      />
       <Stack.Screen name="Requestwait" component={Requestwait} />
       <Stack.Screen name="Patient-Home" component={PatientHome} 
        options={{
