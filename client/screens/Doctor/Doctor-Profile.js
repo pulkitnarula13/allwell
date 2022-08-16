@@ -32,10 +32,10 @@ const Doctorprofile = (props) => {
           >
             <Image
               style={{
-                width: 24,
+                width: 26,
                 height: 24,
               }}
-              source={require("../../assets/new_icons/setting.png")}
+              source={require("../../assets/new_icons/icon_setting.png")}
             />
           </TouchableOpacity>
         </View>
@@ -72,7 +72,7 @@ const Doctorprofile = (props) => {
         <TouchableHighlight onPress={() => props.navigation.navigate("DoctorInformation")}>
               <Image
                 style={styles.profilePhotoEdit}
-                source={require("../../assets/new_icons/pencil.png")}
+                source={require("../../assets/new_icons/icon_edit.png")}
               />
         </TouchableHighlight>
       </View>
@@ -155,11 +155,11 @@ const Doctorprofile = (props) => {
 
 const styles = StyleSheet.create({
   profilePhotoEdit: {
-    width: 44,
-    height: 44,
+    width: 24,
+    height: 24,
     position: "absolute",
     top: -20,
-    right: 40,
+    right: 60,
   },
   main: { display: "flex", flexDirection: "row", justifyContent: "center" },
   btnsetting: {
