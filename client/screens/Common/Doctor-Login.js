@@ -28,8 +28,8 @@ export default function DoctorLogin({ navigation }) {
         <TextInput
           style={styles.TextInput}
           value={email}
-          placeholder="afs@af.com"
-          placeholderTextColor="#000000"
+          placeholder="username@mail.com"
+          placeholderTextColor="#718096"
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -40,8 +40,8 @@ export default function DoctorLogin({ navigation }) {
         <TextInput
           style={styles.TextInput}
           value={password}
-          placeholder="******"
-          placeholderTextColor="#000000"
+          placeholder="********"
+          placeholderTextColor="#718096"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
   ids: {
     marginBottom: 15,
     marginLeft: -200,
-    fontSize:14,
-    fontWeight:"600"
+    fontSize: 14,
+    fontWeight: "600"
   },
   forgot_button: {
     height: 30,

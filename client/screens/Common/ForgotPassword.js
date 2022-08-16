@@ -26,8 +26,9 @@ const ForgotPassword = () => {
         <TextInput
           style={styles.inputbox}
           mode="outlined"
-          label="email"
-          placeholder="asd@as.com"
+          label="Email"
+          placeholder="username@mail.com"
+          placeholderTextColor="#718096"
           value={email}
           onChangeText={(text) => setemail(text)}
         />

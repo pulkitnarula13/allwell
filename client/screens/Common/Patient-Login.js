@@ -38,8 +38,8 @@ export default function PatientLogin({ navigation }) {
               <TextInput
                 style={styles.TextInput}
                 value={email}
-                placeholder="afs@af.com"
-                placeholderTextColor="#000000"
+                placeholder="username@mail.com"
+                placeholderTextColor="#718096"
                 onChangeText={(email) => setEmail(email)}
               />
             </View>
@@ -50,8 +50,8 @@ export default function PatientLogin({ navigation }) {
               <TextInput
                 style={styles.TextInput}
                 value={password}
-                placeholder="******"
-                placeholderTextColor="#000000"
+                placeholder="********"
+                placeholderTextColor="#718096"
                 secureTextEntry={true}
                 onChangeText={(password) => setPassword(password)}
               />
