@@ -5,6 +5,7 @@ import { Divider } from "react-native-paper";
 import { Text} from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import theme from "../../theme";
 const Greeting = ({ navigation }) => {
   return (
     <View style={style.container}>
@@ -77,7 +78,8 @@ const style = StyleSheet.create({
     fontSize:24,
     lineHeight:36,
     marginLeft:51,
-    marginBottom:14
+    marginBottom:14,
+    fontFamily: theme.FONTS.r400
   },
   container: {
     flex: 1,

@@ -15,6 +15,7 @@ import {
 
 import { TextInput } from "react-native-paper";
 import { AuthContext } from "../../Context/AuthContext";
+import theme from "../../theme";
 
 export default function PatientLogin({ navigation }) {
   const [email, setEmail] = useState("");
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 29.05,
     marginBottom: 51,
+    fontFamily: theme.FONTS.r900
   },
   idcontainer: {
     display: "flex",
