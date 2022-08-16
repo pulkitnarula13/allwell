@@ -6,6 +6,63 @@
 
 */
 
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.reveal.active {
+  opacity: 1;
+}
+.active.fade-bottom {
+  animation: fade-bottom 1s ease-in;
+}
+.active.fade-left {
+  animation: fade-left 1s ease-in;
+}
+.active.fade-right {
+  animation: fade-right 1s ease-in;
+}
+@keyframes fade-bottom {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-left {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-right {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -345,6 +402,9 @@ li a:hover:after {
     grid-template-columns: 1fr repeat(2, 220px 0.25fr) 234px 1fr;
 
 }
+
+
+
 .logo-box {
   display: block;
   margin-left: auto;
@@ -371,7 +431,7 @@ li a:hover:after {
 }
 .cards-side img {
   height: 15rem;
-  width: 16rem!important;
+  width: 15rem!important;
 }
 .teamMembers {
   text-align: center;
@@ -780,3 +840,8 @@ li a:hover:after {
     transform: translateY(0);
   }
 } */
+
+
+
+
+
