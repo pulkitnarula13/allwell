@@ -178,7 +178,16 @@ const AppStack = () => {
       {/* COMMON NAVIGATIONS ENDED */}
 
       {/* DOCTOR NAVIGATIONS STARTED*/}
-      <Stack.Screen name="Doctor-Inbox" component={DoctorInbox} />
+      <Stack.Screen name="Doctor-Inbox" component={DoctorInbox}        options={{
+        title: 'My Inbox',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: "#000",
+        },
+      }} />
 
       <Stack.Screen name="Doctor-Waiting-List" component={DoctorWaitingList} />
       <Stack.Screen name="Doctor-Urgent" component={DoctorUrgent} />
@@ -224,6 +233,17 @@ const AppStack = () => {
       <Stack.Screen
         name="Accept-Patient-Schedule"
         component={AcceptPatientSchedule}
+
+        options={{
+          title: 'Approve Schedule',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: "#000",
+          },
+        }}
       />
       <Stack.Screen name="Notfication" component={Notification} />
 
