@@ -83,6 +83,8 @@ body {
   min-width: 700px;
 }
 
+
+
 .highLight {
   color: #74CBD4;
   text-transform: uppercase;
@@ -395,6 +397,7 @@ li a:hover:after {
 }
 
 
+
 @media (max-width: 500px) {
   .cards-container {
     display: grid;
@@ -402,6 +405,14 @@ li a:hover:after {
     grid-template-columns: 1fr repeat(2, 220px 0.25fr) 234px 1fr;
 
 }
+
+
+
+cards-side img {
+  height: 12rem;
+}
+
+
 
 
 
@@ -487,7 +498,7 @@ li a:hover:after {
 }
 
 .cards-side img {
-  height: 15rem;
+  height: 11rem;
   width: 19rem;
 }
 
@@ -721,6 +732,11 @@ li a:hover:after {
   margin-top: 1rem;
 }
 
+.footer-text {
+  text-align: center;
+  font-size: 200%;
+}
+
 .email-form .form-control {
   display: inline-block;
   border: 0;
@@ -763,6 +779,17 @@ li a:hover:after {
 
   .section-a .footercontainer div:first-child {
     order: 2;
+  }
+
+}
+
+
+
+
+@media (min-width: 501px) {
+  .cards-side img {
+    height: 15rem; 
+     width: 19rem;
   }
 
 }
