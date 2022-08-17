@@ -101,7 +101,7 @@ import { BASE_URL_DEV } from "@env";
                 <Avatar.Text
                   style={{ backgroundColor: "#74CBD4" }}
                   size={140}
-                  label={name[0]}
+                  label={name ? name[0] : "A"}
                   color="#fff"
                 />
               {/* ) : ( */}
