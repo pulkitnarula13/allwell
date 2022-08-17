@@ -328,7 +328,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   symptomName: {
-    width: 74,
     height: 24,
     marginTop: 8,
     textAlign: "center",

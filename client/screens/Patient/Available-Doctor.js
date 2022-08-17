@@ -92,6 +92,7 @@ const AvailableDoctor = (props) => {
                 style={{
                   width: 30,
                   height: 30,
+                  marginTop: 20
                 }}
                 source={require("../../assets/icons/medico_icon_sortOff.png")}
               />
