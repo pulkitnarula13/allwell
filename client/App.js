@@ -22,21 +22,24 @@ export default function App() {
     symptoms: [],
   });
 
-  useEffect(() => {
-    _loadResourcesAsync();
-  }, [])
 
 
   _loadResourcesAsync = async () => {
     await Font.loadAsync({
       ...Icon.Ionicons.font,
-      "poppins": require("./assets/fonts/Poppins-Regular.ttf"),
+      "Poppins": require("./assets/fonts/Poppins-Regular.ttf"),
       ionicons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf"),
       anticon: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf"),
       "material-community": require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"),
     });
   };
 
+
+  useEffect(() => {
+    _loadResourcesAsync();
+  }, [])
+
+  
   return (
     <AuthProvider>
       <AppointmentContext.Provider

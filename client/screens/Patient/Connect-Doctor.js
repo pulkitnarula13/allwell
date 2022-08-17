@@ -43,6 +43,7 @@ const ConnectPatient = ({ navigation, route }) => {
       }
     );
 
+    console.log(userInfo, "userInfo");
     const data = familyData.data.data;
     data.unshift(userInfo);
 
@@ -57,6 +58,7 @@ const ConnectPatient = ({ navigation, route }) => {
   };
 
   const renderMember = (item) => {
+    console.log(item.item, "inside item");
     return (
       <TouchableOpacity
         style={[styles.list, item.selectedClass]}
@@ -73,7 +75,9 @@ const ConnectPatient = ({ navigation, route }) => {
           ) : (
             <Image
               style={styles.image1}
-              source={item.item.profilePicture}
+              source={{
+                uri: `${item.item.profilePicture}`
+              }}
               resizeMode="center"
             />
           )}
@@ -82,7 +86,8 @@ const ConnectPatient = ({ navigation, route }) => {
           style={{
             fontSize: 14,
             fontWeight: "400",
-            paddingLeft: 15,
+            paddingLeft: 8,
+            paddingTop: 4
           }}
         >
           {item.item.name.split(" ")[0]}
