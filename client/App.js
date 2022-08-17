@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View, Text, LogBox, Image } from "react-native";
-import { Provider as PaperProvider } from "react-native-paper";
+import { ActivityIndicator, Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
 import AppLoading from 'expo-app-loading';
 
@@ -10,6 +10,7 @@ import AppNav from "./navigations/AppNav";
 import AppointmentContext from "./Context/AppointmentContext";
 import * as Font from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import * as Icon from '@expo/vector-icons';
 
 
 export default function App() {
@@ -21,22 +22,25 @@ export default function App() {
     symptoms: [],
   });
 
+  useEffect(() => {
+    _loadResourcesAsync();
+  }, [])
 
 
- 
+  _loadResourcesAsync = async () => {
+    await Font.loadAsync({
+      ...Icon.Ionicons.font,
+      "poppins": require("./assets/fonts/Poppins-Regular.ttf"),
+      ionicons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf"),
+      anticon: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf"),
+      "material-community": require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"),
+    });
+  };
 
-  let [fontsLoaded] = Font.useFonts({
-    // 'poppins': require('./assets/fonts/Poppins-Regular.ttf'),
-    'Poppins': require('./assets/fonts/Poppins-Italic.ttf')
-  })
-
-  if (!fontsLoaded) {
-    return <AppLoading />
-  }
   return (
     <AuthProvider>
       <AppointmentContext.Provider
-        value={{
+      value={{
           appointmentData,
           setAppointmentData,
         }}
@@ -45,7 +49,7 @@ export default function App() {
         <PaperProvider theme={theme}>
         
           <NavigationContainer theme={theme}>
-            <AppNav />
+          <AppNav />
           </NavigationContainer>
 
         </PaperProvider>

@@ -433,7 +433,7 @@ const PatientHome = ({ navigation }) => {
                   alignItems: "flex-start",
                 }}
               >
-                Choose your symptons
+                Choose your symptoms
               </Text>
             </View>
             <Text
