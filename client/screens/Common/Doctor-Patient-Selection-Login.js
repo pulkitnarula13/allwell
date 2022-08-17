@@ -64,14 +64,12 @@ const style = StyleSheet.create({
 
   txt: {
     textAlign: "center",
-    fontWeight: 'bold',
     marginTop: -50,
     marginBottom: 40
   },
 
   txt1: {
     textAlign: "center",
-    fontWeight: 'bold',
     marginTop: -20,
   }
 });

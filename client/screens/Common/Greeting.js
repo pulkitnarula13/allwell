@@ -65,25 +65,17 @@ const Greeting = ({ navigation }) => {
 
 const style = StyleSheet.create({
   info1:{
-    fontWeight:"400",
     fontSize:16,
-    lineHeight:24,
-    width:311,
-    height:48, 
      marginLeft:51,
-     
   },
   greetme:{
-    fontWeight:"700",
     fontSize:24,
-    lineHeight:36,
     marginLeft:51,
     marginBottom:14,
-    fontFamily: theme.FONTS.r400
+    fontFamily: "Poppins"
   },
   container: {
     flex: 1,
-    
   },
   titleContainer: {
     display: "flex",

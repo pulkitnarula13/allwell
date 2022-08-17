@@ -70,7 +70,6 @@ const AppStack = () => {
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold',
             color: "#000",
           },
         }}
@@ -85,7 +84,7 @@ const AppStack = () => {
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -100,7 +99,7 @@ const AppStack = () => {
           },
           // headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -111,7 +110,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }} />
@@ -125,7 +124,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }}
@@ -136,7 +134,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }} />
@@ -154,7 +152,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }}/>
@@ -165,7 +162,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />
@@ -184,7 +180,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />
@@ -200,7 +195,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -213,7 +208,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }}
@@ -225,7 +219,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }}
@@ -240,7 +233,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -253,7 +246,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />
@@ -266,7 +258,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -292,7 +284,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }} />
@@ -309,7 +301,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -322,7 +314,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }}
@@ -333,7 +324,6 @@ const AppStack = () => {
         title: 'My home',
         headerTintColor: '#fff',
         headerTitleStyle: {
-          fontWeight: 'bold',
         },
       }}
       />
@@ -344,7 +334,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -355,7 +345,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }} />
@@ -368,7 +358,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }}
@@ -380,7 +370,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />
@@ -390,7 +379,7 @@ const AppStack = () => {
             backgroundColor: '#fff',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+
             color: "#000",
           },
         }} />
@@ -402,7 +391,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />
@@ -413,7 +401,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />
@@ -424,7 +411,6 @@ const AppStack = () => {
           backgroundColor: '#fff',
         },
         headerTitleStyle: {
-          fontWeight: 'bold',
           color: "#000",
         },
       }} />

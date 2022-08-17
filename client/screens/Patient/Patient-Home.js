@@ -165,12 +165,14 @@ const PatientHome = ({ navigation }) => {
   };
 
   const Item1 = ({ name, distance, specialities, profilePicture }) => {
+    console.log(specialities, "specialities");
     return (
       <View
         style={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
+          backgroundColor: "#fff"
         }}
       >
         <View
@@ -216,6 +218,11 @@ const PatientHome = ({ navigation }) => {
             }}
           >
             Dr. {name}
+          </Text>
+          <Text style={{
+            color: "#718096"
+          }}>
+            {specialities[0].name}
           </Text>
           <View
             style={{

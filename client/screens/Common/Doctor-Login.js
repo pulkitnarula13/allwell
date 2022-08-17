@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
   welcometext:{
     marginTop:97,
     marginLeft:67,
-    fontWeight:"600",
     fontSize:24,
     lineHeight:29.05,
     marginBottom:51
@@ -119,7 +118,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginLeft: -200,
     fontSize: 14,
-    fontWeight: "600"
   },
   forgot_button: {
     height: 30,

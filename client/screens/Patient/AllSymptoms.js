@@ -21,6 +21,7 @@ export default function AllSymptoms(props) {
   }, []);
 
   const [symptomsData, setSymptomsData] = useState([]);
+  const [updated, setUpdated] = useState(false);
   const { setAppointmentData } = useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
   const [symtpomsLoading, setSymptomsLoading] = useState(true);
@@ -55,24 +56,24 @@ export default function AllSymptoms(props) {
     tempdata[index] = data.item;
 
     setSymptomsData(tempdata);
+    setUpdated(!updated);
   };
 
   const renderItem = (item, image) => {
     return (
-      <TouchableOpacity
-        style={[styles.list, item.selectedClass]}
-        onPress={() => selectItem(item)}
-      >
-        <View style={styles.item}>
-          <Image
-            style={{ width: 74, height: 70 }}
-            source={SymptomsList[item.item.name]}
-            resizeMode="contain"
-          />
+      <TouchableOpacity onPress={() => selectItem(item)}>
+        <View  style={[styles.list, item.selectedClass]}>
+          <View style={styles.item}>
+            <Image
+              style={{ width: 74, height: 70 }}
+              source={SymptomsList[item.item.name]}
+              resizeMode="contain"
+            />
+          </View>
+          <Text style={{ marginBottom: 39, fontSize: 14, fontWeight: "400" }}>
+            {item.item.name}
+          </Text>
         </View>
-        <Text style={{ marginBottom: 39, fontSize: 14, fontWeight: "400" }}>
-          {item.item.name}
-        </Text>
       </TouchableOpacity>
     );
   };
@@ -103,13 +104,12 @@ export default function AllSymptoms(props) {
           <ActivityIndicator />
         ) : (
           <FlatList
-            // style={{ height: 500, marginRight: 36, marginLeft: 36 }}
             horizontal={false}
             data={symptomsData}
             renderItem={renderItem}
-            numColumns={3}
+            numColumns={3}  
             keyExtractor={(item) => item.name}
-            extraData={symptomsData}
+            extraData={updated}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           />
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
   },
-  selected: { backgroundColor: "#74CBD4", borderColor: "red" },
+  selected: { backgroundColor: "#74CBD4", borderColor: "red", borderWidth: 2 },
   list: {
     margin: 3,
     flexDirection: "column",
