@@ -395,7 +395,7 @@ li a:hover:after {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .cards-container {
     display: grid;
     grid-template-rows: 1fr;
@@ -574,16 +574,18 @@ li a:hover:after {
   z-index: 99;
 }
 .profile-card:hover .img{
-  transform: translateY(-60px);
+  transform: translateY(-100px);
 }
 .img img{
   width: 100%;
-  border-radius: 50%;
+  height: 100%;
+  border-radius: 100%;
   box-shadow: 0 0 22px #3336;
   transition: .6s;
 }
 .profile-card:hover img{
-  border-radius: 10px;
+  width: 100%;
+  height: auto;
 }
 .caption{
   text-align: center;

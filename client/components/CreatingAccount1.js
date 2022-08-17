@@ -49,6 +49,7 @@ const CreatingAccount1 = (props) => {
           />
         </TouchableOpacity>
       </View>
+
       <View style={{marginBottom:40}}>
         <Text style={styles.textspeciality}>License Number</Text>
         <TextInput
@@ -63,6 +64,7 @@ const CreatingAccount1 = (props) => {
           }}
         />
       </View>
+      
       <View style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:22}}>
       <Text style={{width:247,fontSize:12}}>Registration Process may take upto 3 hours</Text>
       </View>
