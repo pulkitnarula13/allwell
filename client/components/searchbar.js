@@ -9,18 +9,18 @@ const Searchbars = () => {
   const onChangeSearch = (query) => setSearchQuery(query);
 
   return (
-    <Searchbar
-      style={styles.bar}
-      placeholder="Search"
-      onChangeText={onChangeSearch}
-      value={searchQuery}
-    />
-  //   <TextInput
-  //   label="Search"
-  //   value={searchQuery}
-  //   style={styles.bar}
-  //   onChangeText={text => onChangeSearch(text)}
-  // />
+    // <Searchbar
+    // //   style={styles.bar}
+    // //   placeholder="Search"
+    // //   onChangeText={onChangeSearch}
+    // //   value={searchQuery}
+    // // />
+    <TextInput
+    label="Search"
+    value={searchQuery}
+    style={styles.bar}
+    onChangeText={text => onChangeSearch(text)}
+  />
   );
 };
 const styles = StyleSheet.create({
