@@ -23,6 +23,8 @@ export default function AllSymptoms(props) {
   const { setAppointmentData } = useContext(AppointmentContext);
   const { userInfo } = useContext(AuthContext);
 
+  console.log(symptomsData, "symptomsData");
+
   const getSymptoms = async () => {
     const data = await axios.get(`${BASE_URL_DEV}/patients/symptoms`, {
       headers: {
@@ -65,12 +67,12 @@ export default function AllSymptoms(props) {
         <View style={styles.item}>
           <Image
             style={{ width: 74, height: 70 }}
-            source={SymptomsList[item.item.name]}
+            source={SymptomsList[item.item.value]}
             resizeMode="cover"
           />
         </View>
         <Text style={{ marginBottom: 39, fontSize: 14, fontWeight: "400" }}>
-          {item.item.name}
+          {item.item.value}
         </Text>
       </TouchableOpacity>
     );
@@ -104,7 +106,7 @@ export default function AllSymptoms(props) {
           data={symptomsData}
           renderItem={renderItem}
           numColumns={3}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.value}
           extraData={symptomsData}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}

@@ -78,24 +78,27 @@ const PatientHome = ({ navigation }) => {
 
   const getNearbyDoctorList = async (latitude, longitude) => {
     const response = await axios.get(
-      `${BASE_URL_DEV}/doctors/location?longitude=${longitude}&latitude=${latitude}`,
+      `${BASE_URL_DEV}/doctors/`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
     );
-    const modifiedData = response.data.data.map((val) => {
-      val.distance = getPreciseDistance(
-        { latitude: latitude, longitude: longitude },
-        {
-          latitude: val.location.coordinates[1],
-          longitude: val.location.coordinates[1],
-        }
-      );
 
-      return val;
-    });
+
+    const modifiedData = response.data.data;
+    // const modifiedData = response.data.data.map((val) => {
+    //   val.distance = getPreciseDistance(
+    //     { latitude: latitude, longitude: longitude },
+    //     {
+    //       latitude: val.location.coordinates[1],
+    //       longitude: val.location.coordinates[1],
+    //     }
+    //   );
+
+    //   return val;
+    // });
 
     setNearByDoctors(modifiedData);
   };
@@ -146,7 +149,7 @@ const PatientHome = ({ navigation }) => {
   const renderSpecialities = ({ item }) => {
     return (
       <View>
-        <Text>{item.name}</Text>
+        <Text>{item.value}</Text>
       </View>
     );
   };
@@ -253,7 +256,7 @@ const PatientHome = ({ navigation }) => {
 
   let Screenheight = Dimensions.get("window").height;
 
-  const renderItem = ({ item }) => <Item name={item.name} image={item.image} />;
+  const renderItem = ({ item }) => <Item name={item.value} image={item.image} />;
   const renderItem1 = ({ item }) => {
     if (item) {
       return (
@@ -265,7 +268,7 @@ const PatientHome = ({ navigation }) => {
           }
         >
           <Item1
-            name={item.name}
+            value={item.value}
             image={item.image}
             distance={item.distance}
             specialities={item.specialities}
@@ -435,37 +438,8 @@ const PatientHome = ({ navigation }) => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 17,
-              marginBottom: 17,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "600",
-                fontSize: 16,
-              }}
-            >
-              Near By Doctors
-            </Text>
-          </View>
-          <View>
-            {userLocation ? (
-              <FlatList
-                style={{ height: 210 }}
-                horizontal={true}
-                data={nearbyDoctors}
-                renderItem={renderItem1}
-                keyExtractor={(item) => item.name}
-                showsHorizontalScrollIndicator={false}
-              />
-            ) : (
-              <ActivityIndicator color={"#74CBD4"} />
-            )}
-          </View>
+       
+         
 
           <View>
             <Text

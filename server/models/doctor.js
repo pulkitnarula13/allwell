@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const Schema = mongoose.Schema;
 
 const doctorSchema = new Schema({
@@ -17,16 +18,13 @@ const doctorSchema = new Schema({
   },
 
   location: {
-    type: {
+    
       type: String,
-      enum: ['Point'],
-      default: "Point",
-      index: "2dsphere"
+      // enum: ['Point'],
+      // default: "Point",
+      // index: "2dsphere"
     },
-    coordinates: {
-      type: [Number]
-    }
-  },
+    
 
   email: {
     type: String,
@@ -35,11 +33,11 @@ const doctorSchema = new Schema({
   },
 
   phoneNumber: {
-    type: Number,
+    type: Number
   },
 
   profilePicture: {
-    type: String,
+    type: String
   },
 
   licenseNumber: {
@@ -47,8 +45,8 @@ const doctorSchema = new Schema({
   },
 
   licenseImage: {
-    type: String,
-    required: true,
+    type: String
+    
   },
 
   doctorDescription: {
@@ -109,8 +107,8 @@ const doctorSchema = new Schema({
   }
 });
 
-doctorSchema.index({
-  location: "2dsphere"
-})
+// doctorSchema.index({
+//   location: "2dsphere"
+// })
 
 exports.Doctor = mongoose.model("Doctor", doctorSchema);

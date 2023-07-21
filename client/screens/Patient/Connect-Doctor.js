@@ -135,11 +135,11 @@ const ConnectPatient = ({ navigation, route }) => {
         <View style={styles.symptopmsImgView}>
           <Image
             style={{ width: 74, height: 74 }}
-            source={SymptomsList[item.name]}
+            source={SymptomsList[item.value]}
             resizeMode="cover"
           />
         </View>
-        <Text style={styles.symptomName}>{item.name}</Text>
+        <Text style={styles.symptomName}>{item.value}</Text>
       </View>
     );
   };

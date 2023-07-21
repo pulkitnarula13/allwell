@@ -28,11 +28,15 @@ const DoctorInformation = (props) => {
     setPhoneNumber(userData.data.data.phoneNumber.toString());
     setDoctorDescription(userData.data.data.doctorDescription);
     setDataLoading(false);
+    console.log(profilePicture, "Doctor Profile Picture");
+    console.log(userData)
   };
 
   useEffect(() => {
     getDoctorProfile();
   }, []);
+
+  console.log(profilePicture, "Doctor Profile Picture");
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -58,7 +62,7 @@ const DoctorInformation = (props) => {
           email: email,
           phoneNumber: phoneNumber,
           doctorDescription: doctorDescription,
-          profilePicture: profilePicture.base64,
+          profilePicture: profilePicture.uri,
         },
         {
           headers: {
@@ -86,7 +90,7 @@ const DoctorInformation = (props) => {
                   style={{ backgroundColor: "#74CBD4" }}
                   size={140}
                   label={userInfo?.name[0]}
-                  color="#fff"
+                  color="black"
                 />
               ) : (
                 <Image

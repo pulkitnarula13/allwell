@@ -5,11 +5,11 @@ const { Address } = require("../models/address");
 const { Symptom } = require("../models/Symptoms");
 
 const upload = require("../utils/upload");
-const ROLE = require("../config/roles");
+const ROLE = require("../config/roles") ;
 const { FamilyMember } = require("../models/familyMember");
 
 /**
- * @description API to register patients to database
+ * @description API to register 1tients to database
  * @param {*} req
  * @param {*} res
  * @return {*}

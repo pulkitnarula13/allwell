@@ -12,9 +12,10 @@ const {
   getDoctorSpecialities,
   createSpecialization,
   getDoctorsByLocation,
+  updateImage
 } = require("../controller/doctor");
-const validateToken = require("../middleware/auth");
-const verifyRoles = require("../middleware/roleVerification");
+ const validateToken = require("../middleware/auth");
+ const verifyRoles = require("../middleware/roleVerification");
 
 // Routes
 /**
@@ -115,6 +116,8 @@ router.delete("/:id", deleteDoctor);
  */
 router.get("/:id", getDoctorById);
 
+router.post("/updateImage",updateImage);
+
 
 // Routes
 /**
@@ -128,8 +131,8 @@ router.get("/:id", getDoctorById);
  */
 router.post(
   "/specialities",
-  validateToken,
-  verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
+   validateToken,
+   verifyRoles(ROLE.ADMIN, ROLE.DOCTOR, ROLE.PATIENT),
   createSpecialization
 );
 

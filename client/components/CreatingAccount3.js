@@ -72,12 +72,13 @@ const CreatingAccount3 = (props) => {
         let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
         console.log(longitude, latitude, "longitude");
         setUserLocation(address);
+
+        console.log(typeof(userLocation));
+        console.log(userLocation, "userlocation");
         props.setThirdStepperData({
           ...props.mainData,
           location: {
-            type: "Point",
-            longitude,
-            latitude,
+            userLocation
           },
         });
       }
@@ -97,7 +98,7 @@ const CreatingAccount3 = (props) => {
           value={selectedSpeciality}
           multiSelect
           setValue={(data) => {
-            console.log(data);
+            
             setSelectedSpeciality(data);
             props.setThirdStepperData({
               ...props.mainData,
@@ -182,7 +183,7 @@ const CreatingAccount3 = (props) => {
         />
         <TextInput
           label="Address"
-          value={userLocation}
+          value={userLocation.toString()}
           right={
             <TextInput.Icon onPress={getlocationhandler} name="map-marker" />
           }

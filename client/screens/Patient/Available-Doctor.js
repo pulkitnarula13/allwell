@@ -30,24 +30,29 @@ const AvailableDoctor = (props) => {
     );
 
     const response = await axios.get(
-      `${BASE_URL_DEV}/doctors/location?longitude=${mainLocation.longitude}&latitude=${mainLocation.latitude}`,
+      `${BASE_URL_DEV}/doctors`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
     );
-    const modifiedData = response.data.data.map((val) => {
-      val.distance = getDistance(
-        { latitude: mainLocation.latitude, longitude: mainLocation.longitude },
-        {
-          latitude: val.location.coordinates[1],
-          longitude: val.location.coordinates[1],
-        }
-      );
 
-      return val;
-    });
+
+      const modifiedData = response.data.data;
+
+
+    // const modifiedData = response.data.data.map((val) => {
+    //   val.distance = getDistance(
+    //     { latitude: mainLocation.latitude, longitude: mainLocation.longitude },
+    //     {
+    //       latitude: val.location.coordinates[1],
+    //       longitude: val.location.coordinates[1],
+    //     }
+    //   );
+
+    //   return val;
+    // });
     setAllDoctorsData(modifiedData);
   };
 

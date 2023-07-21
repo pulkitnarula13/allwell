@@ -17,6 +17,10 @@ const CreatingAccount2 = (props) => {
   const [confirmpassword, setconfirmpassword] = useState("");
   const [phonenumber, setphonenumber] = useState("");
 
+
+
+  console.log(typeof(phonenumber),"phone number ");
+
   return (
    
       <View style={{marginTop:37,display:"flex",justifyContent:"center",alignItems:"center"}}>
@@ -86,7 +90,7 @@ const CreatingAccount2 = (props) => {
             style={styles.inputboxlast}
             mode="outlined"
             label="Phone Number"
-            value={phonenumber}
+            value={phonenumber.toString()}
             onChangeText={(text) => {
               setphonenumber(text)
               props.setSecondStepperData({

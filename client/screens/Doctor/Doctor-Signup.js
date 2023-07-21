@@ -46,7 +46,7 @@ const DoctorSignup = ({ navigation }) => {
       doctorDescription: thirdStepperData.description,
       languages: thirdStepperData.languages,
       certifications: thirdStepperData.certifications,
-      location: thirdStepperData.location
+      location: thirdStepperData.userLocation
     };
 
     axios

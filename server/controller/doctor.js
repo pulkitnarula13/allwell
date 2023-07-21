@@ -5,6 +5,9 @@ const { Address } = require("../models/address");
 const { Specialization } = require("../models/specialization");
 const upload = require("../utils/upload");
 const ROLE = require("../config/roles");
+const { DoctorImage } = require("../models/updateImage");
+
+
 
 /**
  * @description API to register doctors to database
@@ -49,9 +52,10 @@ const registerDoctor = async (req, res) => {
       languages: req.body.languages,
       certifications: req.body.certifications,
       licenseImage: uploadLicenseImage,
-      location: {
-        coordinates: [req.body.location.longitude, req.body.location.latitude],
-      },
+      // location: {
+      //   coordinates: [req.body.location.longitude, req.body.location.latitude],
+      // },
+      location: req.body.location,
     });
 
 
@@ -185,20 +189,41 @@ const getDoctors = (req, res) => {
  */
 const updateDoctor = async (req, res) => {
   const id = req.params.id;
-
+  console.log(req);
   let uploadProfilePicture;
 
-  if (req.body.profilePicture) {
-    uploadProfilePicture = await upload(
-      `${Date.now() + "" + req.body.name}`,
-      req.body.profilePicture,
-      "jpg",
-      "doctor",
-      req.body.name
-    );
-  }
+  const AWS = require("aws-sdk");
 
-  Doctor.findOneAndUpdate({ _id: id },  {...req.body, profilePicture: uploadProfilePicture }, {
+ const s3 = new AWS.S3();
+
+ const bucketName = 'medicousers';
+
+ const pictureKey = req.body.profilePicture;
+
+ const localPicturePath = req.body.profilePicture;
+
+ const pictureFile = require('fs').readFileSync(localPicturePath);
+
+  
+ const params = {
+     Bucket: bucketName,
+     Key: pictureKey,
+     Body: pictureFile,
+   };
+
+  s3.upload(params, (err, data) => {
+    if (err) {
+      console.error('Error uploading picture:', err);
+    } else {
+      console.log('Picture uploaded successfully.');
+      console.log('Object URL:', data.Location);
+    }
+  });
+ 
+ 
+ 
+ 
+ Doctor.findOneAndUpdate({ _id: id },  {...req.body, profilePicture: uploadProfilePicture }, {
     returnOrignal: false,
   }).then((result) => {
     res.status(200).json({
@@ -293,6 +318,38 @@ const createSpecialization = (req, res) => {
     });
 };
 
+// UPDATING IMAGE OF DOCTOR
+
+// const AWS = require("aws-sdk");
+
+// const s3 = new AWS.S3();
+
+// const bucketName = 'medicousers';
+
+// const pictureKey = 'YOUR_PICTURE_KEY';
+
+// const localPicturePath = 'YOUR_LOCAL_PICTURE_PATH';
+
+// const pictureFile = require('fs').readFileSync(localPicturePath);
+
+const updateImage = async (req, res) => {
+  // const params = {
+  //   Bucket: bucketName,
+  //   Key: "pictureKey",
+  //   Body: pictureFile,
+  // };
+
+  // s3.upload(params, (err, data) => {
+  //   if (err) {
+  //     console.error('Error uploading picture:', err);
+  //   } else {
+  //     console.log('Picture uploaded successfully.');
+  //     console.log('Object URL:', data.Location);
+  //   }
+  // });
+  
+};
+
 module.exports = {
   getDoctors,
   deleteDoctor,
@@ -303,4 +360,5 @@ module.exports = {
   getDoctorSpecialities,
   createSpecialization,
   getDoctorsByLocation,
+  updateImage
 };

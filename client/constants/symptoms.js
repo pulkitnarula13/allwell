@@ -3,7 +3,7 @@ export const SymptomsList = {
     Fever: require('../assets/icons/fever.png'),
     Nausea: require('../assets/icons/nausea.png'),
     Cold: require('../assets/icons/cold.png'),
-    'Mental Health' :require('../assets/icons/MentalHealth.png'),
+    'Mental Health': require('../assets/icons/MentalHealth.png'),
     Allergies: require('../assets/icons/Allergies.png'),
     Cough: require('../assets/icons/cold.png'),
     Diarrhea: require('../assets/icons/Diarrhea.png'),
@@ -11,4 +11,5 @@ export const SymptomsList = {
     'Eye Problem': require('../assets/icons/Eyeproblem.png'),
     'Joint Problem' :require('../assets/icons/jointProblem.png'),
     'Skin Problem': require('../assets/icons/Skinproblem.png'),
+    'Uterus Problem': require('../assets/icons/UterusProblem.png'),
 }       

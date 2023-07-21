@@ -28,6 +28,8 @@ const CreatingAccount1 = (props) => {
     }
   };
 
+  console.log(typeof(licenseNumber), "licenseNumber");
+
   return (
     <View style={{marginLeft:50,marginRight:50}} >
       <View style={{marginTop:55}}>
