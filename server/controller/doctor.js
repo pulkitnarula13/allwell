@@ -187,51 +187,60 @@ const getDoctors = (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const updateDoctor = async (req, res) => {
-  const id = req.params.id;
-  console.log(req);
-  let uploadProfilePicture;
 
   const AWS = require("aws-sdk");
 
- const s3 = new AWS.S3();
+  const s3 = new AWS.S3({ profile: "Kapil Thaman" });
 
- const bucketName = 'medicousers';
+  const updateDoctor = async (req, res) => {
+    const id = req.params.id;
+  let uploadProfilePicture = "";
+    
 
- const pictureKey = req.body.profilePicture;
+    if (!req.body.profilePicture) {
+      return res.status(400).json({ error: 'Profile picture data not provided' });
+    }
 
- const localPicturePath = req.body.profilePicture;
+    const pictureData = req.body.profilePicture;
+    const pictureKey = `${Date.now()}-${req.body.name}.HEIC`;
 
- const pictureFile = require('fs').readFileSync(localPicturePath);
+    // if (req.body.profilePicture) {
+    //   uploadProfilePicture = await upload(
+    //     `${Date.now() + "" + req.body.name}`,
+    //     req.body.profilePicture,
+    //     "jpg",
+    //     "doctor",
+    //     req.body.name
+    //   );
+    // }
+
+    
+    const params = {
+          Bucket: "medicousers",
+          Key: pictureKey,
+          Body: pictureData,
+        };
+      
+        s3.upload(params, (err, data) => {
+          if (err) {
+            console.log('Error uploading picture:', err);
+          } else {
+            console.log('Picture uploaded successfully.');
+            
+            uploadProfilePicture = data.Location;
+            Doctor.findOneAndUpdate({ _id: id },  {...req.body, profilePicture: uploadProfilePicture }, {
+              returnOrignal: false,
+            }).then((result) => {
+              res.status(200).json({
+                message: "Succesfully updated the Doctor",
+                data: result,
+              });
+            });
+          }
+        });
 
   
- const params = {
-     Bucket: bucketName,
-     Key: pictureKey,
-     Body: pictureFile,
-   };
-
-  s3.upload(params, (err, data) => {
-    if (err) {
-      console.error('Error uploading picture:', err);
-    } else {
-      console.log('Picture uploaded successfully.');
-      console.log('Object URL:', data.Location);
-    }
-  });
- 
- 
- 
- 
- Doctor.findOneAndUpdate({ _id: id },  {...req.body, profilePicture: uploadProfilePicture }, {
-    returnOrignal: false,
-  }).then((result) => {
-    res.status(200).json({
-      message: "Succesfully updated the Doctor",
-      data: result,
-    });
-  });
-};
+  };
 
 /**
  * @description API to delete doctor
@@ -332,23 +341,23 @@ const createSpecialization = (req, res) => {
 
 // const pictureFile = require('fs').readFileSync(localPicturePath);
 
-const updateImage = async (req, res) => {
-  // const params = {
-  //   Bucket: bucketName,
-  //   Key: "pictureKey",
-  //   Body: pictureFile,
-  // };
+ const updateImage = async (req, res) => {
+//   const params = {
+//     Bucket: bucketName,
+//     Key: "pictureKey",
+//     Body: pictureFile,
+//   };
 
-  // s3.upload(params, (err, data) => {
-  //   if (err) {
-  //     console.error('Error uploading picture:', err);
-  //   } else {
-  //     console.log('Picture uploaded successfully.');
-  //     console.log('Object URL:', data.Location);
-  //   }
-  // });
+//   s3.upload(params, (err, data) => {
+//     if (err) {
+//       console.error('Error uploading picture:', err);
+//     } else {
+//       console.log('Picture uploaded successfully.');
+//       console.log('Object URL:', data.Location);
+//     }
+//   });
   
-};
+ };
 
 module.exports = {
   getDoctors,

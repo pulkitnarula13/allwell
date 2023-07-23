@@ -19,7 +19,10 @@ const Doctorprofile = (props) => {
   const getDoctorProfile = async () => {
     const userData = await axios.get(`${BASE_URL_DEV}/doctors/${userInfo.id}`);
     setDocProfileData(userData.data.data);
+  
   };
+
+  console.log(docProfileData, "docProfileData");
 
   return docProfileData ? (
     <View style={styles.allview}>
@@ -53,11 +56,7 @@ const Doctorprofile = (props) => {
         ) : (
           <Image
             style={styles.image2}
-            source={
-            {
-              uri: `${docProfileData.profilePicture}`
-            }
-            }
+            source={{ uri: docProfileData.profilePicture }}
           />
 
           // <ExpoFastImage

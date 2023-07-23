@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   },
 
   modalSymptoms: {
-    fontSize: "13%",
+    fontSize: 13,
   },
 
   viewDividerLine: {

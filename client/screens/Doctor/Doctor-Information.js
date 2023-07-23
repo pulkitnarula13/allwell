@@ -28,7 +28,7 @@ const DoctorInformation = (props) => {
     setPhoneNumber(userData.data.data.phoneNumber.toString());
     setDoctorDescription(userData.data.data.doctorDescription);
     setDataLoading(false);
-    console.log(profilePicture, "Doctor Profile Picture");
+  
     console.log(userData)
   };
 
@@ -36,7 +36,7 @@ const DoctorInformation = (props) => {
     getDoctorProfile();
   }, []);
 
-  console.log(profilePicture, "Doctor Profile Picture");
+  
 
   const openimagelib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -49,7 +49,7 @@ const DoctorInformation = (props) => {
 
     if (!result.cancelled) {
       setProfilePicture({ base64: result.base64, uri: result.uri });
-      console.log(profilePicture, "Selected Doctor Profile Picture");
+     
     }
   };
 
@@ -68,11 +68,13 @@ const DoctorInformation = (props) => {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
           },
-        }
+        },
+        console.log(profilePicture, "Doctor Profile Picture2")
       )
       .then((response) => {
         Alert.alert("Success", "Updated Profile Succesfully");
         props.navigation.navigate("Doctorprofile")
+        console.log(response,"response");
       })
       .catch((err) => {
         console.log(err);
